@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Challenges — Alyssa Fitness</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="global.css" />
+  <style>
+    /* ─── HERO CHALLENGE ─────────────────────────────── */
+    .chall-hero {
+      padding-top: calc(var(--header-h) + 56px);
+      padding-bottom: 56px;
+      background: linear-gradient(135deg, var(--beige-premium) 0%, #f0ddd7 60%, rgba(233,135,128,.15) 100%);
+      position: relative; overflow: hidden; text-align: center;
+    }
+    .chall-hero::before {
+      content: ''; position: absolute; top: -120px; right: -120px;
+      width: 500px; height: 500px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(233,135,128,.1) 0%, transparent 70%);
+    }
+    .chall-hero::after {
+      content: ''; position: absolute; bottom: -80px; left: -80px;
+      width: 350px; height: 350px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(243,179,173,.12) 0%, transparent 70%);
+    }
+    .chall-hero__inner { position: relative; z-index: 1; }
+    .chall-hero__eyebrow { font-size:.68rem; font-weight:700; letter-spacing:.2em; text-transform:uppercase; color:var(--rose-saumon); margin-bottom:12px; }
+    .chall-hero__title { font-family:var(--font-titre); font-size:clamp(2.2rem,5vw,3.8rem); font-weight:400; color:var(--noir-doux); line-height:1.1; margin-bottom:14px; letter-spacing:-.02em; }
+    .chall-hero__title em { font-style:italic; color:var(--rose-saumon); }
+    .chall-hero__sub { font-size:.97rem; color:var(--texte-corps); max-width:520px; margin:0 auto 36px; line-height:1.75; }
+
+    /* Points & level bar */
+    .level-card {
+      display: inline-flex; align-items: center; gap: 20px;
+      background: #fff; border-radius: var(--radius-xl);
+      padding: 20px 32px; box-shadow: var(--ombre-forte);
+      border: 1px solid var(--gris-clair);
+    }
+    .level-card__badge {
+      width: 56px; height: 56px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--rose-saumon), #d4706a);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.5rem; flex-shrink: 0;
+      box-shadow: 0 6px 20px rgba(233,135,128,.4);
+    }
+    .level-card__info { text-align: left; }
+    .level-card__level { font-size:.7rem; font-weight:700; letter-spacing:.12em; text-transform:uppercase; color:var(--gris-texte); margin-bottom:4px; }
+    .level-card__name  { font-family:var(--font-titre); font-size:1.3rem; font-weight:500; color:var(--noir-doux); margin-bottom:8px; }
+    .level-card__pts   { font-size:.78rem; color:var(--texte-corps); margin-bottom:6px; }
+    .level-card__pts strong { color:var(--rose-saumon); font-weight:700; }
+    .level-card__bar   { width: 200px; }
+    .level-card__bar-labels { display:flex; justify-content:space-between; font-size:.65rem; color:var(--gris-texte); margin-top:4px; }
+
+    /* Streak */
+    .streak-row {
+      display: flex; align-items: center; gap: 8px;
+      margin: 0 16px;
+      background: linear-gradient(135deg, rgba(244,197,122,.15), rgba(244,197,122,.05));
+      border: 1px solid rgba(244,197,122,.3); border-radius: var(--radius-full);
+      padding: 10px 20px; white-space: nowrap;
+    }
+    .streak-row__fire { font-size: 1.4rem; }
+    .streak-row__num  { font-family:var(--font-titre); font-size:1.6rem; font-weight:500; color:var(--noir-doux); }
+    .streak-row__label { font-size:.78rem; color:var(--texte-corps); font-weight:500; }
+
+    /* ─── MAIN ────────────────────────────────────────── */
+    .chall-main { padding: 56px 0 80px; }
+
+    .chall-section-title { font-family:var(--font-titre); font-size:clamp(1.6rem,3vw,2.2rem); font-weight:400; color:var(--noir-doux); margin-bottom:24px; }
+    .chall-section-title em { font-style:italic; color:var(--rose-saumon); }
+
+    /* Tab nav */
+    .tab-nav { display:flex; gap:4px; background:var(--beige-premium); border-radius:var(--radius-full); padding:4px; border:1px solid var(--gris-clair); width:fit-content; margin-bottom:28px; }
+    .tab-btn { padding:9px 20px; border-radius:var(--radius-full); font-size:.8rem; font-weight:600; cursor:pointer; transition:all .25s; color:var(--texte-corps); border:none; background:transparent; }
+    .tab-btn.active { background:#fff; color:var(--noir-doux); box-shadow:var(--ombre-card); }
+
+    /* Challenge cards */
+    .chall-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:20px; margin-bottom:20px; }
+
+    .chall-card {
+      background: #fff; border:1px solid var(--gris-clair);
+      border-radius: var(--radius-lg); overflow:hidden;
+      box-shadow: var(--ombre-card); transition:all .3s;
+    }
+    .chall-card:hover { transform:translateY(-4px); box-shadow:var(--ombre-hover); border-color:var(--rose-clair); }
+    .chall-card--active { border-color:rgba(233,135,128,.3); background:linear-gradient(180deg,rgba(233,135,128,.03),#fff 120px); }
+    .chall-card--done { opacity:.85; }
+
+    .chall-card__header {
+      padding: 20px 20px 0;
+      display: flex; align-items: flex-start; justify-content: space-between;
+    }
+    .chall-card__icon-wrap {
+      width: 52px; height: 52px; border-radius: 14px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.6rem;
+    }
+    .chall-card__icon-wrap--active { background:rgba(233,135,128,.1); }
+    .chall-card__icon-wrap--done   { background:rgba(109,190,154,.1); }
+    .chall-card__icon-wrap--locked { background:rgba(232,232,232,.5); filter:grayscale(1); }
+
+    .chall-card__status-badge {
+      font-size:.65rem; font-weight:700; letter-spacing:.1em; text-transform:uppercase;
+      padding:4px 12px; border-radius:var(--radius-full);
+    }
+    .chall-card__status-badge--active { background:rgba(233,135,128,.12); color:var(--rose-saumon); }
+    .chall-card__status-badge--done   { background:rgba(109,190,154,.15); color:#3d9974; }
+    .chall-card__status-badge--locked { background:var(--gris-clair); color:var(--gris-texte); }
+
+    .chall-card__body { padding: 16px 20px 20px; }
+    .chall-card__title { font-family:var(--font-titre); font-size:1.15rem; font-weight:500; color:var(--noir-doux); margin-bottom:6px; }
+    .chall-card__desc  { font-size:.82rem; color:var(--texte-corps); line-height:1.65; margin-bottom:14px; }
+
+    .chall-card__meta { display:flex; gap:12px; flex-wrap:wrap; margin-bottom:14px; }
+    .chall-meta-item { display:flex; align-items:center; gap:4px; font-size:.72rem; color:var(--gris-texte); font-weight:500; }
+    .chall-meta-item svg { width:13px; height:13px; }
+
+    .chall-card__points { font-size:.78rem; font-weight:700; color:var(--rose-saumon); margin-bottom:14px; }
+
+    .chall-card__progress-label { display:flex; justify-content:space-between; font-size:.72rem; margin-bottom:6px; }
+    .chall-card__progress-label span:first-child { color:var(--texte-corps); }
+    .chall-card__progress-label span:last-child  { font-weight:700; color:var(--rose-saumon); }
+    .chall-card__progress-label--done span:last-child { color:var(--success); }
+
+    /* Badges section */
+    .badges-section { background:var(--beige-premium); border-radius:var(--radius-xl); padding:36px; margin-bottom:32px; }
+    .badges-grid { display:grid; grid-template-columns:repeat(6,1fr); gap:16px; }
+    .badge-item { display:flex; flex-direction:column; align-items:center; gap:8px; text-align:center; }
+    .badge-item__icon {
+      width:64px; height:64px; border-radius:50%;
+      display:flex; align-items:center; justify-content:center; font-size:1.8rem;
+      transition:transform .3s;
+    }
+    .badge-item__icon:hover { transform:scale(1.1) rotate(5deg); }
+    .badge-item__icon--earned  { box-shadow:0 4px 20px rgba(0,0,0,.1); }
+    .badge-item__icon--locked  { filter:grayscale(1); opacity:.35; }
+    .badge-item__name  { font-size:.7rem; font-weight:600; color:var(--noir-doux); line-height:1.3; }
+    .badge-item__name--locked { color:var(--gris-texte); }
+    .badge-item__pts   { font-size:.65rem; color:var(--rose-saumon); font-weight:700; }
+
+    /* Points leaderboard feeling */
+    .points-card {
+      background: linear-gradient(135deg, var(--noir-doux), #2a2a2a);
+      border-radius: var(--radius-xl); padding:32px;
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 24px; flex-wrap: wrap;
+      position: relative; overflow: hidden;
+    }
+    .points-card::before {
+      content: '★'; position: absolute; right: 20px; top: 50%; transform: translateY(-50%);
+      font-size: 160px; opacity: .04; color: var(--warning); line-height: 1;
+      pointer-events: none;
+    }
+    .points-card__left { position: relative; z-index: 1; }
+    .points-card__eyebrow { font-size:.68rem; font-weight:700; letter-spacing:.2em; text-transform:uppercase; color:var(--rose-clair); margin-bottom:8px; }
+    .points-card__val { font-family:var(--font-titre); font-size:clamp(2.5rem,5vw,4rem); font-weight:400; color:#fff; line-height:1; margin-bottom:6px; }
+    .points-card__val span { font-size:1rem; color:rgba(255,255,255,.5); font-family:var(--font-corps); }
+    .points-card__sub { font-size:.88rem; color:rgba(255,255,255,.6); }
+    .points-card__right { display:flex; flex-direction:column; gap:12px; position: relative; z-index:1; }
+    .points-stat { display:flex; align-items:center; gap:12px; }
+    .points-stat__icon { width:36px; height:36px; border-radius:10px; background:rgba(255,255,255,.08); display:flex; align-items:center; justify-content:center; }
+    .points-stat__icon svg { width:18px; height:18px; color:var(--rose-clair); }
+    .points-stat__label { font-size:.72rem; color:rgba(255,255,255,.5); margin-bottom:2px; }
+    .points-stat__val   { font-size:.88rem; font-weight:700; color:#fff; }
+
+    @media (max-width:1024px) {
+      .chall-grid { grid-template-columns:repeat(2,1fr); }
+      .badges-grid { grid-template-columns:repeat(4,1fr); }
+    }
+    @media (max-width:640px) {
+      .chall-grid { grid-template-columns:1fr; }
+      .badges-grid { grid-template-columns:repeat(3,1fr); }
+      .level-card { flex-direction:column; text-align:center; }
+      .level-card__info { text-align:center; }
+      .level-card__bar { width:160px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="header" id="header">
+    <div class="header__inner container">
+      <a href="index.html" class="header__logo"><div class="logo-mono"><span>A</span></div><div class="logo-wordmark"><span class="logo-wordmark__name">Alyssa Fitness</span><span class="logo-wordmark__sub">Coaching premium</span></div></a>
+      <nav class="header__nav"><ul class="nav-list">
+        <li><a href="index.html" class="nav-link">Accueil</a></li>
+        <li><a href="coaching.html" class="nav-link">Coaching</a></li>
+        <li><a href="a-propos.html" class="nav-link">À propos</a></li>
+        <li><a href="methode.html" class="nav-link">Méthode</a></li>
+        <li><a href="suivi.html" class="nav-link">Suivi</a></li>
+        <li><a href="challenge.html" class="nav-link active">Challenge</a></li>
+        <li><a href="contact.html" class="nav-link">Contact</a></li>
+      </ul></nav>
+      <div class="header__ctas">
+        <a href="compte.html" class="btn--compte"><svg viewBox="0 0 20 20" fill="none" width="15"><circle cx="10" cy="7" r="3.5" stroke="currentColor" stroke-width="1.5"/><path d="M3 17c0-3.866 3.134-7 7-7s7 3.134 7 7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>Mon compte</a>
+        <a href="reservation.html" class="btn btn--primary btn--sm">Réserver</a>
+      </div>
+      <button class="burger" id="burger" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="mobile-menu"><span></span><span></span><span></span></button>
+    </div>
+    <div class="mobile-menu" id="mobile-menu">
+      <ul class="mobile-nav-list"><li><a href="index.html" class="mobile-nav-link">Accueil</a></li><li><a href="coaching.html" class="mobile-nav-link">Coaching</a></li><li><a href="a-propos.html" class="mobile-nav-link">À propos</a></li><li><a href="methode.html" class="mobile-nav-link">Méthode</a></li><li><a href="suivi.html" class="mobile-nav-link">Suivi</a></li><li><a href="challenge.html" class="mobile-nav-link">Challenge</a></li><li><a href="contact.html" class="mobile-nav-link">Contact</a></li></ul>
+      <div class="mobile-menu__ctas"><a href="compte.html" class="btn btn--ghost mobile-cta">Mon compte</a><a href="reservation.html" class="btn btn--primary mobile-cta">Réserver</a></div>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="chall-hero">
+    <div class="container chall-hero__inner">
+      <p class="chall-hero__eyebrow">Défis & Récompenses</p>
+      <h1 class="chall-hero__title">Repousse tes <em>limites</em><br/>avec élégance.</h1>
+      <p class="chall-hero__sub">Des défis pensés pour te motiver sans pression, célébrer tes progrès et te récompenser pour chaque effort.</p>
+
+      <div style="display:flex; align-items:center; justify-content:center; gap:16px; flex-wrap:wrap;">
+        <div class="level-card">
+          <div class="level-card__badge">🌸</div>
+          <div class="level-card__info">
+            <div class="level-card__level">Niveau 3 — Étoile montante</div>
+            <div class="level-card__name">Sophie M.</div>
+            <div class="level-card__pts"><strong>750 points</strong> · Prochain niveau à 1000 pts</div>
+            <div class="level-card__bar">
+              <div class="progress-bar"><div class="progress-bar__fill" data-width="75%"></div></div>
+              <div class="level-card__bar-labels"><span>750 pts</span><span>1000 pts</span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="streak-row">
+          <span class="streak-row__fire">🔥</span>
+          <span class="streak-row__num">7</span>
+          <span class="streak-row__label">jours de série<br/>consécutifs</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MAIN -->
+  <main class="chall-main">
+    <div class="container">
+
+      <!-- Tab nav -->
+      <div style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:16px; margin-bottom:28px;">
+        <h2 class="chall-section-title" style="margin-bottom:0;">Mes <em>défis</em></h2>
+        <div class="tab-nav">
+          <button class="tab-btn active" onclick="filterChallenges('all', this)">Tous</button>
+          <button class="tab-btn" onclick="filterChallenges('active', this)">En cours</button>
+          <button class="tab-btn" onclick="filterChallenges('done', this)">Terminés</button>
+        </div>
+      </div>
+
+      <!-- Challenge cards -->
+      <div class="chall-grid" id="challGrid">
+
+        <!-- Challenge 1 : En cours -->
+        <div class="chall-card chall-card--active" data-status="active">
+          <div class="chall-card__header">
+            <div class="chall-card__icon-wrap chall-card__icon-wrap--active">💪</div>
+            <span class="chall-card__status-badge chall-card__status-badge--active">En cours</span>
+          </div>
+          <div class="chall-card__body">
+            <h3 class="chall-card__title">3 séances cette semaine</h3>
+            <p class="chall-card__desc">Réalise 3 entraînements complets cette semaine pour solidifier ta régularité et booster ta progression.</p>
+            <div class="chall-card__meta">
+              <div class="chall-meta-item"><svg viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6" stroke="currentColor" stroke-width="1.3"/><path d="M8 5v3l2 2" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg> 4 jours restants</div>
+              <div class="chall-meta-item"><svg viewBox="0 0 16 16" fill="none"><polygon points="8,1 10,6 15,6.5 11.5,10 12.5,15 8,12.5 3.5,15 4.5,10 1,6.5 6,6" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/></svg> +150 pts</div>
+            </div>
+            <div class="chall-card__progress-label">
+              <span>Progression</span><span>2 / 3 séances</span>
+            </div>
+            <div class="progress-bar"><div class="progress-bar__fill" data-width="66%"></div></div>
+            <div style="margin-top:14px;">
+              <button class="btn btn--primary btn--sm" style="width:100%;justify-content:center;" onclick="showToast('Séance enregistrée ! +50 points 💪', 'success')">
+                Marquer la séance comme faite
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Challenge 2 : En cours -->
+        <div class="chall-card chall-card--active" data-status="active">
+          <div class="chall-card__header">
+            <div class="chall-card__icon-wrap chall-card__icon-wrap--active">💧</div>
+            <span class="chall-card__status-badge chall-card__status-badge--active">En cours</span>
+          </div>
+          <div class="chall-card__body">
+            <h3 class="chall-card__title">Hydratation 7 jours</h3>
+            <p class="chall-card__desc">Bois au moins 2L d'eau par jour pendant 7 jours consécutifs. Simple, puissant, transformateur.</p>
+            <div class="chall-card__meta">
+              <div class="chall-meta-item"><svg viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6" stroke="currentColor" stroke-width="1.3"/><path d="M8 5v3l2 2" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg> 3 jours restants</div>
+              <div class="chall-meta-item"><svg viewBox="0 0 16 16" fill="none"><polygon points="8,1 10,6 15,6.5 11.5,10 12.5,15 8,12.5 3.5,15 4.5,10 1,6.5 6,6" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/></svg> +100 pts</div>
+            </div>
+            <div class="chall-card__progress-label">
+              <span>Progression</span><span>4 / 7 jours</span>
+            </div>
+            <div class="progress-bar"><div class="progress-bar__fill" data-width="57%"></div></div>
+            <div style="display:flex; gap:5px; margin-top:12px;">
+              <div style="flex:1; height:24px; border-radius:4px; background:var(--success);"></div>
+              <div style="flex:1; height:24px; border-radius:4px; background:var(--success);"></div>
+              <div style="flex:1; height:24px; border-radius:4px; background:var(--success);"></div>
+              <div style="flex:1; height:24px; border-radius:4px; background:var(--success);"></div>
+              <div style="flex:1; height:24px; border-radius:4px; background:var(--gris-clair);"></div>
+              <div style="flex:1; height:24px; border-radius:4px; background:var(--gris-clair);"></div>
+              <div style="flex:1; height:24px; border-radius:4px; background:var(--gris-clair);"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Challenge 3 : En cours -->
+        <div class="chall-card chall-card--active" data-status="active">
+          <div class="chall-card__header">
+            <div class="chall-card__icon-wrap chall-card__icon-wrap--active">🧘</div>
+            <span class="chall-card__status-badge chall-card__status-badge--active">En cours</span>
+          </div>
+          <div class="chall-card__body">
+            <h3 class="chall-card__title">Routine mobilité 7 jours</h3>
+            <p class="chall-card__desc">5 minutes de stretching chaque matin pendant 7 jours. Hanche, colonne, épaules — tout y passe.</p>
+            <div class="chall-card__meta">
+              <div class="chall-meta-item"><svg viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6" stroke="currentColor" stroke-width="1.3"/><path d="M8 5v3l2 2" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg> 5 jours restants</div>
+              <div class="chall-meta-item"><svg viewBox="0 0 16 16" fill="none"><polygon points="8,1 10,6 15,6.5 11.5,10 12.5,15 8,12.5 3.5,15 4.5,10 1,6.5 6,6" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/></svg> +80 pts</div>
+            </div>
+            <div class="chall-card__progress-label">
+              <span>Progression</span><span>2 / 7 jours</span>
+            </div>
+            <div class="progress-bar"><div class="progress-bar__fill" data-width="28%"></div></div>
+          </div>
+        </div>
+
+        <!-- Challenge 4 : Terminé -->
+        <div class="chall-card chall-card--done" data-status="done">
+          <div class="chall-card__header">
+            <div class="chall-card__icon-wrap chall-card__icon-wrap--done">⚡</div>
+            <span class="chall-card__status-badge chall-card__status-badge--done">✓ Terminé</span>
+          </div>
+          <div class="chall-card__body">
+            <h3 class="chall-card__title">Challenge gainage</h3>
+            <p class="chall-card__desc">30 secondes de gainage frontal + latéral par jour pendant 5 jours. Ta sangle abdominale te dit merci !</p>
+            <div class="chall-card__meta">
+              <div class="chall-meta-item"><svg viewBox="0 0 16 16" fill="none"><path d="M2 8l4 4 8-8" stroke="#6DBE9A" stroke-width="1.5" stroke-linecap="round"/></svg> Terminé le 12 mai</div>
+              <div class="chall-meta-item" style="color:var(--success);">+120 pts gagnés !</div>
+            </div>
+            <div class="chall-card__progress-label chall-card__progress-label--done">
+              <span>Progression</span><span>5 / 5 jours ✓</span>
+            </div>
+            <div class="progress-bar progress-bar--success"><div class="progress-bar__fill" data-width="100%"></div></div>
+          </div>
+        </div>
+
+        <!-- Challenge 5 : Terminé -->
+        <div class="chall-card chall-card--done" data-status="done">
+          <div class="chall-card__header">
+            <div class="chall-card__icon-wrap chall-card__icon-wrap--done">🌟</div>
+            <span class="chall-card__status-badge chall-card__status-badge--done">✓ Terminé</span>
+          </div>
+          <div class="chall-card__body">
+            <h3 class="chall-card__title">Première semaine complète</h3>
+            <p class="chall-card__desc">Réalise toutes tes séances prévues lors de ta toute première semaine de programme.</p>
+            <div class="chall-card__meta">
+              <div class="chall-meta-item"><svg viewBox="0 0 16 16" fill="none"><path d="M2 8l4 4 8-8" stroke="#6DBE9A" stroke-width="1.5" stroke-linecap="round"/></svg> Terminé le 3 avril</div>
+              <div class="chall-meta-item" style="color:var(--success);">+200 pts gagnés !</div>
+            </div>
+            <div class="chall-card__progress-label chall-card__progress-label--done">
+              <span>Progression</span><span>3 / 3 séances ✓</span>
+            </div>
+            <div class="progress-bar progress-bar--success"><div class="progress-bar__fill" data-width="100%"></div></div>
+          </div>
+        </div>
+
+        <!-- Challenge 6 : Verrouillé -->
+        <div class="chall-card" data-status="locked" style="opacity:.6;">
+          <div class="chall-card__header">
+            <div class="chall-card__icon-wrap chall-card__icon-wrap--locked">🏃</div>
+            <span class="chall-card__status-badge chall-card__status-badge--locked">🔒 Bientôt</span>
+          </div>
+          <div class="chall-card__body">
+            <h3 class="chall-card__title">10 000 pas / jour pendant 5 jours</h3>
+            <p class="chall-card__desc">Atteins 10 000 pas chaque jour pendant 5 jours. Le mouvement au quotidien, c'est aussi de l'entraînement.</p>
+            <div class="chall-card__meta">
+              <div class="chall-meta-item"><svg viewBox="0 0 16 16" fill="none"><rect x="3" y="5" width="10" height="8" rx="1.5" stroke="currentColor" stroke-width="1.3"/><path d="M5 5V4a3 3 0 016 0v1" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg> Débloque niveau 4</div>
+              <div class="chall-meta-item"><svg viewBox="0 0 16 16" fill="none"><polygon points="8,1 10,6 15,6.5 11.5,10 12.5,15 8,12.5 3.5,15 4.5,10 1,6.5 6,6" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/></svg> +250 pts</div>
+            </div>
+            <p style="font-size:.78rem; color:var(--gris-texte); margin-top:8px;">Atteins 1000 pts pour débloquer ce défi.</p>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Badges -->
+      <div class="badges-section reveal">
+        <h2 class="chall-section-title" style="margin-bottom:24px;">Mes <em>badges</em></h2>
+        <div class="badges-grid">
+          <div class="badge-item">
+            <div class="badge-item__icon badge-item__icon--earned" style="background:linear-gradient(135deg,var(--success),#8fd4b4);">🌱</div>
+            <div class="badge-item__name">Première séance</div>
+            <div class="badge-item__pts">+50 pts</div>
+          </div>
+          <div class="badge-item">
+            <div class="badge-item__icon badge-item__icon--earned" style="background:linear-gradient(135deg,var(--warning),#f8d99a);">🔥</div>
+            <div class="badge-item__name">7 jours de suite</div>
+            <div class="badge-item__pts">+100 pts</div>
+          </div>
+          <div class="badge-item">
+            <div class="badge-item__icon badge-item__icon--earned" style="background:linear-gradient(135deg,var(--rose-saumon),var(--rose-clair));">💪</div>
+            <div class="badge-item__name">10 séances</div>
+            <div class="badge-item__pts">+150 pts</div>
+          </div>
+          <div class="badge-item">
+            <div class="badge-item__icon badge-item__icon--earned" style="background:linear-gradient(135deg,#a78bfa,#c4b5fd);">⭐</div>
+            <div class="badge-item__name">Niveau 3</div>
+            <div class="badge-item__pts">+200 pts</div>
+          </div>
+          <div class="badge-item">
+            <div class="badge-item__icon badge-item__icon--locked">🏆</div>
+            <div class="badge-item__name badge-item__name--locked">20 séances</div>
+            <div class="badge-item__pts" style="color:var(--gris-texte);">+300 pts</div>
+          </div>
+          <div class="badge-item">
+            <div class="badge-item__icon badge-item__icon--locked">👑</div>
+            <div class="badge-item__name badge-item__name--locked">Programme complet</div>
+            <div class="badge-item__pts" style="color:var(--gris-texte);">+500 pts</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Points total -->
+      <div class="points-card reveal">
+        <div class="points-card__left">
+          <p class="points-card__eyebrow">Mon total de points</p>
+          <div class="points-card__val" data-count="750" data-suffix=" pts">0 pts</div>
+          <p class="points-card__sub">Niveau 3 — Étoile montante · 250 pts pour le niveau 4</p>
+        </div>
+        <div class="points-card__right">
+          <div class="points-stat">
+            <div class="points-stat__icon"><svg viewBox="0 0 20 20" fill="none"><polygon points="10,2 12.5,7.5 18,8.2 14,12 15.2,17.5 10,14.8 4.8,17.5 6,12 2,8.2 7.5,7.5" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg></div>
+            <div><div class="points-stat__label">Challenges terminés</div><div class="points-stat__val">2 défis</div></div>
+          </div>
+          <div class="points-stat">
+            <div class="points-stat__icon"><svg viewBox="0 0 20 20" fill="none"><path d="M10 2l2 6h6l-5 3.5 2 6L10 14l-5 3.5 2-6L2 8h6l2-6z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg></div>
+            <div><div class="points-stat__label">Badges obtenus</div><div class="points-stat__val">4 badges</div></div>
+          </div>
+          <div class="points-stat">
+            <div class="points-stat__icon"><svg viewBox="0 0 20 20" fill="none"><path d="M3 10l5 5L17 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+            <div><div class="points-stat__label">Série actuelle</div><div class="points-stat__val">🔥 7 jours</div></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer"><div class="container footer__grid"><div class="footer__brand"><a href="index.html" style="display:flex;align-items:center;gap:10px;text-decoration:none;"><div class="logo-mono" style="background:var(--rose-saumon);"><span style="color:#fff;">A</span></div><div class="logo-wordmark"><span class="logo-wordmark__name" style="color:#fff;">Alyssa Fitness</span><span class="logo-wordmark__sub">Coaching premium</span></div></a><p class="footer__tagline">Coaching fitness personnalisé, musculation et personal training pour femmes.</p><div class="footer__social"><a href="#" class="footer__social-link"><svg viewBox="0 0 24 24" fill="none" width="18"><rect x="2" y="2" width="20" height="20" rx="5" stroke="currentColor" stroke-width="1.5"/><circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.5"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg></a></div></div><nav class="footer__nav-col"><h4 class="footer__col-title">Liens rapides</h4><ul><li><a href="index.html" class="footer__link">Accueil</a></li><li><a href="coaching.html" class="footer__link">Coaching</a></li><li><a href="a-propos.html" class="footer__link">À propos</a></li><li><a href="methode.html" class="footer__link">Méthode</a></li><li><a href="contact.html" class="footer__link">Contact</a></li></ul></nav><nav class="footer__nav-col"><h4 class="footer__col-title">Espace client</h4><ul><li><a href="compte.html" class="footer__link">Mon compte</a></li><li><a href="reservation.html" class="footer__link">Réserver</a></li><li><a href="messagerie.html" class="footer__link">Messagerie</a></li><li><a href="suivi.html" class="footer__link">Mon suivi</a></li><li><a href="challenge.html" class="footer__link">Challenges</a></li></ul></nav><div class="footer__contact-col"><h4 class="footer__col-title">Contact</h4><ul><li><svg viewBox="0 0 20 20" fill="none" width="14"><rect x="1" y="3" width="18" height="14" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M1 7l9 6 9-6" stroke="currentColor" stroke-width="1.5"/></svg><a href="mailto:contact@alyssafitness.fr" class="footer__link">contact@alyssafitness.fr</a></li></ul></div><div class="footer__instagram-col"><h4 class="footer__col-title">Suivez-moi</h4><div class="footer__insta-grid"><a href="#" class="insta-thumb"><div class="insta-placeholder insta-placeholder--1"></div></a><a href="#" class="insta-thumb"><div class="insta-placeholder insta-placeholder--2"></div></a><a href="#" class="insta-thumb"><div class="insta-placeholder insta-placeholder--3"></div></a><a href="#" class="insta-thumb"><div class="insta-placeholder insta-placeholder--4"></div></a><a href="#" class="insta-thumb"><div class="insta-placeholder insta-placeholder--5"></div></a><a href="#" class="insta-thumb"><div class="insta-placeholder insta-placeholder--6"></div></a></div></div></div><div class="footer__bottom"><div class="container footer__bottom-inner"><p class="footer__copyright">© 2025 Alyssa Fitness — Tous droits réservés.</p><div class="footer__legal"><a href="#" class="footer__link">Mentions légales</a><span>·</span><a href="#" class="footer__link">Confidentialité</a></div></div></div></footer>
+
+  <script src="global.js"></script>
+  <script>
+    function filterChallenges(status, btn) {
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      document.querySelectorAll('.chall-card').forEach(card => {
+        if (status === 'all') {
+          card.style.display = '';
+        } else if (status === 'active') {
+          card.style.display = card.dataset.status === 'active' ? '' : 'none';
+        } else if (status === 'done') {
+          card.style.display = card.dataset.status === 'done' ? '' : 'none';
+        }
+      });
+    }
+  </script>
+</body>
+</html>

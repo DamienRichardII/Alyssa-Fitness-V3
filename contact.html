@@ -1,0 +1,963 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Contactez Alyssa Fitness — Coaching fitness personnalisé pour femmes à Lyon. Prenons le temps de vous connaître." />
+  <title>Contact — Alyssa Fitness</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="global.css" />
+
+  <style>
+    /* ─── HERO INTERNE ──────────────────────────────────────── */
+    .hero-inner {
+      background: var(--beige-premium);
+      padding: calc(var(--header-h) + clamp(48px, 8vw, 96px)) 0 clamp(48px, 7vw, 80px);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-inner::before {
+      content: 'Contact';
+      position: absolute;
+      font-family: var(--font-titre);
+      font-size: clamp(80px, 18vw, 200px);
+      font-weight: 300;
+      color: rgba(233,135,128,0.07);
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      white-space: nowrap;
+      pointer-events: none;
+      user-select: none;
+      letter-spacing: 0.05em;
+    }
+
+    .hero-inner__title {
+      font-family: var(--font-titre);
+      font-size: clamp(2.4rem, 5vw, 4rem);
+      font-weight: 400;
+      line-height: 1.12;
+      color: var(--noir-doux);
+      letter-spacing: -0.02em;
+      max-width: 680px;
+      margin: 0 auto 20px;
+    }
+
+    .hero-inner__title em {
+      font-style: italic;
+      color: var(--rose-saumon);
+    }
+
+    .hero-inner__subtitle {
+      font-size: clamp(0.9rem, 1.4vw, 1rem);
+      color: var(--texte-corps);
+      max-width: 500px;
+      margin: 0 auto;
+      line-height: 1.8;
+    }
+
+    /* ─── SECTION PRINCIPALE CONTACT ───────────────────────── */
+    .contact-section {
+      background: var(--blanc-casse);
+      padding: clamp(64px, 8vw, 120px) 0;
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.1fr;
+      gap: clamp(48px, 7vw, 88px);
+      align-items: start;
+    }
+
+    /* Colonne gauche : infos */
+    .contact-infos__title {
+      font-family: var(--font-titre);
+      font-size: clamp(1.6rem, 3vw, 2.2rem);
+      font-weight: 400;
+      color: var(--noir-doux);
+      margin-bottom: 8px;
+      letter-spacing: -0.01em;
+    }
+
+    .contact-infos__title em {
+      font-style: italic;
+      color: var(--rose-saumon);
+    }
+
+    .contact-infos__intro {
+      font-size: 0.9rem;
+      color: var(--texte-corps);
+      line-height: 1.8;
+      margin-bottom: 36px;
+    }
+
+    .contact-list {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      margin-bottom: 36px;
+    }
+
+    .contact-list-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+    }
+
+    .contact-list-item__icon {
+      width: 44px;
+      height: 44px;
+      background: rgba(233,135,128,0.1);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .contact-list-item__body {}
+
+    .contact-list-item__label {
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--gris-texte);
+      margin-bottom: 3px;
+    }
+
+    .contact-list-item__value {
+      font-size: 0.92rem;
+      color: var(--noir-doux);
+      font-weight: 500;
+    }
+
+    .contact-list-item__value a {
+      color: var(--noir-doux);
+      transition: color var(--transition);
+    }
+
+    .contact-list-item__value a:hover { color: var(--rose-saumon); }
+
+    /* Horaires */
+    .horaires-card {
+      background: var(--beige-premium);
+      border-radius: var(--radius-md);
+      padding: 24px 28px;
+      margin-bottom: 28px;
+      border: 1px solid var(--beige-moyen);
+    }
+
+    .horaires-card__title {
+      font-family: var(--font-titre);
+      font-size: 1.1rem;
+      font-weight: 500;
+      color: var(--noir-doux);
+      margin-bottom: 14px;
+    }
+
+    .horaires-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .horaires-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.83rem;
+    }
+
+    .horaires-row__day {
+      color: var(--texte-corps);
+    }
+
+    .horaires-row__time {
+      font-weight: 500;
+      color: var(--noir-doux);
+    }
+
+    .horaires-row__badge {
+      font-size: 0.7rem;
+      font-weight: 600;
+      color: var(--success);
+      background: rgba(109,190,154,0.12);
+      border-radius: var(--radius-full);
+      padding: 2px 8px;
+    }
+
+    /* Message rassurant */
+    .contact-reassure {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 18px 20px;
+      background: rgba(233,135,128,0.07);
+      border-left: 3px solid var(--rose-saumon);
+      border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    }
+
+    .contact-reassure p {
+      font-size: 0.85rem;
+      color: var(--texte-corps);
+      line-height: 1.7;
+      font-style: italic;
+    }
+
+    /* Colonne droite : formulaire */
+    .contact-form-wrap {
+      background: #fff;
+      border-radius: var(--radius-lg);
+      padding: clamp(28px, 4vw, 48px);
+      box-shadow: var(--ombre-forte);
+      border: 1px solid var(--gris-clair);
+    }
+
+    .contact-form-title {
+      font-family: var(--font-titre);
+      font-size: 1.4rem;
+      font-weight: 500;
+      color: var(--noir-doux);
+      margin-bottom: 6px;
+    }
+
+    .contact-form-sub {
+      font-size: 0.82rem;
+      color: var(--gris-texte);
+      margin-bottom: 28px;
+    }
+
+    .contact-form .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .form-group {
+      margin-bottom: 18px;
+    }
+
+    .form-label {
+      display: block;
+      font-size: 0.74rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--texte-corps);
+      margin-bottom: 7px;
+    }
+
+    .form-label .required {
+      color: var(--rose-saumon);
+      margin-left: 2px;
+    }
+
+    .form-input,
+    .form-textarea,
+    .form-select {
+      width: 100%;
+      padding: 13px 16px;
+      border: 1.5px solid var(--gris-clair);
+      border-radius: var(--radius-sm);
+      background: var(--blanc-casse);
+      font-size: 0.88rem;
+      color: var(--noir-doux);
+      transition: border-color var(--transition), box-shadow var(--transition);
+      outline: none;
+      appearance: none;
+      -webkit-appearance: none;
+    }
+
+    .form-input:focus,
+    .form-textarea:focus,
+    .form-select:focus {
+      border-color: var(--rose-saumon);
+      box-shadow: 0 0 0 3px rgba(233,135,128,0.12);
+    }
+
+    .form-input::placeholder,
+    .form-textarea::placeholder {
+      color: #bbb;
+    }
+
+    .form-textarea {
+      resize: vertical;
+      min-height: 130px;
+    }
+
+    .form-select-wrap {
+      position: relative;
+    }
+
+    .form-select-wrap::after {
+      content: '';
+      position: absolute;
+      right: 16px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 0;
+      height: 0;
+      border-left: 5px solid transparent;
+      border-right: 5px solid transparent;
+      border-top: 5px solid var(--gris-texte);
+      pointer-events: none;
+    }
+
+    .form-select {
+      cursor: pointer;
+    }
+
+    .btn-submit {
+      width: 100%;
+      padding: 15px 24px;
+      background: var(--rose-saumon);
+      color: #fff;
+      border: none;
+      border-radius: var(--radius-full);
+      font-family: var(--font-corps);
+      font-size: 0.88rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      transition: all var(--transition);
+      margin-top: 8px;
+    }
+
+    .btn-submit:hover {
+      background: var(--rose-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(233,135,128,0.35);
+    }
+
+    .btn-submit:active { transform: translateY(0); }
+
+    /* Message de confirmation */
+    .form-confirmation {
+      display: none;
+      padding: 24px 28px;
+      background: rgba(109,190,154,0.1);
+      border: 1.5px solid rgba(109,190,154,0.4);
+      border-radius: var(--radius-md);
+      text-align: center;
+      margin-top: 20px;
+      animation: fadeInUp 0.5s ease forwards;
+    }
+
+    .form-confirmation.visible {
+      display: block;
+    }
+
+    .form-confirmation__icon {
+      width: 52px;
+      height: 52px;
+      background: rgba(109,190,154,0.15);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 14px;
+    }
+
+    .form-confirmation__title {
+      font-family: var(--font-titre);
+      font-size: 1.3rem;
+      font-weight: 500;
+      color: #3a8a6a;
+      margin-bottom: 8px;
+    }
+
+    .form-confirmation__text {
+      font-size: 0.86rem;
+      color: #4a7c63;
+      line-height: 1.7;
+    }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(12px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ─── PRENDRE RENDEZ-VOUS ───────────────────────────────── */
+    .rdv-section {
+      background: var(--beige-premium);
+      padding: clamp(64px, 8vw, 100px) 0;
+    }
+
+    .rdv-steps {
+      display: flex;
+      align-items: center;
+      gap: 0;
+      max-width: 860px;
+      margin: 0 auto 48px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .rdv-step {
+      flex: 1;
+      min-width: 200px;
+      text-align: center;
+      padding: 0 24px;
+    }
+
+    .rdv-step__icon {
+      width: 72px;
+      height: 72px;
+      background: #fff;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 16px;
+      box-shadow: 0 4px 20px rgba(233,135,128,0.15);
+      border: 1.5px solid rgba(233,135,128,0.2);
+    }
+
+    .rdv-step__num {
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--rose-saumon);
+      margin-bottom: 6px;
+    }
+
+    .rdv-step__title {
+      font-family: var(--font-titre);
+      font-size: 1.15rem;
+      font-weight: 500;
+      color: var(--noir-doux);
+      margin-bottom: 6px;
+    }
+
+    .rdv-step__text {
+      font-size: 0.8rem;
+      color: var(--texte-corps);
+      line-height: 1.65;
+    }
+
+    .rdv-arrow {
+      display: flex;
+      align-items: center;
+      padding-bottom: 36px;
+      color: var(--rose-clair);
+      flex-shrink: 0;
+    }
+
+    .rdv-section .cta-center {
+      text-align: center;
+    }
+
+    /* ─── CTA INSTAGRAM ─────────────────────────────────────── */
+    .insta-cta-section {
+      background: var(--noir-doux);
+      padding: clamp(64px, 7vw, 96px) 0;
+      text-align: center;
+    }
+
+    .insta-cta__eyebrow {
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--rose-clair);
+      margin-bottom: 18px;
+    }
+
+    .insta-cta__title {
+      font-family: var(--font-titre);
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 400;
+      color: #fff;
+      margin-bottom: 14px;
+      letter-spacing: -0.01em;
+    }
+
+    .insta-cta__title em {
+      font-style: italic;
+      color: var(--rose-clair);
+    }
+
+    .insta-cta__text {
+      font-size: 0.92rem;
+      color: rgba(255,255,255,0.65);
+      max-width: 440px;
+      margin: 0 auto 36px;
+      line-height: 1.8;
+    }
+
+    .btn--insta {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 28px;
+      background: linear-gradient(135deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+      color: #fff;
+      border-radius: var(--radius-full);
+      font-size: 0.88rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      transition: all var(--transition);
+      box-shadow: 0 8px 24px rgba(220,39,67,0.3);
+    }
+
+    .btn--insta:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 32px rgba(220,39,67,0.4);
+    }
+
+    /* ─── RESPONSIVE ────────────────────────────────────────── */
+    @media (max-width: 900px) {
+      .contact-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .rdv-steps {
+        flex-direction: column;
+        gap: 32px;
+      }
+
+      .rdv-arrow { display: none; }
+    }
+
+    @media (max-width: 600px) {
+      .contact-form .form-row {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ═══════════════════════════════════════════
+       HEADER
+  ═══════════════════════════════════════════ -->
+  <header class="header" id="header">
+    <div class="header__inner container">
+      <a href="index.html" class="header__logo">
+        <div class="logo-mono"><span>A</span></div>
+        <div class="logo-wordmark"><span class="logo-wordmark__name">Alyssa Fitness</span><span class="logo-wordmark__sub">Coaching premium</span></div>
+      </a>
+      <nav class="header__nav"><ul class="nav-list">
+        <li><a href="index.html" class="nav-link">Accueil</a></li>
+        <li><a href="coaching.html" class="nav-link">Coaching</a></li>
+        <li><a href="a-propos.html" class="nav-link">À propos</a></li>
+        <li><a href="methode.html" class="nav-link">Méthode</a></li>
+        <li><a href="suivi.html" class="nav-link">Suivi</a></li>
+        <li><a href="challenge.html" class="nav-link">Challenge</a></li>
+        <li><a href="contact.html" class="nav-link active">Contact</a></li>
+      </ul></nav>
+      <div class="header__ctas">
+        <a href="compte.html" class="btn--compte"><svg viewBox="0 0 20 20" fill="none" width="15"><circle cx="10" cy="7" r="3.5" stroke="currentColor" stroke-width="1.5"/><path d="M3 17c0-3.866 3.134-7 7-7s7 3.134 7 7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>Mon compte</a>
+        <a href="reservation.html" class="btn btn--primary btn--sm">Réserver un appel</a>
+      </div>
+      <button class="burger" id="burger" aria-expanded="false" aria-controls="mobile-menu"><span></span><span></span><span></span></button>
+    </div>
+    <div class="mobile-menu" id="mobile-menu">
+      <ul class="mobile-nav-list">
+        <li><a href="index.html" class="mobile-nav-link">Accueil</a></li>
+        <li><a href="coaching.html" class="mobile-nav-link">Coaching</a></li>
+        <li><a href="a-propos.html" class="mobile-nav-link">À propos</a></li>
+        <li><a href="methode.html" class="mobile-nav-link">Méthode</a></li>
+        <li><a href="suivi.html" class="mobile-nav-link">Suivi</a></li>
+        <li><a href="challenge.html" class="mobile-nav-link">Challenge</a></li>
+        <li><a href="contact.html" class="mobile-nav-link">Contact</a></li>
+      </ul>
+      <div class="mobile-menu__ctas">
+        <a href="compte.html" class="btn btn--ghost mobile-cta">Mon compte</a>
+        <a href="reservation.html" class="btn btn--primary mobile-cta">Réserver un appel</a>
+      </div>
+    </div>
+  </header>
+
+
+  <!-- ═══════════════════════════════════════════
+       HERO INTERNE
+  ═══════════════════════════════════════════ -->
+  <section class="hero-inner" aria-label="En-tête page contact">
+    <div class="container" style="position:relative; z-index:1;">
+      <p class="section-eyebrow reveal">Parlons-en</p>
+      <h1 class="hero-inner__title reveal">
+        Prenons le temps de <em>te connaître.</em>
+      </h1>
+      <p class="hero-inner__subtitle reveal">
+        Je réponds à chaque message personnellement. Tu es unique, et ton projet mérite une vraie attention.
+      </p>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════
+       SECTION PRINCIPALE
+  ═══════════════════════════════════════════ -->
+  <section class="contact-section" aria-label="Coordonnées et formulaire de contact">
+    <div class="container">
+      <div class="contact-grid">
+
+        <!-- ─ Colonne gauche ─ -->
+        <div class="contact-infos reveal reveal--left">
+          <h2 class="contact-infos__title">Dis-moi <em>tout.</em></h2>
+          <p class="contact-infos__intro">
+            Tu as des questions sur mon coaching, tu veux en savoir plus sur mes programmes, ou tu veux simplement faire connaissance ? Je suis là, et je lis chaque message avec attention.
+          </p>
+
+          <div class="contact-list" role="list">
+
+            <div class="contact-list-item" role="listitem">
+              <div class="contact-list-item__icon">
+                <svg viewBox="0 0 24 24" fill="none" width="20"><rect x="2" y="4" width="20" height="16" rx="2" stroke="#E98780" stroke-width="1.5"/><path d="M2 8l10 7 10-7" stroke="#E98780" stroke-width="1.5"/></svg>
+              </div>
+              <div class="contact-list-item__body">
+                <p class="contact-list-item__label">Email</p>
+                <p class="contact-list-item__value"><a href="mailto:contact@alyssafitness.fr">contact@alyssafitness.fr</a></p>
+              </div>
+            </div>
+
+            <div class="contact-list-item" role="listitem">
+              <div class="contact-list-item__icon">
+                <svg viewBox="0 0 24 24" fill="none" width="20"><path d="M5 3h3.5l1.5 4.5-2.5 1.5C8.5 11.5 12.5 15.5 15 17l1.5-2.5L21 16v3.5C21 21 20 22 19 22 10 22 2 14 2 5c0-1 1-2 2-2z" stroke="#E98780" stroke-width="1.5" stroke-linejoin="round"/></svg>
+              </div>
+              <div class="contact-list-item__body">
+                <p class="contact-list-item__label">Téléphone</p>
+                <p class="contact-list-item__value"><a href="tel:+33623456789">06 23 45 67 89</a></p>
+              </div>
+            </div>
+
+            <div class="contact-list-item" role="listitem">
+              <div class="contact-list-item__icon">
+                <svg viewBox="0 0 24 24" fill="none" width="20"><path d="M12 2C8.686 2 6 4.686 6 8c0 5.25 6 12 6 12s6-6.75 6-12c0-3.314-2.686-6-6-6zm0 8a2 2 0 110-4 2 2 0 010 4z" stroke="#E98780" stroke-width="1.5"/></svg>
+              </div>
+              <div class="contact-list-item__body">
+                <p class="contact-list-item__label">Localisation</p>
+                <p class="contact-list-item__value">Lyon, France</p>
+              </div>
+            </div>
+
+            <div class="contact-list-item" role="listitem">
+              <div class="contact-list-item__icon">
+                <svg viewBox="0 0 24 24" fill="none" width="20"><rect x="2" y="2" width="20" height="20" rx="5" stroke="#E98780" stroke-width="1.5"/><circle cx="12" cy="12" r="4" stroke="#E98780" stroke-width="1.5"/><circle cx="17.5" cy="6.5" r="1" fill="#E98780"/></svg>
+              </div>
+              <div class="contact-list-item__body">
+                <p class="contact-list-item__label">Instagram</p>
+                <p class="contact-list-item__value"><a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer">@alyssafitness</a></p>
+              </div>
+            </div>
+
+          </div>
+
+          <div class="horaires-card">
+            <h3 class="horaires-card__title">Disponibilités</h3>
+            <div class="horaires-list">
+              <div class="horaires-row">
+                <span class="horaires-row__day">Lundi – Vendredi</span>
+                <span class="horaires-row__time">9h00 – 18h00</span>
+              </div>
+              <div class="horaires-row">
+                <span class="horaires-row__day">Samedi</span>
+                <span class="horaires-row__time">9h00 – 13h00</span>
+              </div>
+              <div class="horaires-row">
+                <span class="horaires-row__day">Dimanche</span>
+                <span class="horaires-row__badge">Repos</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="contact-reassure">
+            <svg viewBox="0 0 24 24" fill="none" width="20" style="flex-shrink:0; margin-top:2px;"><path d="M12 2l2.4 7.4H22l-6.2 4.5 2.4 7.4L12 17l-6.2 4.3 2.4-7.4L2 9.4h7.6L12 2z" stroke="#E98780" stroke-width="1.4" stroke-linejoin="round"/></svg>
+            <p>Je réponds à tous les messages sous 24h maximum. Tu ne seras jamais laissée sans réponse — je m'y engage personnellement.</p>
+          </div>
+        </div>
+
+        <!-- ─ Colonne droite : formulaire ─ -->
+        <div class="contact-form-wrap reveal reveal--right">
+          <h2 class="contact-form-title">Envoie-moi un message</h2>
+          <p class="contact-form-sub">Tous les champs marqués d'un * sont obligatoires.</p>
+
+          <form class="contact-form" id="contactForm" novalidate>
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label" for="prenom">Prénom <span class="required">*</span></label>
+                <input class="form-input" type="text" id="prenom" name="prenom" placeholder="Camille" required autocomplete="given-name" />
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="nom">Nom <span class="required">*</span></label>
+                <input class="form-input" type="text" id="nom" name="nom" placeholder="Martin" required autocomplete="family-name" />
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label" for="email">Email <span class="required">*</span></label>
+                <input class="form-input" type="email" id="email" name="email" placeholder="camille@exemple.fr" required autocomplete="email" />
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="telephone">Téléphone</label>
+                <input class="form-input" type="tel" id="telephone" name="telephone" placeholder="06 XX XX XX XX" autocomplete="tel" />
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="objectif">Ton objectif principal</label>
+              <div class="form-select-wrap">
+                <select class="form-select" id="objectif" name="objectif">
+                  <option value="" disabled selected>Choisir un objectif…</option>
+                  <option value="remise-forme">Remise en forme générale</option>
+                  <option value="musculation">Musculation &amp; tonification</option>
+                  <option value="perte-poids">Perte de poids</option>
+                  <option value="transformation">Transformation physique</option>
+                  <option value="post-natal">Retour post-natal</option>
+                  <option value="autre">Autre / Je ne sais pas encore</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="message">Ton message <span class="required">*</span></label>
+              <textarea class="form-textarea" id="message" name="message" placeholder="Dis-moi tout ce qui te passe par la tête : tes objectifs, tes questions, tes doutes... Il n'y a pas de mauvaise réponse." required rows="5"></textarea>
+            </div>
+
+            <button type="submit" class="btn-submit">
+              Envoyer mon message
+              <svg viewBox="0 0 20 20" fill="none" width="18"><path d="M17 10L3 4l3.5 6L3 16l14-6z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>
+            </button>
+          </form>
+
+          <!-- Confirmation -->
+          <div class="form-confirmation" id="formConfirmation" role="alert" aria-live="polite">
+            <div class="form-confirmation__icon">
+              <svg viewBox="0 0 24 24" fill="none" width="24"><path d="M5 12l4 4L19 8" stroke="#6DBE9A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <h3 class="form-confirmation__title">Message envoyé avec succès !</h3>
+            <p class="form-confirmation__text">Merci pour ton message. Je te réponds personnellement dans les 24h. À très vite !</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════
+       PRENDRE RENDEZ-VOUS
+  ═══════════════════════════════════════════ -->
+  <section class="rdv-section" aria-label="Comment prendre rendez-vous">
+    <div class="container">
+      <h2 class="section-title reveal">
+        Prendre <em>rendez-vous</em>, c'est simple
+      </h2>
+
+      <div class="rdv-steps">
+
+        <div class="rdv-step reveal">
+          <div class="rdv-step__icon">
+            <svg viewBox="0 0 48 48" fill="none" width="32"><rect x="2" y="4" width="44" height="36" rx="4" stroke="#E98780" stroke-width="1.8"/><path d="M2 14h44" stroke="#E98780" stroke-width="1.8"/><path d="M16 2v6M32 2v6" stroke="#E98780" stroke-width="1.8" stroke-linecap="round"/><path d="M22 28l2.5 2.5L30 24" stroke="#E98780" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <p class="rdv-step__num">Étape 1</p>
+          <h3 class="rdv-step__title">Écris-moi</h3>
+          <p class="rdv-step__text">Via le formulaire ci-dessus ou directement par email. Je lis chaque message avec attention.</p>
+        </div>
+
+        <div class="rdv-arrow" aria-hidden="true">
+          <svg viewBox="0 0 40 16" fill="none" width="40"><path d="M2 8h32M28 2l8 6-8 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+
+        <div class="rdv-step reveal reveal-delay-1">
+          <div class="rdv-step__icon">
+            <svg viewBox="0 0 48 48" fill="none" width="32"><circle cx="24" cy="24" r="18" stroke="#E98780" stroke-width="1.8"/><path d="M14 24c0 0 2 2 4 4l12-12" stroke="#E98780" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <p class="rdv-step__num">Étape 2</p>
+          <h3 class="rdv-step__title">Appel découverte</h3>
+          <p class="rdv-step__text">Un appel gratuit de 20 minutes pour faire connaissance, définir tes objectifs et trouver la meilleure formule.</p>
+        </div>
+
+        <div class="rdv-arrow" aria-hidden="true">
+          <svg viewBox="0 0 40 16" fill="none" width="40"><path d="M2 8h32M28 2l8 6-8 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+
+        <div class="rdv-step reveal reveal-delay-2">
+          <div class="rdv-step__icon">
+            <svg viewBox="0 0 48 48" fill="none" width="32"><path d="M24 8c-8.4 0-15 6-15 13 0 4 2 7.6 5.5 10L12 42l12-5 12 5-2.5-11C37 28.6 39 25 39 21c0-7-6.6-13-15-13z" stroke="#E98780" stroke-width="1.8" stroke-linejoin="round"/><path d="M19 22l2.5 2.5L29 18" stroke="#E98780" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <p class="rdv-step__num">Étape 3</p>
+          <h3 class="rdv-step__title">On commence !</h3>
+          <p class="rdv-step__text">Je prépare ton programme sur-mesure et on démarre ensemble ton parcours de transformation.</p>
+        </div>
+
+      </div>
+
+      <div class="cta-center reveal">
+        <a href="reservation.html" class="btn btn--primary btn--lg">
+          Réserver mon appel découverte gratuit
+          <svg class="btn-arrow" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════
+       CTA INSTAGRAM
+  ═══════════════════════════════════════════ -->
+  <section class="insta-cta-section" aria-label="Rejoindre sur Instagram">
+    <div class="container">
+      <p class="insta-cta__eyebrow reveal">Restons connectées</p>
+      <h2 class="insta-cta__title reveal">
+        Retrouve-moi au quotidien<br/>sur <em>Instagram.</em>
+      </h2>
+      <p class="insta-cta__text reveal">
+        Conseils fitness, coulisses de mon quotidien, témoignages de mes clientes et doses de motivation — chaque jour sur @alyssafitness.
+      </p>
+      <div class="reveal">
+        <a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer" class="btn--insta">
+          <svg viewBox="0 0 24 24" fill="none" width="20"><rect x="2" y="2" width="20" height="20" rx="5" stroke="currentColor" stroke-width="1.5"/><circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.5"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg>
+          Me suivre sur Instagram
+        </a>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════
+       FOOTER
+  ═══════════════════════════════════════════ -->
+  <footer class="footer" role="contentinfo">
+    <div class="container footer__grid">
+
+      <div class="footer__brand">
+        <a href="index.html" class="footer__logo-link footer__logo-wordmark" aria-label="Alyssa Fitness">
+          <div style="display:flex; align-items:center; gap:10px;">
+            <div class="logo-mono" style="background:var(--rose-saumon);" aria-hidden="true"><span style="color:#fff;">A</span></div>
+            <div class="logo-wordmark footer__logo-wordmark">
+              <span class="logo-wordmark__name" style="color:#fff;">Alyssa Fitness</span>
+              <span class="logo-wordmark__sub">Coaching premium</span>
+            </div>
+          </div>
+        </a>
+        <p class="footer__tagline">Coaching fitness personnalisé, musculation et personal training pour femmes.</p>
+        <div class="footer__social">
+          <a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer" class="footer__social-link" aria-label="Instagram">
+            <svg viewBox="0 0 24 24" fill="none" width="18"><rect x="2" y="2" width="20" height="20" rx="5" stroke="currentColor" stroke-width="1.5"/><circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.5"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg>
+          </a>
+          <a href="mailto:contact@alyssafitness.fr" class="footer__social-link" aria-label="Email">
+            <svg viewBox="0 0 24 24" fill="none" width="18"><rect x="2" y="4" width="20" height="16" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M2 8l10 7 10-7" stroke="currentColor" stroke-width="1.5"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <nav class="footer__nav-col" aria-label="Navigation footer">
+        <h4 class="footer__col-title">Liens rapides</h4>
+        <ul>
+          <li><a href="index.html" class="footer__link">Accueil</a></li>
+          <li><a href="coaching.html" class="footer__link">Coaching</a></li>
+          <li><a href="a-propos.html" class="footer__link">À propos</a></li>
+          <li><a href="methode.html" class="footer__link">Méthode</a></li>
+          <li><a href="contact.html" class="footer__link">Contact</a></li>
+        </ul>
+      </nav>
+
+      <nav class="footer__nav-col" aria-label="Espace client">
+        <h4 class="footer__col-title">Espace client</h4>
+        <ul>
+          <li><a href="compte.html" class="footer__link">Mon compte</a></li>
+          <li><a href="reservation.html" class="footer__link">Réserver une séance</a></li>
+          <li><a href="messagerie.html" class="footer__link">Messagerie</a></li>
+          <li><a href="suivi.html" class="footer__link">Mon suivi</a></li>
+          <li><a href="challenge.html" class="footer__link">Challenges</a></li>
+        </ul>
+      </nav>
+
+      <div class="footer__contact-col">
+        <h4 class="footer__col-title">Contact</h4>
+        <ul>
+          <li>
+            <svg viewBox="0 0 20 20" fill="none" width="14"><rect x="1" y="3" width="18" height="14" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M1 7l9 6 9-6" stroke="currentColor" stroke-width="1.5"/></svg>
+            <a href="mailto:contact@alyssafitness.fr" class="footer__link">contact@alyssafitness.fr</a>
+          </li>
+          <li>
+            <svg viewBox="0 0 20 20" fill="none" width="14"><path d="M4 2h3l1.5 4-2 1.5c1 2 3 4 5 5L13 10.5l4 1.5v3c0 1-1 2-2 2C7 17 3 10 3 4c0-1 1-2 2-2z" stroke="currentColor" stroke-width="1.5"/></svg>
+            <span>06 23 45 67 89</span>
+          </li>
+          <li>
+            <svg viewBox="0 0 20 20" fill="none" width="14"><path d="M10 2C6.686 2 4 4.686 4 8c0 5.25 6 10 6 10s6-4.75 6-10c0-3.314-2.686-6-6-6zm0 8a2 2 0 110-4 2 2 0 010 4z" stroke="currentColor" stroke-width="1.5"/></svg>
+            <span>Lyon, France</span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="footer__instagram-col">
+        <h4 class="footer__col-title">Suivez-moi</h4>
+        <div class="footer__insta-grid">
+          <a href="https://www.instagram.com/" target="_blank" rel="noopener" class="insta-thumb"><div class="insta-placeholder insta-placeholder--1"></div></a>
+          <a href="https://www.instagram.com/" target="_blank" rel="noopener" class="insta-thumb"><div class="insta-placeholder insta-placeholder--2"></div></a>
+          <a href="https://www.instagram.com/" target="_blank" rel="noopener" class="insta-thumb"><div class="insta-placeholder insta-placeholder--3"></div></a>
+          <a href="https://www.instagram.com/" target="_blank" rel="noopener" class="insta-thumb"><div class="insta-placeholder insta-placeholder--4"></div></a>
+          <a href="https://www.instagram.com/" target="_blank" rel="noopener" class="insta-thumb"><div class="insta-placeholder insta-placeholder--5"></div></a>
+          <a href="https://www.instagram.com/" target="_blank" rel="noopener" class="insta-thumb"><div class="insta-placeholder insta-placeholder--6"></div></a>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="footer__bottom">
+      <div class="container footer__bottom-inner">
+        <p class="footer__copyright">© 2025 Alyssa Fitness — Tous droits réservés.</p>
+        <div class="footer__legal">
+          <a href="#" class="footer__link">Mentions légales</a>
+          <span aria-hidden="true">·</span>
+          <a href="#" class="footer__link">Confidentialité</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="global.js"></script>
+  <script>
+    /* ── Formulaire de contact ─────────────────── */
+    const form         = document.getElementById('contactForm');
+    const confirmation = document.getElementById('formConfirmation');
+
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      // Validation minimale
+      const required = form.querySelectorAll('[required]');
+      let valid = true;
+
+      required.forEach(field => {
+        if (!field.value.trim()) {
+          valid = false;
+          field.style.borderColor = '#E98780';
+          field.addEventListener('input', () => {
+            field.style.borderColor = '';
+          }, { once: true });
+        }
+      });
+
+      if (!valid) return;
+
+      // Simuler l'envoi
+      const btn = form.querySelector('.btn-submit');
+      btn.textContent = 'Envoi en cours…';
+      btn.disabled = true;
+
+      setTimeout(() => {
+        form.style.display = 'none';
+        confirmation.classList.add('visible');
+        confirmation.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      }, 800);
+    });
+  </script>
+</body>
+</html>

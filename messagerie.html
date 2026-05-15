@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Messagerie — Alyssa Fitness</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="global.css" />
+  <style>
+    body { overflow: hidden; }
+
+    .msg-layout {
+      display: grid;
+      grid-template-columns: 300px 1fr;
+      height: calc(100vh - var(--header-h));
+      margin-top: var(--header-h);
+    }
+
+    /* ─── SIDEBAR ──────────────────────────────────────── */
+    .msg-sidebar {
+      background: var(--blanc-casse);
+      border-right: 1px solid var(--gris-clair);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    .msg-sidebar__head {
+      padding: 24px 20px 16px;
+      border-bottom: 1px solid var(--gris-clair);
+    }
+
+    .msg-sidebar__title {
+      font-family: var(--font-titre);
+      font-size: 1.4rem;
+      font-weight: 500;
+      color: var(--noir-doux);
+      margin-bottom: 14px;
+    }
+
+    .msg-search {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--beige-premium);
+      border: 1px solid var(--gris-clair);
+      border-radius: var(--radius-full);
+      padding: 9px 14px;
+    }
+    .msg-search svg { flex-shrink: 0; color: var(--gris-texte); }
+    .msg-search input {
+      border: none; background: transparent; font-size: .82rem;
+      color: var(--noir-doux); outline: none; width: 100%;
+    }
+    .msg-search input::placeholder { color: var(--gris-texte); }
+
+    .msg-list { flex: 1; overflow-y: auto; padding: 8px 0; }
+
+    .msg-conv {
+      display: flex; align-items: center; gap: 12px;
+      padding: 14px 20px; cursor: pointer;
+      transition: background .2s; border-radius: 0;
+      position: relative;
+    }
+    .msg-conv:hover { background: var(--beige-premium); }
+    .msg-conv.active { background: rgba(233,135,128,.08); }
+    .msg-conv.active::before {
+      content: '';
+      position: absolute; left: 0; top: 0; bottom: 0;
+      width: 3px; background: var(--rose-saumon); border-radius: 0 3px 3px 0;
+    }
+
+    .msg-conv__avatar {
+      width: 44px; height: 44px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--rose-saumon), var(--rose-clair));
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--font-titre); font-size: 1.2rem; font-weight: 500;
+      color: #fff; flex-shrink: 0; position: relative;
+    }
+    .msg-conv__online {
+      position: absolute; bottom: 1px; right: 1px;
+      width: 11px; height: 11px; border-radius: 50%;
+      background: var(--success); border: 2px solid var(--blanc-casse);
+    }
+
+    .msg-conv__body { flex: 1; overflow: hidden; }
+    .msg-conv__name { font-size: .88rem; font-weight: 600; color: var(--noir-doux); margin-bottom: 3px; }
+    .msg-conv__preview { font-size: .77rem; color: var(--gris-texte); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .msg-conv__meta { display: flex; flex-direction: column; align-items: flex-end; gap: 5px; flex-shrink: 0; }
+    .msg-conv__time { font-size: .68rem; color: var(--gris-texte); }
+    .msg-conv__unread {
+      min-width: 18px; height: 18px; border-radius: var(--radius-full);
+      background: var(--rose-saumon); color: #fff;
+      font-size: .65rem; font-weight: 700; display: flex; align-items: center; justify-content: center;
+      padding: 0 5px;
+    }
+
+    .msg-sidebar__footer {
+      padding: 16px 20px;
+      border-top: 1px solid var(--gris-clair);
+      background: var(--blanc-casse);
+    }
+
+    /* ─── MAIN CHAT ─────────────────────────────────────── */
+    .msg-main {
+      display: flex;
+      flex-direction: column;
+      background: var(--blanc-casse);
+      overflow: hidden;
+    }
+
+    .msg-main__head {
+      padding: 16px 24px;
+      border-bottom: 1px solid var(--gris-clair);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: #fff;
+      box-shadow: 0 2px 12px rgba(0,0,0,.04);
+    }
+
+    .msg-main__coach {
+      display: flex; align-items: center; gap: 14px;
+    }
+    .msg-main__avatar {
+      width: 48px; height: 48px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--noir-doux), #3a3a3a);
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--font-titre); font-size: 1.4rem; font-weight: 500;
+      color: var(--rose-saumon); flex-shrink: 0; position: relative;
+    }
+    .msg-main__online-dot {
+      position: absolute; bottom: 2px; right: 2px;
+      width: 12px; height: 12px; border-radius: 50%;
+      background: var(--success); border: 2px solid #fff;
+    }
+    .msg-main__coach-name { font-size: .95rem; font-weight: 700; color: var(--noir-doux); margin-bottom: 2px; }
+    .msg-main__status { font-size: .75rem; color: var(--success); font-weight: 600; display: flex; align-items: center; gap: 5px; }
+    .msg-main__status::before { content: ''; display: block; width: 6px; height: 6px; border-radius: 50%; background: var(--success); }
+
+    .msg-main__actions { display: flex; gap: 8px; }
+    .msg-action-btn {
+      width: 38px; height: 38px; border-radius: 50%;
+      border: 1px solid var(--gris-clair); background: #fff;
+      display: flex; align-items: center; justify-content: center;
+      color: var(--texte-corps); cursor: pointer; transition: all .25s;
+    }
+    .msg-action-btn:hover { border-color: var(--rose-saumon); color: var(--rose-saumon); background: var(--rose-pale); }
+
+    /* ─── MESSAGES AREA ─────────────────────────────────── */
+    .msg-body {
+      flex: 1;
+      overflow-y: auto;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      background: var(--beige-premium);
+    }
+
+    .msg-date-sep {
+      text-align: center;
+      font-size: .68rem;
+      font-weight: 700;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--gris-texte);
+      position: relative;
+    }
+    .msg-date-sep::before, .msg-date-sep::after {
+      content: ''; position: absolute; top: 50%; width: calc(50% - 60px); height: 1px;
+      background: var(--gris-clair);
+    }
+    .msg-date-sep::before { left: 0; }
+    .msg-date-sep::after  { right: 0; }
+
+    .msg-row {
+      display: flex;
+      align-items: flex-end;
+      gap: 10px;
+      max-width: 75%;
+    }
+    .msg-row--user   { align-self: flex-end; flex-direction: row-reverse; }
+    .msg-row--coach  { align-self: flex-start; }
+
+    .msg-row__avatar {
+      width: 32px; height: 32px; border-radius: 50%; flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--font-titre); font-size: .9rem; font-weight: 500;
+    }
+    .msg-row__avatar--coach { background: linear-gradient(135deg, var(--noir-doux), #3a3a3a); color: var(--rose-saumon); }
+    .msg-row__avatar--user  { background: linear-gradient(135deg, var(--rose-saumon), var(--rose-clair)); color: #fff; }
+
+    .msg-bubble {
+      padding: 12px 16px;
+      border-radius: 18px;
+      max-width: 100%;
+      font-size: .88rem;
+      line-height: 1.65;
+    }
+    .msg-bubble--coach {
+      background: #fff;
+      color: var(--noir-doux);
+      border-radius: 4px 18px 18px 18px;
+      box-shadow: 0 2px 12px rgba(0,0,0,.06);
+    }
+    .msg-bubble--user {
+      background: var(--rose-saumon);
+      color: #fff;
+      border-radius: 18px 4px 18px 18px;
+      box-shadow: 0 2px 12px rgba(233,135,128,.3);
+    }
+    .msg-bubble__time {
+      display: block;
+      font-size: .65rem;
+      opacity: .65;
+      margin-top: 5px;
+      text-align: right;
+    }
+
+    /* Conseil card dans le chat */
+    .msg-conseil {
+      background: linear-gradient(135deg, rgba(233,135,128,.08), rgba(243,179,173,.05));
+      border: 1px solid rgba(233,135,128,.2);
+      border-radius: var(--radius-md);
+      padding: 14px 16px;
+      margin-top: 4px;
+      max-width: 340px;
+    }
+    .msg-conseil__label { font-size:.65rem; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:var(--rose-saumon); margin-bottom:6px; }
+    .msg-conseil__title { font-family:var(--font-titre); font-size:1rem; font-weight:500; color:var(--noir-doux); margin-bottom:4px; }
+    .msg-conseil__text  { font-size:.78rem; color:var(--texte-corps); line-height:1.6; }
+
+    /* Session reminder */
+    .msg-reminder {
+      display: flex; align-items: center; gap: 12px;
+      background: #fff; border: 1px solid var(--gris-clair);
+      border-radius: var(--radius-md); padding: 12px 16px;
+      max-width: 300px;
+    }
+    .msg-reminder__icon { width:36px; height:36px; border-radius:10px; background:rgba(233,135,128,.1); display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+    .msg-reminder__icon svg { width:18px; height:18px; color:var(--rose-saumon); }
+    .msg-reminder__label { font-size:.68rem; color:var(--gris-texte); margin-bottom:2px; }
+    .msg-reminder__val { font-size:.85rem; font-weight:700; color:var(--noir-doux); }
+
+    /* ─── INPUT BAR ─────────────────────────────────────── */
+    .msg-input-bar {
+      padding: 16px 24px;
+      background: #fff;
+      border-top: 1px solid var(--gris-clair);
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .msg-quick-replies {
+      display: flex; gap: 8px; overflow-x: auto; padding-bottom: 2px;
+    }
+    .msg-quick-replies::-webkit-scrollbar { display: none; }
+
+    .quick-reply {
+      flex-shrink: 0;
+      padding: 6px 14px;
+      border-radius: var(--radius-full);
+      border: 1px solid var(--gris-clair);
+      font-size: .75rem; font-weight: 500;
+      color: var(--texte-corps); cursor: pointer;
+      background: #fff; transition: all .2s;
+      white-space: nowrap;
+    }
+    .quick-reply:hover { border-color: var(--rose-saumon); color: var(--rose-saumon); background: var(--rose-pale); }
+
+    .msg-input-row {
+      display: flex; align-items: flex-end; gap: 10px;
+    }
+
+    .msg-input-wrap {
+      flex: 1; position: relative;
+    }
+
+    .msg-input {
+      width: 100%; padding: 12px 48px 12px 16px;
+      border: 1.5px solid var(--gris-clair);
+      border-radius: 24px; font-size: .9rem;
+      color: var(--noir-doux); resize: none;
+      outline: none; line-height: 1.5;
+      max-height: 120px; overflow-y: auto;
+      transition: border-color .25s;
+      font-family: var(--font-corps);
+    }
+    .msg-input:focus { border-color: var(--rose-saumon); }
+
+    .msg-input-emoji {
+      position: absolute; right: 14px; bottom: 13px;
+      font-size: 1rem; cursor: pointer; opacity: .5;
+      transition: opacity .2s;
+    }
+    .msg-input-emoji:hover { opacity: 1; }
+
+    .msg-send-btn {
+      width: 44px; height: 44px; border-radius: 50%;
+      background: var(--rose-saumon); border: none;
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer; flex-shrink: 0;
+      transition: all .25s;
+      box-shadow: 0 4px 16px rgba(233,135,128,.35);
+    }
+    .msg-send-btn:hover { background: var(--rose-hover); transform: scale(1.05); }
+    .msg-send-btn svg { width: 18px; height: 18px; color: #fff; }
+
+    /* ─── RESPONSIVE ────────────────────────────────────── */
+    @media (max-width: 768px) {
+      body { overflow: auto; }
+      .msg-layout { grid-template-columns: 1fr; height: auto; }
+      .msg-sidebar { height: 200px; overflow: hidden; }
+      .msg-main { height: calc(100vh - var(--header-h) - 200px); }
+      .msg-body { padding: 16px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="header" id="header">
+    <div class="header__inner container">
+      <a href="index.html" class="header__logo">
+        <div class="logo-mono"><span>A</span></div>
+        <div class="logo-wordmark"><span class="logo-wordmark__name">Alyssa Fitness</span><span class="logo-wordmark__sub">Coaching premium</span></div>
+      </a>
+      <nav class="header__nav">
+        <ul class="nav-list">
+          <li><a href="index.html" class="nav-link">Accueil</a></li>
+          <li><a href="coaching.html" class="nav-link">Coaching</a></li>
+          <li><a href="a-propos.html" class="nav-link">À propos</a></li>
+          <li><a href="methode.html" class="nav-link">Méthode</a></li>
+          <li><a href="suivi.html" class="nav-link">Suivi</a></li>
+          <li><a href="challenge.html" class="nav-link">Challenge</a></li>
+          <li><a href="contact.html" class="nav-link">Contact</a></li>
+        </ul>
+      </nav>
+      <div class="header__ctas">
+        <a href="compte.html" class="btn--compte"><svg viewBox="0 0 20 20" fill="none" width="15"><circle cx="10" cy="7" r="3.5" stroke="currentColor" stroke-width="1.5"/><path d="M3 17c0-3.866 3.134-7 7-7s7 3.134 7 7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>Mon compte</a>
+        <a href="reservation.html" class="btn btn--primary btn--sm">Réserver</a>
+      </div>
+      <button class="burger" id="burger" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="mobile-menu"><span></span><span></span><span></span></button>
+    </div>
+    <div class="mobile-menu" id="mobile-menu">
+      <ul class="mobile-nav-list">
+        <li><a href="index.html" class="mobile-nav-link">Accueil</a></li>
+        <li><a href="coaching.html" class="mobile-nav-link">Coaching</a></li>
+        <li><a href="a-propos.html" class="mobile-nav-link">À propos</a></li>
+        <li><a href="methode.html" class="mobile-nav-link">Méthode</a></li>
+        <li><a href="suivi.html" class="mobile-nav-link">Suivi</a></li>
+        <li><a href="challenge.html" class="mobile-nav-link">Challenge</a></li>
+        <li><a href="contact.html" class="mobile-nav-link">Contact</a></li>
+      </ul>
+      <div class="mobile-menu__ctas"><a href="compte.html" class="btn btn--ghost mobile-cta">Mon compte</a><a href="reservation.html" class="btn btn--primary mobile-cta">Réserver</a></div>
+    </div>
+  </header>
+
+  <!-- MESSAGERIE -->
+  <div class="msg-layout">
+
+    <!-- SIDEBAR -->
+    <aside class="msg-sidebar">
+      <div class="msg-sidebar__head">
+        <h1 class="msg-sidebar__title">Messages</h1>
+        <div class="msg-search">
+          <svg viewBox="0 0 16 16" fill="none" width="14"><circle cx="7" cy="7" r="5" stroke="currentColor" stroke-width="1.4"/><path d="M11 11l3 3" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+          <input type="search" placeholder="Rechercher…" aria-label="Rechercher une conversation" />
+        </div>
+      </div>
+
+      <div class="msg-list">
+        <!-- Conversation active -->
+        <div class="msg-conv active" onclick="">
+          <div class="msg-conv__avatar">
+            A
+            <div class="msg-conv__online"></div>
+          </div>
+          <div class="msg-conv__body">
+            <div class="msg-conv__name">Alyssa — Coach</div>
+            <div class="msg-conv__preview">Super séance hier ! Voici tes conseils pour demain 💪</div>
+          </div>
+          <div class="msg-conv__meta">
+            <div class="msg-conv__time">10:32</div>
+            <div class="msg-conv__unread">2</div>
+          </div>
+        </div>
+
+        <!-- Bot / Info -->
+        <div class="msg-conv" onclick="">
+          <div class="msg-conv__avatar" style="background:linear-gradient(135deg,#6DBE9A,#8fd4b4); font-size:.8rem;">
+            ✓
+          </div>
+          <div class="msg-conv__body">
+            <div class="msg-conv__name">Rappels & Planning</div>
+            <div class="msg-conv__preview">Ta séance de vendredi est confirmée</div>
+          </div>
+          <div class="msg-conv__meta">
+            <div class="msg-conv__time">08:00</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="msg-sidebar__footer">
+        <div style="display:flex; align-items:center; gap:10px; padding:10px 0;">
+          <div style="width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,var(--rose-saumon),var(--rose-clair));display:flex;align-items:center;justify-content:center;font-family:var(--font-titre);font-size:1rem;font-weight:500;color:#fff;flex-shrink:0;">S</div>
+          <div style="flex:1;">
+            <div style="font-size:.82rem;font-weight:600;color:var(--noir-doux);">Sophie M.</div>
+            <div style="font-size:.72rem;color:var(--gris-texte);">Semaine 7 · Transformation</div>
+          </div>
+          <a href="compte.html" style="color:var(--gris-texte);" title="Mon compte">
+            <svg viewBox="0 0 16 16" fill="none" width="16"><circle cx="8" cy="6" r="3" stroke="currentColor" stroke-width="1.3"/><path d="M2 14c0-3.314 2.686-6 6-6s6 2.686 6 6" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
+          </a>
+        </div>
+      </div>
+    </aside>
+
+    <!-- MAIN CHAT -->
+    <main class="msg-main">
+
+      <!-- Chat header -->
+      <div class="msg-main__head">
+        <div class="msg-main__coach">
+          <div class="msg-main__avatar">
+            A
+            <div class="msg-main__online-dot"></div>
+          </div>
+          <div>
+            <div class="msg-main__coach-name">Alyssa — Coach personnelle</div>
+            <div class="msg-main__status">En ligne</div>
+          </div>
+        </div>
+        <div class="msg-main__actions">
+          <button class="msg-action-btn" aria-label="Appel vidéo" title="Lancer une visio">
+            <svg viewBox="0 0 20 20" fill="none" width="16"><rect x="1" y="5" width="12" height="10" rx="2" stroke="currentColor" stroke-width="1.4"/><path d="M13 8l6-3v9l-6-3V8z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/></svg>
+          </button>
+          <button class="msg-action-btn" aria-label="Voir le profil" title="Profil du coach">
+            <svg viewBox="0 0 20 20" fill="none" width="16"><circle cx="10" cy="7" r="4" stroke="currentColor" stroke-width="1.4"/><path d="M3 17c0-3.866 3.134-7 7-7s7 3.134 7 7" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+          </button>
+          <button class="msg-action-btn" aria-label="Réserver une séance" title="Réserver" onclick="window.location='reservation.html'">
+            <svg viewBox="0 0 20 20" fill="none" width="16"><rect x="2" y="3" width="16" height="15" rx="2" stroke="currentColor" stroke-width="1.4"/><path d="M6 2v2M14 2v2M2 8h16" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Messages -->
+      <div class="msg-body" id="msgBody">
+
+        <div class="msg-date-sep">Lundi 19 mai</div>
+
+        <!-- Coach messages -->
+        <div class="msg-row msg-row--coach">
+          <div class="msg-row__avatar msg-row__avatar--coach">A</div>
+          <div>
+            <div class="msg-bubble msg-bubble--coach">
+              Bonjour Sophie ! 🌸 Prête pour ta semaine ? J'ai regardé ton suivi de la semaine dernière et tu progresses vraiment bien. Tu es constante, c'est exactement ce qu'il faut.
+              <span class="msg-bubble__time">09:15</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="msg-row msg-row--user">
+          <div class="msg-row__avatar msg-row__avatar--user">S</div>
+          <div>
+            <div class="msg-bubble msg-bubble--user">
+              Merci Alyssa ! Oui je me sens vraiment mieux depuis 2 semaines. J'ai moins de douleurs dans le dos et j'ai plus d'énergie le matin 😊
+              <span class="msg-bubble__time" style="color:rgba(255,255,255,.7);">09:22</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="msg-row msg-row--coach">
+          <div class="msg-row__avatar msg-row__avatar--coach">A</div>
+          <div>
+            <div class="msg-bubble msg-bubble--coach">
+              C'est exactement le signe que ton corps s'adapte positivement. Les douleurs dorsales qui diminuent, c'est le renforcement de tes lombaires qui commence à faire son effet 💪
+              <span class="msg-bubble__time">09:25</span>
+            </div>
+            <div class="msg-conseil" style="margin-top:6px;">
+              <div class="msg-conseil__label">💡 Conseil du jour</div>
+              <div class="msg-conseil__title">Mobilité matinale</div>
+              <div class="msg-conseil__text">5 min de mobilité le matin avant de te lever. Cat-cow + rotations de hanches. Ça va encore améliorer tes douleurs en 2 semaines.</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="msg-date-sep">Aujourd'hui</div>
+
+        <div class="msg-row msg-row--coach">
+          <div class="msg-row__avatar msg-row__avatar--coach">A</div>
+          <div>
+            <div class="msg-bubble msg-bubble--coach">
+              Sophie, j'ai préparé ton programme pour vendredi. On se concentre sur le haut du corps — épaules, dos, biceps. Ça va être une belle séance ! 🏋️‍♀️
+              <span class="msg-bubble__time">10:00</span>
+            </div>
+            <div class="msg-reminder" style="margin-top:6px;">
+              <div class="msg-reminder__icon">
+                <svg viewBox="0 0 20 20" fill="none"><rect x="2" y="3" width="16" height="15" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M6 2v2M14 2v2M2 8h16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><circle cx="10" cy="13" r="1.5" fill="currentColor"/></svg>
+              </div>
+              <div>
+                <div class="msg-reminder__label">Prochaine séance</div>
+                <div class="msg-reminder__val">Vendredi 23 mai · 10h00</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="msg-row msg-row--coach">
+          <div class="msg-row__avatar msg-row__avatar--coach">A</div>
+          <div>
+            <div class="msg-bubble msg-bubble--coach">
+              Super séance hier ! Voici tes conseils pour demain — pense à bien t'hydrater et dormir 8h si possible 💪✨
+              <span class="msg-bubble__time">10:32</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Typing indicator -->
+        <div class="msg-row msg-row--coach" id="typingIndicator" style="display:none;">
+          <div class="msg-row__avatar msg-row__avatar--coach">A</div>
+          <div class="msg-bubble msg-bubble--coach" style="padding:14px 18px;">
+            <div style="display:flex; gap:5px; align-items:center;">
+              <div style="width:7px;height:7px;border-radius:50%;background:var(--gris-texte);animation:typing .8s infinite alternate;" class="t1"></div>
+              <div style="width:7px;height:7px;border-radius:50%;background:var(--gris-texte);animation:typing .8s .2s infinite alternate;" class="t2"></div>
+              <div style="width:7px;height:7px;border-radius:50%;background:var(--gris-texte);animation:typing .8s .4s infinite alternate;" class="t3"></div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Input bar -->
+      <div class="msg-input-bar">
+        <!-- Quick replies -->
+        <div class="msg-quick-replies" id="quickReplies">
+          <button class="quick-reply" onclick="setInput('Merci Alyssa !')">Merci Alyssa !</button>
+          <button class="quick-reply" onclick="setInput('J\'ai une question sur mon programme')">Question sur mon programme</button>
+          <button class="quick-reply" onclick="setInput('Je confirme ma séance de vendredi')">Confirmer ma séance</button>
+          <button class="quick-reply" onclick="setInput('J\'ai besoin de reporter ma séance')">Reporter une séance</button>
+        </div>
+
+        <div class="msg-input-row">
+          <div class="msg-input-wrap">
+            <textarea class="msg-input" id="msgInput" rows="1" placeholder="Écris ton message…" aria-label="Écrire un message"></textarea>
+            <span class="msg-input-emoji" title="Ajouter un emoji">😊</span>
+          </div>
+          <button class="msg-send-btn" id="sendBtn" aria-label="Envoyer le message">
+            <svg viewBox="0 0 20 20" fill="none"><path d="M18 2L9 11M18 2L12 18l-3-7-7-3 16-6z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+        </div>
+      </div>
+
+    </main>
+  </div>
+
+  <style>
+    @keyframes typing { from { opacity:.3; transform:scale(.8); } to { opacity:1; transform:scale(1); } }
+  </style>
+
+  <script src="global.js"></script>
+  <script>
+    const msgBody  = document.getElementById('msgBody');
+    const msgInput = document.getElementById('msgInput');
+    const sendBtn  = document.getElementById('sendBtn');
+
+    function setInput(text) {
+      msgInput.value = text;
+      msgInput.focus();
+    }
+
+    // Auto-resize textarea
+    msgInput.addEventListener('input', () => {
+      msgInput.style.height = 'auto';
+      msgInput.style.height = Math.min(msgInput.scrollHeight, 120) + 'px';
+    });
+
+    // Enter = send (Shift+Enter = newline)
+    msgInput.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' && !e.shiftKey) {
+        e.preventDefault();
+        sendMessage();
+      }
+    });
+
+    sendBtn.addEventListener('click', sendMessage);
+
+    function sendMessage() {
+      const text = msgInput.value.trim();
+      if (!text) return;
+
+      // Append user message
+      appendMessage(text, 'user');
+      msgInput.value = '';
+      msgInput.style.height = 'auto';
+
+      // Show typing
+      showTyping();
+
+      // Simulate coach reply after 1.5-3s
+      const delay = 1500 + Math.random() * 1500;
+      setTimeout(() => {
+        hideTyping();
+        const replies = [
+          "Très bien Sophie ! Je prends note. On en parlera lors de ta prochaine séance 😊",
+          "Super ! Garde ce rythme, tu es sur la bonne voie. Continue comme ça 💪✨",
+          "Parfait ! Je t'ai préparé quelques ajustements pour cette semaine. Regarde ton suivi pour les détails.",
+          "Je comprends ! Pas de souci, on adapte ensemble. Ton bien-être avant tout 🌸",
+          "Excellente question ! La réponse courte : oui, continue exactement comme ça. La régularité, c'est la clé !"
+        ];
+        const reply = replies[Math.floor(Math.random() * replies.length)];
+        appendMessage(reply, 'coach');
+      }, delay);
+    }
+
+    function appendMessage(text, sender) {
+      const typing = document.getElementById('typingIndicator');
+      const row = document.createElement('div');
+      row.className = `msg-row msg-row--${sender}`;
+
+      const now = new Date();
+      const time = `${now.getHours().toString().padStart(2,'0')}:${now.getMinutes().toString().padStart(2,'0')}`;
+
+      if (sender === 'user') {
+        row.innerHTML = `
+          <div class="msg-row__avatar msg-row__avatar--user">S</div>
+          <div><div class="msg-bubble msg-bubble--user">${text}<span class="msg-bubble__time" style="color:rgba(255,255,255,.7);">${time}</span></div></div>
+        `;
+      } else {
+        row.innerHTML = `
+          <div class="msg-row__avatar msg-row__avatar--coach">A</div>
+          <div><div class="msg-bubble msg-bubble--coach">${text}<span class="msg-bubble__time">${time}</span></div></div>
+        `;
+      }
+
+      msgBody.insertBefore(row, typing);
+      msgBody.scrollTop = msgBody.scrollHeight;
+    }
+
+    function showTyping() {
+      const ti = document.getElementById('typingIndicator');
+      ti.style.display = 'flex';
+      msgBody.scrollTop = msgBody.scrollHeight;
+    }
+
+    function hideTyping() {
+      document.getElementById('typingIndicator').style.display = 'none';
+    }
+
+    // Init scroll to bottom
+    msgBody.scrollTop = msgBody.scrollHeight;
+  </script>
+</body>
+</html>

@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Découvrez les accompagnements coaching fitness d'Alyssa : remise en forme, musculation, transformation complète et suivi personnalisé." />
+  <title>Coaching — Alyssa Fitness</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="global.css" />
+
+  <style>
+    /* ── HERO INTERNE ─────────────────────────────── */
+    .hero-internal {
+      padding-top: calc(var(--header-h) + 80px);
+      padding-bottom: 80px;
+      background: linear-gradient(135deg, #FBF8F5 0%, #F6EFE8 60%, #f0ddd4 100%);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-internal::before {
+      content: '';
+      position: absolute;
+      top: -120px; right: -120px;
+      width: 480px; height: 480px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(233,135,128,0.12) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero-internal .eyebrow {
+      display: inline-block;
+      font-family: var(--font-body);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--rose-saumon);
+      margin-bottom: 20px;
+    }
+    .hero-internal h1 {
+      font-family: var(--font-heading);
+      font-size: clamp(2.4rem, 5vw, 4rem);
+      font-weight: 400;
+      color: var(--noir-doux);
+      line-height: 1.15;
+      margin-bottom: 20px;
+    }
+    .hero-internal h1 em {
+      font-style: italic;
+      color: var(--rose-saumon);
+    }
+    .hero-internal .subtitle {
+      font-family: var(--font-body);
+      font-size: 1rem;
+      font-weight: 300;
+      color: #666;
+      max-width: 520px;
+      margin: 0 auto 36px;
+      line-height: 1.7;
+    }
+
+    /* ── PROGRAMMES ───────────────────────────────── */
+    .prog-card {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+      align-items: stretch;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 8px 40px rgba(17,17,17,0.07);
+      margin-bottom: 56px;
+    }
+    .prog-card--reverse { direction: rtl; }
+    .prog-card--reverse > * { direction: ltr; }
+
+    .prog-card__img {
+      min-height: 420px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+    .prog-card__img-inner {
+      width: 100%; height: 100%;
+      min-height: 420px;
+    }
+    .prog-card__img-inner--remise {
+      background: linear-gradient(140deg, #fde8e5 0%, #f5c4be 50%, #e8a89e 100%);
+    }
+    .prog-card__img-inner--muscu {
+      background: linear-gradient(140deg, #e8ddd4 0%, #d4c4b8 50%, #c4a898 100%);
+    }
+    .prog-card__img-inner--transfo {
+      background: linear-gradient(140deg, #f0e4da 0%, #e2ccbf 50%, #d4b4a8 100%);
+    }
+    .prog-card__img-inner--perso {
+      background: linear-gradient(140deg, #faeae8 0%, #f0ccc8 50%, #e6b0aa 100%);
+    }
+    .prog-card__img-label {
+      position: absolute;
+      bottom: 24px; left: 24px;
+      font-family: var(--font-heading);
+      font-size: 1.1rem;
+      font-style: italic;
+      color: rgba(255,255,255,0.9);
+    }
+
+    .prog-card__body {
+      background: #fff;
+      padding: 52px 48px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .prog-card__badge {
+      display: inline-block;
+      background: var(--beige);
+      color: var(--rose-saumon);
+      font-family: var(--font-body);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      padding: 6px 14px;
+      border-radius: 30px;
+      margin-bottom: 18px;
+      align-self: flex-start;
+    }
+    .prog-card__title {
+      font-family: var(--font-heading);
+      font-size: clamp(1.6rem, 2.5vw, 2.2rem);
+      font-weight: 500;
+      color: var(--noir-doux);
+      margin-bottom: 14px;
+    }
+    .prog-card__desc {
+      font-family: var(--font-body);
+      font-size: 0.92rem;
+      font-weight: 300;
+      color: #555;
+      line-height: 1.75;
+      margin-bottom: 24px;
+    }
+    .prog-card__benefits {
+      list-style: none;
+      padding: 0; margin: 0 0 24px;
+    }
+    .prog-card__benefits li {
+      font-family: var(--font-body);
+      font-size: 0.88rem;
+      color: #444;
+      padding: 6px 0 6px 24px;
+      position: relative;
+      border-bottom: 1px solid #f5f0eb;
+    }
+    .prog-card__benefits li:last-child { border-bottom: none; }
+    .prog-card__benefits li::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 50%;
+      transform: translateY(-50%);
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: var(--rose-saumon);
+    }
+    .prog-card__meta {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+      margin-bottom: 28px;
+    }
+    .prog-card__meta-item {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+    .prog-card__meta-label {
+      font-family: var(--font-body);
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: #aaa;
+    }
+    .prog-card__meta-val {
+      font-family: var(--font-body);
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--noir-doux);
+    }
+
+    /* ── FAQ ─────────────────────────────────────── */
+    .faq-list { max-width: 760px; margin: 0 auto; }
+    .faq-item {
+      border-bottom: 1px solid #e8e0d8;
+    }
+    .faq-item:first-child { border-top: 1px solid #e8e0d8; }
+    .faq-btn {
+      width: 100%;
+      background: none;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 24px 0;
+      text-align: left;
+      gap: 16px;
+    }
+    .faq-btn__q {
+      font-family: var(--font-body);
+      font-size: 1rem;
+      font-weight: 500;
+      color: var(--noir-doux);
+    }
+    .faq-btn__icon {
+      width: 28px; height: 28px;
+      border-radius: 50%;
+      border: 1.5px solid var(--rose-saumon);
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+      transition: background 0.25s, transform 0.3s;
+      color: var(--rose-saumon);
+    }
+    .faq-btn[aria-expanded="true"] .faq-btn__icon {
+      background: var(--rose-saumon);
+      color: #fff;
+      transform: rotate(45deg);
+    }
+    .faq-answer {
+      display: none;
+      padding: 0 0 24px;
+      font-family: var(--font-body);
+      font-size: 0.92rem;
+      font-weight: 300;
+      color: #666;
+      line-height: 1.75;
+      max-width: 680px;
+    }
+    .faq-answer.is-open { display: block; }
+
+    /* ── CTA FINAL ───────────────────────────────── */
+    .section--cta {
+      background: linear-gradient(120deg, var(--noir-doux) 0%, #2a1e1c 100%);
+      text-align: center;
+      padding: 100px 24px;
+    }
+    .section--cta .eyebrow {
+      color: var(--rose-saumon);
+      font-family: var(--font-body);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      display: block;
+      margin-bottom: 18px;
+    }
+    .section--cta h2 {
+      font-family: var(--font-heading);
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      font-weight: 400;
+      color: #fff;
+      margin-bottom: 16px;
+    }
+    .section--cta p {
+      font-family: var(--font-body);
+      font-size: 0.95rem;
+      font-weight: 300;
+      color: rgba(255,255,255,0.6);
+      margin-bottom: 40px;
+      max-width: 480px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    /* ── RESPONSIVE ──────────────────────────────── */
+    @media (max-width: 860px) {
+      .prog-card {
+        grid-template-columns: 1fr;
+        direction: ltr !important;
+      }
+      .prog-card__img { min-height: 260px; }
+      .prog-card__img-inner { min-height: 260px; }
+      .prog-card__body { padding: 36px 28px; }
+      .prog-card--reverse > * { direction: ltr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ═══ HEADER ═══ -->
+  <header class="header" id="header">
+    <div class="header__inner container">
+      <a href="index.html" class="header__logo">
+        <div class="logo-mono"><span>A</span></div>
+        <div class="logo-wordmark">
+          <span class="logo-wordmark__name">Alyssa Fitness</span>
+          <span class="logo-wordmark__sub">Coaching premium</span>
+        </div>
+      </a>
+      <nav class="header__nav">
+        <ul class="nav-list">
+          <li><a href="index.html" class="nav-link">Accueil</a></li>
+          <li><a href="coaching.html" class="nav-link active">Coaching</a></li>
+          <li><a href="a-propos.html" class="nav-link">À propos</a></li>
+          <li><a href="methode.html" class="nav-link">Méthode</a></li>
+          <li><a href="suivi.html" class="nav-link">Suivi</a></li>
+          <li><a href="challenge.html" class="nav-link">Challenge</a></li>
+          <li><a href="contact.html" class="nav-link">Contact</a></li>
+        </ul>
+      </nav>
+      <div class="header__ctas">
+        <a href="compte.html" class="btn--compte">
+          <svg viewBox="0 0 20 20" fill="none" width="15"><circle cx="10" cy="7" r="3.5" stroke="currentColor" stroke-width="1.5"/><path d="M3 17c0-3.866 3.134-7 7-7s7 3.134 7 7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+          Mon compte
+        </a>
+        <a href="reservation.html" class="btn btn--primary btn--sm btn--reserv-desktop">Réserver un appel</a>
+      </div>
+      <button class="burger" id="burger" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="mobile-menu"><span></span><span></span><span></span></button>
+    </div>
+    <div class="mobile-menu" id="mobile-menu">
+      <ul class="mobile-nav-list">
+        <li><a href="index.html" class="mobile-nav-link">Accueil</a></li>
+        <li><a href="coaching.html" class="mobile-nav-link">Coaching</a></li>
+        <li><a href="a-propos.html" class="mobile-nav-link">À propos</a></li>
+        <li><a href="methode.html" class="mobile-nav-link">Méthode</a></li>
+        <li><a href="suivi.html" class="mobile-nav-link">Suivi</a></li>
+        <li><a href="challenge.html" class="mobile-nav-link">Challenge</a></li>
+        <li><a href="contact.html" class="mobile-nav-link">Contact</a></li>
+      </ul>
+      <div class="mobile-menu__ctas">
+        <a href="compte.html" class="btn btn--ghost mobile-cta">Mon compte</a>
+        <a href="reservation.html" class="btn btn--primary mobile-cta">Réserver un appel</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- ═══ HERO INTERNE ═══ -->
+    <section class="hero-internal">
+      <div class="container" style="position:relative;z-index:1;">
+        <span class="eyebrow">Mes accompagnements</span>
+        <h1>Choisis l'accompagnement qui <em>te correspond.</em></h1>
+        <p class="subtitle">Chaque femme est unique. Mes programmes sont pensés pour s'adapter à ton niveau, ton rythme et tes objectifs — du débutant au confirmé.</p>
+        <a href="reservation.html" class="btn btn--primary">Réserver un appel découverte</a>
+      </div>
+    </section>
+
+    <!-- ═══ PROGRAMMES ═══ -->
+    <section class="section section--white" id="programmes">
+      <div class="container">
+
+        <!-- Programme 1 : Remise en forme -->
+        <div class="prog-card" id="remise">
+          <div class="prog-card__img">
+            <div class="prog-card__img-inner prog-card__img-inner--remise"></div>
+            <span class="prog-card__img-label">Remise en forme</span>
+          </div>
+          <div class="prog-card__body">
+            <span class="prog-card__badge">Programme 01</span>
+            <h2 class="prog-card__title">Remise en forme & Bien-être</h2>
+            <p class="prog-card__desc">Un programme doux mais efficace pour te remettre en mouvement en douceur. On travaille la mobilité, le renforcement global et ton rapport au sport — sans jamais te brusquer. L'objectif : retrouver de l'énergie, du tonus et de la confiance en toi.</p>
+            <ul class="prog-card__benefits">
+              <li>Séances adaptées à ton rythme et ta condition physique</li>
+              <li>Exercices de mobilité et de renforcement progressifs</li>
+              <li>Conseils nutritionnels simples et durables</li>
+              <li>Suivi hebdomadaire personnalisé</li>
+              <li>Accès à la communauté privée</li>
+            </ul>
+            <div class="prog-card__meta">
+              <div class="prog-card__meta-item">
+                <span class="prog-card__meta-label">Pour qui</span>
+                <span class="prog-card__meta-val">Débutantes & reprises</span>
+              </div>
+              <div class="prog-card__meta-item">
+                <span class="prog-card__meta-label">Niveau</span>
+                <span class="prog-card__meta-val">Débutant</span>
+              </div>
+              <div class="prog-card__meta-item">
+                <span class="prog-card__meta-label">Format</span>
+                <span class="prog-card__meta-val">En ligne · 3 mois</span>
+              </div>
+            </div>
+            <a href="reservation.html" class="btn btn--primary btn--sm">Démarrer ce programme</a>
+          </div>
+        </div>
+
+        <!-- Programme 2 : Musculation -->
+        <div class="prog-card prog-card--reverse" id="musculation">
+          <div class="prog-card__img">
+            <div class="prog-card__img-inner prog-card__img-inner--muscu"></div>
+            <span class="prog-card__img-label">Musculation feminine</span>
+          </div>
+          <div class="prog-card__body">
+            <span class="prog-card__badge">Programme 02</span>
+            <h2 class="prog-card__title">Musculation Féminine</h2>
+            <p class="prog-card__desc">Construis un physique fort, gainé et féminin. Ce programme se concentre sur la prise de masse musculaire ciblée — fessiers, cuisses, épaules — avec des méthodes d'entraînement éprouvées. Tu apprendras à t'entraîner avec des charges, sans te masculiniser.</p>
+            <ul class="prog-card__benefits">
+              <li>Programmes salle de sport structurés et progressifs</li>
+              <li>Focus prise de masse féminine et galbe</li>
+              <li>Suivi nutrition adapté aux objectifs de composition corporelle</li>
+              <li>Vidéos techniques pour maîtriser les mouvements</li>
+              <li>Appel bilan mensuel individuel</li>
+            </ul>
+            <div class="prog-card__meta">
+              <div class="prog-card__meta-item">
+                <span class="prog-card__meta-label">Pour qui</span>
+                <span class="prog-card__meta-val">Pratiquantes de salle</span>
+              </div>
+              <div class="prog-card__meta-item">
+                <span class="prog-card__meta-label">Niveau</span>
+                <span class="prog-card__meta-val">Intermédiaire</span>
+              </div>
+              <div class="prog-card__meta-item">
+                <span class="prog-card__meta-label">Format</span>
+                <span class="prog-card__meta-val">Présentiel ou ligne · 3–6 mois</span>
+              </div>
+            </div>
+            <a href="reservation.html" class="btn btn--primary btn--sm">Démarrer ce programme</a>
+          </div>
+        </div>
+
+        <!-- Programme 3 : Transformation -->
+        <div class="prog-card" id="transformation">
+          <div class="prog-card__img">
+            <div class="prog-card__img-inner prog-card__img-inner--transfo"></div>
+            <span class="prog-card__img-label">Transformation totale</span>
+          </div>
+          <div class="prog-card__body">
+            <span class="prog-card__badge">Programme 03</span>
+            <h2 class="prog-card__title">Transformation Complète</h2>
+            <p class="prog-card__desc">Le programme le plus complet. En combinant entraînement intensif, rééquilibrage alimentaire et coaching mental, on redéfinit ton corps et ton rapport à toi-même. Pour celles qui veulent des résultats visibles et durables sur 6 mois.</p>
+            <ul class="prog-card__benefits">
+              <li>Plan d'entraînement 4–5 jours par semaine</li>
+              <li>Plan nutritionnel personnalisé avec phases de rééquilibrage</li>
+              <li>Suivi des mensurations et photos de progression</li>
+              <li>Coaching mental et gestion des blocages</li>
+              <li>Accès illimité à Alyssa via messagerie privée</li>
+            </ul>
+            <div class="prog-card__meta">
+              <div class="prog-card__meta-item">
+                <span class="prog-card__meta-label">Pour qui</span>
+                <span class="prog-card__meta-val">Toutes niveaux, motivées</span>
+              </div>
+              <div class="prog-card__meta-item">
+                <span class="prog-card__meta-label">Niveau</span>
+                <span class="prog-card__meta-val">Tous niveaux</span>
+              </div>
+              <div class="prog-card__meta-item">
+                <span class="prog-card__meta-label">Format</span>
+                <span class="prog-card__meta-val">En ligne · 6 mois</span>
+              </div>
+            </div>
+            <a href="reservation.html" class="btn btn--primary btn--sm">Démarrer ce programme</a>
+          </div>
+        </div>
+
+        <!-- Programme 4 : Personnalisé -->
+        <div class="prog-card prog-card--reverse" id="perso">
+          <div class="prog-card__img">
+            <div class="prog-card__img-inner prog-card__img-inner--perso"></div>
+            <span class="prog-card__img-label">Suivi sur-mesure</span>
+          </div>
+          <div class="prog-card__body">
+            <span class="prog-card__badge">Programme 04</span>
+            <h2 class="prog-card__title">Coaching Sur-Mesure</h2>
+            <p class="prog-card__desc">Pour celles qui veulent le meilleur. Un suivi 100 % personnalisé, construit autour de ta vie, tes contraintes, tes objectifs précis. Je crée ton programme de A à Z et je l'ajuste en temps réel selon tes retours et tes résultats.</p>
+            <ul class="prog-card__benefits">
+              <li>Bilan initial complet (morphologie, objectifs, mode de vie)</li>
+              <li>Programme d'entraînement entièrement sur-mesure</li>
+              <li>Plan nutritionnel flexible et adapté à tes préférences</li>
+              <li>Appels vidéo hebdomadaires avec Alyssa</li>
+              <li>Ajustements continus en fonction des résultats</li>
+            </ul>
+            <div class="prog-card__meta">
+              <div class="prog-card__meta-item">
+                <span class="prog-card__meta-label">Pour qui</span>
+                <span class="prog-card__meta-val">Profil exigeant, objectif précis</span>
+              </div>
+              <div class="prog-card__meta-item">
+                <span class="prog-card__meta-label">Niveau</span>
+                <span class="prog-card__meta-val">Tous niveaux</span>
+              </div>
+              <div class="prog-card__meta-item">
+                <span class="prog-card__meta-label">Format</span>
+                <span class="prog-card__meta-val">En ligne · Durée libre</span>
+              </div>
+            </div>
+            <a href="reservation.html" class="btn btn--primary btn--sm">Démarrer ce programme</a>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ═══ FAQ ═══ -->
+    <section class="section section--beige">
+      <div class="container">
+        <div style="text-align:center; margin-bottom:56px;">
+          <span style="display:inline-block; font-family:var(--font-body); font-size:11px; font-weight:600; letter-spacing:0.2em; text-transform:uppercase; color:var(--rose-saumon); margin-bottom:14px;">FAQ</span>
+          <h2 style="font-family:var(--font-heading); font-size:clamp(1.8rem,3.5vw,2.8rem); font-weight:400; color:var(--noir-doux);">Questions fréquentes</h2>
+        </div>
+        <div class="faq-list">
+
+          <div class="faq-item">
+            <button class="faq-btn" aria-expanded="false">
+              <span class="faq-btn__q">Comment se déroule le premier appel découverte ?</span>
+              <span class="faq-btn__icon" aria-hidden="true">
+                <svg viewBox="0 0 16 16" fill="none" width="12"><path d="M8 3v10M3 8h10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+              </span>
+            </button>
+            <div class="faq-answer">L'appel découverte dure environ 30 minutes. On discute de tes objectifs, de ton mode de vie, de tes éventuelles contraintes (blessures, agenda, équipement). Cet appel est gratuit et sans engagement — il me permet de comprendre ta situation et de te proposer le programme le plus adapté.</div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-btn" aria-expanded="false">
+              <span class="faq-btn__q">Faut-il obligatoirement avoir accès à une salle de sport ?</span>
+              <span class="faq-btn__icon" aria-hidden="true">
+                <svg viewBox="0 0 16 16" fill="none" width="12"><path d="M8 3v10M3 8h10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+              </span>
+            </button>
+            <div class="faq-answer">Non, ce n'est pas obligatoire. Plusieurs programmes peuvent être adaptés en full bodyweight ou avec du petit équipement à domicile (haltères, bandes élastiques). Je m'adapte toujours à ce dont tu disposes. Si tu as accès à une salle, certains programmes en tirent mieux parti, mais rien n'est bloquant.</div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-btn" aria-expanded="false">
+              <span class="faq-btn__q">Les résultats sont-ils garantis ?</span>
+              <span class="faq-btn__icon" aria-hidden="true">
+                <svg viewBox="0 0 16 16" fill="none" width="12"><path d="M8 3v10M3 8h10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+              </span>
+            </button>
+            <div class="faq-answer">Les résultats dépendent de ton investissement, mais je t'accompagne pour maximiser tes chances de succès. 94 % des femmes que j'accompagne constatent des changements significatifs dès les 6 premières semaines. Mon rôle est de m'adapter en permanence pour que tu avances, même quand la motivation fluctue.</div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-btn" aria-expanded="false">
+              <span class="faq-btn__q">Peut-on changer de programme en cours de route ?</span>
+              <span class="faq-btn__icon" aria-hidden="true">
+                <svg viewBox="0 0 16 16" fill="none" width="12"><path d="M8 3v10M3 8h10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+              </span>
+            </button>
+            <div class="faq-answer">Absolument. Les objectifs évoluent, la vie aussi. Si ton programme ne te convient plus ou si tu souhaites évoluer vers quelque chose de différent, on en discute ensemble et on ajuste. La flexibilité fait partie de mon approche — un bon programme, c'est avant tout un programme que tu peux suivre sur la durée.</div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ CTA FINAL ═══ -->
+    <section class="section--cta">
+      <span class="eyebrow">Prête à commencer ?</span>
+      <h2>Prête à commencer ton coaching ?</h2>
+      <p>Un seul appel suffit pour tout changer. Gratuit, sans engagement, et peut-être le meilleur investissement que tu feras pour toi.</p>
+      <a href="reservation.html" class="btn btn--primary">Réserver mon appel gratuit</a>
+    </section>
+
+  </main>
+
+  <!-- ═══ FOOTER ═══ -->
+  <footer class="footer" role="contentinfo">
+    <div class="container footer__grid">
+      <div class="footer__brand">
+        <a href="index.html" class="footer__logo-link footer__logo-wordmark" aria-label="Alyssa Fitness">
+          <div style="display:flex; align-items:center; gap:10px;">
+            <div class="logo-mono" style="background:var(--rose-saumon);" aria-hidden="true"><span style="color:#fff;">A</span></div>
+            <div class="logo-wordmark footer__logo-wordmark">
+              <span class="logo-wordmark__name" style="color:#fff;">Alyssa Fitness</span>
+              <span class="logo-wordmark__sub">Coaching premium</span>
+            </div>
+          </div>
+        </a>
+        <p class="footer__tagline">Coaching fitness personnalisé, musculation et personal training pour femmes.</p>
+        <div class="footer__social">
+          <a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer" class="footer__social-link" aria-label="Instagram">
+            <svg viewBox="0 0 24 24" fill="none" width="18"><rect x="2" y="2" width="20" height="20" rx="5" stroke="currentColor" stroke-width="1.5"/><circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.5"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg>
+          </a>
+          <a href="mailto:contact@alyssafitness.fr" class="footer__social-link" aria-label="Email">
+            <svg viewBox="0 0 24 24" fill="none" width="18"><rect x="2" y="4" width="20" height="16" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M2 8l10 7 10-7" stroke="currentColor" stroke-width="1.5"/></svg>
+          </a>
+        </div>
+      </div>
+      <nav class="footer__nav-col" aria-label="Navigation footer">
+        <h4 class="footer__col-title">Liens rapides</h4>
+        <ul>
+          <li><a href="index.html" class="footer__link">Accueil</a></li>
+          <li><a href="coaching.html" class="footer__link">Coaching</a></li>
+          <li><a href="a-propos.html" class="footer__link">À propos</a></li>
+          <li><a href="methode.html" class="footer__link">Méthode</a></li>
+          <li><a href="contact.html" class="footer__link">Contact</a></li>
+        </ul>
+      </nav>
+      <nav class="footer__nav-col" aria-label="Espace client">
+        <h4 class="footer__col-title">Espace client</h4>
+        <ul>
+          <li><a href="compte.html" class="footer__link">Mon compte</a></li>
+          <li><a href="reservation.html" class="footer__link">Réserver une séance</a></li>
+          <li><a href="messagerie.html" class="footer__link">Messagerie</a></li>
+          <li><a href="suivi.html" class="footer__link">Mon suivi</a></li>
+          <li><a href="challenge.html" class="footer__link">Challenges</a></li>
+        </ul>
+      </nav>
+      <div class="footer__contact-col">
+        <h4 class="footer__col-title">Contact</h4>
+        <ul>
+          <li>
+            <svg viewBox="0 0 20 20" fill="none" width="14"><rect x="1" y="3" width="18" height="14" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M1 7l9 6 9-6" stroke="currentColor" stroke-width="1.5"/></svg>
+            <a href="mailto:contact@alyssafitness.fr" class="footer__link">contact@alyssafitness.fr</a>
+          </li>
+          <li>
+            <svg viewBox="0 0 20 20" fill="none" width="14"><path d="M4 2h3l1.5 4-2 1.5c1 2 3 4 5 5L13 10.5l4 1.5v3c0 1-1 2-2 2C7 17 3 10 3 4c0-1 1-2 2-2z" stroke="currentColor" stroke-width="1.5"/></svg>
+            <span>06 23 45 67 89</span>
+          </li>
+          <li>
+            <svg viewBox="0 0 20 20" fill="none" width="14"><path d="M10 2C6.686 2 4 4.686 4 8c0 5.25 6 10 6 10s6-4.75 6-10c0-3.314-2.686-6-6-6zm0 8a2 2 0 110-4 2 2 0 010 4z" stroke="currentColor" stroke-width="1.5"/></svg>
+            <span>Lyon, France</span>
+          </li>
+        </ul>
+      </div>
+      <div class="footer__instagram-col">
+        <h4 class="footer__col-title">Suivez-moi</h4>
+        <div class="footer__insta-grid">
+          <a href="https://www.instagram.com/" target="_blank" rel="noopener" class="insta-thumb"><div class="insta-placeholder insta-placeholder--1"></div></a>
+          <a href="https://www.instagram.com/" target="_blank" rel="noopener" class="insta-thumb"><div class="insta-placeholder insta-placeholder--2"></div></a>
+          <a href="https://www.instagram.com/" target="_blank" rel="noopener" class="insta-thumb"><div class="insta-placeholder insta-placeholder--3"></div></a>
+          <a href="https://www.instagram.com/" target="_blank" rel="noopener" class="insta-thumb"><div class="insta-placeholder insta-placeholder--4"></div></a>
+          <a href="https://www.instagram.com/" target="_blank" rel="noopener" class="insta-thumb"><div class="insta-placeholder insta-placeholder--5"></div></a>
+          <a href="https://www.instagram.com/" target="_blank" rel="noopener" class="insta-thumb"><div class="insta-placeholder insta-placeholder--6"></div></a>
+        </div>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <div class="container footer__bottom-inner">
+        <p class="footer__copyright">© 2025 Alyssa Fitness — Tous droits réservés.</p>
+        <div class="footer__legal">
+          <a href="#" class="footer__link">Mentions légales</a>
+          <span aria-hidden="true">·</span>
+          <a href="#" class="footer__link">Confidentialité</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="global.js"></script>
+  <script>
+    // FAQ accordion
+    document.querySelectorAll('.faq-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const answer = btn.nextElementSibling;
+        const isOpen = btn.getAttribute('aria-expanded') === 'true';
+        // Close all
+        document.querySelectorAll('.faq-btn').forEach(b => {
+          b.setAttribute('aria-expanded', 'false');
+          b.nextElementSibling.classList.remove('is-open');
+        });
+        // Toggle current
+        if (!isOpen) {
+          btn.setAttribute('aria-expanded', 'true');
+          answer.classList.add('is-open');
+        }
+      });
+    });
+  </script>
+</body>
+</html>
