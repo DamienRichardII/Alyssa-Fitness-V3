@@ -246,8 +246,18 @@ input, textarea, select {
 .logo-img {
   height: 40px;
   width: auto;
+  max-width: 140px;
   object-fit: contain;
   display: block;
+  flex-shrink: 0;
+}
+
+/* Logo version footer — fond sombre */
+.logo-img--footer {
+  height: 36px;
+  max-width: 120px;
+  opacity: .92;
+  filter: brightness(0) invert(1);  /* force blanc sur fond sombre si logo-white.png insuffisant */
 }
 
 .logo-wordmark {
@@ -1124,13 +1134,56 @@ input, textarea, select {
 
 .insta-thumb:hover { opacity: 0.8; }
 
-.insta-placeholder { width: 100%; height: 100%; background-size: cover; background-position: center; }
-.insta-placeholder--1 { background: linear-gradient(135deg, #e8c4ba, #ddb5ad); }
-.insta-placeholder--2 { background: linear-gradient(135deg, #f0d5c8, #e8c4ba); }
-.insta-placeholder--3 { background: linear-gradient(135deg, #ddb5ad, #cfa29b); }
-.insta-placeholder--4 { background: linear-gradient(135deg, #f3b3ad, #e8c4ba); }
-.insta-placeholder--5 { background: linear-gradient(135deg, #e8c4ba, #f3b3ad); }
-.insta-placeholder--6 { background: linear-gradient(135deg, #cfa29b, #ddb5ad); }
+/* Instagram grid — visuels premium (pas de texte placeholder) */
+.insta-placeholder {
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  position: relative;
+  transition: transform 0.35s ease;
+}
+.insta-thumb:hover .insta-placeholder {
+  transform: scale(1.04);
+}
+
+/* Visuels fitness premium variés — tons chauds/naturels */
+.insta-placeholder--1 {
+  background:
+    radial-gradient(ellipse at 30% 40%, rgba(233,135,128,0.55) 0%, transparent 60%),
+    radial-gradient(ellipse at 80% 70%, rgba(210,100,90,0.4) 0%, transparent 50%),
+    linear-gradient(160deg, #2e2420 0%, #4a3330 50%, #3a2820 100%);
+}
+.insta-placeholder--2 {
+  background:
+    radial-gradient(ellipse at 60% 30%, rgba(246,239,232,0.3) 0%, transparent 55%),
+    radial-gradient(ellipse at 20% 80%, rgba(233,135,128,0.35) 0%, transparent 60%),
+    linear-gradient(150deg, #f6efe8 0%, #e8d5c8 45%, #d4b8ac 100%);
+}
+.insta-placeholder--3 {
+  background:
+    radial-gradient(ellipse at 70% 50%, rgba(233,135,128,0.45) 0%, transparent 55%),
+    radial-gradient(ellipse at 20% 20%, rgba(200,80,70,0.3) 0%, transparent 50%),
+    linear-gradient(135deg, #1a1412 0%, #2e1e1a 50%, #241612 100%);
+}
+.insta-placeholder--4 {
+  background:
+    radial-gradient(ellipse at 40% 60%, rgba(251,248,245,0.25) 0%, transparent 55%),
+    radial-gradient(ellipse at 75% 25%, rgba(233,135,128,0.4) 0%, transparent 50%),
+    linear-gradient(155deg, #f0e8e0 0%, #dcc8bc 45%, #c8a89c 100%);
+}
+.insta-placeholder--5 {
+  background:
+    radial-gradient(ellipse at 25% 35%, rgba(233,135,128,0.6) 0%, transparent 55%),
+    radial-gradient(ellipse at 80% 75%, rgba(180,60,50,0.35) 0%, transparent 50%),
+    linear-gradient(145deg, #332420 0%, #4a3028 55%, #3c2420 100%);
+}
+.insta-placeholder--6 {
+  background:
+    radial-gradient(ellipse at 55% 45%, rgba(246,239,232,0.35) 0%, transparent 55%),
+    radial-gradient(ellipse at 15% 75%, rgba(233,135,128,0.3) 0%, transparent 55%),
+    linear-gradient(160deg, #ede0d8 0%, #d8c4b8 45%, #c4a898 100%);
+}
 
 .footer__bottom {
   border-top: 1px solid rgba(255,255,255,0.08);
@@ -1464,4 +1517,114 @@ input, textarea, select {
   .card { padding: 24px 18px; }
   .confiance-item { padding: 24px 18px; }
   .hero-internal__title { font-size: 1.9rem; }
+
+  /* Logo image mobile sizing */
+  .logo-img {
+    height: 34px;
+    max-width: 100px;
+  }
+  /* Hide wordmark on very small screens if logo already contains branding */
+  .logo-wordmark {
+    display: none;
+  }
+
+  /* Boutons CTA mobile - prevent overflow */
+  .btn--lg {
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    text-align: center;
+    justify-content: center;
+    font-size: 0.8rem;
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  /* Footer social icons row */
+  .footer__social {
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   GLOBAL — ANTI-OVERFLOW HORIZONTAL
+═══════════════════════════════════════════════════════════════ */
+html, body {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+/* Sections avec textes : jamais plus larges que l'écran */
+.section, .hero-internal, .hero-internal__title,
+.hero-internal .subtitle,
+.methode-cta, .methode-cta__title, .methode-cta__text,
+.timeline-section, .timeline-item, .timeline-content,
+.prog-card, .prog-card__body, .prog-card__meta {
+  max-width: 100%;
+  word-break: break-word;
+  overflow-wrap: break-word;
+}
+
+/* Subtitle coaching - max-width + padding mobile */
+@media (max-width: 768px) {
+  .hero-internal .subtitle,
+  .subtitle {
+    max-width: 100%;
+    padding: 0 8px;
+    box-sizing: border-box;
+    overflow-wrap: break-word;
+  }
+
+  /* Coaching page: prevent prog-card overflow */
+  .prog-card {
+    overflow: hidden;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  /* Meta items on mobile: stack vertically */
+  .prog-card__meta {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  /* Programme card video wrapper */
+  .program-video-wrapper {
+    min-height: 220px;
+  }
+
+  /* Timeline section PJ1 fix */
+  .timeline-item {
+    overflow: hidden;
+  }
+  .timeline-content {
+    min-width: 0;
+    overflow: hidden;
+  }
+
+  /* Methode CTA button */
+  .methode-cta .btn--lg,
+  .methode-cta .btn--primary {
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    white-space: normal;
+    text-align: center;
+    justify-content: center;
+  }
+  .methode-cta > .container {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  /* Instagram footer grid on mobile */
+  .footer__insta-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* TikTok icon hover */
+.footer__social-link[aria-label="TikTok"]:hover {
+  color: var(--rose-saumon);
 }
