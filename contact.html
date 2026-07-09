@@ -929,7 +929,7 @@
 
     <div class="footer__bottom">
       <div class="container footer__bottom-inner">
-        <p class="footer__copyright">© 2025 Alyssa Fitness — Tous droits réservés.</p>
+        <p class="footer__copyright">© 2026 Alyssa Fitness — Tous droits réservés.</p>
         <div class="footer__legal">
           <a href="#" class="footer__link">Mentions légales</a>
           <span aria-hidden="true">·</span>
@@ -939,41 +939,66 @@
     </div>
   </footer>
 
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
   <script src="global.js"></script>
   <script>
-    /* ── Formulaire de contact ─────────────────── */
+    /* ── Formulaire de contact — Supabase ─────────── */
+    const SUPABASE_URL  = 'https://tokeglpixnwhfocsyrsg.supabase.co';
+    const SUPABASE_ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRva2VnbHBpeG53aGZvY3N5cnNnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODM2MDMwNTUsImV4cCI6MjA5OTE3OTA1NX0._7-FKr9JMBr95heFgyoYS_Ucm-S0aIfDKGCLnF_APlk';
+    const { createClient } = supabase;
+    const sb = createClient(SUPABASE_URL, SUPABASE_ANON);
+
     const form         = document.getElementById('contactForm');
     const confirmation = document.getElementById('formConfirmation');
 
-    form.addEventListener('submit', function(e) {
+    form.addEventListener('submit', async function(e) {
       e.preventDefault();
 
-      // Validation minimale
+      // Validation
       const required = form.querySelectorAll('[required]');
       let valid = true;
-
       required.forEach(field => {
         if (!field.value.trim()) {
           valid = false;
           field.style.borderColor = '#E98780';
-          field.addEventListener('input', () => {
-            field.style.borderColor = '';
-          }, { once: true });
+          field.addEventListener('input', () => { field.style.borderColor = ''; }, { once: true });
         }
       });
-
       if (!valid) return;
 
-      // Simuler l'envoi
       const btn = form.querySelector('.btn-submit');
       btn.textContent = 'Envoi en cours…';
       btn.disabled = true;
 
-      setTimeout(() => {
+      try {
+        const { error } = await sb.from('contacts').insert({
+          prenom:    form.querySelector('#prenom').value.trim(),
+          nom:       form.querySelector('#nom').value.trim(),
+          email:     form.querySelector('#email').value.trim(),
+          telephone: form.querySelector('#telephone')?.value?.trim() || null,
+          objectif:  form.querySelector('#objectif')?.value || null,
+          message:   form.querySelector('#message').value.trim()
+        });
+
+        if (error) throw error;
+
         form.style.display = 'none';
         confirmation.classList.add('visible');
         confirmation.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-      }, 800);
+
+      } catch (err) {
+        console.error('Erreur Supabase:', err);
+        btn.textContent = 'Envoyer mon message';
+        btn.disabled = false;
+        let errEl = form.querySelector('.form-error-global');
+        if (!errEl) {
+          errEl = document.createElement('p');
+          errEl.className = 'form-error-global';
+          errEl.style.cssText = 'color:#E98780;font-size:.85rem;margin-top:12px;text-align:center;';
+          form.appendChild(errEl);
+        }
+        errEl.textContent = 'Une erreur est survenue. Réessaie dans un instant ou écris-moi directement sur Instagram.';
+      }
     });
   </script>
 </body>

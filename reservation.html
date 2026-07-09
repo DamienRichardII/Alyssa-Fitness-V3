@@ -419,6 +419,50 @@
     </div>
   </section>
 
+
+  <!-- BOOKING FORM MODAL -->
+  <div class="confirmation-overlay" id="bookingModal">
+    <div class="confirmation-modal" style="position:relative;max-width:480px;">
+      <button id="closeBookingModal" aria-label="Fermer"
+        style="position:absolute;top:16px;right:16px;background:none;border:none;cursor:pointer;font-size:1.3rem;color:var(--gris-texte);line-height:1;">✕</button>
+      <h2 class="confirmation-modal__title" style="font-size:1.35rem;margin-bottom:6px;">Tes coordonnées</h2>
+      <p style="color:var(--gris-texte);font-size:.88rem;margin-bottom:24px;text-align:center;">
+        Pour finaliser ta réservation, indique-moi comment te contacter.
+      </p>
+      <form id="bookingForm" novalidate style="display:flex;flex-direction:column;gap:14px;">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+          <div>
+            <label style="font-size:.78rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--noir-doux);margin-bottom:6px;display:block;">Prénom *</label>
+            <input type="text" id="bk-prenom" required autocomplete="given-name" placeholder="Prénom"
+              style="width:100%;padding:11px 14px;border:1.5px solid #e0d8d0;border-radius:8px;font-family:inherit;font-size:.9rem;background:#fff;box-sizing:border-box;outline:none;transition:border-color .2s;">
+          </div>
+          <div>
+            <label style="font-size:.78rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--noir-doux);margin-bottom:6px;display:block;">Nom *</label>
+            <input type="text" id="bk-nom" required autocomplete="family-name" placeholder="Nom"
+              style="width:100%;padding:11px 14px;border:1.5px solid #e0d8d0;border-radius:8px;font-family:inherit;font-size:.9rem;background:#fff;box-sizing:border-box;outline:none;transition:border-color .2s;">
+          </div>
+        </div>
+        <div>
+          <label style="font-size:.78rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--noir-doux);margin-bottom:6px;display:block;">E-mail *</label>
+          <input type="email" id="bk-email" required autocomplete="email" placeholder="ton@email.com"
+            style="width:100%;padding:11px 14px;border:1.5px solid #e0d8d0;border-radius:8px;font-family:inherit;font-size:.9rem;background:#fff;box-sizing:border-box;outline:none;transition:border-color .2s;">
+        </div>
+        <div>
+          <label style="font-size:.78rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--noir-doux);margin-bottom:6px;display:block;">Téléphone <span style="font-weight:400;opacity:.6;">(optionnel)</span></label>
+          <input type="tel" id="bk-tel" autocomplete="tel" placeholder="06 XX XX XX XX"
+            style="width:100%;padding:11px 14px;border:1.5px solid #e0d8d0;border-radius:8px;font-family:inherit;font-size:.9rem;background:#fff;box-sizing:border-box;outline:none;transition:border-color .2s;">
+        </div>
+        <p id="bkError" style="display:none;color:#E98780;font-size:.85rem;text-align:center;margin:0;"></p>
+        <button type="submit" id="bkSubmitBtn" class="btn btn--primary btn--lg" style="justify-content:center;margin-top:4px;">
+          Confirmer ma réservation
+        </button>
+        <button type="button" id="bkBackBtn" class="btn btn--ghost btn--lg" style="justify-content:center;">
+          ← Modifier mon créneau
+        </button>
+      </form>
+    </div>
+  </div>
+
   <!-- CONFIRMATION MODAL -->
   <div class="confirmation-overlay" id="confirmModal">
     <div class="confirmation-modal">
@@ -445,7 +489,7 @@
         </a>
         <p class="footer__tagline">Coaching fitness personnalisé, musculation et personal training pour femmes.</p>
         <div class="footer__social">
-          <a href="#" class="footer__social-link" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" width="18"><rect x="2" y="2" width="20" height="20" rx="5" stroke="currentColor" stroke-width="1.5"/><circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.5"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg></a>
+          <a href="https://www.instagram.com/alyssa_hdd" target="_blank" rel="noopener noreferrer" class="footer__social-link" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" width="18"><rect x="2" y="2" width="20" height="20" rx="5" stroke="currentColor" stroke-width="1.5"/><circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.5"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg></a>
                     <a href="https://www.tiktok.com/@alyssa_hdd" target="_blank" rel="noopener noreferrer" class="footer__social-link" aria-label="TikTok">
             <!-- TikTok icon SVG -->
             <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.95a8.16 8.16 0 0 0 4.77 1.52V7.01a4.85 4.85 0 0 1-1-.32z"/></svg>
@@ -456,49 +500,41 @@
       <nav class="footer__nav-col"><h4 class="footer__col-title">Liens rapides</h4><ul><li><a href="index.html" class="footer__link">Accueil</a></li><li><a href="coaching.html" class="footer__link">Coaching</a></li><li><a href="a-propos.html" class="footer__link">À propos</a></li><li><a href="methode.html" class="footer__link">Méthode</a></li><li><a href="contact.html" class="footer__link">Contact</a></li></ul></nav>
       <nav class="footer__nav-col"><h4 class="footer__col-title">Espace client</h4><ul><li><a href="compte.html" class="footer__link">Mon compte</a></li><li><a href="reservation.html" class="footer__link">Réserver</a></li><li><a href="messagerie.html" class="footer__link">Messagerie</a></li><li><a href="suivi.html" class="footer__link">Mon suivi</a></li><li><a href="challenge.html" class="footer__link">Challenges</a></li></ul></nav>
       <div class="footer__contact-col"><h4 class="footer__col-title">Contact</h4><ul><li><svg viewBox="0 0 20 20" fill="none" width="14"><rect x="1" y="3" width="18" height="14" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M1 7l9 6 9-6" stroke="currentColor" stroke-width="1.5"/></svg><a href="mailto:alyssapro.coaching@gmail.com" class="footer__link">alyssapro.coaching@gmail.com</a></li><li><svg viewBox="0 0 20 20" fill="none" width="14"><path d="M4 2h3l1.5 4-2 1.5c1 2 3 4 5 5L13 10.5l4 1.5v3c0 1-1 2-2 2C7 17 3 10 3 4c0-1 1-2 2-2z" stroke="currentColor" stroke-width="1.5"/></svg><span>0783512058</span></li><li><svg viewBox="0 0 20 20" fill="none" width="14"><path d="M10 2C6.686 2 4 4.686 4 8c0 5.25 6 10 6 10s6-4.75 6-10c0-3.314-2.686-6-6-6zm0 8a2 2 0 110-4 2 2 0 010 4z" stroke="currentColor" stroke-width="1.5"/></svg><span>Paris, France</span></li></ul></div>
-      <div class="footer__instagram-col"><h4 class="footer__col-title">Suivez-moi</h4><div class="footer__insta-grid"><a href="#" class="insta-thumb"><div class="insta-placeholder insta-placeholder--1"></div></a><a href="#" class="insta-thumb"><div class="insta-placeholder insta-placeholder--2"></div></a><a href="#" class="insta-thumb"><div class="insta-placeholder insta-placeholder--3"></div></a><a href="#" class="insta-thumb"><div class="insta-placeholder insta-placeholder--4"></div></a><a href="#" class="insta-thumb"><div class="insta-placeholder insta-placeholder--5"></div></a><a href="#" class="insta-thumb"><div class="insta-placeholder insta-placeholder--6"></div></a></div></div>
+      <div class="footer__instagram-col"><h4 class="footer__col-title">Suivez-moi</h4><div class="footer__insta-grid"><a href="https://www.instagram.com/alyssa_hdd" target="_blank" rel="noopener" class="insta-thumb"><div class="insta-placeholder insta-placeholder--1"></div></a><a href="https://www.instagram.com/alyssa_hdd" target="_blank" rel="noopener" class="insta-thumb"><div class="insta-placeholder insta-placeholder--2"></div></a><a href="https://www.instagram.com/alyssa_hdd" target="_blank" rel="noopener" class="insta-thumb"><div class="insta-placeholder insta-placeholder--3"></div></a><a href="https://www.instagram.com/alyssa_hdd" target="_blank" rel="noopener" class="insta-thumb"><div class="insta-placeholder insta-placeholder--4"></div></a><a href="https://www.instagram.com/alyssa_hdd" target="_blank" rel="noopener" class="insta-thumb"><div class="insta-placeholder insta-placeholder--5"></div></a><a href="https://www.instagram.com/alyssa_hdd" target="_blank" rel="noopener" class="insta-thumb"><div class="insta-placeholder insta-placeholder--6"></div></a></div></div>
     </div>
-    <div class="footer__bottom"><div class="container footer__bottom-inner"><p class="footer__copyright">© 2025 Alyssa Fitness — Tous droits réservés.</p><div class="footer__legal"><a href="#" class="footer__link">Mentions légales</a><span>·</span><a href="#" class="footer__link">Confidentialité</a></div></div></div>
+    <div class="footer__bottom"><div class="container footer__bottom-inner"><p class="footer__copyright">© 2026 Alyssa Fitness — Tous droits réservés.</p><div class="footer__legal"><a href="#" class="footer__link">Mentions légales</a><span>·</span><a href="#" class="footer__link">Confidentialité</a></div></div></div>
   </footer>
 
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
   <script src="global.js"></script>
   <script>
     /* ═══════════════════════════════════════════════════
-       CALENDRIER DYNAMIQUE — Alyssa Fitness Réservation
+       CALENDRIER — Alyssa Fitness Réservation — Supabase
     ═══════════════════════════════════════════════════ */
 
-    // ─── DONNÉES MOCKÉES ────────────────────────────────
+    // ─── SUPABASE ────────────────────────────────────────
+    const SUPABASE_URL  = 'https://tokeglpixnwhfocsyrsg.supabase.co';
+    const SUPABASE_ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRva2VnbHBpeG53aGZvY3N5cnNnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODM2MDMwNTUsImV4cCI6MjA5OTE3OTA1NX0._7-FKr9JMBr95heFgyoYS_Ucm-S0aIfDKGCLnF_APlk';
+    const { createClient } = supabase;
+    const sb = createClient(SUPABASE_URL, SUPABASE_ANON);
+
+    // ─── DONNÉES SESSIONS ────────────────────────────────
     const sessionData = {
-      bilan:    { label: 'Bilan initial',   duree: '45 minutes', format: 'Visioconférence', color: '#6DBE9A' },
+      bilan:    { label: 'Bilan initial',   duree: '45 minutes', format: 'Visioconférence',       color: '#6DBE9A' },
       seance:   { label: 'Séance guidée',   duree: '60 minutes', format: 'En ligne / Présentiel', color: '#E98780' },
-      coaching: { label: 'Coaching perso', duree: '90 minutes', format: 'Sur mesure', color: '#F4C57A' }
+      coaching: { label: 'Coaching perso',  duree: '90 minutes', format: 'Sur mesure',            color: '#F4C57A' }
     };
-
-    // Créneaux disponibles par jour de semaine (0=Dim, 1=Lun…6=Sam)
-    const slotsByDay = {
-      1: ['08:00','09:00','10:00','14:00','15:00','16:00'],
-      2: ['09:00','10:00','11:00','14:00','17:00','18:00'],
-      3: ['08:00','10:00','11:00','15:00','16:00'],
-      4: ['09:00','10:00','14:00','15:00','16:00','17:00'],
-      5: ['08:00','09:00','10:00','11:00','14:00'],
-      6: ['09:00','10:00','11:00']
-    };
-
-    // Certains créneaux indisponibles (jours indisponibles)
-    function getUnavailableSlots(date) {
-      const d = date.getDate();
-      if (d % 7 === 0) return ['09:00', '10:00'];
-      if (d % 5 === 0) return ['14:00', '15:00'];
-      return [];
-    }
 
     // ─── STATE ───────────────────────────────────────────
-    let currentDate   = new Date();
-    let selectedDate  = null;
-    let selectedSlot  = null;
-    let selectedType  = 'bilan';
-    let viewYear      = currentDate.getFullYear();
-    let viewMonth     = currentDate.getMonth();
+    // dispoMap : { 'YYYY-MM-DD': [{id, heure_debut, heure_fin, type_seance, duree_min}] }
+    let dispoMap       = {};
+    let currentDate    = new Date();
+    let selectedDate   = null;
+    let selectedSlot   = null;
+    let selectedDispoId = null;
+    let selectedType   = 'bilan';
+    let viewYear       = currentDate.getFullYear();
+    let viewMonth      = currentDate.getMonth();
 
     // ─── UTILS ───────────────────────────────────────────
     const MONTHS_FR = ['Janvier','Février','Mars','Avril','Mai','Juin','Juillet','Août','Septembre','Octobre','Novembre','Décembre'];
@@ -508,9 +544,15 @@
       return `${DAYS_FR[d.getDay()]} ${d.getDate()} ${MONTHS_FR[d.getMonth()]} ${d.getFullYear()}`;
     }
 
+    function toDateKey(date) {
+      const y = date.getFullYear();
+      const m = String(date.getMonth() + 1).padStart(2, '0');
+      const dd = String(date.getDate()).padStart(2, '0');
+      return `${y}-${m}-${dd}`;
+    }
+
     function isAvailableDay(date) {
-      const dow = date.getDay();
-      return dow >= 1 && dow <= 6;
+      return (dispoMap[toDateKey(date)] || []).length > 0;
     }
 
     function isPast(date) {
@@ -524,6 +566,31 @@
       return date.getDate()===today.getDate() && date.getMonth()===today.getMonth() && date.getFullYear()===today.getFullYear();
     }
 
+    // ─── SUPABASE : CHARGER LES DISPONIBILITÉS ───────────
+    async function loadDisponibilites() {
+      const today = toDateKey(new Date());
+      const { data, error } = await sb
+        .from('disponibilites')
+        .select('id, date_seance, heure_debut, heure_fin, type_seance, duree_min')
+        .eq('disponible', true)
+        .gte('date_seance', today)
+        .order('date_seance')
+        .order('heure_debut');
+
+      if (error) {
+        console.error('Erreur chargement disponibilités:', error);
+        return;
+      }
+
+      dispoMap = {};
+      (data || []).forEach(slot => {
+        if (!dispoMap[slot.date_seance]) dispoMap[slot.date_seance] = [];
+        dispoMap[slot.date_seance].push(slot);
+      });
+
+      renderCalendar(); // ré-afficher avec les vrais créneaux
+    }
+
     // ─── RENDER CALENDAR ─────────────────────────────────
     function renderCalendar() {
       const label = document.getElementById('calMonthLabel');
@@ -532,21 +599,18 @@
       const grid = document.getElementById('calGrid');
       grid.innerHTML = '';
 
-      // Premier jour du mois (lundi = 0)
       const firstDay = new Date(viewYear, viewMonth, 1);
       let startDow = firstDay.getDay() - 1;
       if (startDow < 0) startDow = 6;
 
       const daysInMonth = new Date(viewYear, viewMonth + 1, 0).getDate();
 
-      // Cellules vides avant
       for (let i = 0; i < startDow; i++) {
         const empty = document.createElement('div');
         empty.className = 'cal-day empty';
         grid.appendChild(empty);
       }
 
-      // Jours du mois
       for (let d = 1; d <= daysInMonth; d++) {
         const date = new Date(viewYear, viewMonth, d);
         const div  = document.createElement('div');
@@ -556,8 +620,8 @@
         const available = isAvailableDay(date) && !past;
 
         let classes = ['cal-day'];
-        if (isToday(date)) classes.push('today');
-        if (available)     classes.push('available');
+        if (isToday(date))  classes.push('today');
+        if (available)      classes.push('available');
         if (past || !isAvailableDay(date)) classes.push('past');
         if (selectedDate &&
             date.getDate()===selectedDate.getDate() &&
@@ -576,23 +640,21 @@
 
     // ─── SELECT DATE ──────────────────────────────────────
     function selectDate(date) {
-      selectedDate = date;
-      selectedSlot = null;
+      selectedDate    = date;
+      selectedSlot    = null;
+      selectedDispoId = null;
       updateSummary();
       renderCalendar();
 
-      // Show slots
       const section = document.getElementById('slotsSection');
-      const label   = document.getElementById('slotsDateLabel');
+      const lbl     = document.getElementById('slotsDateLabel');
       const grid    = document.getElementById('slotsGrid');
 
       section.style.display = 'block';
-      label.textContent = fmtDate(date);
+      lbl.textContent = fmtDate(date);
       grid.innerHTML = '';
 
-      const dow   = date.getDay();
-      const slots = slotsByDay[dow] || [];
-      const unavail = getUnavailableSlots(date);
+      const slots = dispoMap[toDateKey(date)] || [];
 
       if (slots.length === 0) {
         grid.innerHTML = '<p style="color:var(--gris-texte); font-size:.85rem; grid-column:1/-1; padding:16px 0;">Aucun créneau disponible ce jour. Essaie un autre jour.</p>';
@@ -600,24 +662,24 @@
       }
 
       slots.forEach(slot => {
-        const btn = document.createElement('button');
-        btn.className = 'slot-btn' + (unavail.includes(slot) ? ' unavailable' : '');
-        btn.innerHTML = `<span class="slot-btn__time">${slot}</span><span class="slot-btn__dur">${sessionData[selectedType].duree}</span>`;
-        if (!unavail.includes(slot)) {
-          btn.addEventListener('click', () => selectSlot(slot, btn));
-        }
+        const time  = slot.heure_debut.slice(0, 5);
+        const duree = slot.duree_min ? `${slot.duree_min} min` : sessionData[selectedType].duree;
+        const btn   = document.createElement('button');
+        btn.className = 'slot-btn';
+        btn.innerHTML = `<span class="slot-btn__time">${time}</span><span class="slot-btn__dur">${duree}</span>`;
+        btn.addEventListener('click', () => selectSlot(time, slot.id, btn));
         grid.appendChild(btn);
       });
 
-      // Update stepper
       document.getElementById('step1').classList.remove('active'); document.getElementById('step1').classList.add('done');
       document.getElementById('conn1').classList.add('done');
       document.getElementById('step2').classList.add('active');
     }
 
     // ─── SELECT SLOT ──────────────────────────────────────
-    function selectSlot(slot, btn) {
-      selectedSlot = slot;
+    function selectSlot(slot, dispoId, btn) {
+      selectedSlot    = slot;
+      selectedDispoId = dispoId;
       document.querySelectorAll('.slot-btn').forEach(b => b.classList.remove('selected'));
       btn.classList.add('selected');
       updateSummary();
@@ -630,22 +692,16 @@
     // ─── UPDATE SUMMARY ───────────────────────────────────
     function updateSummary() {
       const sd = sessionData[selectedType];
-      document.getElementById('sum-type').textContent  = sd.label;
-      document.getElementById('sum-duree').textContent = sd.duree;
-      document.getElementById('sum-format').textContent= sd.format;
+      document.getElementById('sum-type').textContent   = sd.label;
+      document.getElementById('sum-duree').textContent  = sd.duree;
+      document.getElementById('sum-format').textContent = sd.format;
 
       const dateEl = document.getElementById('sum-date');
       const slotEl = document.getElementById('sum-slot');
       const btn    = document.getElementById('confirmBtn');
 
-      if (selectedDate) {
-        dateEl.textContent = fmtDate(selectedDate);
-        dateEl.classList.remove('placeholder');
-      }
-      if (selectedSlot) {
-        slotEl.textContent = selectedSlot;
-        slotEl.classList.remove('placeholder');
-      }
+      if (selectedDate) { dateEl.textContent = fmtDate(selectedDate); dateEl.classList.remove('placeholder'); }
+      if (selectedSlot) { slotEl.textContent = selectedSlot;          slotEl.classList.remove('placeholder'); }
       btn.disabled = !(selectedDate && selectedSlot);
     }
 
@@ -656,40 +712,96 @@
         card.classList.add('selected');
         selectedType = card.querySelector('input').value;
         updateSummary();
-        if (selectedDate) selectDate(selectedDate); // Re-render slots
+        if (selectedDate) selectDate(selectedDate);
       });
     });
 
-    // ─── NAV BUTTONS ─────────────────────────────────────
+    // ─── NAV MOIS ────────────────────────────────────────
     document.getElementById('prevMonth').addEventListener('click', () => {
-      viewMonth--;
-      if (viewMonth < 0) { viewMonth = 11; viewYear--; }
+      viewMonth--; if (viewMonth < 0) { viewMonth = 11; viewYear--; }
       renderCalendar();
     });
-
     document.getElementById('nextMonth').addEventListener('click', () => {
-      viewMonth++;
-      if (viewMonth > 11) { viewMonth = 0; viewYear++; }
+      viewMonth++; if (viewMonth > 11) { viewMonth = 0; viewYear++; }
       renderCalendar();
     });
 
-    // ─── CONFIRMATION ──────────────────────────────────────
+    // ─── CONFIRM BTN → OUVRIR FORMULAIRE ─────────────────
     document.getElementById('confirmBtn').addEventListener('click', () => {
-      const sd = sessionData[selectedType];
-      const details = document.getElementById('confDetails');
-      details.innerHTML = `
-        <div class="conf-detail"><span class="conf-detail__label">Séance</span><span class="conf-detail__val">${sd.label}</span></div>
-        <div class="conf-detail"><span class="conf-detail__label">Date</span><span class="conf-detail__val">${fmtDate(selectedDate)}</span></div>
-        <div class="conf-detail"><span class="conf-detail__label">Heure</span><span class="conf-detail__val">${selectedSlot}</span></div>
-        <div class="conf-detail"><span class="conf-detail__label">Durée</span><span class="conf-detail__val">${sd.duree}</span></div>
-        <div class="conf-detail"><span class="conf-detail__label">Format</span><span class="conf-detail__val">${sd.format}</span></div>
-      `;
-      document.getElementById('confirmModal').classList.add('show');
+      document.getElementById('bkError').style.display = 'none';
+      document.getElementById('bookingModal').classList.add('show');
+    });
+    document.getElementById('closeBookingModal').addEventListener('click', () => {
+      document.getElementById('bookingModal').classList.remove('show');
+    });
+    document.getElementById('bkBackBtn').addEventListener('click', () => {
+      document.getElementById('bookingModal').classList.remove('show');
+    });
+
+    // ─── FORMULAIRE RÉSERVATION → SUPABASE RPC ────────────
+    document.getElementById('bookingForm').addEventListener('submit', async function(e) {
+      e.preventDefault();
+
+      const prenom = document.getElementById('bk-prenom').value.trim();
+      const nom    = document.getElementById('bk-nom').value.trim();
+      const email  = document.getElementById('bk-email').value.trim();
+      const tel    = document.getElementById('bk-tel').value.trim();
+      const errEl  = document.getElementById('bkError');
+
+      if (!prenom || !nom || !email) {
+        errEl.textContent    = 'Merci de remplir les champs obligatoires (*).';
+        errEl.style.display  = 'block';
+        return;
+      }
+
+      const submitBtn = document.getElementById('bkSubmitBtn');
+      submitBtn.textContent = 'Réservation en cours…';
+      submitBtn.disabled    = true;
+      errEl.style.display   = 'none';
+
+      try {
+        const { data, error } = await sb.rpc('creer_reservation', {
+          p_disponibilite_id: selectedDispoId,
+          p_prenom:    prenom,
+          p_nom:       nom,
+          p_email:     email,
+          p_telephone: tel || null
+        });
+
+        if (error) throw error;
+
+        const result = typeof data === 'string' ? JSON.parse(data) : data;
+        if (!result?.success) throw new Error(result?.message || 'Créneau non disponible');
+
+        // Fermer le formulaire
+        document.getElementById('bookingModal').classList.remove('show');
+
+        // Afficher la confirmation
+        const sd = sessionData[selectedType];
+        document.getElementById('confDetails').innerHTML = `
+          <div class="conf-detail"><span class="conf-detail__label">Nom</span><span class="conf-detail__val">${prenom} ${nom}</span></div>
+          <div class="conf-detail"><span class="conf-detail__label">Séance</span><span class="conf-detail__val">${sd.label}</span></div>
+          <div class="conf-detail"><span class="conf-detail__label">Date</span><span class="conf-detail__val">${fmtDate(selectedDate)}</span></div>
+          <div class="conf-detail"><span class="conf-detail__label">Heure</span><span class="conf-detail__val">${selectedSlot}</span></div>
+          <div class="conf-detail"><span class="conf-detail__label">Confirmation</span><span class="conf-detail__val">${email}</span></div>
+        `;
+        document.getElementById('confirmModal').classList.add('show');
+
+      } catch (err) {
+        console.error('Erreur réservation:', err);
+        submitBtn.textContent = 'Confirmer ma réservation';
+        submitBtn.disabled    = false;
+        errEl.textContent     = err.message === 'Créneau non disponible'
+          ? 'Ce créneau vient d'être pris. Choisis un autre horaire.'
+          : 'Une erreur est survenue. Réessaie ou contacte-moi directement.';
+        errEl.style.display   = 'block';
+      }
     });
 
     // ─── INIT ─────────────────────────────────────────────
-    renderCalendar();
+    renderCalendar();   // calendrier vide le temps du chargement
     updateSummary();
+    loadDisponibilites(); // async — re-render avec les vrais créneaux
   </script>
 </body>
 </html>
