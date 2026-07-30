@@ -46,12 +46,9 @@
     .hero__img-placeholder {
       width: 100%;
       height: 100%;
-      background: linear-gradient(120deg,
-        #fdf5f0 0%,
-        #f8ece5 25%,
-        #f2ddd4 55%,
-        #e8c9be 80%,
-        #ddb5ad 100%);
+      object-fit: cover;
+      object-position: center top;
+      display: block;
     }
 
     .hero__overlay {
@@ -66,7 +63,7 @@
       );
     }
 
-    /* Coach photo placeholder en centre-droite */
+    /* Coach photo en centre-droite */
     .hero__coach-photo {
       position: absolute;
       right: 8%;
@@ -74,10 +71,16 @@
       width: 42%;
       max-width: 520px;
       aspect-ratio: 2/3;
-      background: linear-gradient(170deg, #f0d5c8 0%, #ddb5ad 40%, #cfa29b 100%);
       border-radius: 280px 280px 0 0;
       overflow: hidden;
       z-index: 1;
+    }
+    .hero__coach-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+      display: block;
     }
 
     .hero__coach-photo::after {
@@ -708,6 +711,29 @@
       border-color: var(--rose-clair);
     }
 
+    /* Photo header optionnel dans une specialite-card */
+    .specialite-card__photo {
+      margin: -32px -26px 24px;
+      height: 180px;
+      overflow: hidden;
+      border-radius: var(--radius-md) var(--radius-md) 0 0;
+      position: relative;
+    }
+    .specialite-card__photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+      display: block;
+    }
+    .specialite-card__photo::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, transparent 45%, rgba(233,135,128,0.18) 100%);
+      pointer-events: none;
+    }
+
     .specialite-card__emoji {
       font-size: 1.9rem;
       margin-bottom: 16px;
@@ -1044,12 +1070,14 @@
   ═══════════════════════════════════════════ -->
   <section class="hero" id="accueil" aria-label="Section hero">
     <div class="hero__bg">
-      <div class="hero__img-placeholder" role="img" aria-label="Studio fitness lumineux, ambiance premium"></div>
+      <img class="hero__img-placeholder" src="assets/images/alyssa/alyssa-rope-training.webp" alt="Alyssa coach fitness — entraînement intensif à la corde" loading="eager" fetchpriority="high">
       <div class="hero__overlay"></div>
     </div>
 
     <!-- Photo coach -->
-    <div class="hero__coach-photo" aria-hidden="true"></div>
+    <div class="hero__coach-photo" aria-hidden="true">
+      <img src="assets/images/alyssa/alyssa-squat-rack.webp" alt="" loading="eager">
+    </div>
 
     <!-- KPI cards flottantes -->
     <aside class="hero__kpi-col" aria-label="Tableau de bord rapide">
@@ -1314,6 +1342,9 @@
       <div class="specialites-grid">
 
         <article class="specialite-card reveal">
+          <div class="specialite-card__photo" aria-hidden="true">
+            <img src="assets/images/alyssa/alyssa-energy-cycle.webp" alt="" loading="lazy">
+          </div>
           <span class="specialite-card__emoji" aria-hidden="true">🔄</span>
           <h3 class="specialite-card__title">Entraîne-toi selon ton cycle</h3>
           <p class="specialite-card__text">Ton corps change chaque semaine. Tes entraînements aussi. Je programme tes séances en accord avec tes phases hormonales pour maximiser tes résultats et respecter ton énergie.</p>
@@ -1326,6 +1357,9 @@
         </article>
 
         <article class="specialite-card reveal reveal-delay-2">
+          <div class="specialite-card__photo" aria-hidden="true">
+            <img src="assets/images/alyssa/alyssa-squat-gym.webp" alt="" loading="lazy">
+          </div>
           <span class="specialite-card__emoji" aria-hidden="true">💪</span>
           <h3 class="specialite-card__title">Sculpte sans t'épuiser</h3>
           <p class="specialite-card__text">Pas de régime extrême, pas d'overtraining. Une approche intelligente qui combine musculation, nutrition et récupération pour transformer ton corps durablement.</p>
@@ -1697,12 +1731,24 @@
       <div class="footer__instagram-col">
         <h4 class="footer__col-title">Suivez-moi</h4>
         <div class="footer__insta-grid">
-          <a href="https://www.instagram.com/alyssa_hdd" target="_blank" rel="noopener" class="insta-thumb"><div class="insta-placeholder insta-placeholder--1"></div></a>
-          <a href="https://www.instagram.com/alyssa_hdd" target="_blank" rel="noopener" class="insta-thumb"><div class="insta-placeholder insta-placeholder--2"></div></a>
-          <a href="https://www.instagram.com/alyssa_hdd" target="_blank" rel="noopener" class="insta-thumb"><div class="insta-placeholder insta-placeholder--3"></div></a>
-          <a href="https://www.instagram.com/alyssa_hdd" target="_blank" rel="noopener" class="insta-thumb"><div class="insta-placeholder insta-placeholder--4"></div></a>
-          <a href="https://www.instagram.com/alyssa_hdd" target="_blank" rel="noopener" class="insta-thumb"><div class="insta-placeholder insta-placeholder--5"></div></a>
-          <a href="https://www.instagram.com/alyssa_hdd" target="_blank" rel="noopener" class="insta-thumb"><div class="insta-placeholder insta-placeholder--6"></div></a>
+          <a href="https://www.instagram.com/alyssa_hdd" target="_blank" rel="noopener" class="insta-thumb" aria-label="Alyssa sur Instagram — squat rack">
+            <img src="assets/images/alyssa/alyssa-squat-rack.webp" alt="Alyssa coach fitness — squat rack" loading="lazy">
+          </a>
+          <a href="https://www.instagram.com/alyssa_hdd" target="_blank" rel="noopener" class="insta-thumb" aria-label="Alyssa sur Instagram — corde à sauter">
+            <img src="assets/images/alyssa/alyssa-rope-training.webp" alt="Alyssa coach fitness — entraînement corde" loading="lazy">
+          </a>
+          <a href="https://www.instagram.com/alyssa_hdd" target="_blank" rel="noopener" class="insta-thumb" aria-label="Alyssa sur Instagram — haltères">
+            <img src="assets/images/alyssa/alyssa-dumbbell-press.webp" alt="Alyssa coach fitness — haltères" loading="lazy">
+          </a>
+          <a href="https://www.instagram.com/alyssa_hdd" target="_blank" rel="noopener" class="insta-thumb" aria-label="Alyssa sur Instagram — tapis de course">
+            <img src="assets/images/alyssa/alyssa-treadmill.webp" alt="Alyssa coach fitness — tapis de course" loading="lazy">
+          </a>
+          <a href="https://www.instagram.com/alyssa_hdd" target="_blank" rel="noopener" class="insta-thumb" aria-label="Alyssa sur Instagram — énergie et cycle">
+            <img src="assets/images/alyssa/alyssa-energy-cycle.webp" alt="Alyssa coach fitness — énergie et vitalité" loading="lazy">
+          </a>
+          <a href="https://www.instagram.com/alyssa_hdd" target="_blank" rel="noopener" class="insta-thumb" aria-label="Alyssa sur Instagram — squat en salle">
+            <img src="assets/images/alyssa/alyssa-squat-gym.webp" alt="Alyssa coach fitness — squat en salle" loading="lazy">
+          </a>
         </div>
       </div>
 
@@ -1728,9 +1774,8 @@
       <button class="video-modal__close" id="videoModalClose" aria-label="Fermer">
         <svg viewBox="0 0 24 24" fill="none" width="28" height="28"><path d="M6 6l12 12M18 6L6 18" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg>
       </button>
-      <!-- TODO: remplacer par la vidéo officielle d'Alyssa -->
       <video id="videoPlayer" controls preload="none" style="width:100%;display:block;">
-        <source src="assets/videos/alyssa-coaching-personnalise.mp4" type="video/mp4">
+        <source src="assets/videos/alyssa-video-hero.mov" type="video/mp4">
       </video>
     </div>
   </div>

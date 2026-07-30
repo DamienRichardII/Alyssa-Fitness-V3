@@ -99,18 +99,9 @@
     .prog-card__img-inner {
       width: 100%; height: 100%;
       min-height: 420px;
-    }
-    .prog-card__img-inner--remise {
-      background: linear-gradient(140deg, #fde8e5 0%, #f5c4be 50%, #e8a89e 100%);
-    }
-    .prog-card__img-inner--muscu {
-      background: linear-gradient(140deg, #e8ddd4 0%, #d4c4b8 50%, #c4a898 100%);
-    }
-    .prog-card__img-inner--transfo {
-      background: linear-gradient(140deg, #f0e4da 0%, #e2ccbf 50%, #d4b4a8 100%);
-    }
-    .prog-card__img-inner--perso {
-      background: linear-gradient(140deg, #faeae8 0%, #f0ccc8 50%, #e6b0aa 100%);
+      object-fit: cover;
+      object-position: center top;
+      display: block;
     }
 
     /* ── Video wrapper pour Coaching Sur-Mesure ── */
@@ -437,7 +428,7 @@
           <div class="prog-card__img prog-card__img--video">
             <div class="program-video-wrapper">
               <video class="program-card-video" autoplay muted loop playsinline preload="metadata">
-                <source src="assets/videos/alyssa-coaching-personnalise.mp4" type="video/mp4">
+                <source src="assets/videos/alyssa-coaching-sur-mesure.mov" type="video/mp4">
               </video>
             </div>
             <span class="prog-card__img-label">Suivi sur-mesure</span>
@@ -476,7 +467,7 @@
         <!-- Programme 02 : Galbe & Musculation -->
         <div class="prog-card prog-card--reverse" id="programme-galbe-musculation">
           <div class="prog-card__img">
-            <div class="prog-card__img-inner prog-card__img-inner--muscu"></div>
+            <img class="prog-card__img-inner" src="assets/images/alyssa/alyssa-dumbbell-press.webp" alt="Alyssa coach fitness — haltères galbe musculation" loading="lazy">
             <span class="prog-card__img-label">Galbe & musculation</span>
           </div>
           <div class="prog-card__body">
@@ -512,7 +503,7 @@
         <!-- Programme 03 : Sèche -->
         <div class="prog-card" id="programme-seche">
           <div class="prog-card__img">
-            <div class="prog-card__img-inner prog-card__img-inner--transfo"></div>
+            <img class="prog-card__img-inner" src="assets/images/alyssa/alyssa-treadmill.webp" alt="Alyssa coach fitness — cardio tapis de course sèche" loading="lazy">
             <span class="prog-card__img-label">Transformation totale</span>
           </div>
           <div class="prog-card__body">
@@ -548,7 +539,7 @@
         <!-- Programme 04 : Remise en forme -->
         <div class="prog-card prog-card--reverse" id="remise">
           <div class="prog-card__img">
-            <div class="prog-card__img-inner prog-card__img-inner--remise"></div>
+            <img class="prog-card__img-inner" src="assets/images/alyssa/alyssa-squat-gym.webp" alt="Alyssa coach fitness — remise en forme squat" loading="lazy">
             <span class="prog-card__img-label">Remise en forme</span>
           </div>
           <div class="prog-card__body">

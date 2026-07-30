@@ -1136,7 +1136,20 @@ input, textarea, select {
 
 .insta-thumb:hover { opacity: 0.8; }
 
-/* Instagram grid — visuels premium (pas de texte placeholder) */
+/* Instagram grid — vraies photos */
+.insta-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  display: block;
+  transition: transform 0.35s ease;
+}
+.insta-thumb:hover img {
+  transform: scale(1.04);
+}
+
+/* Fallback gradient (si img absente) */
 .insta-placeholder {
   width: 100%;
   height: 100%;
