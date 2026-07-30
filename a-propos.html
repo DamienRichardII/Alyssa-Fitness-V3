@@ -92,10 +92,18 @@
       width: 340px;
       height: 340px;
       border-radius: 50%;
-      background: linear-gradient(140deg, #fde8e5 0%, #f0c4bb 40%, #e8a89e 75%, #d99090 100%);
+      background: var(--beige-premium);
       position: relative;
       overflow: hidden;
       box-shadow: 0 20px 60px rgba(233,135,128,0.22);
+    }
+    .bio-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+      display: block;
+      border-radius: 50%;
     }
     .bio-photo::after {
       content: '';
@@ -430,7 +438,7 @@
           <!-- Photo + badge -->
           <div class="bio-photo-wrap">
             <div class="bio-photo">
-              <div class="bio-photo__initials">A</div>
+              <img src="assets/images/alyssa/alyssa-dumbbell-press.webp" alt="Alyssa, coach fitness pour femmes" loading="eager">
             </div>
             <div class="bio-badge">
               <div class="bio-badge__icon">
@@ -455,7 +463,7 @@
                 <span class="kpi-card__label">Années d'expérience</span>
               </div>
               <div class="kpi-card">
-                <span class="kpi-card__num">320+</span>
+                <span class="kpi-card__num">150+</span>
                 <span class="kpi-card__label">Femmes accompagnées</span>
               </div>
               <div class="kpi-card">
@@ -657,18 +665,30 @@
       <div class="footer__instagram-col">
         <h4 class="footer__col-title">Suivez-moi</h4>
         <div class="footer__insta-grid">
-          <a href="https://www.instagram.com/alyssa_hdd" target="_blank" rel="noopener" class="insta-thumb"><div class="insta-placeholder insta-placeholder--1"></div></a>
-          <a href="https://www.instagram.com/alyssa_hdd" target="_blank" rel="noopener" class="insta-thumb"><div class="insta-placeholder insta-placeholder--2"></div></a>
-          <a href="https://www.instagram.com/alyssa_hdd" target="_blank" rel="noopener" class="insta-thumb"><div class="insta-placeholder insta-placeholder--3"></div></a>
-          <a href="https://www.instagram.com/alyssa_hdd" target="_blank" rel="noopener" class="insta-thumb"><div class="insta-placeholder insta-placeholder--4"></div></a>
-          <a href="https://www.instagram.com/alyssa_hdd" target="_blank" rel="noopener" class="insta-thumb"><div class="insta-placeholder insta-placeholder--5"></div></a>
-          <a href="https://www.instagram.com/alyssa_hdd" target="_blank" rel="noopener" class="insta-thumb"><div class="insta-placeholder insta-placeholder--6"></div></a>
+          <a href="https://www.instagram.com/alyssa_hdd" target="_blank" rel="noopener noreferrer" class="insta-thumb" aria-label="Alyssa sur Instagram — squat rack">
+            <img src="assets/images/alyssa/alyssa-squat-rack.webp" alt="Alyssa coach fitness — squat rack" loading="lazy">
+          </a>
+          <a href="https://www.instagram.com/alyssa_hdd" target="_blank" rel="noopener noreferrer" class="insta-thumb" aria-label="Alyssa sur Instagram — corde à sauter">
+            <img src="assets/images/alyssa/alyssa-rope-training.webp" alt="Alyssa coach fitness — entraînement corde" loading="lazy">
+          </a>
+          <a href="https://www.instagram.com/alyssa_hdd" target="_blank" rel="noopener noreferrer" class="insta-thumb" aria-label="Alyssa sur Instagram — haltères">
+            <img src="assets/images/alyssa/alyssa-dumbbell-press.webp" alt="Alyssa coach fitness — haltères" loading="lazy">
+          </a>
+          <a href="https://www.instagram.com/alyssa_hdd" target="_blank" rel="noopener noreferrer" class="insta-thumb" aria-label="Alyssa sur Instagram — tapis de course">
+            <img src="assets/images/alyssa/alyssa-treadmill.webp" alt="Alyssa coach fitness — tapis de course" loading="lazy">
+          </a>
+          <a href="https://www.instagram.com/alyssa_hdd" target="_blank" rel="noopener noreferrer" class="insta-thumb" aria-label="Alyssa sur Instagram — énergie et cycle">
+            <img src="assets/images/alyssa/alyssa-energy-cycle.webp" alt="Alyssa coach fitness — énergie et vitalité" loading="lazy">
+          </a>
+          <a href="https://www.instagram.com/alyssa_hdd" target="_blank" rel="noopener noreferrer" class="insta-thumb" aria-label="Alyssa sur Instagram — squat en salle">
+            <img src="assets/images/alyssa/alyssa-squat-gym.webp" alt="Alyssa coach fitness — squat en salle" loading="lazy">
+          </a>
         </div>
       </div>
     </div>
     <div class="footer__bottom">
       <div class="container footer__bottom-inner">
-        <p class="footer__copyright">© 2025 Alyssa Fitness — Tous droits réservés.</p>
+        <p class="footer__copyright">© 2026 Alyssa Fitness — Tous droits réservés.</p>
         <div class="footer__legal">
           <a href="#" class="footer__link">Mentions légales</a>
           <span aria-hidden="true">·</span>
