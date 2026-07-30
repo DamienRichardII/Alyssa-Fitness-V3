@@ -226,6 +226,17 @@
       font-weight: 600;
       color: var(--noir-doux);
     }
+    /* Mention sous-programme (ex: Coaching sur-mesure) */
+    .prog-card__sub {
+      font-family: var(--font-body);
+      font-size: 0.76rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--rose-saumon);
+      margin-bottom: 16px;
+      margin-top: -8px;
+    }
 
     /* ── FAQ ─────────────────────────────────────── */
     .faq-list { max-width: 760px; margin: 0 auto; }
@@ -421,16 +432,129 @@
     <section class="section section--white" id="programmes">
       <div class="container">
 
-        <!-- Programme 1 : Remise en forme -->
-        <div class="prog-card" id="remise">
+        <!-- Programme 01 : Transformation complète — Coaching sur-mesure -->
+        <div class="prog-card" id="coaching-sur-mesure">
+          <div class="prog-card__img prog-card__img--video">
+            <div class="program-video-wrapper">
+              <video class="program-card-video" autoplay muted loop playsinline preload="metadata">
+                <source src="assets/videos/alyssa-coaching-personnalise.mp4" type="video/mp4">
+              </video>
+            </div>
+            <span class="prog-card__img-label">Suivi sur-mesure</span>
+          </div>
+          <div class="prog-card__body">
+            <span class="prog-card__badge">Programme 01 — Coaching sur-mesure</span>
+            <h2 class="prog-card__title">Transformation complète</h2>
+            <p class="prog-card__desc">Un accompagnement complet et un programme entièrement adapté à ton rythme de vie, tes contraintes, tes objectifs et tes progrès afin de t'accompagner à chaque étape de ta transformation.</p>
+            <ul class="prog-card__benefits">
+              <li>Bilan initial complet : morphologie, habitudes, objectifs et mode de vie</li>
+              <li>Programme d'entraînement 100% personnalisé et évolutif adapté à ton cycle</li>
+              <li>Accompagnement nutritionnel</li>
+              <li>Accès à l'application de suivi Ekklo</li>
+              <li>Accès messagerie régulière, messages et vocaux</li>
+              <li>Appel ou visio hebdomadaire</li>
+              <li>Conseils de récupération, mobilité et habitudes de vie</li>
+            </ul>
+            <div class="prog-card__meta">
+              <div class="prog-card__meta-item">
+                <span class="prog-card__meta-label">Pour qui</span>
+                <span class="prog-card__meta-val">Femmes avec objectif précis, contraintes ou besoin d'un accompagnement complet</span>
+              </div>
+              <div class="prog-card__meta-item">
+                <span class="prog-card__meta-label">Niveau</span>
+                <span class="prog-card__meta-val">Tous niveaux</span>
+              </div>
+              <div class="prog-card__meta-item">
+                <span class="prog-card__meta-label">Format</span>
+                <span class="prog-card__meta-val">En ligne et/ou présentiel · Durée libre</span>
+              </div>
+            </div>
+            <a href="reservation.html" class="btn btn--primary btn--sm">Démarrer ce programme</a>
+          </div>
+        </div>
+
+        <!-- Programme 02 : Galbe & Musculation -->
+        <div class="prog-card prog-card--reverse" id="programme-galbe-musculation">
+          <div class="prog-card__img">
+            <div class="prog-card__img-inner prog-card__img-inner--muscu"></div>
+            <span class="prog-card__img-label">Galbe & musculation</span>
+          </div>
+          <div class="prog-card__body">
+            <span class="prog-card__badge">Programme 02</span>
+            <h2 class="prog-card__title">Programme galbe & musculation</h2>
+            <p class="prog-card__desc">Construis un physique fort et développe ta masse musculaire intelligemment afin de sculpter une silhouette plus harmonieuse. Pensée pour favoriser le développement musculaire tout en limitant la prise de gras.</p>
+            <ul class="prog-card__benefits">
+              <li>Programmes salle de sport structurés et progressifs</li>
+              <li>Focus prise de masse féminine et galbe</li>
+              <li>Adaptation possible selon le cycle menstruel</li>
+              <li>Suivi nutrition adapté aux objectifs de composition corporelle</li>
+              <li>Vidéos techniques pour maîtriser les mouvements</li>
+              <li>Appel bilan mensuel individuel</li>
+            </ul>
+            <div class="prog-card__meta">
+              <div class="prog-card__meta-item">
+                <span class="prog-card__meta-label">Pour qui</span>
+                <span class="prog-card__meta-val">Femmes souhaitant développer leur masse musculaire et galber leur silhouette</span>
+              </div>
+              <div class="prog-card__meta-item">
+                <span class="prog-card__meta-label">Niveau</span>
+                <span class="prog-card__meta-val">Débutant ou intermédiaire</span>
+              </div>
+              <div class="prog-card__meta-item">
+                <span class="prog-card__meta-label">Format</span>
+                <span class="prog-card__meta-val">Présentiel ou en ligne · 3–6 mois</span>
+              </div>
+            </div>
+            <a href="reservation.html" class="btn btn--primary btn--sm">Démarrer ce programme</a>
+          </div>
+        </div>
+
+        <!-- Programme 03 : Sèche -->
+        <div class="prog-card" id="programme-seche">
+          <div class="prog-card__img">
+            <div class="prog-card__img-inner prog-card__img-inner--transfo"></div>
+            <span class="prog-card__img-label">Transformation totale</span>
+          </div>
+          <div class="prog-card__body">
+            <span class="prog-card__badge">Programme 03</span>
+            <h2 class="prog-card__title">Programme sèche</h2>
+            <p class="prog-card__desc">Perds du gras durablement, tonifie ta silhouette et révèle un physique plus harmonieux grâce à une méthode alliant musculation, nutrition et récupération.</p>
+            <ul class="prog-card__benefits">
+              <li>Programme d'entraînement progressif : 2 à 5 séances par semaine</li>
+              <li>Plan nutritionnel complet</li>
+              <li>Guide cardio : Zone 2 et HIIT selon objectifs</li>
+              <li>Plus de 30 recettes protéinées simples et gourmandes</li>
+              <li>Vidéos techniques des exercices</li>
+              <li>Outils de suivi de progression</li>
+            </ul>
+            <div class="prog-card__meta">
+              <div class="prog-card__meta-item">
+                <span class="prog-card__meta-label">Pour qui</span>
+                <span class="prog-card__meta-val">Prête à sécher, pas à te priver</span>
+              </div>
+              <div class="prog-card__meta-item">
+                <span class="prog-card__meta-label">Niveau</span>
+                <span class="prog-card__meta-val">Tous niveaux</span>
+              </div>
+              <div class="prog-card__meta-item">
+                <span class="prog-card__meta-label">Format</span>
+                <span class="prog-card__meta-val">En ligne · 3–6 mois</span>
+              </div>
+            </div>
+            <a href="reservation.html" class="btn btn--primary btn--sm">Démarrer ce programme</a>
+          </div>
+        </div>
+
+        <!-- Programme 04 : Remise en forme -->
+        <div class="prog-card prog-card--reverse" id="remise">
           <div class="prog-card__img">
             <div class="prog-card__img-inner prog-card__img-inner--remise"></div>
             <span class="prog-card__img-label">Remise en forme</span>
           </div>
           <div class="prog-card__body">
-            <span class="prog-card__badge">Programme 01</span>
+            <span class="prog-card__badge">Programme 04</span>
             <h2 class="prog-card__title">Remise en forme & Bien-être</h2>
-            <p class="prog-card__desc">Un programme doux mais efficace pour te remettre en mouvement en douceur. On travaille la mobilité, le renforcement global et ton rapport au sport — sans jamais te brusquer. L'objectif : retrouver de l'énergie, du tonus et de la confiance en toi.</p>
+            <p class="prog-card__desc">Un programme doux mais efficace pour te remettre en mouvement en douceur. On travaille la mobilité, le renforcement global et ton rapport au sport, sans jamais te brusquer. L'objectif : retrouver de l'énergie, du tonus et de la confiance en toi.</p>
             <ul class="prog-card__benefits">
               <li>Séances adaptées à ton rythme et ta condition physique</li>
               <li>Exercices de mobilité et de renforcement progressifs</li>
@@ -450,123 +574,6 @@
               <div class="prog-card__meta-item">
                 <span class="prog-card__meta-label">Format</span>
                 <span class="prog-card__meta-val">En ligne · 3 mois</span>
-              </div>
-            </div>
-            <a href="reservation.html" class="btn btn--primary btn--sm">Démarrer ce programme</a>
-          </div>
-        </div>
-
-        <!-- Programme 2 : Musculation -->
-        <div class="prog-card prog-card--reverse" id="musculation">
-          <div class="prog-card__img">
-            <div class="prog-card__img-inner prog-card__img-inner--muscu"></div>
-            <span class="prog-card__img-label">Musculation feminine</span>
-          </div>
-          <div class="prog-card__body">
-            <span class="prog-card__badge">Programme 02</span>
-            <h2 class="prog-card__title">Musculation Féminine</h2>
-            <p class="prog-card__desc">Construis un physique fort, gainé et féminin. Ce programme se concentre sur la prise de masse musculaire ciblée — fessiers, cuisses, épaules — avec des méthodes d'entraînement éprouvées. Tu apprendras à t'entraîner avec des charges, sans te masculiniser.</p>
-            <ul class="prog-card__benefits">
-              <li>Programmes salle de sport structurés et progressifs</li>
-              <li>Focus prise de masse féminine et galbe</li>
-              <li>Adaptation possible selon le cycle menstruel</li>
-              <li>Suivi nutrition adapté aux objectifs de composition corporelle</li>
-              <li>Vidéos techniques pour maîtriser les mouvements</li>
-              <li>Appel bilan mensuel individuel</li>
-            </ul>
-            <div class="prog-card__meta">
-              <div class="prog-card__meta-item">
-                <span class="prog-card__meta-label">Pour qui</span>
-                <span class="prog-card__meta-val">Pratiquantes de salle</span>
-              </div>
-              <div class="prog-card__meta-item">
-                <span class="prog-card__meta-label">Niveau</span>
-                <span class="prog-card__meta-val">Débutant ou intermédiaire</span>
-              </div>
-              <div class="prog-card__meta-item">
-                <span class="prog-card__meta-label">Format</span>
-                <span class="prog-card__meta-val">Présentiel ou en ligne · 3–6 mois</span>
-              </div>
-            </div>
-            <a href="reservation.html" class="btn btn--primary btn--sm">Démarrer ce programme</a>
-          </div>
-        </div>
-
-        <!-- Programme 3 : Transformation -->
-        <div class="prog-card" id="transformation">
-          <div class="prog-card__img">
-            <div class="prog-card__img-inner prog-card__img-inner--transfo"></div>
-            <span class="prog-card__img-label">Transformation totale</span>
-          </div>
-          <div class="prog-card__body">
-            <span class="prog-card__badge">Programme 03</span>
-            <h2 class="prog-card__title">Transformation Complète</h2>
-            <p class="prog-card__desc">Le programme le plus complet. En combinant entraînement intensif, rééquilibrage alimentaire et coaching mental, on redéfinit ton corps et ton rapport à toi-même. Pour celles qui veulent des résultats visibles et durables sur 6 mois.</p>
-            <ul class="prog-card__benefits">
-              <li>Plan d'entraînement 4–5 jours par semaine</li>
-              <li>Plan nutritionnel personnalisé avec phases de rééquilibrage</li>
-              <li>Suivi des mensurations et photos de progression</li>
-              <li>Coaching mental et gestion des blocages</li>
-              <li>Accès illimité à Alyssa via messagerie privée</li>
-            </ul>
-            <div class="prog-card__meta">
-              <div class="prog-card__meta-item">
-                <span class="prog-card__meta-label">Pour qui</span>
-                <span class="prog-card__meta-val">Toutes niveaux, motivées</span>
-              </div>
-              <div class="prog-card__meta-item">
-                <span class="prog-card__meta-label">Niveau</span>
-                <span class="prog-card__meta-val">Tous niveaux</span>
-              </div>
-              <div class="prog-card__meta-item">
-                <span class="prog-card__meta-label">Format</span>
-                <span class="prog-card__meta-val">En ligne · 6 mois</span>
-              </div>
-            </div>
-            <a href="reservation.html" class="btn btn--primary btn--sm">Démarrer ce programme</a>
-          </div>
-        </div>
-
-        <!-- Programme 4 : Personnalisé -->
-        <div class="prog-card prog-card--reverse" id="perso">
-          <div class="prog-card__img prog-card__img--video">
-            <div class="program-video-wrapper">
-              <video
-                class="program-card-video"
-                autoplay
-                muted
-                loop
-                playsinline
-                preload="metadata"
-              >
-                <source src="assets/videos/alyssa-coaching-personnalise.mp4" type="video/mp4">
-              </video>
-            </div>
-            <span class="prog-card__img-label">Suivi sur-mesure</span>
-          </div>
-          <div class="prog-card__body">
-            <span class="prog-card__badge">Programme 04</span>
-            <h2 class="prog-card__title">Coaching Sur-Mesure</h2>
-            <p class="prog-card__desc">Pour celles qui veulent le meilleur. Un suivi 100 % personnalisé, construit autour de ta vie, tes contraintes, tes objectifs précis. Je crée ton programme de A à Z et je l'ajuste en temps réel selon tes retours et tes résultats.</p>
-            <ul class="prog-card__benefits">
-              <li>Bilan initial complet (morphologie, objectifs, mode de vie)</li>
-              <li>Programme d'entraînement entièrement sur-mesure</li>
-              <li>Plan nutritionnel flexible et adapté à tes préférences</li>
-              <li>Appel ou visio hebdomadaire avec Alyssa</li>
-              <li>Ajustements continus en fonction des résultats</li>
-            </ul>
-            <div class="prog-card__meta">
-              <div class="prog-card__meta-item">
-                <span class="prog-card__meta-label">Pour qui</span>
-                <span class="prog-card__meta-val">Profil exigeant, objectif précis</span>
-              </div>
-              <div class="prog-card__meta-item">
-                <span class="prog-card__meta-label">Niveau</span>
-                <span class="prog-card__meta-val">Tous niveaux</span>
-              </div>
-              <div class="prog-card__meta-item">
-                <span class="prog-card__meta-label">Format</span>
-                <span class="prog-card__meta-val">En ligne · Durée libre</span>
               </div>
             </div>
             <a href="reservation.html" class="btn btn--primary btn--sm">Démarrer ce programme</a>
@@ -717,6 +724,6 @@
     </div>
     <div class="footer__bottom">
       <div class="container footer__bottom-inner">
-        <p class="footer__copyright">© 2025 Alyssa Fitness — Tous droits réservés.</p>
+        <p class="footer__copyright">© 2026 Alyssa Fitness — Tous droits réservés.</p>
         <div class="footer__legal">
           <a href="#" class="footer__link">M
