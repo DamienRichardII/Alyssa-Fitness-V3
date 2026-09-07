@@ -21,7 +21,7 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
 
   <link rel="stylesheet" href="global.css" />
 
@@ -56,10 +56,10 @@
       inset: 0;
       background: linear-gradient(
         100deg,
-        rgba(251,248,245,0.92) 0%,
-        rgba(251,248,245,0.75) 38%,
-        rgba(251,248,245,0.2) 60%,
-        rgba(251,248,245,0.05) 100%
+        rgba(248,250,252,0.92) 0%,
+        rgba(248,250,252,0.75) 38%,
+        rgba(248,250,252,0.2) 60%,
+        rgba(248,250,252,0.05) 100%
       );
     }
 
@@ -288,7 +288,7 @@
     .play-circle svg { width: 18px; height: 18px; }
 
     .hero__video-btn:hover .play-circle {
-      background: rgba(233,135,128,0.1);
+      background: rgba(45,156,219,0.1);
       border-color: var(--rose-saumon);
     }
 
@@ -322,7 +322,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      background: rgba(233,135,128,0.1);
+      background: rgba(45,156,219,0.1);
       border-radius: 50%;
       flex-shrink: 0;
     }
@@ -369,7 +369,7 @@
       font-family: var(--font-titre);
       font-size: 4rem;
       font-weight: 300;
-      color: rgba(233,135,128,0.25);
+      color: rgba(45,156,219,0.25);
       letter-spacing: 0.08em;
       white-space: nowrap;
       user-select: none;
@@ -382,7 +382,7 @@
       max-width: 420px;
       border-radius: 50%;
       background: linear-gradient(145deg, #f0d5c8 0%, #e8c4ba 50%, #ddb5ad 100%);
-      box-shadow: 0 20px 60px rgba(233,135,128,0.22);
+      box-shadow: 0 20px 60px rgba(45,156,219,0.22);
       position: relative;
       overflow: hidden;
       margin: 0 auto;
@@ -530,7 +530,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      background: rgba(233,135,128,0.1);
+      background: rgba(45,156,219,0.1);
       border-radius: 50%;
       margin-bottom: 12px;
     }
@@ -587,31 +587,32 @@
       gap: 20px;
     }
 
-    /* ─── TEMOIGNAGES — titre gauche ─────────────────────────── */
-    .temo-layout {
-      display: grid;
-      grid-template-columns: 280px 1fr;
-      gap: clamp(40px, 6vw, 72px);
-      align-items: start;
+    /* ─── TEMOIGNAGES — carousel infini ─────────────────────────── */
+    .temo-header { text-align: center; margin-bottom: clamp(28px, 4vw, 52px); }
+    .temo-subtitle {
+      font-size: 0.93rem; color: var(--texte-corps);
+      max-width: 480px; margin: -6px auto 0; line-height: 1.75;
     }
-
-    .temo-aside .section-title {
-      text-align: left;
-      margin-bottom: 0;
+    .temo-carousel-outer {
+      overflow-x: clip;
+      margin: 0 calc(-1 * var(--gutter));
+      padding: 16px 0 40px;
+      cursor: grab;
     }
-
-    .temo-aside__text {
-      font-size: 0.88rem;
-      color: var(--texte-corps);
-      line-height: 1.75;
-      margin-top: 16px;
-    }
-
-    .temo-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
+    .temo-carousel-outer:active { cursor: grabbing; }
+    .temo-track {
+      display: flex;
       gap: 20px;
+      width: max-content;
+      animation: temo-scroll 34s linear infinite;
     }
+    .temo-track.paused, .temo-track:hover { animation-play-state: paused; }
+    @keyframes temo-scroll {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
+    .testimonial-card { width: 320px; flex-shrink: 0; }
+    @media (max-width: 768px) { .testimonial-card { width: 272px; } }
 
     /* ─── POUR QUI ? ─────────────────────────────────────────── */
     .pourqui-intro {
@@ -653,7 +654,7 @@
       width: 34px;
       height: 34px;
       border-radius: 50%;
-      background: rgba(233,135,128,0.13);
+      background: rgba(45,156,219,0.13);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -730,7 +731,7 @@
       content: '';
       position: absolute;
       inset: 0;
-      background: linear-gradient(180deg, transparent 45%, rgba(233,135,128,0.18) 100%);
+      background: linear-gradient(180deg, transparent 45%, rgba(45,156,219,0.18) 100%);
       pointer-events: none;
     }
 
@@ -865,7 +866,7 @@
       border-radius: 20px;
       padding: 40px 44px;
       box-shadow: 0 8px 48px rgba(0,0,0,0.07);
-      border: 1px solid rgba(233,135,128,0.12);
+      border: 1px solid rgba(45,156,219,0.12);
     }
     .quiz-progress {
       height: 4px;
@@ -919,12 +920,12 @@
     }
     .quiz-choice:hover {
       border-color: var(--rose-saumon);
-      background: rgba(233,135,128,0.06);
+      background: rgba(45,156,219,0.06);
       transform: translateX(4px);
     }
     .quiz-choice.selected {
       border-color: var(--rose-saumon);
-      background: rgba(233,135,128,0.09);
+      background: rgba(45,156,219,0.09);
       color: var(--rose-saumon);
     }
     .quiz-back {
@@ -943,7 +944,7 @@
     .quiz-result__icon {
       width: 56px; height: 56px;
       border-radius: 50%;
-      background: rgba(233,135,128,0.12);
+      background: rgba(45,156,219,0.12);
       color: var(--rose-saumon);
       font-size: 1.5rem;
       font-weight: 700;
@@ -1037,7 +1038,7 @@
           Mon compte
         </a>
         <a href="reservation.html" class="btn btn--primary btn--sm btn--reserv-desktop">
-          Réserver un appel
+          Réserver
           <svg class="btn-arrow" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </a>
       </div>
@@ -1059,7 +1060,7 @@
       </ul>
       <div class="mobile-menu__ctas">
         <a href="compte.html" class="btn btn--ghost mobile-cta">Mon compte</a>
-        <a href="reservation.html" class="btn btn--primary mobile-cta">Réserver un appel</a>
+        <a href="reservation.html" class="btn btn--primary mobile-cta">Réserver</a>
       </div>
     </div>
   </header>
@@ -1070,7 +1071,7 @@
   ═══════════════════════════════════════════ -->
   <section class="hero" id="accueil" aria-label="Section hero">
     <div class="hero__bg">
-      <img class="hero__img-placeholder" src="assets/images/alyssa/alyssa-rope-training.webp" alt="Alyssa coach fitness — entraînement intensif à la corde" loading="eager" fetchpriority="high">
+      <img class="hero__img-placeholder" src="assets/images/alyssa/alyssa-stretch-studio.webp" alt="Alyssa coach fitness en séance de stretching" loading="eager" fetchpriority="high">
       <div class="hero__overlay"></div>
     </div>
 
@@ -1180,7 +1181,7 @@
 
         <div class="promesse-card reveal">
           <div class="promesse-card__icon">
-            <svg viewBox="0 0 48 48" fill="none"><circle cx="24" cy="16" r="8" stroke="#E98780" stroke-width="2"/><path d="M8 42c0-8.837 7.163-16 16-16s16 7.163 16 16" stroke="#E98780" stroke-width="2" stroke-linecap="round"/></svg>
+            <svg viewBox="0 0 48 48" fill="none"><circle cx="24" cy="16" r="8" stroke="#2D9CDB" stroke-width="2"/><path d="M8 42c0-8.837 7.163-16 16-16s16 7.163 16 16" stroke="#2D9CDB" stroke-width="2" stroke-linecap="round"/></svg>
           </div>
           <div class="promesse-card__body">
             <h3 class="promesse-card__title">Coaching personnalisé</h3>
@@ -1190,7 +1191,7 @@
 
         <div class="promesse-card reveal reveal-delay-1">
           <div class="promesse-card__icon">
-            <svg viewBox="0 0 48 48" fill="none"><rect x="4" y="20" width="8" height="8" rx="2" stroke="#E98780" stroke-width="2"/><rect x="36" y="20" width="8" height="8" rx="2" stroke="#E98780" stroke-width="2"/><line x1="12" y1="24" x2="18" y2="24" stroke="#E98780" stroke-width="2" stroke-linecap="round"/><line x1="30" y1="24" x2="36" y2="24" stroke="#E98780" stroke-width="2" stroke-linecap="round"/><rect x="18" y="18" width="12" height="12" rx="2" stroke="#E98780" stroke-width="2"/></svg>
+            <svg viewBox="0 0 48 48" fill="none"><rect x="4" y="20" width="8" height="8" rx="2" stroke="#2D9CDB" stroke-width="2"/><rect x="36" y="20" width="8" height="8" rx="2" stroke="#2D9CDB" stroke-width="2"/><line x1="12" y1="24" x2="18" y2="24" stroke="#2D9CDB" stroke-width="2" stroke-linecap="round"/><line x1="30" y1="24" x2="36" y2="24" stroke="#2D9CDB" stroke-width="2" stroke-linecap="round"/><rect x="18" y="18" width="12" height="12" rx="2" stroke="#2D9CDB" stroke-width="2"/></svg>
           </div>
           <div class="promesse-card__body">
             <h3 class="promesse-card__title">Musculation & tonification</h3>
@@ -1200,7 +1201,7 @@
 
         <div class="promesse-card reveal reveal-delay-2">
           <div class="promesse-card__icon">
-            <svg viewBox="0 0 48 48" fill="none"><path d="M24 8c-8 0-14 5.5-14 12 0 4.5 2.5 8.5 6.5 10.5L16 42l8-4 8 4-2.5-11.5C33.5 28.5 36 24.5 36 20c0-6.5-6-12-12-12z" stroke="#E98780" stroke-width="2" stroke-linejoin="round"/><path d="M20 22l2.5 2.5L28 17" stroke="#E98780" stroke-width="2" stroke-linecap="round"/></svg>
+            <svg viewBox="0 0 48 48" fill="none"><path d="M24 8c-8 0-14 5.5-14 12 0 4.5 2.5 8.5 6.5 10.5L16 42l8-4 8 4-2.5-11.5C33.5 28.5 36 24.5 36 20c0-6.5-6-12-12-12z" stroke="#2D9CDB" stroke-width="2" stroke-linejoin="round"/><path d="M20 22l2.5 2.5L28 17" stroke="#2D9CDB" stroke-width="2" stroke-linecap="round"/></svg>
           </div>
           <div class="promesse-card__body">
             <h3 class="promesse-card__title">Suivi humain</h3>
@@ -1226,28 +1227,28 @@
 
         <div class="pourqui-card reveal">
           <div class="pourqui-card__dot">
-            <svg viewBox="0 0 24 24" fill="none"><path d="M5 12l4 4L19 7" stroke="#E98780" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <svg viewBox="0 0 24 24" fill="none"><path d="M5 12l4 4L19 7" stroke="#2D9CDB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </div>
           <p class="pourqui-card__text">Tu veux reprendre le sport sans te blesser ni te perdre</p>
         </div>
 
         <div class="pourqui-card reveal reveal-delay-1">
           <div class="pourqui-card__dot">
-            <svg viewBox="0 0 24 24" fill="none"><path d="M5 12l4 4L19 7" stroke="#E98780" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <svg viewBox="0 0 24 24" fill="none"><path d="M5 12l4 4L19 7" stroke="#2D9CDB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </div>
           <p class="pourqui-card__text">Tu ressens les effets de ton cycle sur ton énergie et tes performances</p>
         </div>
 
         <div class="pourqui-card reveal reveal-delay-2">
           <div class="pourqui-card__dot">
-            <svg viewBox="0 0 24 24" fill="none"><path d="M5 12l4 4L19 7" stroke="#E98780" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <svg viewBox="0 0 24 24" fill="none"><path d="M5 12l4 4L19 7" stroke="#2D9CDB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </div>
           <p class="pourqui-card__text">Tu reviens de grossesse et tu veux y aller à ton rythme</p>
         </div>
 
         <div class="pourqui-card reveal reveal-delay-3">
           <div class="pourqui-card__dot">
-            <svg viewBox="0 0 24 24" fill="none"><path d="M5 12l4 4L19 7" stroke="#E98780" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <svg viewBox="0 0 24 24" fill="none"><path d="M5 12l4 4L19 7" stroke="#2D9CDB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </div>
           <p class="pourqui-card__text">Tu en as marre des programmes génériques qui ne te ressemblent pas</p>
         </div>
@@ -1320,7 +1321,7 @@
             <p class="quiz-result__text" id="quizResultText"></p>
             <div class="quiz-result__ctas">
               <a href="#" class="btn btn--primary btn--lg" id="quizResultCta" style="justify-content:center;"></a>
-              <a href="reservation.html" class="btn btn--ghost btn--lg" style="justify-content:center;">Réserver un appel gratuit</a>
+              <a href="reservation.html" class="btn btn--ghost btn--lg" style="justify-content:center;">Réserver gratuitement</a>
             </div>
             <button class="quiz-restart" id="quizRestart">Recommencer le quiz</button>
           </div>
@@ -1395,7 +1396,7 @@
           <p class="about-body">Chaque femme a un potentiel incroyable. Mon rôle, c'est de t'aider à le révéler.</p>
 
           <div class="about-badge">
-            <svg viewBox="0 0 24 24" fill="none" width="18"><path d="M9 12l2 2 4-4M20.618 5.984A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622C17.176 19.29 21 14.591 21 9c0-1.052-.12-2.076-.382-3.016z" stroke="#E98780" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <svg viewBox="0 0 24 24" fill="none" width="18"><path d="M9 12l2 2 4-4M20.618 5.984A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622C17.176 19.29 21 14.591 21 9c0-1.052-.12-2.076-.382-3.016z" stroke="#2D9CDB" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
             Coach certifiée CQP — Musculation & Personal Training
           </div>
 
@@ -1489,7 +1490,7 @@
           <div class="methode-step-card reveal">
             <div class="methode-step-card__num">01</div>
             <div class="methode-step-card__icon">
-              <svg viewBox="0 0 40 40" fill="none"><rect x="8" y="6" width="24" height="28" rx="3" stroke="#E98780" stroke-width="1.8"/><line x1="13" y1="13" x2="27" y2="13" stroke="#E98780" stroke-width="1.5" stroke-linecap="round"/><line x1="13" y1="18" x2="27" y2="18" stroke="#E98780" stroke-width="1.5" stroke-linecap="round"/><line x1="13" y1="23" x2="21" y2="23" stroke="#E98780" stroke-width="1.5" stroke-linecap="round"/></svg>
+              <svg viewBox="0 0 40 40" fill="none"><rect x="8" y="6" width="24" height="28" rx="3" stroke="#2D9CDB" stroke-width="1.8"/><line x1="13" y1="13" x2="27" y2="13" stroke="#2D9CDB" stroke-width="1.5" stroke-linecap="round"/><line x1="13" y1="18" x2="27" y2="18" stroke="#2D9CDB" stroke-width="1.5" stroke-linecap="round"/><line x1="13" y1="23" x2="21" y2="23" stroke="#2D9CDB" stroke-width="1.5" stroke-linecap="round"/></svg>
             </div>
             <h3 class="methode-step-card__title">Bilan initial</h3>
             <p class="methode-step-card__text">On échange sur tes objectifs, ton quotidien et ton niveau pour faire le point ensemble.</p>
@@ -1498,7 +1499,7 @@
           <div class="methode-step-card reveal reveal-delay-1">
             <div class="methode-step-card__num">02</div>
             <div class="methode-step-card__icon">
-              <svg viewBox="0 0 40 40" fill="none"><circle cx="20" cy="20" r="12" stroke="#E98780" stroke-width="1.8"/><path d="M15 20l3 3 7-7" stroke="#E98780" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              <svg viewBox="0 0 40 40" fill="none"><circle cx="20" cy="20" r="12" stroke="#2D9CDB" stroke-width="1.8"/><path d="M15 20l3 3 7-7" stroke="#2D9CDB" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </div>
             <h3 class="methode-step-card__title">Plan personnalisé</h3>
             <p class="methode-step-card__text">Je crée ton programme sur-mesure, adapté à ton corps et à ton rythme de vie.</p>
@@ -1507,7 +1508,7 @@
           <div class="methode-step-card reveal reveal-delay-2">
             <div class="methode-step-card__num">03</div>
             <div class="methode-step-card__icon">
-              <svg viewBox="0 0 40 40" fill="none"><rect x="4" y="17" width="6" height="6" rx="1.5" stroke="#E98780" stroke-width="1.8"/><rect x="30" y="17" width="6" height="6" rx="1.5" stroke="#E98780" stroke-width="1.8"/><line x1="10" y1="20" x2="14" y2="20" stroke="#E98780" stroke-width="1.8"/><line x1="26" y1="20" x2="30" y2="20" stroke="#E98780" stroke-width="1.8"/><rect x="14" y="14" width="12" height="12" rx="2" stroke="#E98780" stroke-width="1.8"/></svg>
+              <svg viewBox="0 0 40 40" fill="none"><rect x="4" y="17" width="6" height="6" rx="1.5" stroke="#2D9CDB" stroke-width="1.8"/><rect x="30" y="17" width="6" height="6" rx="1.5" stroke="#2D9CDB" stroke-width="1.8"/><line x1="10" y1="20" x2="14" y2="20" stroke="#2D9CDB" stroke-width="1.8"/><line x1="26" y1="20" x2="30" y2="20" stroke="#2D9CDB" stroke-width="1.8"/><rect x="14" y="14" width="12" height="12" rx="2" stroke="#2D9CDB" stroke-width="1.8"/></svg>
             </div>
             <h3 class="methode-step-card__title">Séances guidées</h3>
             <p class="methode-step-card__text">Des entraînements efficaces, encadrés et motivants, en présentiel ou à distance.</p>
@@ -1516,7 +1517,7 @@
           <div class="methode-step-card reveal reveal-delay-3">
             <div class="methode-step-card__num">04</div>
             <div class="methode-step-card__icon">
-              <svg viewBox="0 0 40 40" fill="none"><polyline points="5,28 13,18 20,22 28,10 35,14" stroke="#E98780" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M29 10h6v6" stroke="#E98780" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              <svg viewBox="0 0 40 40" fill="none"><polyline points="5,28 13,18 20,22 28,10 35,14" stroke="#2D9CDB" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M29 10h6v6" stroke="#2D9CDB" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </div>
             <h3 class="methode-step-card__title">Suivi & ajustements</h3>
             <p class="methode-step-card__text">On suit tes progrès, on ajuste à tes besoins et on avance ensemble vers tes objectifs.</p>
@@ -1544,7 +1545,7 @@
         <div class="confiance-items-row">
           <article class="confiance-item reveal">
             <div class="confiance-item__icon">
-              <svg viewBox="0 0 48 48" fill="none" width="28" height="28"><path d="M9 12l2 2 4-4M20.618 5.984A11.955 11.955 0 0124 4.944a11.955 11.955 0 018.618 3.04A12.02 12.02 0 0135 17c0 5.591-3.824 10.29-9 11.622C20.824 27.29 17 22.591 17 17c0-1.052.12-2.076.382-3.016z" stroke="#E98780" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              <svg viewBox="0 0 48 48" fill="none" width="28" height="28"><path d="M9 12l2 2 4-4M20.618 5.984A11.955 11.955 0 0124 4.944a11.955 11.955 0 018.618 3.04A12.02 12.02 0 0135 17c0 5.591-3.824 10.29-9 11.622C20.824 27.29 17 22.591 17 17c0-1.052.12-2.076.382-3.016z" stroke="#2D9CDB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </div>
             <h3 class="confiance-item__title">Certifiée</h3>
             <p class="confiance-item__text">Formée et certifiée pour t'offrir un coaching de qualité et en toute sécurité.</p>
@@ -1552,7 +1553,7 @@
 
           <article class="confiance-item reveal reveal-delay-1">
             <div class="confiance-item__icon">
-              <svg viewBox="0 0 48 48" fill="none" width="28" height="28"><path d="M24 10c-8.4 0-14 5.6-14 12 0 4.2 2.4 8 6.2 10.4L14 40l10-4 10 4-2.2-7.6C35.6 30 38 26.2 38 22c0-6.4-5.6-12-14-12z" stroke="#E98780" stroke-width="1.8" stroke-linejoin="round"/><path d="M20 23l2.5 2.5L28 18" stroke="#E98780" stroke-width="1.8" stroke-linecap="round"/></svg>
+              <svg viewBox="0 0 48 48" fill="none" width="28" height="28"><path d="M24 10c-8.4 0-14 5.6-14 12 0 4.2 2.4 8 6.2 10.4L14 40l10-4 10 4-2.2-7.6C35.6 30 38 26.2 38 22c0-6.4-5.6-12-14-12z" stroke="#2D9CDB" stroke-width="1.8" stroke-linejoin="round"/><path d="M20 23l2.5 2.5L28 18" stroke="#2D9CDB" stroke-width="1.8" stroke-linecap="round"/></svg>
             </div>
             <h3 class="confiance-item__title">À l'écoute</h3>
             <p class="confiance-item__text">Une écoute attentive, une relation de confiance et un soutien constant.</p>
@@ -1560,7 +1561,7 @@
 
           <article class="confiance-item reveal reveal-delay-2">
             <div class="confiance-item__icon">
-              <svg viewBox="0 0 48 48" fill="none" width="28" height="28"><polyline points="6,30 16,18 24,24 34,10 42,14" stroke="#E98780" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M36 10h6v6" stroke="#E98780" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              <svg viewBox="0 0 48 48" fill="none" width="28" height="28"><polyline points="6,30 16,18 24,24 34,10 42,14" stroke="#2D9CDB" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M36 10h6v6" stroke="#2D9CDB" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </div>
             <h3 class="confiance-item__title">Progression durable</h3>
             <p class="confiance-item__text">Des résultats concrets, sans extrêmes, pour un changement durable et sain.</p>
@@ -1576,57 +1577,101 @@
        TÉMOIGNAGES
   ═══════════════════════════════════════════ -->
   <section class="section section--beige" id="temoignages" aria-label="Témoignages clientes">
-    <div class="container">
-      <div class="temo-layout">
+    <div class="container temo-header">
+      <h2 class="section-title">
+        Elles ont commencé à <em>leur rythme.</em>
+      </h2>
+      <p class="temo-subtitle">Des femmes de tous profils, qui ont choisi de se donner une chance.</p>
+    </div>
 
-        <div class="temo-aside reveal reveal--left">
-          <h2 class="section-title section-title--left" style="margin-bottom:0;">
-            Elles ont commencé<br/>à <em>leur rythme.</em>
-          </h2>
-          <p class="temo-aside__text">Des femmes de tous profils, qui ont choisi de se donner une chance.</p>
-        </div>
-
-        <div class="temo-grid" id="testimonialsTrack">
-          <article class="testimonial-card reveal">
-            <div class="testimonial-card__header">
-              <div class="avatar" aria-hidden="true">L</div>
-              <div>
-                <p class="testimonial-card__name">Laura M.</p>
-                <div class="stars" aria-label="5 étoiles">★★★★★</div>
-              </div>
-            </div>
-            <p class="testimonial-card__text">"Grâce à Alyssa, j'ai repris confiance en moi et j'ai enfin trouvé une routine qui me fait du bien. Elle s'adapte vraiment à moi."</p>
-          </article>
-
-          <article class="testimonial-card reveal reveal-delay-1">
-            <div class="testimonial-card__header">
-              <div class="avatar" aria-hidden="true">M</div>
-              <div>
-                <p class="testimonial-card__name">Marine K.</p>
-                <div class="stars" aria-label="5 étoiles">★★★★★</div>
-              </div>
-            </div>
-            <p class="testimonial-card__text">"J'apprécie son écoute et sa bienveillance. Les séances sont motivantes et toujours adaptées à ma forme du jour."</p>
-          </article>
-
-          <article class="testimonial-card reveal reveal-delay-2">
-            <div class="testimonial-card__header">
-              <div class="avatar" aria-hidden="true">C</div>
-              <div>
-                <p class="testimonial-card__name">Camille T.</p>
-                <div class="stars" aria-label="5 étoiles">★★★★★</div>
-              </div>
-            </div>
-            <p class="testimonial-card__text">"En quelques semaines, je me sens plus forte, plus tonique et surtout beaucoup plus épanouie. Merci Alyssa !"</p>
-          </article>
-        </div>
-
-        <div class="testimonials-dots" id="testimonialsDots" aria-label="Navigation témoignages">
-          <button class="dot dot--active" data-index="0" aria-label="Témoignage 1"></button>
-          <button class="dot" data-index="1" aria-label="Témoignage 2"></button>
-          <button class="dot" data-index="2" aria-label="Témoignage 3"></button>
-        </div>
-
+    <div class="temo-carousel-outer" role="region" aria-label="Défilement témoignages" tabindex="0">
+      <div class="temo-track" id="temoTrack">
+        <!-- Set A -->
+        <article class="testimonial-card">
+          <div class="testimonial-card__header">
+            <div class="avatar" aria-hidden="true">L</div>
+            <div><p class="testimonial-card__name">Laura M.</p><div class="stars" aria-label="5 étoiles">★★★★★</div></div>
+          </div>
+          <p class="testimonial-card__text">"Grâce à Alyssa, j'ai repris confiance en moi et j'ai enfin trouvé une routine qui me fait du bien. Elle s'adapte vraiment à moi."</p>
+        </article>
+        <article class="testimonial-card">
+          <div class="testimonial-card__header">
+            <div class="avatar" aria-hidden="true">M</div>
+            <div><p class="testimonial-card__name">Marine K.</p><div class="stars" aria-label="5 étoiles">★★★★★</div></div>
+          </div>
+          <p class="testimonial-card__text">"J'apprécie son écoute et sa bienveillance. Les séances sont motivantes et toujours adaptées à ma forme du jour."</p>
+        </article>
+        <article class="testimonial-card">
+          <div class="testimonial-card__header">
+            <div class="avatar" aria-hidden="true">C</div>
+            <div><p class="testimonial-card__name">Camille T.</p><div class="stars" aria-label="5 étoiles">★★★★★</div></div>
+          </div>
+          <p class="testimonial-card__text">"En quelques semaines, je me sens plus forte, plus tonique et surtout beaucoup plus épanouie. Merci Alyssa !"</p>
+        </article>
+        <article class="testimonial-card">
+          <div class="testimonial-card__header">
+            <div class="avatar" aria-hidden="true">S</div>
+            <div><p class="testimonial-card__name">Sofia R.</p><div class="stars" aria-label="5 étoiles">★★★★★</div></div>
+          </div>
+          <p class="testimonial-card__text">"Le suivi personnalisé fait toute la différence. Alyssa m'a aidée à trouver mon équilibre entre effort et récupération."</p>
+        </article>
+        <article class="testimonial-card">
+          <div class="testimonial-card__header">
+            <div class="avatar" aria-hidden="true">J</div>
+            <div><p class="testimonial-card__name">Julie N.</p><div class="stars" aria-label="5 étoiles">★★★★★</div></div>
+          </div>
+          <p class="testimonial-card__text">"Programme sèche de 8 semaines — résultat bluffant. J'ai perdu 4 kg tout en gardant du muscle. Je recommande les yeux fermés !"</p>
+        </article>
+        <article class="testimonial-card">
+          <div class="testimonial-card__header">
+            <div class="avatar" aria-hidden="true">A</div>
+            <div><p class="testimonial-card__name">Amandine P.</p><div class="stars" aria-label="5 étoiles">★★★★★</div></div>
+          </div>
+          <p class="testimonial-card__text">"Après ma grossesse, j'avais peur de ne pas retrouver mon corps. Alyssa m'a accompagnée avec douceur et efficacité."</p>
+        </article>
+        <!-- Set B (duplicate for infinite loop) -->
+        <article class="testimonial-card" aria-hidden="true">
+          <div class="testimonial-card__header">
+            <div class="avatar" aria-hidden="true">L</div>
+            <div><p class="testimonial-card__name">Laura M.</p><div class="stars" aria-label="5 étoiles">★★★★★</div></div>
+          </div>
+          <p class="testimonial-card__text">"Grâce à Alyssa, j'ai repris confiance en moi et j'ai enfin trouvé une routine qui me fait du bien. Elle s'adapte vraiment à moi."</p>
+        </article>
+        <article class="testimonial-card" aria-hidden="true">
+          <div class="testimonial-card__header">
+            <div class="avatar" aria-hidden="true">M</div>
+            <div><p class="testimonial-card__name">Marine K.</p><div class="stars" aria-label="5 étoiles">★★★★★</div></div>
+          </div>
+          <p class="testimonial-card__text">"J'apprécie son écoute et sa bienveillance. Les séances sont motivantes et toujours adaptées à ma forme du jour."</p>
+        </article>
+        <article class="testimonial-card" aria-hidden="true">
+          <div class="testimonial-card__header">
+            <div class="avatar" aria-hidden="true">C</div>
+            <div><p class="testimonial-card__name">Camille T.</p><div class="stars" aria-label="5 étoiles">★★★★★</div></div>
+          </div>
+          <p class="testimonial-card__text">"En quelques semaines, je me sens plus forte, plus tonique et surtout beaucoup plus épanouie. Merci Alyssa !"</p>
+        </article>
+        <article class="testimonial-card" aria-hidden="true">
+          <div class="testimonial-card__header">
+            <div class="avatar" aria-hidden="true">S</div>
+            <div><p class="testimonial-card__name">Sofia R.</p><div class="stars" aria-label="5 étoiles">★★★★★</div></div>
+          </div>
+          <p class="testimonial-card__text">"Le suivi personnalisé fait toute la différence. Alyssa m'a aidée à trouver mon équilibre entre effort et récupération."</p>
+        </article>
+        <article class="testimonial-card" aria-hidden="true">
+          <div class="testimonial-card__header">
+            <div class="avatar" aria-hidden="true">J</div>
+            <div><p class="testimonial-card__name">Julie N.</p><div class="stars" aria-label="5 étoiles">★★★★★</div></div>
+          </div>
+          <p class="testimonial-card__text">"Programme sèche de 8 semaines — résultat bluffant. J'ai perdu 4 kg tout en gardant du muscle. Je recommande les yeux fermés !"</p>
+        </article>
+        <article class="testimonial-card" aria-hidden="true">
+          <div class="testimonial-card__header">
+            <div class="avatar" aria-hidden="true">A</div>
+            <div><p class="testimonial-card__name">Amandine P.</p><div class="stars" aria-label="5 étoiles">★★★★★</div></div>
+          </div>
+          <p class="testimonial-card__text">"Après ma grossesse, j'avais peur de ne pas retrouver mon corps. Alyssa m'a accompagnée avec douceur et efficacité."</p>
+        </article>
       </div>
     </div>
   </section>

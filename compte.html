@@ -20,7 +20,7 @@
   <title>Mon Compte — Alyssa Fitness</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="global.css" />
   <style>
     /* ─── DASHBOARD ─────────────────────────────────────── */
@@ -80,22 +80,22 @@
     .kpi-widget:hover { transform: translateY(-3px); box-shadow: var(--ombre-hover); }
     .kpi-widget__top { display:flex; align-items:flex-start; justify-content:space-between; margin-bottom:16px; }
     .kpi-widget__icon { width:44px; height:44px; border-radius:12px; display:flex; align-items:center; justify-content:center; }
-    .kpi-widget__icon--rose   { background:rgba(233,135,128,.12); }
+    .kpi-widget__icon--rose   { background:rgba(45,156,219,.12); }
     .kpi-widget__icon--green  { background:rgba(109,190,154,.12); }
     .kpi-widget__icon--gold   { background:rgba(244,197,122,.15); }
     .kpi-widget__icon--dark   { background:rgba(17,17,17,.07); }
     .kpi-widget__icon svg { width:22px; height:22px; }
     .kpi-widget__badge { font-size:.65rem; font-weight:700; letter-spacing:.08em; text-transform:uppercase; padding:4px 10px; border-radius:var(--radius-full); }
     .kpi-widget__badge--green { background:rgba(109,190,154,.15); color:#3d9974; }
-    .kpi-widget__badge--rose  { background:rgba(233,135,128,.12); color:var(--rose-saumon); }
+    .kpi-widget__badge--rose  { background:rgba(45,156,219,.12); color:var(--rose-saumon); }
     .kpi-widget__value { font-family:var(--font-titre); font-size:2.2rem; font-weight:500; color:var(--noir-doux); line-height:1; margin-bottom:4px; }
     .kpi-widget__label { font-size:.75rem; font-weight:600; color:var(--gris-texte); text-transform:uppercase; letter-spacing:.06em; margin-bottom:12px; }
     .kpi-widget__sub { font-size:.78rem; color:var(--texte-corps); }
 
     .kpi-widget--highlight {
-      background: linear-gradient(135deg, var(--rose-saumon) 0%, #d4706a 100%);
+      background: linear-gradient(135deg, var(--rose-saumon) 0%, #1A7AB5 100%);
       border-color: transparent;
-      box-shadow: 0 8px 32px rgba(233,135,128,.35);
+      box-shadow: 0 8px 32px rgba(45,156,219,.35);
     }
     .kpi-widget--highlight .kpi-widget__value,
     .kpi-widget--highlight .kpi-widget__label,
@@ -131,9 +131,9 @@
     .next-session {
       display: flex; align-items: center; gap: 20px;
       padding: 20px;
-      background: linear-gradient(135deg, rgba(233,135,128,.06), rgba(243,179,173,.04));
+      background: linear-gradient(135deg, rgba(45,156,219,.06), rgba(243,179,173,.04));
       border-radius: var(--radius-md);
-      border: 1px solid rgba(233,135,128,.15);
+      border: 1px solid rgba(45,156,219,.15);
     }
     .next-session__date-block {
       background: var(--rose-saumon);
@@ -166,9 +166,9 @@
 
     /* Challenge card */
     .challenge-card {
-      background: linear-gradient(135deg, var(--beige-premium), #f0ddd7);
+      background: linear-gradient(135deg, var(--beige-premium), #D4EDF8);
       border-radius: var(--radius-md); padding:20px;
-      border: 1px solid rgba(233,135,128,.2);
+      border: 1px solid rgba(45,156,219,.2);
     }
     .challenge-card__label { font-size:.68rem; font-weight:700; letter-spacing:.12em; text-transform:uppercase; color:var(--rose-saumon); margin-bottom:8px; }
     .challenge-card__title { font-family:var(--font-titre); font-size:1.15rem; font-weight:500; color:var(--noir-doux); margin-bottom:12px; }
@@ -183,8 +183,8 @@
       background:#fff; border:1px solid var(--gris-clair); border-radius:var(--radius-md);
       cursor:pointer; transition:all .25s; text-decoration:none; color:var(--noir-doux);
     }
-    .quick-action:hover { border-color:var(--rose-saumon); background:rgba(233,135,128,.03); transform:translateX(4px); }
-    .quick-action__icon { width:40px; height:40px; border-radius:10px; background:rgba(233,135,128,.1); display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+    .quick-action:hover { border-color:var(--rose-saumon); background:rgba(45,156,219,.03); transform:translateX(4px); }
+    .quick-action__icon { width:40px; height:40px; border-radius:10px; background:rgba(45,156,219,.1); display:flex; align-items:center; justify-content:center; flex-shrink:0; }
     .quick-action__icon svg { width:20px; height:20px; color:var(--rose-saumon); }
     .quick-action__text { flex:1; }
     .quick-action__title { font-size:.88rem; font-weight:600; color:var(--noir-doux); margin-bottom:2px; }
@@ -217,6 +217,75 @@
     }
     @media (max-width:480px) {
       .kpi-grid { grid-template-columns:1fr 1fr; }
+    }
+  
+    /* ─── GESTION MÉDIAS ─────────────────────────────────────── */
+    .media-section { margin-top: 36px; }
+    .media-section-title {
+      font-family: var(--font-titre);
+      font-size: 1.4rem; font-weight: 500;
+      color: var(--noir-doux); margin-bottom: 6px;
+    }
+    .media-section-sub {
+      font-size: 0.8rem; color: var(--texte-corps); margin-bottom: 20px;
+    }
+    .media-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+      gap: 14px;
+    }
+    .media-card {
+      background: #fff;
+      border: 1.5px solid var(--gris-clair);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      transition: box-shadow 0.25s ease, border-color 0.25s ease;
+      cursor: pointer;
+    }
+    .media-card:hover {
+      box-shadow: 0 6px 28px rgba(45,156,219,0.14);
+      border-color: var(--rose-saumon);
+    }
+    .media-card__img {
+      width: 100%; aspect-ratio: 1/1;
+      object-fit: cover; display: block;
+    }
+    .media-card__info {
+      padding: 8px 10px;
+    }
+    .media-card__name {
+      font-size: 0.7rem; font-weight: 600;
+      color: var(--noir-doux);
+      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    }
+    .media-card__size {
+      font-size: 0.65rem; color: var(--gris-texte); margin-top: 2px;
+    }
+    .media-copy-btn {
+      display: block; width: 100%;
+      font-size: 0.67rem; font-weight: 600;
+      color: var(--rose-saumon);
+      background: rgba(45,156,219,0.06);
+      border: none; border-top: 1px solid var(--gris-clair);
+      padding: 6px 10px; cursor: pointer;
+      transition: background 0.2s ease;
+      text-align: left;
+    }
+    .media-copy-btn:hover { background: rgba(45,156,219,0.12); }
+    .media-upload-zone {
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      gap: 10px;
+      border: 2px dashed var(--gris-clair);
+      border-radius: var(--radius-md);
+      padding: 32px 20px; margin-top: 20px;
+      text-align: center;
+      background: rgba(45,156,219,0.03);
+    }
+    .media-upload-zone__title { font-size: 0.88rem; font-weight: 600; color: var(--noir-doux); }
+    .media-upload-zone__sub { font-size: 0.77rem; color: var(--gris-texte); line-height: 1.6; }
+    .media-upload-zone svg { color: var(--rose-saumon); }
+    @media (max-width: 768px) {
+      .media-grid { grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); }
     }
   </style>
 </head>
@@ -602,6 +671,123 @@
       </div>
 
     </div>
+
+    <!-- ═══════════════════════════════════════
+         GESTION MÉDIAS
+    ═══════════════════════════════════════ -->
+    <div class="media-section" id="gestion-medias">
+      <h2 class="media-section-title">Gestion des médias</h2>
+      <p class="media-section-sub">Photos et vidéos utilisées sur le site. Cliquez sur une image pour copier son chemin.</p>
+
+      <div class="media-grid">
+        <!-- Photos Alyssa -->
+        <div class="media-card" onclick="copyPath('assets/images/alyssa/alyssa-stretch-studio.webp')">
+          <img class="media-card__img" src="assets/images/alyssa/alyssa-stretch-studio.webp" alt="Alyssa stretch studio">
+          <div class="media-card__info">
+            <p class="media-card__name">alyssa-stretch-studio.webp</p>
+            <p class="media-card__size">Hero homepage</p>
+          </div>
+          <button class="media-copy-btn">📋 Copier le chemin</button>
+        </div>
+
+        <div class="media-card" onclick="copyPath('assets/images/alyssa/alyssa-squat-rack.webp')">
+          <img class="media-card__img" src="assets/images/alyssa/alyssa-squat-rack.webp" alt="Squat rack">
+          <div class="media-card__info">
+            <p class="media-card__name">alyssa-squat-rack.webp</p>
+            <p class="media-card__size">Photo coach hero</p>
+          </div>
+          <button class="media-copy-btn">📋 Copier le chemin</button>
+        </div>
+
+        <div class="media-card" onclick="copyPath('assets/images/alyssa/alyssa-rope-training.webp')">
+          <img class="media-card__img" src="assets/images/alyssa/alyssa-rope-training.webp" alt="Rope training">
+          <div class="media-card__info">
+            <p class="media-card__name">alyssa-rope-training.webp</p>
+            <p class="media-card__size">Méthode / post-partum</p>
+          </div>
+          <button class="media-copy-btn">📋 Copier le chemin</button>
+        </div>
+
+        <div class="media-card" onclick="copyPath('assets/images/alyssa/alyssa-dumbbell-press.webp')">
+          <img class="media-card__img" src="assets/images/alyssa/alyssa-dumbbell-press.webp" alt="Dumbbell press">
+          <div class="media-card__info">
+            <p class="media-card__name">alyssa-dumbbell-press.webp</p>
+            <p class="media-card__size">Photo bio À propos</p>
+          </div>
+          <button class="media-copy-btn">📋 Copier le chemin</button>
+        </div>
+
+        <div class="media-card" onclick="copyPath('assets/images/alyssa/alyssa-treadmill.webp')">
+          <img class="media-card__img" src="assets/images/alyssa/alyssa-treadmill.webp" alt="Treadmill">
+          <div class="media-card__info">
+            <p class="media-card__name">alyssa-treadmill.webp</p>
+            <p class="media-card__size">Programme sèche</p>
+          </div>
+          <button class="media-copy-btn">📋 Copier le chemin</button>
+        </div>
+
+        <div class="media-card" onclick="copyPath('assets/images/alyssa/alyssa-squat-gym.webp')">
+          <img class="media-card__img" src="assets/images/alyssa/alyssa-squat-gym.webp" alt="Squat gym">
+          <div class="media-card__info">
+            <p class="media-card__name">alyssa-squat-gym.webp</p>
+            <p class="media-card__size">Programme coaching</p>
+          </div>
+          <button class="media-copy-btn">📋 Copier le chemin</button>
+        </div>
+
+        <div class="media-card" onclick="copyPath('assets/images/alyssa/alyssa-energy-cycle.webp')">
+          <img class="media-card__img" src="assets/images/alyssa/alyssa-energy-cycle.webp" alt="Energy cycle">
+          <div class="media-card__info">
+            <p class="media-card__name">alyssa-energy-cycle.webp</p>
+            <p class="media-card__size">Cycle-syncing</p>
+          </div>
+          <button class="media-copy-btn">📋 Copier le chemin</button>
+        </div>
+      </div>
+
+      <!-- Vidéos -->
+      <h3 style="font-family:var(--font-titre);font-size:1.1rem;font-weight:500;color:var(--noir-doux);margin:28px 0 12px;">Vidéos</h3>
+      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px;">
+        <div style="background:#fff;border:1.5px solid var(--gris-clair);border-radius:var(--radius-md);padding:14px 16px;display:flex;align-items:center;gap:12px;">
+          <div style="width:40px;height:40px;background:rgba(45,156,219,0.1);border-radius:var(--radius-sm);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+            <svg viewBox="0 0 20 20" fill="none" width="20" stroke="var(--rose-saumon)" stroke-width="1.5"><polygon points="5,3 19,10 5,17" fill="var(--rose-saumon)"/></svg>
+          </div>
+          <div>
+            <p style="font-size:0.78rem;font-weight:600;color:var(--noir-doux);">alyssa-video-hero.mp4</p>
+            <p style="font-size:0.7rem;color:var(--gris-texte);margin-top:2px;">Modal vidéo hero · 3.7 Mo</p>
+          </div>
+        </div>
+        <div style="background:#fff;border:1.5px solid var(--gris-clair);border-radius:var(--radius-md);padding:14px 16px;display:flex;align-items:center;gap:12px;">
+          <div style="width:40px;height:40px;background:rgba(45,156,219,0.1);border-radius:var(--radius-sm);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+            <svg viewBox="0 0 20 20" fill="none" width="20" stroke="var(--rose-saumon)" stroke-width="1.5"><polygon points="5,3 19,10 5,17" fill="var(--rose-saumon)"/></svg>
+          </div>
+          <div>
+            <p style="font-size:0.78rem;font-weight:600;color:var(--noir-doux);">alyssa-coaching-sur-mesure.mp4</p>
+            <p style="font-size:0.7rem;color:var(--gris-texte);margin-top:2px;">Loop coaching · 2.2 Mo</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Zone d'ajout -->
+      <div class="media-upload-zone">
+        <svg viewBox="0 0 24 24" fill="none" width="32" stroke="currentColor" stroke-width="1.5">
+          <path d="M4 16.004V20h16v-4M12 4v12M8 8l4-4 4 4" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <p class="media-upload-zone__title">Ajouter une photo ou vidéo</p>
+        <p class="media-upload-zone__sub">Pour ajouter un média au site, placez le fichier dans le dossier<br><code>assets/images/alyssa/</code> ou <code>assets/videos/</code><br>puis effectuez un <code>git push</code>.</p>
+      </div>
+    </div>
+
+    <script>
+    function copyPath(path) {
+      if (navigator.clipboard) {
+        navigator.clipboard.writeText(path).then(() => {
+          if (window.showToast) showToast('Chemin copié : ' + path, 'success');
+        });
+      }
+    }
+    </script>
+
   </main>
 
   <!-- FOOTER -->

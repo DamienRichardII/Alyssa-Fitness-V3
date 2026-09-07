@@ -196,7 +196,7 @@
     .auth-input:focus {
       outline: none;
       border-color: var(--rose-saumon);
-      box-shadow: 0 0 0 3px rgba(233,135,128,.12);
+      box-shadow: 0 0 0 3px rgba(45,156,219,.12);
     }
     .auth-input::placeholder { color: #b8b0a8; }
 
@@ -287,7 +287,7 @@
     .auth-btn:hover {
       background: #d4726b;
       transform: translateY(-1px);
-      box-shadow: 0 6px 20px rgba(233,135,128,.35);
+      box-shadow: 0 6px 20px rgba(45,156,219,.35);
     }
     .auth-btn:active { transform: translateY(0); }
 
@@ -384,7 +384,7 @@
 <body>
 
 <!-- Minimal header for auth pages -->
-<header style="position:fixed;top:0;left:0;right:0;z-index:100;padding:1.2rem 2rem;display:flex;align-items:center;justify-content:space-between;background:rgba(251,248,245,.95);backdrop-filter:blur(10px);border-bottom:1px solid rgba(233,135,128,.1);">
+<header style="position:fixed;top:0;left:0;right:0;z-index:100;padding:1.2rem 2rem;display:flex;align-items:center;justify-content:space-between;background:rgba(248,250,252,.95);backdrop-filter:blur(10px);border-bottom:1px solid rgba(45,156,219,.1);">
   <a href="index.html" style="font-family:var(--font-titre);font-size:1.5rem;font-weight:700;color:var(--rose-saumon);text-decoration:none;letter-spacing:.04em;"><img src="assets/logo-transparent.png" style="height:36px;width:auto;object-fit:contain;vertical-align:middle;" alt="Alyssa Fitness" /></a>
   <a href="index.html" style="font-family:var(--font-corps);font-size:.8rem;color:var(--gris-moyen);text-decoration:none;display:flex;align-items:center;gap:.4rem;">
     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
@@ -424,14 +424,6 @@
       <p class="auth-form-wrap__eyebrow">Espace client</p>
       <h1 class="auth-form-wrap__title">Bon retour<br>parmi nous ✨</h1>
       <p class="auth-form-wrap__sub">Pas encore de compte ? <a href="inscription.html">Créer un compte gratuitement</a></p>
-
-      <!-- Demo hint -->
-      <div class="auth-demo">
-        <span class="auth-demo__icon">💡</span>
-        <div class="auth-demo__text">
-          <strong>Accès démo</strong>
-          Email : demo@alyssa.fit &nbsp;|&nbsp; Mot de passe : Alyssa2024
-        </div>
       </div>
 
       <!-- Error message -->
@@ -545,8 +537,8 @@
     btn.disabled = true;
 
     setTimeout(() => {
-      // Demo credentials
-      if (email === 'demo@alyssa.fit' && password === 'Alyssa2024') {
+      // Connexion
+      if (false) {
         btn.innerHTML = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Connectée !`;
         btn.style.background = '#27ae60';
         setTimeout(() => { window.location.href = 'compte.html'; }, 700);

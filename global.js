@@ -67,50 +67,29 @@ document.addEventListener('DOMContentLoaded', () => {
     reveals.forEach(el => observer.observe(el));
   }
 
-  /* ─── TÉMOIGNAGES SLIDER MOBILE ─────────────────────────── */
-  const track = document.getElementById('testimonialsTrack');
-  const dots  = document.querySelectorAll('.dot[data-index]');
+  /* ─── CAROUSEL TÉMOIGNAGES — drag & touch ───────────────── */
+  const temoTrack = document.getElementById('temoTrack');
+  if (temoTrack) {
+    let isDown = false, startXPos = 0, scrollLeft = 0;
 
-  if (track && dots.length) {
-    let current = 0;
+    // Pause animation on drag/touch
+    const pauseAnim  = () => temoTrack.classList.add('paused');
+    const resumeAnim = () => temoTrack.classList.remove('paused');
 
-    const goTo = (idx) => {
-      current = idx;
-      if (window.innerWidth <= 768) {
-        track.style.transform = `translateX(-${idx * 100}%)`;
-      }
-      dots.forEach((d, i) => d.classList.toggle('dot--active', i === idx));
-    };
-
-    dots.forEach(dot => {
-      dot.addEventListener('click', () => goTo(+dot.dataset.index));
+    // Mouse drag
+    temoTrack.addEventListener('mousedown',  e => { isDown = true; startXPos = e.pageX - temoTrack.offsetLeft; scrollLeft = temoTrack.scrollLeft; pauseAnim(); });
+    temoTrack.addEventListener('mouseleave', () => { isDown = false; resumeAnim(); });
+    temoTrack.addEventListener('mouseup',    () => { isDown = false; resumeAnim(); });
+    temoTrack.addEventListener('mousemove',  e => {
+      if (!isDown) return;
+      e.preventDefault();
+      temoTrack.scrollLeft = scrollLeft - (e.pageX - temoTrack.offsetLeft - startXPos);
     });
 
-    // Swipe support
-    let startX = 0;
-    track.addEventListener('touchstart', e => {
-      startX = e.touches[0].clientX;
-    }, { passive: true });
-
-    track.addEventListener('touchend', e => {
-      const diff = startX - e.changedTouches[0].clientX;
-      if (Math.abs(diff) > 50) {
-        const total = dots.length;
-        goTo(diff > 0
-          ? Math.min(current + 1, total - 1)
-          : Math.max(current - 1, 0)
-        );
-      }
-    }, { passive: true });
-
-    // Reset on resize
-    window.addEventListener('resize', () => {
-      if (window.innerWidth > 768) {
-        track.style.transform = '';
-      } else {
-        goTo(current);
-      }
-    });
+    // Touch swipe
+    let touchStartX = 0;
+    temoTrack.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; pauseAnim(); }, { passive: true });
+    temoTrack.addEventListener('touchend',   () => resumeAnim(), { passive: true });
   }
 
   /* ─── NAV ACTIVE PAGE ───────────────────────────────────── */
@@ -228,7 +207,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         .toast--success { border-left: 3px solid #6DBE9A; color: #2d7a5a; }
         .toast--error   { border-left: 3px solid #e05a5a; color: #b83333; }
-        .toast--info    { border-left: 3px solid #E98780; color: #c5504a; }
+        .toast--info    { border-left: 3px solid #2D9CDB; color: #1A7AB5; }
         @keyframes toastIn {
           from { transform: translateY(16px); opacity: 0; }
           to   { transform: translateY(0); opacity: 1; }
