@@ -237,23 +237,56 @@
     .msg-empty p { font-size: 0.85rem; }
 
     /* MÉDIAS */
-    .medias-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(195px, 1fr)); gap: 14px; margin-bottom: 24px; }
+    .medias-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); gap: 16px; margin-bottom: 24px; }
     .media-item { background: #fff; border: 1.5px solid var(--gris-clair); border-radius: var(--radius-lg); overflow: hidden; transition: all var(--transition); }
     .media-item:hover { box-shadow: var(--ombre-hover); border-color: var(--bleu-clair); }
-    .media-item__img { width: 100%; aspect-ratio: 1; object-fit: cover; }
+    .media-item__img { width: 100%; aspect-ratio: 1; object-fit: cover; cursor: pointer; }
     .media-item__info { padding: 10px 12px; }
-    .media-item__name { font-size: 0.72rem; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-    .media-item__usage { font-size: 0.65rem; color: var(--bleu); margin-top: 2px; }
+    .media-item__name { font-size: 0.75rem; font-weight: 700; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color: var(--noir); }
+    .media-item__pages { font-size: 0.65rem; color: var(--gris-texte); margin-top: 2px; line-height: 1.4; }
+    .media-item__filename { font-size: 0.62rem; color: var(--bleu); margin-top: 3px; font-family: monospace; }
     .media-item__actions { display: flex; gap: 6px; padding: 8px 12px; border-top: 1px solid var(--gris-clair); }
-    .media-item__btn { font-size: 0.65rem; font-weight: 600; color: var(--bleu); padding: 4px 8px; border-radius: 6px; background: var(--bleu-pale); transition: all var(--transition); flex: 1; text-align: center; cursor: pointer; }
-    .media-item__btn:hover { background: var(--bleu); color: #fff; }
+    .media-item__btn { font-size: 0.68rem; font-weight: 600; padding: 6px 0; border-radius: 8px; transition: all var(--transition); flex: 1; text-align: center; cursor: pointer; border: none; }
+    .media-item__btn--replace { background: var(--bleu); color: #fff; }
+    .media-item__btn--replace:hover { background: var(--bleu-hover); transform: translateY(-1px); box-shadow: 0 4px 12px rgba(45,156,219,0.3); }
+    .media-item__btn--copy { background: var(--fond); color: var(--texte); }
+    .media-item__btn--copy:hover { background: var(--gris-clair); }
     .video-thumb { background: var(--noir); aspect-ratio: 16/9; display: flex; align-items: center; justify-content: center; }
     .video-thumb svg { color: rgba(255,255,255,0.6); width: 36px; height: 36px; }
-    .upload-zone { border: 2px dashed var(--gris-clair); border-radius: var(--radius-lg); padding: 36px 20px; text-align: center; background: rgba(45,156,219,0.02); transition: all var(--transition); cursor: pointer; }
-    .upload-zone:hover, .upload-zone.drag-over { border-color: var(--bleu); background: var(--bleu-pale); }
-    .upload-zone svg { margin: 0 auto 10px; color: var(--bleu); opacity: 0.6; }
-    .upload-zone__title { font-weight: 600; font-size: 0.9rem; margin-bottom: 4px; }
-    .upload-zone__sub { font-size: 0.75rem; color: var(--gris-texte); line-height: 1.6; }
+
+    /* REPLACE MODAL */
+    .replace-modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.55); z-index: 950; align-items: center; justify-content: center; padding: 16px; backdrop-filter: blur(6px); }
+    .replace-modal-overlay.open { display: flex; }
+    .replace-modal { background: #fff; border-radius: var(--radius-lg); box-shadow: 0 32px 100px rgba(0,0,0,0.2); width: 100%; max-width: 680px; max-height: 92vh; overflow-y: auto; animation: modalIn 0.3s cubic-bezier(0.22,1,0.36,1); }
+    .replace-modal__head { padding: 20px 24px 14px; border-bottom: 1px solid var(--gris-clair); display: flex; align-items: center; justify-content: space-between; }
+    .replace-modal__title { font-family: var(--font-titre); font-size: 1.1rem; font-weight: 500; }
+    .replace-modal__body { padding: 20px 24px; }
+    .replace-preview-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 20px; }
+    .replace-preview-card { border: 1.5px solid var(--gris-clair); border-radius: var(--radius); overflow: hidden; }
+    .replace-preview-card--new { border-color: var(--bleu); }
+    .replace-preview-card__label { padding: 8px 12px; font-size: 0.65rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gris-texte); background: var(--fond); }
+    .replace-preview-card--new .replace-preview-card__label { color: var(--bleu); background: var(--bleu-pale); }
+    .replace-preview-card__img { width: 100%; aspect-ratio: 1; object-fit: cover; display: block; }
+    .replace-info { background: var(--fond); border-radius: var(--radius); padding: 14px 16px; margin-bottom: 18px; font-size: 0.78rem; line-height: 1.7; }
+    .replace-info__file { font-family: monospace; color: var(--bleu); font-weight: 600; font-size: 0.82rem; display: block; margin-bottom: 6px; }
+    .replace-steps { display: flex; gap: 10px; margin-bottom: 18px; }
+    .step { flex: 1; text-align: center; padding: 12px 8px; border-radius: var(--radius); background: var(--fond); border: 1px solid var(--gris-clair); }
+    .step.done { background: rgba(109,190,154,0.1); border-color: var(--success); }
+    .step__num { font-size: 1.1rem; margin-bottom: 4px; }
+    .step__label { font-size: 0.65rem; font-weight: 600; color: var(--texte); }
+    .replace-actions { display: flex; gap: 10px; justify-content: flex-end; }
+    .replace-drop-zone { border: 2px dashed var(--bleu); border-radius: var(--radius-lg); padding: 32px 20px; text-align: center; background: var(--bleu-pale); cursor: pointer; transition: all var(--transition); }
+    .replace-drop-zone:hover { background: rgba(45,156,219,0.12); }
+    .replace-drop-zone svg { margin: 0 auto 10px; color: var(--bleu); }
+    .replace-drop-zone__title { font-weight: 700; font-size: 0.9rem; color: var(--noir); margin-bottom: 4px; }
+    .replace-drop-zone__sub { font-size: 0.75rem; color: var(--gris-texte); }
+    .media-section-tag { display: inline-block; font-size: 0.6rem; font-weight: 600; padding: 2px 7px; border-radius: 999px; margin: 1px; }
+    .tag--index    { background: rgba(45,156,219,0.12); color: var(--bleu-hover); }
+    .tag--coaching { background: rgba(109,190,154,0.12); color: #2d7a5a; }
+    .tag--apropos  { background: rgba(244,197,122,0.15); color: #7a5a00; }
+    .tag--methode  { background: rgba(136,136,136,0.1); color: #555; }
+    .tag--multi    { background: rgba(45,156,219,0.08); color: #888; }
+    @media (max-width: 560px) { .replace-preview-grid { grid-template-columns: 1fr; } .replace-steps { flex-direction: column; } }
 
     /* MODAL */
     .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.35); z-index: 900; align-items: center; justify-content: center; padding: 20px; backdrop-filter: blur(4px); }
@@ -475,20 +508,12 @@
       <section id="sec-medias" class="admin-section">
         <div class="sec-head">
           <h2 class="sec-head__title">Médias</h2>
-          <p class="sec-head__sub">Photos et vidéos utilisées sur le site</p>
+          <p class="sec-head__sub">Cliquez sur <strong>Remplacer</strong> pour changer une photo — aperçu avant/après + téléchargement automatique au bon nom de fichier.</p>
         </div>
-        <h3 style="font-family:var(--font-titre);font-size:1rem;font-weight:500;margin-bottom:14px">Photos (7)</h3>
+        <h3 style="font-family:var(--font-titre);font-size:1rem;font-weight:500;margin-bottom:14px;color:var(--noir)">Photos du site (7)</h3>
         <div class="medias-grid" id="mediasPhotos"></div>
-        <h3 style="font-family:var(--font-titre);font-size:1rem;font-weight:500;margin:4px 0 14px">Vidéos (2)</h3>
+        <h3 style="font-family:var(--font-titre);font-size:1rem;font-weight:500;margin:8px 0 14px;color:var(--noir)">Vidéos (2)</h3>
         <div class="medias-grid" id="mediasVideos"></div>
-        <h3 style="font-family:var(--font-titre);font-size:1rem;font-weight:500;margin:4px 0 14px">Ajouter un média</h3>
-        <div class="upload-zone" id="uploadZone">
-          <svg viewBox="0 0 24 24" fill="none" width="36" stroke="currentColor" stroke-width="1.5"><path d="M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2M12 4v12M8 8l4-4 4 4" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          <p class="upload-zone__title">Glisser-déposer ou cliquer pour sélectionner</p>
-          <p class="upload-zone__sub">JPG, PNG, WebP, MP4 · Max 10 Mo<br>
-          <span style="color:var(--bleu)">ℹ️ Configurez Supabase Storage (bucket «medias») pour activer l'upload.</span></p>
-          <input type="file" id="uploadInput" accept="image/*,video/mp4,video/webm" style="display:none" multiple onchange="handleUpload(this.files)">
-        </div>
       </section>
 
     </div>
@@ -516,6 +541,82 @@
     </div>
     <div class="modal__body" id="modalClientBody"></div>
     <div class="modal__actions" id="modalClientActions"></div>
+  </div>
+</div>
+
+<!-- REPLACE PHOTO MODAL -->
+<div class="replace-modal-overlay" id="replaceModal" onclick="closeReplaceModal()">
+  <div class="replace-modal" onclick="event.stopPropagation()">
+    <div class="replace-modal__head">
+      <div class="replace-modal__title" id="replaceModalTitle">Remplacer la photo</div>
+      <button class="modal__close" onclick="closeReplaceModal()">
+        <svg viewBox="0 0 16 16" fill="none" width="16" stroke="currentColor" stroke-width="2"><path d="M4 4l8 8M12 4l-8 8" stroke-linecap="round"/></svg>
+      </button>
+    </div>
+    <div class="replace-modal__body">
+
+      <!-- STEP 1 : choisir une photo -->
+      <div id="replaceStep1">
+        <div class="replace-drop-zone" id="replaceDropZone">
+          <svg viewBox="0 0 24 24" fill="none" width="40" stroke="currentColor" stroke-width="1.5"><path d="M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2M12 4v12M8 8l4-4 4 4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <p class="replace-drop-zone__title">Glisser votre photo ici<br>ou cliquer pour choisir</p>
+          <p class="replace-drop-zone__sub">JPG, PNG, WebP · Max 10 Mo · Convertie en WebP automatiquement</p>
+          <input type="file" id="replaceFileInput" accept="image/*" style="display:none" onchange="onReplaceFilePicked(this.files[0])">
+        </div>
+        <div id="replaceConverting" style="display:none;text-align:center;padding:20px">
+          <div class="spinner"></div>
+          <p style="font-size:0.82rem;color:var(--gris-texte)">Conversion en WebP…</p>
+        </div>
+      </div>
+
+      <!-- STEP 2 : aperçu + téléchargement -->
+      <div id="replaceStep2" style="display:none">
+        <div class="replace-preview-grid">
+          <div class="replace-preview-card">
+            <div class="replace-preview-card__label">Actuelle</div>
+            <img id="previewOld" class="replace-preview-card__img" src="" alt="Photo actuelle">
+          </div>
+          <div class="replace-preview-card replace-preview-card--new">
+            <div class="replace-preview-card__label">Nouvelle ✦</div>
+            <img id="previewNew" class="replace-preview-card__img" src="" alt="Nouvelle photo">
+          </div>
+        </div>
+
+        <div class="replace-info">
+          <span class="replace-info__file" id="replaceInfoFile"></span>
+          Cette photo sera mise à jour sur <strong id="replaceInfoPages"></strong> du site dès que vous aurez déposé le fichier dans le dossier et lancé le déploiement.
+        </div>
+
+        <div class="replace-steps">
+          <div class="step done" id="stepDownload">
+            <div class="step__num">📥</div>
+            <div class="step__label">Télécharger</div>
+          </div>
+          <div class="step" id="stepCopy">
+            <div class="step__num">📁</div>
+            <div class="step__label">Copier dans<br>assets/images/alyssa/</div>
+          </div>
+          <div class="step" id="stepDeploy">
+            <div class="step__num">🚀</div>
+            <div class="step__label">git push<br>→ Vercel auto-deploy</div>
+          </div>
+        </div>
+
+        <div style="background:var(--fond);border-radius:var(--radius);padding:10px 14px;font-size:0.72rem;margin-bottom:16px">
+          <strong style="color:var(--noir)">CMD à lancer après avoir copié le fichier :</strong><br>
+          <code id="replaceCmdText" style="color:var(--bleu);font-size:0.7rem;word-break:break-all"></code>
+        </div>
+
+        <div class="replace-actions">
+          <button class="btn btn--ghost" onclick="resetReplaceModal()">Choisir une autre photo</button>
+          <button class="btn btn--primary" id="replaceDownloadBtn">
+            <svg viewBox="0 0 16 16" fill="none" width="14" stroke="currentColor" stroke-width="1.5"><path d="M8 2v9M4 8l4 4 4-4" stroke-linecap="round" stroke-linejoin="round"/><path d="M2 14h12" stroke-linecap="round"/></svg>
+            Télécharger la photo
+          </button>
+        </div>
+      </div>
+
+    </div>
   </div>
 </div>
 
@@ -958,52 +1059,210 @@ function selectContact(id) {
 
 /* ── MÉDIAS ─────────────────────────────────────── */
 const PHOTOS = [
-  { f:'alyssa-stretch-studio.webp',   l:'Hero homepage',  u:'index.html — fond hero' },
-  { f:'alyssa-squat-rack.webp',       l:'Photo coach',    u:'index.html — photo droite' },
-  { f:'alyssa-rope-training.webp',    l:'Entraînement',   u:'methode.html' },
-  { f:'alyssa-dumbbell-press.webp',   l:'Haltères',       u:'a-propos.html' },
-  { f:'alyssa-treadmill.webp',        l:'Tapis course',   u:'coaching.html — sèche' },
-  { f:'alyssa-squat-gym.webp',        l:'Squat gym',      u:'coaching.html — coaching' },
-  { f:'alyssa-energy-cycle.webp',     l:'Énergie cycle',  u:'index.html' },
-];
-const VIDEOS = [
-  { f:'alyssa-video-hero.mp4',            l:'Vidéo hero',    u:'index.html — modal' },
-  { f:'alyssa-coaching-sur-mesure.mp4',   l:'Coaching loop', u:'coaching.html — loop' },
+  {
+    f: 'alyssa-stretch-studio.webp',
+    l: 'Hero — fond principal',
+    pages: [
+      { label: 'index.html', css: 'tag--index', desc: 'Fond hero' },
+    ],
+  },
+  {
+    f: 'alyssa-squat-rack.webp',
+    l: 'Coach — photo principale',
+    pages: [
+      { label: 'index.html', css: 'tag--index', desc: 'Photo droite hero' },
+      { label: 'a-propos.html', css: 'tag--apropos', desc: 'Galerie' },
+      { label: 'coaching.html', css: 'tag--coaching', desc: 'Galerie' },
+      { label: '+4 pages', css: 'tag--multi', desc: 'challenge, contact, methode, reservation, suivi' },
+    ],
+  },
+  {
+    f: 'alyssa-rope-training.webp',
+    l: 'Entraînement — corde',
+    pages: [
+      { label: 'methode.html', css: 'tag--methode', desc: 'Photo section' },
+      { label: 'a-propos.html', css: 'tag--apropos', desc: 'Galerie' },
+      { label: '+4 pages', css: 'tag--multi', desc: 'coaching, challenge, contact, reservation, suivi' },
+    ],
+  },
+  {
+    f: 'alyssa-dumbbell-press.webp',
+    l: 'Haltères — galbe',
+    pages: [
+      { label: 'a-propos.html', css: 'tag--apropos', desc: 'Photo bio' },
+      { label: 'coaching.html', css: 'tag--coaching', desc: 'Programme Galbe' },
+      { label: '+4 pages', css: 'tag--multi', desc: 'challenge, contact, methode, reservation, suivi' },
+    ],
+  },
+  {
+    f: 'alyssa-treadmill.webp',
+    l: 'Tapis course — sèche',
+    pages: [
+      { label: 'coaching.html', css: 'tag--coaching', desc: 'Programme Sèche' },
+      { label: '+4 pages', css: 'tag--multi', desc: 'a-propos, challenge, contact, methode, reservation, suivi' },
+    ],
+  },
+  {
+    f: 'alyssa-squat-gym.webp',
+    l: 'Squat gym — coaching',
+    pages: [
+      { label: 'coaching.html', css: 'tag--coaching', desc: 'Programme Remise en forme' },
+      { label: '+4 pages', css: 'tag--multi', desc: 'a-propos, challenge, contact, methode, reservation, suivi' },
+    ],
+  },
+  {
+    f: 'alyssa-energy-cycle.webp',
+    l: 'Énergie & cycle',
+    pages: [
+      { label: 'index.html', css: 'tag--index', desc: 'Section cycle-syncing' },
+      { label: '+4 pages', css: 'tag--multi', desc: 'a-propos, challenge, contact, methode, reservation, suivi' },
+    ],
+  },
 ];
 
+const VIDEOS = [
+  { f:'alyssa-video-hero.mp4',            l:'Vidéo hero',    u:'index.html — modal vidéo' },
+  { f:'alyssa-coaching-sur-mesure.mp4',   l:'Coaching loop', u:'coaching.html — Programme 01' },
+];
+
+let replaceTarget = null; // photo slot en cours de remplacement
+let replaceBlobUrl = null;
+let replaceBlob    = null;
+
 function renderMedias() {
-  document.getElementById('mediasPhotos').innerHTML = PHOTOS.map(p => `
-    <div class="media-item">
-      <img class="media-item__img" src="assets/images/alyssa/${p.f}" alt="${p.l}" loading="lazy">
-      <div class="media-item__info"><div class="media-item__name">${p.l}</div><div class="media-item__usage">${p.u}</div></div>
-      <div class="media-item__actions">
-        <button class="media-item__btn" onclick="copyPath('assets/images/alyssa/${p.f}')">📋 Copier</button>
-        <a href="assets/images/alyssa/${p.f}" target="_blank" rel="noopener" class="media-item__btn">↗ Ouvrir</a>
-      </div>
-    </div>`).join('');
+  document.getElementById('mediasPhotos').innerHTML = PHOTOS.map((p, i) => {
+    const tags = p.pages.slice(0,3).map(pg => `<span class="media-section-tag ${pg.css}" title="${pg.desc}">${pg.label}</span>`).join('');
+    return `
+      <div class="media-item">
+        <img class="media-item__img" src="assets/images/alyssa/${p.f}" alt="${p.l}" loading="lazy" onclick="openReplaceModal(${i})">
+        <div class="media-item__info">
+          <div class="media-item__name">${p.l}</div>
+          <div class="media-item__pages">${tags}</div>
+          <div class="media-item__filename">${p.f}</div>
+        </div>
+        <div class="media-item__actions">
+          <button class="media-item__btn media-item__btn--replace" onclick="openReplaceModal(${i})">
+            📸 Remplacer
+          </button>
+          <button class="media-item__btn media-item__btn--copy" onclick="copyPath('assets/images/alyssa/${p.f}')">
+            📋
+          </button>
+        </div>
+      </div>`;
+  }).join('');
 
   document.getElementById('mediasVideos').innerHTML = VIDEOS.map(v => `
     <div class="media-item">
       <div class="video-thumb"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><polygon points="10,8 16,12 10,16" fill="currentColor"/></svg></div>
-      <div class="media-item__info"><div class="media-item__name">${v.l}</div><div class="media-item__usage">${v.u}</div></div>
+      <div class="media-item__info">
+        <div class="media-item__name">${v.l}</div>
+        <div class="media-item__pages" style="color:var(--gris-texte)">${v.u}</div>
+        <div class="media-item__filename">${v.f}</div>
+      </div>
       <div class="media-item__actions">
-        <button class="media-item__btn" onclick="copyPath('assets/videos/${v.f}')">📋 Copier</button>
-        <a href="assets/videos/${v.f}" target="_blank" rel="noopener" class="media-item__btn">↗ Ouvrir</a>
+        <button class="media-item__btn media-item__btn--copy" onclick="copyPath('assets/videos/${v.f}')" style="flex:1">📋 Copier chemin</button>
+        <a href="assets/videos/${v.f}" target="_blank" rel="noopener" class="media-item__btn media-item__btn--replace" style="text-decoration:none">↗ Ouvrir</a>
       </div>
     </div>`).join('');
-
-  const zone = document.getElementById('uploadZone');
-  zone.onclick = () => document.getElementById('uploadInput').click();
-  zone.ondragover = e => { e.preventDefault(); zone.classList.add('drag-over'); };
-  zone.ondragleave = () => zone.classList.remove('drag-over');
-  zone.ondrop = e => { e.preventDefault(); zone.classList.remove('drag-over'); handleUpload(e.dataTransfer.files); };
 }
 
-function handleUpload(files) {
-  if (!files?.length) return;
-  const f = files[0];
-  if (f.size > 10*1024*1024) { showToast('Fichier trop lourd (max 10 Mo)', 'error'); return; }
-  showToast('Upload désactivé — configurez Supabase Storage (bucket «medias»)', 'error');
+/* ── REPLACE MODAL ──────────────────────────────── */
+function openReplaceModal(idx) {
+  replaceTarget = PHOTOS[idx];
+  replaceBlob = null;
+  if (replaceBlobUrl) { URL.revokeObjectURL(replaceBlobUrl); replaceBlobUrl = null; }
+  document.getElementById('replaceModalTitle').textContent = `Remplacer : ${replaceTarget.l}`;
+  resetReplaceModal();
+  document.getElementById('replaceModal').classList.add('open');
+
+  // drop zone
+  const dz = document.getElementById('replaceDropZone');
+  dz.onclick = () => document.getElementById('replaceFileInput').click();
+  dz.ondragover = e => { e.preventDefault(); dz.style.background = 'rgba(45,156,219,0.18)'; };
+  dz.ondragleave = () => { dz.style.background = ''; };
+  dz.ondrop = e => { e.preventDefault(); dz.style.background = ''; onReplaceFilePicked(e.dataTransfer.files[0]); };
+}
+
+function closeReplaceModal() {
+  document.getElementById('replaceModal').classList.remove('open');
+}
+
+function resetReplaceModal() {
+  document.getElementById('replaceStep1').style.display = '';
+  document.getElementById('replaceConverting').style.display = 'none';
+  document.getElementById('replaceStep2').style.display = 'none';
+  document.getElementById('replaceFileInput').value = '';
+}
+
+function onReplaceFilePicked(file) {
+  if (!file) return;
+  if (!file.type.startsWith('image/')) { showToast('Format non supporté — choisissez une image', 'error'); return; }
+  if (file.size > 10 * 1024 * 1024) { showToast('Fichier trop lourd (max 10 Mo)', 'error'); return; }
+
+  document.getElementById('replaceStep1').style.display = 'none';
+  document.getElementById('replaceConverting').style.display = 'block';
+
+  const reader = new FileReader();
+  reader.onload = e => {
+    const img = new Image();
+    img.onload = () => {
+      // Redimensionner à max 2048px en conservant le ratio
+      const MAX = 2048;
+      let w = img.naturalWidth, h = img.naturalHeight;
+      if (w > MAX) { h = Math.round(h * MAX / w); w = MAX; }
+      const canvas = document.createElement('canvas');
+      canvas.width = w; canvas.height = h;
+      canvas.getContext('2d').drawImage(img, 0, 0, w, h);
+      canvas.toBlob(blob => {
+        replaceBlob = blob;
+        if (replaceBlobUrl) URL.revokeObjectURL(replaceBlobUrl);
+        replaceBlobUrl = URL.createObjectURL(blob);
+        showReplacePreview();
+      }, 'image/webp', 0.82);
+    };
+    img.src = e.target.result;
+  };
+  reader.readAsDataURL(file);
+}
+
+function showReplacePreview() {
+  document.getElementById('replaceConverting').style.display = 'none';
+  document.getElementById('replaceStep2').style.display = '';
+
+  document.getElementById('previewOld').src = 'assets/images/alyssa/' + replaceTarget.f;
+  document.getElementById('previewNew').src = replaceBlobUrl;
+
+  const pagesCount = replaceTarget.pages.reduce((acc, pg) => {
+    if (pg.label.startsWith('+')) return acc + parseInt(pg.label);
+    return acc + 1;
+  }, 0);
+  document.getElementById('replaceInfoFile').textContent = 'assets/images/alyssa/' + replaceTarget.f;
+  document.getElementById('replaceInfoPages').textContent =
+    `${pagesCount} page${pagesCount > 1 ? 's' : ''}`;
+
+  const cmd = `cd "C:\\Users\\HP-15\\OneDrive\\Bureau\\OneDrive\\Documents\\Alyssa Fitness V3"\ngit add assets/images/alyssa/${replaceTarget.f}\ngit commit -m "media: remplace ${replaceTarget.f}"\ngit push origin main`;
+  document.getElementById('replaceCmdText').textContent = cmd;
+
+  const btn = document.getElementById('replaceDownloadBtn');
+  btn.onclick = () => {
+    const a = document.createElement('a');
+    a.href = replaceBlobUrl;
+    a.download = replaceTarget.f;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    // marquer step download comme done
+    document.getElementById('stepDownload').innerHTML = '<div class="step__num">✅</div><div class="step__label">Téléchargé !</div>';
+    document.getElementById('stepCopy').classList.add('done');
+    showToast(`${replaceTarget.f} téléchargé — copiez-le dans le dossier assets/images/alyssa/`);
+    // copier la CMD dans le presse-papier
+    if (navigator.clipboard) {
+      const cmd = document.getElementById('replaceCmdText').textContent;
+      navigator.clipboard.writeText(cmd).then(() => {
+        setTimeout(() => showToast('CMD git copiée dans le presse-papier 📋'), 2000);
+      });
+    }
+  };
 }
 
 function copyPath(path) {
