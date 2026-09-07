@@ -1,0 +1,1024 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Administration — Alyssa Fitness</title>
+  <link rel="icon" href="assets/images/logos/favicon.ico">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4/dist/chart.umd.min.js"></script>
+  <style>
+    :root {
+      --bleu:         #2D9CDB;
+      --bleu-clair:   #79C8EA;
+      --bleu-hover:   #1A7AB5;
+      --bleu-pale:    #EBF6FC;
+      --blanc:        #F8FAFC;
+      --fond:         #EEF4FA;
+      --gris-clair:   #E8E8E8;
+      --gris-texte:   #888888;
+      --noir:         #111111;
+      --texte:        #555555;
+      --success:      #6DBE9A;
+      --warning:      #F4C57A;
+      --danger:       #E05A5A;
+      --font-titre:   'Playfair Display', Georgia, serif;
+      --font-corps:   'Montserrat', Arial, sans-serif;
+      --radius:       12px;
+      --radius-lg:    16px;
+      --ombre:        0 2px 16px rgba(0,0,0,0.07);
+      --ombre-hover:  0 8px 32px rgba(45,156,219,0.16);
+      --sidebar-w:    240px;
+      --header-h:     60px;
+      --transition:   0.25s ease;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { font-size: 15px; scroll-behavior: smooth; }
+    body { font-family: var(--font-corps); background: var(--blanc); color: var(--noir); -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+    img { display: block; max-width: 100%; }
+    a { color: inherit; text-decoration: none; }
+    ul { list-style: none; }
+    button { border: none; background: none; cursor: pointer; font-family: inherit; }
+    input, textarea, select { font-family: inherit; font-size: inherit; }
+
+    /* LAYOUT */
+    .admin-layout { display: flex; min-height: 100vh; }
+
+    /* SIDEBAR */
+    .admin-sidebar {
+      width: var(--sidebar-w);
+      background: var(--noir);
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      position: fixed;
+      top: 0; left: 0;
+      height: 100vh;
+      z-index: 200;
+      transition: transform var(--transition);
+      overflow-y: auto;
+    }
+    .sidebar-brand {
+      padding: 20px 20px 16px;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      display: flex; align-items: center; gap: 10px;
+    }
+    .sidebar-brand__name { font-size: 0.92rem; font-weight: 700; font-family: var(--font-titre); color: #fff; }
+    .sidebar-brand__label { font-size: 0.63rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.38); margin-top: 2px; }
+    .sidebar-nav { flex: 1; padding: 16px 0; }
+    .nav-item {
+      display: flex; align-items: center; gap: 10px;
+      width: 100%; padding: 11px 20px;
+      font-size: 0.82rem; font-weight: 500;
+      color: rgba(255,255,255,0.6);
+      border-left: 3px solid transparent;
+      transition: all var(--transition); cursor: pointer;
+      letter-spacing: 0.02em;
+    }
+    .nav-item:hover { color: #fff; background: rgba(255,255,255,0.06); }
+    .nav-item.active { color: #fff; border-left-color: var(--bleu); background: rgba(45,156,219,0.12); }
+    .nav-item svg { flex-shrink: 0; opacity: 0.7; }
+    .nav-item.active svg { opacity: 1; }
+    .nav-badge {
+      margin-left: auto; background: var(--bleu); color: #fff;
+      font-size: 0.65rem; font-weight: 700; padding: 2px 7px;
+      border-radius: 999px; min-width: 20px; text-align: center; display: none;
+    }
+    .nav-badge.visible { display: inline-block; }
+    .sidebar-footer { padding: 16px 20px; border-top: 1px solid rgba(255,255,255,0.08); }
+    .sidebar-footer a { font-size: 0.75rem; color: rgba(255,255,255,0.4); display: flex; align-items: center; gap: 6px; transition: color var(--transition); }
+    .sidebar-footer a:hover { color: rgba(255,255,255,0.8); }
+
+    /* OVERLAY */
+    .admin-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.4); z-index: 150; }
+    .admin-overlay.open { display: block; }
+
+    /* MAIN */
+    .admin-main { margin-left: var(--sidebar-w); flex: 1; display: flex; flex-direction: column; min-height: 100vh; }
+
+    /* HEADER */
+    .admin-header {
+      height: var(--header-h); background: #fff;
+      border-bottom: 1px solid var(--gris-clair);
+      display: flex; align-items: center; padding: 0 24px; gap: 16px;
+      position: sticky; top: 0; z-index: 100;
+    }
+    .admin-header__burger { display: none; padding: 6px; border-radius: 6px; transition: background var(--transition); }
+    .admin-header__burger:hover { background: var(--fond); }
+    .admin-header__title { font-family: var(--font-titre); font-size: 1.1rem; font-weight: 500; flex: 1; }
+    .admin-header__date { font-size: 0.75rem; color: var(--gris-texte); white-space: nowrap; }
+    .admin-header__link { font-size: 0.75rem; color: var(--bleu); font-weight: 600; display: flex; align-items: center; gap: 4px; transition: color var(--transition); }
+    .admin-header__link:hover { color: var(--bleu-hover); }
+
+    /* CONTENT */
+    .admin-content { padding: 24px; flex: 1; }
+    .admin-section { display: none; }
+    .admin-section.active { display: block; }
+
+    /* KPI */
+    .kpi-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(175px, 1fr)); gap: 14px; margin-bottom: 22px; }
+    .kpi-card { background: #fff; border: 1px solid var(--gris-clair); border-radius: var(--radius-lg); padding: 18px 20px; box-shadow: var(--ombre); transition: box-shadow var(--transition); }
+    .kpi-card:hover { box-shadow: var(--ombre-hover); }
+    .kpi-card__eyebrow { font-size: 0.65rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gris-texte); margin-bottom: 8px; }
+    .kpi-card__value { font-family: var(--font-titre); font-size: 2rem; font-weight: 600; color: var(--noir); line-height: 1; margin-bottom: 4px; }
+    .kpi-card__label { font-size: 0.73rem; color: var(--texte); }
+
+    /* DASH GRID */
+    .dash-grid { display: grid; grid-template-columns: 1fr 340px; gap: 18px; margin-bottom: 22px; }
+    .dash-card { background: #fff; border: 1px solid var(--gris-clair); border-radius: var(--radius-lg); box-shadow: var(--ombre); overflow: hidden; }
+    .dash-card__head { padding: 16px 20px 12px; border-bottom: 1px solid var(--gris-clair); display: flex; align-items: center; justify-content: space-between; }
+    .dash-card__title { font-family: var(--font-titre); font-size: 0.95rem; font-weight: 500; }
+    .dash-card__body { padding: 16px 20px; }
+    .chart-canvas-wrap { position: relative; height: 200px; }
+
+    /* TABLES */
+    .admin-table { width: 100%; border-collapse: collapse; font-size: 0.8rem; }
+    .admin-table th { text-align: left; padding: 8px 12px; font-weight: 600; font-size: 0.68rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--gris-texte); border-bottom: 1px solid var(--gris-clair); }
+    .admin-table td { padding: 10px 12px; border-bottom: 1px solid rgba(232,232,232,0.6); color: var(--texte); vertical-align: middle; }
+    .admin-table tr:last-child td { border-bottom: none; }
+    .admin-table tr:hover td { background: var(--fond); cursor: pointer; }
+
+    /* BADGES */
+    .badge { display: inline-flex; align-items: center; gap: 4px; padding: 3px 9px; border-radius: 999px; font-size: 0.68rem; font-weight: 600; }
+    .badge--green  { background: rgba(109,190,154,0.15); color: #2d7a5a; }
+    .badge--yellow { background: rgba(244,197,122,0.2);  color: #8a6400; }
+    .badge--red    { background: rgba(224,90,90,0.12);   color: #b33; }
+    .badge--grey   { background: rgba(136,136,136,0.12); color: #666; }
+    .badge--blue   { background: rgba(45,156,219,0.12);  color: var(--bleu-hover); }
+
+    /* CALENDAR */
+    .cal-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 18px; gap: 12px; flex-wrap: wrap; }
+    .cal-nav { display: flex; align-items: center; gap: 12px; }
+    .cal-nav__title { font-family: var(--font-titre); font-size: 1.1rem; font-weight: 500; min-width: 180px; text-align: center; }
+    .btn { display: inline-flex; align-items: center; gap: 6px; padding: 8px 16px; border-radius: 999px; font-size: 0.78rem; font-weight: 600; transition: all var(--transition); cursor: pointer; font-family: var(--font-corps); }
+    .btn--primary { background: var(--bleu); color: #fff; box-shadow: 0 2px 12px rgba(45,156,219,0.3); }
+    .btn--primary:hover { background: var(--bleu-hover); transform: translateY(-1px); }
+    .btn--ghost { background: transparent; color: var(--noir); border: 1.5px solid var(--gris-clair); }
+    .btn--ghost:hover { background: var(--fond); border-color: var(--bleu-clair); }
+    .btn--icon { padding: 7px; border-radius: 8px; background: transparent; border: 1px solid var(--gris-clair); }
+    .btn--icon:hover { background: var(--fond); }
+    .cal-grid-wrap { background: #fff; border: 1px solid var(--gris-clair); border-radius: var(--radius-lg); box-shadow: var(--ombre); overflow: hidden; }
+    .cal-weekdays { display: grid; grid-template-columns: repeat(7,1fr); background: var(--fond); border-bottom: 1px solid var(--gris-clair); }
+    .cal-weekday { padding: 10px 0; text-align: center; font-size: 0.68rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gris-texte); }
+    .cal-days { display: grid; grid-template-columns: repeat(7,1fr); }
+    .cal-day { min-height: 88px; border-right: 1px solid rgba(232,232,232,0.5); border-bottom: 1px solid rgba(232,232,232,0.5); padding: 6px; cursor: pointer; transition: background var(--transition); position: relative; }
+    .cal-day:hover { background: var(--fond); }
+    .cal-day:nth-child(7n) { border-right: none; }
+    .cal-day--other { opacity: 0.3; }
+    .cal-day--today { background: rgba(45,156,219,0.05); }
+    .cal-day--today .cal-day__num { background: var(--bleu); color: #fff; border-radius: 50%; }
+    .cal-day__num { font-size: 0.78rem; font-weight: 600; width: 24px; height: 24px; display: flex; align-items: center; justify-content: center; margin-bottom: 4px; }
+    .cal-event { background: rgba(45,156,219,0.1); border-left: 2px solid var(--bleu); border-radius: 4px; padding: 2px 5px; font-size: 0.62rem; font-weight: 600; color: var(--bleu-hover); margin-bottom: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .cal-event:hover { background: rgba(45,156,219,0.2); }
+    .cal-event--bilan   { background: rgba(109,190,154,0.12); border-color: #6DBE9A; color: #2d7a5a; }
+    .cal-event--coaching { background: rgba(244,197,122,0.15); border-color: #F4C57A; color: #7a5a00; }
+    .cal-day-panel { background: #fff; border: 1px solid var(--gris-clair); border-radius: var(--radius-lg); box-shadow: var(--ombre); padding: 20px; margin-top: 18px; display: none; }
+    .cal-day-panel.open { display: block; }
+    .cal-day-panel__title { font-family: var(--font-titre); font-size: 1rem; font-weight: 500; margin-bottom: 14px; }
+
+    /* RDV CARD */
+    .rdv-card { border: 1px solid var(--gris-clair); border-radius: var(--radius); padding: 12px 16px; margin-bottom: 10px; display: flex; align-items: center; gap: 12px; cursor: pointer; transition: all var(--transition); }
+    .rdv-card:hover { border-color: var(--bleu-clair); box-shadow: var(--ombre-hover); transform: translateX(3px); }
+    .rdv-card__time { font-size: 0.88rem; font-weight: 700; color: var(--bleu); min-width: 50px; flex-shrink: 0; }
+    .rdv-card__name { font-weight: 600; font-size: 0.85rem; }
+    .rdv-card__type { font-size: 0.72rem; color: var(--texte); margin-top: 2px; }
+    .rdv-card__arrow { margin-left: auto; color: var(--gris-texte); flex-shrink: 0; }
+    .recent-list { max-height: 290px; overflow-y: auto; }
+
+    /* CLIENTS */
+    .clients-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; flex-wrap: wrap; gap: 12px; }
+    .search-wrap { position: relative; display: inline-flex; align-items: center; }
+    .search-wrap svg { position: absolute; left: 10px; color: var(--gris-texte); width: 15px; height: 15px; pointer-events: none; }
+    .search-input { padding: 9px 14px 9px 36px; border: 1px solid var(--gris-clair); border-radius: var(--radius); font-size: 0.82rem; background: #fff; color: var(--noir); width: 220px; transition: border-color var(--transition); }
+    .search-input:focus { outline: none; border-color: var(--bleu); }
+    .clients-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(270px, 1fr)); gap: 14px; }
+    .client-card { background: #fff; border: 1px solid var(--gris-clair); border-radius: var(--radius-lg); padding: 18px; box-shadow: var(--ombre); cursor: pointer; transition: all var(--transition); }
+    .client-card:hover { box-shadow: var(--ombre-hover); border-color: var(--bleu-clair); transform: translateY(-2px); }
+    .client-card__top { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
+    .client-avatar { width: 40px; height: 40px; border-radius: 50%; background: var(--bleu-pale); color: var(--bleu); font-weight: 700; font-size: 0.9rem; display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-family: var(--font-titre); }
+    .client-card__name { font-weight: 600; font-size: 0.9rem; }
+    .client-card__email { font-size: 0.72rem; color: var(--gris-texte); margin-top: 1px; }
+    .client-card__stats { display: flex; gap: 20px; }
+    .stat-val { font-size: 1.1rem; font-weight: 700; font-family: var(--font-titre); }
+    .stat-lbl { font-size: 0.65rem; color: var(--gris-texte); margin-top: 1px; }
+
+    /* MESSAGERIE */
+    .msg-layout { display: grid; grid-template-columns: 290px 1fr; background: #fff; border: 1px solid var(--gris-clair); border-radius: var(--radius-lg); box-shadow: var(--ombre); overflow: hidden; height: calc(100vh - 140px); min-height: 500px; }
+    .msg-list { border-right: 1px solid var(--gris-clair); overflow-y: auto; background: var(--fond); }
+    .msg-list__head { padding: 14px 16px; border-bottom: 1px solid var(--gris-clair); background: #fff; }
+    .msg-list__head h3 { font-family: var(--font-titre); font-size: 0.92rem; font-weight: 500; }
+    .msg-item { padding: 13px 16px; border-bottom: 1px solid rgba(232,232,232,0.6); cursor: pointer; transition: background var(--transition); }
+    .msg-item:hover { background: rgba(45,156,219,0.04); }
+    .msg-item.active { background: var(--bleu-pale); }
+    .msg-item__top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 3px; }
+    .msg-item__name { font-size: 0.82rem; font-weight: 600; display: flex; align-items: center; gap: 6px; }
+    .msg-unread-dot { width: 7px; height: 7px; background: var(--bleu); border-radius: 50%; flex-shrink: 0; }
+    .msg-item__date { font-size: 0.67rem; color: var(--gris-texte); }
+    .msg-item__preview { font-size: 0.72rem; color: var(--gris-texte); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .msg-main { display: flex; flex-direction: column; }
+    .msg-main__head { padding: 14px 20px; border-bottom: 1px solid var(--gris-clair); display: flex; align-items: center; justify-content: space-between; flex-shrink: 0; }
+    .msg-main__client { font-weight: 600; font-size: 0.9rem; }
+    .msg-main__email { font-size: 0.72rem; color: var(--gris-texte); }
+    .msg-body { flex: 1; overflow-y: auto; padding: 20px; display: flex; flex-direction: column; gap: 14px; }
+    .msg-bubble { max-width: 72%; }
+    .msg-bubble--client { align-self: flex-start; }
+    .msg-bubble--admin  { align-self: flex-end; }
+    .msg-bubble__text { padding: 12px 16px; border-radius: 16px; font-size: 0.82rem; line-height: 1.6; }
+    .msg-bubble--client .msg-bubble__text { background: var(--fond); border-radius: 4px 16px 16px 16px; color: var(--texte); }
+    .msg-bubble--admin  .msg-bubble__text { background: var(--bleu); color: #fff; border-radius: 16px 4px 16px 16px; }
+    .msg-bubble__meta { font-size: 0.62rem; color: var(--gris-texte); margin-top: 4px; padding: 0 4px; }
+    .msg-bubble--admin .msg-bubble__meta { text-align: right; }
+    .msg-empty { display: flex; flex-direction: column; align-items: center; justify-content: center; flex: 1; color: var(--gris-texte); gap: 8px; padding: 40px; }
+    .msg-empty svg { width: 40px; height: 40px; opacity: 0.3; }
+    .msg-empty p { font-size: 0.85rem; }
+
+    /* MÉDIAS */
+    .medias-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(195px, 1fr)); gap: 14px; margin-bottom: 24px; }
+    .media-item { background: #fff; border: 1.5px solid var(--gris-clair); border-radius: var(--radius-lg); overflow: hidden; transition: all var(--transition); }
+    .media-item:hover { box-shadow: var(--ombre-hover); border-color: var(--bleu-clair); }
+    .media-item__img { width: 100%; aspect-ratio: 1; object-fit: cover; }
+    .media-item__info { padding: 10px 12px; }
+    .media-item__name { font-size: 0.72rem; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .media-item__usage { font-size: 0.65rem; color: var(--bleu); margin-top: 2px; }
+    .media-item__actions { display: flex; gap: 6px; padding: 8px 12px; border-top: 1px solid var(--gris-clair); }
+    .media-item__btn { font-size: 0.65rem; font-weight: 600; color: var(--bleu); padding: 4px 8px; border-radius: 6px; background: var(--bleu-pale); transition: all var(--transition); flex: 1; text-align: center; cursor: pointer; }
+    .media-item__btn:hover { background: var(--bleu); color: #fff; }
+    .video-thumb { background: var(--noir); aspect-ratio: 16/9; display: flex; align-items: center; justify-content: center; }
+    .video-thumb svg { color: rgba(255,255,255,0.6); width: 36px; height: 36px; }
+    .upload-zone { border: 2px dashed var(--gris-clair); border-radius: var(--radius-lg); padding: 36px 20px; text-align: center; background: rgba(45,156,219,0.02); transition: all var(--transition); cursor: pointer; }
+    .upload-zone:hover, .upload-zone.drag-over { border-color: var(--bleu); background: var(--bleu-pale); }
+    .upload-zone svg { margin: 0 auto 10px; color: var(--bleu); opacity: 0.6; }
+    .upload-zone__title { font-weight: 600; font-size: 0.9rem; margin-bottom: 4px; }
+    .upload-zone__sub { font-size: 0.75rem; color: var(--gris-texte); line-height: 1.6; }
+
+    /* MODAL */
+    .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.35); z-index: 900; align-items: center; justify-content: center; padding: 20px; backdrop-filter: blur(4px); }
+    .modal-overlay.open { display: flex; }
+    .modal { background: #fff; border-radius: var(--radius-lg); box-shadow: 0 24px 80px rgba(0,0,0,0.15); width: 100%; max-width: 500px; max-height: 90vh; overflow-y: auto; animation: modalIn 0.3s cubic-bezier(0.22,1,0.36,1); }
+    @keyframes modalIn { from { transform: translateY(20px) scale(0.97); opacity: 0; } to { transform: none; opacity: 1; } }
+    .modal__head { padding: 20px 24px 14px; border-bottom: 1px solid var(--gris-clair); display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; }
+    .modal__title { font-family: var(--font-titre); font-size: 1.1rem; font-weight: 500; }
+    .modal__close { width: 28px; height: 28px; border-radius: 6px; display: flex; align-items: center; justify-content: center; color: var(--gris-texte); transition: all var(--transition); flex-shrink: 0; }
+    .modal__close:hover { background: var(--fond); color: var(--noir); }
+    .modal__body { padding: 20px 24px; }
+    .modal__row { display: flex; gap: 20px; margin-bottom: 14px; }
+    .modal__field { flex: 1; }
+    .modal__label { font-size: 0.65rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gris-texte); margin-bottom: 3px; }
+    .modal__value { font-size: 0.85rem; font-weight: 500; }
+    .modal__actions { padding: 12px 24px 18px; display: flex; gap: 10px; justify-content: flex-end; }
+
+    /* SECTION HEAD */
+    .sec-head { margin-bottom: 18px; }
+    .sec-head__title { font-family: var(--font-titre); font-size: 1.4rem; font-weight: 500; margin-bottom: 4px; }
+    .sec-head__sub { font-size: 0.78rem; color: var(--gris-texte); }
+
+    /* STATES */
+    .loading-state { text-align: center; padding: 40px; color: var(--gris-texte); font-size: 0.82rem; }
+    .spinner { width: 26px; height: 26px; border: 2.5px solid var(--gris-clair); border-top-color: var(--bleu); border-radius: 50%; animation: spin 0.7s linear infinite; margin: 0 auto 12px; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .empty-state { text-align: center; padding: 40px; color: var(--gris-texte); }
+    .empty-state p { font-size: 0.85rem; margin-top: 10px; }
+
+    /* TOAST */
+    .admin-toast { position: fixed; bottom: 24px; right: 24px; z-index: 9999; background: #fff; border-radius: var(--radius); padding: 12px 18px; font-size: 0.82rem; font-weight: 500; box-shadow: 0 8px 32px rgba(0,0,0,0.14); border: 1px solid var(--gris-clair); display: none; align-items: center; gap: 10px; max-width: 300px; }
+    .admin-toast.open { display: flex; }
+    .admin-toast--success { border-left: 3px solid var(--success); }
+    .admin-toast--error   { border-left: 3px solid var(--danger); }
+
+    /* DOT */
+    .dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; margin-right: 5px; vertical-align: middle; }
+
+    /* RESPONSIVE */
+    @media (max-width: 1050px) { .dash-grid { grid-template-columns: 1fr; } }
+    @media (max-width: 860px) {
+      .admin-sidebar { transform: translateX(-100%); }
+      .admin-sidebar.open { transform: translateX(0); }
+      .admin-main { margin-left: 0; }
+      .admin-header__burger { display: flex; }
+      .msg-layout { grid-template-columns: 1fr; height: auto; }
+      .msg-list { max-height: 220px; border-right: none; border-bottom: 1px solid var(--gris-clair); }
+      .msg-body { max-height: 300px; }
+      .kpi-grid { grid-template-columns: repeat(2,1fr); }
+    }
+    @media (max-width: 560px) {
+      .admin-content { padding: 14px; }
+      .kpi-grid { grid-template-columns: repeat(2,1fr); }
+      .medias-grid { grid-template-columns: repeat(2,1fr); }
+      .clients-grid { grid-template-columns: 1fr; }
+      .cal-day { min-height: 60px; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="admin-layout">
+
+  <!-- SIDEBAR -->
+  <aside class="admin-sidebar" id="adminSidebar">
+    <div class="sidebar-brand">
+      <div>
+        <div class="sidebar-brand__name">Alyssa Fitness</div>
+        <div class="sidebar-brand__label">Administration</div>
+      </div>
+    </div>
+    <nav class="sidebar-nav">
+      <button class="nav-item active" data-section="dashboard" onclick="showSection('dashboard',this)">
+        <svg viewBox="0 0 20 20" fill="none" width="16" stroke="currentColor" stroke-width="1.6"><rect x="2" y="2" width="7" height="7" rx="1.5"/><rect x="11" y="2" width="7" height="7" rx="1.5"/><rect x="2" y="11" width="7" height="7" rx="1.5"/><rect x="11" y="11" width="7" height="7" rx="1.5"/></svg>
+        Dashboard
+      </button>
+      <button class="nav-item" data-section="calendrier" onclick="showSection('calendrier',this)">
+        <svg viewBox="0 0 20 20" fill="none" width="16" stroke="currentColor" stroke-width="1.6"><rect x="2" y="4" width="16" height="14" rx="2"/><path d="M6 2v4M14 2v4M2 9h16" stroke-linecap="round"/></svg>
+        Calendrier
+      </button>
+      <button class="nav-item" data-section="clients" onclick="showSection('clients',this)">
+        <svg viewBox="0 0 20 20" fill="none" width="16" stroke="currentColor" stroke-width="1.6"><circle cx="8" cy="7" r="3.5"/><path d="M1 17c0-3.314 3.134-6 7-6s7 2.686 7 6" stroke-linecap="round"/><circle cx="15" cy="6" r="2.5"/><path d="M18 16c0-2.21-1.343-4-3-4" stroke-linecap="round"/></svg>
+        Clients
+      </button>
+      <button class="nav-item" data-section="messagerie" onclick="showSection('messagerie',this)">
+        <svg viewBox="0 0 20 20" fill="none" width="16" stroke="currentColor" stroke-width="1.6"><path d="M3 4h14a1 1 0 011 1v8a1 1 0 01-1 1H7l-4 3V5a1 1 0 011-1z" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Messagerie
+        <span class="nav-badge" id="navMsgBadge">0</span>
+      </button>
+      <button class="nav-item" data-section="medias" onclick="showSection('medias',this)">
+        <svg viewBox="0 0 20 20" fill="none" width="16" stroke="currentColor" stroke-width="1.6"><rect x="2" y="3" width="16" height="14" rx="2"/><circle cx="7.5" cy="8.5" r="1.5"/><path d="M2 14l4-4 3 3 3-3 6 5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Médias
+      </button>
+    </nav>
+    <div class="sidebar-footer">
+      <a href="index.html" target="_blank" rel="noopener">
+        <svg viewBox="0 0 14 14" fill="none" width="12" stroke="currentColor" stroke-width="1.5"><path d="M1 7h12M8 3l4 4-4 4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Voir le site
+      </a>
+    </div>
+  </aside>
+
+  <div class="admin-overlay" id="adminOverlay" onclick="closeSidebar()"></div>
+
+  <!-- MAIN -->
+  <main class="admin-main">
+    <header class="admin-header">
+      <button class="admin-header__burger" onclick="toggleSidebar()" aria-label="Menu">
+        <svg viewBox="0 0 20 20" fill="none" width="20" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M3 5h14M3 10h14M3 15h14"/></svg>
+      </button>
+      <div class="admin-header__title" id="adminPageTitle">Dashboard</div>
+      <div class="admin-header__date" id="adminDate"></div>
+      <a href="index.html" target="_blank" class="admin-header__link" rel="noopener">
+        <svg viewBox="0 0 14 14" fill="none" width="12" stroke="currentColor" stroke-width="1.5"><path d="M1 7h12M8 3l4 4-4 4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Site
+      </a>
+    </header>
+
+    <div class="admin-content">
+
+      <!-- DASHBOARD -->
+      <section id="sec-dashboard" class="admin-section active">
+        <div class="sec-head">
+          <h1 class="sec-head__title" id="dashGreet">Bonjour, Alyssa ✦</h1>
+          <p class="sec-head__sub" id="dashSubtitle">Chargement…</p>
+        </div>
+        <div class="kpi-grid" id="kpiGrid"><div class="loading-state"><div class="spinner"></div>Chargement des données…</div></div>
+        <div class="dash-grid">
+          <div class="dash-card">
+            <div class="dash-card__head">
+              <span class="dash-card__title">Rendez-vous — 4 semaines</span>
+              <span style="font-size:0.7rem;color:var(--gris-texte)">barres hebdomadaires</span>
+            </div>
+            <div class="dash-card__body">
+              <div class="chart-canvas-wrap"><canvas id="chartRdv"></canvas></div>
+            </div>
+          </div>
+          <div class="dash-card">
+            <div class="dash-card__head">
+              <span class="dash-card__title">Prochains rendez-vous</span>
+              <button class="btn btn--ghost" style="padding:5px 12px;font-size:0.72rem;" onclick="showSection('calendrier',document.querySelector('[data-section=calendrier]'))">Voir tout</button>
+            </div>
+            <div class="recent-list" id="recentRdvList" style="padding:0">
+              <div class="loading-state"><div class="spinner"></div></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- CALENDRIER -->
+      <section id="sec-calendrier" class="admin-section">
+        <div class="cal-header">
+          <div class="sec-head" style="margin:0"><h2 class="sec-head__title">Calendrier</h2></div>
+          <div class="cal-nav">
+            <button class="btn btn--icon" onclick="calNav(-1)" aria-label="Mois précédent">
+              <svg viewBox="0 0 16 16" fill="none" width="16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M10 4L6 8l4 4"/></svg>
+            </button>
+            <span class="cal-nav__title" id="calTitle">…</span>
+            <button class="btn btn--icon" onclick="calNav(1)" aria-label="Mois suivant">
+              <svg viewBox="0 0 16 16" fill="none" width="16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M6 4l4 4-4 4"/></svg>
+            </button>
+          </div>
+          <button class="btn btn--ghost" onclick="calGoToday()">Aujourd'hui</button>
+        </div>
+        <div class="cal-grid-wrap">
+          <div class="cal-weekdays">
+            <div class="cal-weekday">Lun</div><div class="cal-weekday">Mar</div><div class="cal-weekday">Mer</div>
+            <div class="cal-weekday">Jeu</div><div class="cal-weekday">Ven</div><div class="cal-weekday">Sam</div>
+            <div class="cal-weekday">Dim</div>
+          </div>
+          <div class="cal-days" id="calDays"></div>
+        </div>
+        <div class="cal-day-panel" id="calDayPanel">
+          <div class="cal-day-panel__title" id="calDayTitle"></div>
+          <div id="calDayRdvs"></div>
+        </div>
+      </section>
+
+      <!-- CLIENTS -->
+      <section id="sec-clients" class="admin-section">
+        <div class="clients-header">
+          <div class="sec-head" style="margin:0">
+            <h2 class="sec-head__title">Clients</h2>
+            <p class="sec-head__sub" id="clientsSubtitle">…</p>
+          </div>
+          <div class="search-wrap">
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="7" cy="7" r="5"/><path d="M12 12l2.5 2.5" stroke-linecap="round"/></svg>
+            <input type="search" class="search-input" id="clientSearch" placeholder="Rechercher…" oninput="filterClients(this.value)">
+          </div>
+        </div>
+        <div class="clients-grid" id="clientsGrid"><div class="loading-state"><div class="spinner"></div>Chargement…</div></div>
+      </section>
+
+      <!-- MESSAGERIE -->
+      <section id="sec-messagerie" class="admin-section">
+        <div class="sec-head">
+          <h2 class="sec-head__title">Messagerie</h2>
+          <p class="sec-head__sub">Messages reçus via le formulaire de contact</p>
+        </div>
+        <div class="msg-layout">
+          <div class="msg-list">
+            <div class="msg-list__head"><h3>Messages</h3></div>
+            <div id="msgListItems"><div class="loading-state"><div class="spinner"></div></div></div>
+          </div>
+          <div class="msg-main" id="msgMainPanel">
+            <div class="msg-empty" id="msgEmpty">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H7l-5 3V6c0-1.1.9-2 2-2z"/></svg>
+              <p>Sélectionnez un message</p>
+            </div>
+            <div id="msgConversation" style="display:none;flex-direction:column;height:100%">
+              <div class="msg-main__head" id="msgConvHead"></div>
+              <div class="msg-body" id="msgConvBody"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- MÉDIAS -->
+      <section id="sec-medias" class="admin-section">
+        <div class="sec-head">
+          <h2 class="sec-head__title">Médias</h2>
+          <p class="sec-head__sub">Photos et vidéos utilisées sur le site</p>
+        </div>
+        <h3 style="font-family:var(--font-titre);font-size:1rem;font-weight:500;margin-bottom:14px">Photos (7)</h3>
+        <div class="medias-grid" id="mediasPhotos"></div>
+        <h3 style="font-family:var(--font-titre);font-size:1rem;font-weight:500;margin:4px 0 14px">Vidéos (2)</h3>
+        <div class="medias-grid" id="mediasVideos"></div>
+        <h3 style="font-family:var(--font-titre);font-size:1rem;font-weight:500;margin:4px 0 14px">Ajouter un média</h3>
+        <div class="upload-zone" id="uploadZone">
+          <svg viewBox="0 0 24 24" fill="none" width="36" stroke="currentColor" stroke-width="1.5"><path d="M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2M12 4v12M8 8l4-4 4 4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <p class="upload-zone__title">Glisser-déposer ou cliquer pour sélectionner</p>
+          <p class="upload-zone__sub">JPG, PNG, WebP, MP4 · Max 10 Mo<br>
+          <span style="color:var(--bleu)">ℹ️ Configurez Supabase Storage (bucket «medias») pour activer l'upload.</span></p>
+          <input type="file" id="uploadInput" accept="image/*,video/mp4,video/webm" style="display:none" multiple onchange="handleUpload(this.files)">
+        </div>
+      </section>
+
+    </div>
+  </main>
+</div>
+
+<!-- MODAL RDV -->
+<div class="modal-overlay" id="rdvModal" onclick="closeModal('rdvModal')">
+  <div class="modal" onclick="event.stopPropagation()">
+    <div class="modal__head">
+      <div><div class="modal__title" id="modalRdvTitle">Rendez-vous</div><div id="modalRdvBadge" style="margin-top:4px"></div></div>
+      <button class="modal__close" onclick="closeModal('rdvModal')"><svg viewBox="0 0 16 16" fill="none" width="16" stroke="currentColor" stroke-width="2"><path d="M4 4l8 8M12 4l-8 8" stroke-linecap="round"/></svg></button>
+    </div>
+    <div class="modal__body" id="modalRdvBody"></div>
+    <div class="modal__actions" id="modalRdvActions"></div>
+  </div>
+</div>
+
+<!-- MODAL CLIENT -->
+<div class="modal-overlay" id="clientModal" onclick="closeModal('clientModal')">
+  <div class="modal" onclick="event.stopPropagation()">
+    <div class="modal__head">
+      <div class="modal__title" id="modalClientTitle">Fiche client</div>
+      <button class="modal__close" onclick="closeModal('clientModal')"><svg viewBox="0 0 16 16" fill="none" width="16" stroke="currentColor" stroke-width="2"><path d="M4 4l8 8M12 4l-8 8" stroke-linecap="round"/></svg></button>
+    </div>
+    <div class="modal__body" id="modalClientBody"></div>
+    <div class="modal__actions" id="modalClientActions"></div>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="admin-toast" id="adminToast">
+  <span id="toastMsg"></span>
+</div>
+
+<script>
+/* ═══════════════════════════════════════════════════════
+   ALYSSA FITNESS — admin.html — Supabase Admin Panel
+═══════════════════════════════════════════════════════ */
+
+const SUPABASE_URL  = 'https://tokeglpixnwhfocsyrsg.supabase.co';
+const SUPABASE_ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRva2VnbHBpeG53aGZvY3N5cnNnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODM2MDMwNTUsImV4cCI6MjA5OTE3OTA1NX0._7-FKr9JMBr95heFgyoYS_Ucm-S0aIfDKGCLnF_APlk';
+const sb = supabase.createClient(SUPABASE_URL, SUPABASE_ANON);
+
+const SESSION_TYPES = {
+  bilan:    { label: 'Bilan initial',  duree: '45 min', color: '#6DBE9A' },
+  seance:   { label: 'Séance guidée',  duree: '60 min', color: '#2D9CDB' },
+  coaching: { label: 'Coaching perso', duree: '90 min', color: '#F4C57A' },
+};
+
+const MOIS = ['Janvier','Février','Mars','Avril','Mai','Juin','Juillet','Août','Septembre','Octobre','Novembre','Décembre'];
+
+let state = {
+  reservations: [],
+  contacts: [],
+  selectedContactId: null,
+  readIds: new Set(JSON.parse(localStorage.getItem('af_admin_read') || '[]')),
+  calYear: new Date().getFullYear(),
+  calMonth: new Date().getMonth(),
+  chart: null,
+  allClients: [],
+};
+
+/* ── NAV ────────────────────────────────────────── */
+function showSection(id, btn) {
+  document.querySelectorAll('.admin-section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.nav-item').forEach(b => { b.classList.remove('active'); b.removeAttribute('aria-current'); });
+  document.getElementById('sec-' + id).classList.add('active');
+  if (btn) { btn.classList.add('active'); btn.setAttribute('aria-current','page'); }
+  const titles = { dashboard:'Dashboard', calendrier:'Calendrier', clients:'Clients', messagerie:'Messagerie', medias:'Médias' };
+  document.getElementById('adminPageTitle').textContent = titles[id] || id;
+  closeSidebar();
+  if (id === 'calendrier') renderCalendar();
+  if (id === 'clients') renderClients();
+  if (id === 'messagerie') renderMessagerie();
+  if (id === 'medias') renderMedias();
+}
+
+function toggleSidebar() {
+  document.getElementById('adminSidebar').classList.toggle('open');
+  document.getElementById('adminOverlay').classList.toggle('open');
+}
+function closeSidebar() {
+  document.getElementById('adminSidebar').classList.remove('open');
+  document.getElementById('adminOverlay').classList.remove('open');
+}
+
+/* ── UTILS ──────────────────────────────────────── */
+function nowYMD() { return new Date().toISOString().substring(0,10); }
+function toYMD(d) { return new Date(d).toISOString().substring(0,10); }
+
+function fmtDate(ds, opts) {
+  if (!ds) return '—';
+  return new Date(ds + (ds.includes('T') ? '' : 'T12:00:00'))
+    .toLocaleDateString('fr-FR', opts || { day:'2-digit', month:'short', year:'numeric' });
+}
+function fmtTime(t) { return t ? t.substring(0,5) : '—'; }
+function fmtDateTime(d) {
+  if (!d) return '—';
+  return new Date(d).toLocaleDateString('fr-FR', { day:'2-digit', month:'short', year:'numeric', hour:'2-digit', minute:'2-digit' });
+}
+function weekNum(d) {
+  const date = new Date(d); date.setHours(0,0,0,0);
+  date.setDate(date.getDate() + 3 - (date.getDay()+6)%7);
+  const w1 = new Date(date.getFullYear(), 0, 4);
+  return 1 + Math.round(((date - w1) / 86400000 - 3 + (w1.getDay()+6)%7) / 7);
+}
+
+function showToast(msg, type='success') {
+  const t = document.getElementById('adminToast');
+  document.getElementById('toastMsg').textContent = msg;
+  t.className = 'admin-toast open admin-toast--' + type;
+  clearTimeout(t._t);
+  t._t = setTimeout(() => t.classList.remove('open'), 3200);
+}
+
+function openModal(id)  { document.getElementById(id).classList.add('open'); }
+function closeModal(id) { document.getElementById(id).classList.remove('open'); }
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') document.querySelectorAll('.modal-overlay.open').forEach(m => m.classList.remove('open'));
+});
+
+/* ── LOAD DATA ──────────────────────────────────── */
+async function loadData() {
+  try {
+    const [r1, r2] = await Promise.all([
+      sb.from('reservations').select('id, prenom, nom, email, telephone, created_at, disponibilite_id, disponibilites(id, date_seance, heure_debut, heure_fin, type_seance, duree_min)').order('created_at', { ascending: false }),
+      sb.from('contacts').select('id, prenom, nom, email, telephone, objectif, message, created_at').order('created_at', { ascending: false }),
+    ]);
+    if (!r1.error) state.reservations = r1.data || [];
+    else console.warn('reservations:', r1.error.message);
+    if (!r2.error) state.contacts = r2.data || [];
+    else console.warn('contacts:', r2.error.message);
+    renderDashboard();
+    updateMsgBadge();
+  } catch(err) {
+    console.error(err);
+    showToast('Erreur Supabase — vérifiez la connexion', 'error');
+  }
+}
+
+function setupRealtime() {
+  sb.channel('admin-rt')
+    .on('postgres_changes', { event:'INSERT', schema:'public', table:'reservations' }, async () => { await loadData(); showToast('Nouveau rendez-vous !'); })
+    .on('postgres_changes', { event:'INSERT', schema:'public', table:'contacts' },     async () => { await loadData(); showToast('Nouveau message !'); })
+    .subscribe();
+}
+
+/* ── DASHBOARD ──────────────────────────────────── */
+function renderDashboard() {
+  const today = nowYMD();
+  const now = new Date();
+  const wS = toYMD(new Date(now.getFullYear(), now.getMonth(), now.getDate() - ((now.getDay()+6)%7)));
+  const wE = toYMD(new Date(+new Date(wS) + 6*86400000));
+  const mS = today.substring(0,7) + '-01';
+  const mE = today.substring(0,7) + '-31';
+
+  const withDispo = state.reservations.filter(r => r.disponibilites);
+  const todayR = withDispo.filter(r => r.disponibilites.date_seance === today);
+  const weekR  = withDispo.filter(r => r.disponibilites.date_seance >= wS && r.disponibilites.date_seance <= wE);
+  const monthR = withDispo.filter(r => r.disponibilites.date_seance >= mS && r.disponibilites.date_seance <= mE);
+  const upcomR = withDispo.filter(r => r.disponibilites.date_seance >= today);
+  const emails = [...new Set(state.reservations.map(r => r.email).filter(Boolean))];
+  const unread = state.contacts.filter(c => !state.readIds.has(c.id));
+  const now30  = new Date(); now30.setDate(now30.getDate() - 30);
+  const newCli = emails.filter(e => { const r = state.reservations.find(x => x.email===e); return r && new Date(r.created_at) > now30; });
+
+  const kpis = [
+    { lbl:'Clients',        val: emails.length,        sub:'emails uniques',       col:'#2D9CDB' },
+    { lbl:'Réservations',   val: state.reservations.length, sub:'total',            col:'#2D9CDB' },
+    { lbl:"Aujourd'hui",    val: todayR.length,        sub:'rendez-vous',           col: todayR.length ? '#6DBE9A' : '#888' },
+    { lbl:'Cette semaine',  val: weekR.length,         sub:'rendez-vous',           col:'#2D9CDB' },
+    { lbl:'Ce mois',        val: monthR.length,        sub:'rendez-vous',           col:'#2D9CDB' },
+    { lbl:'À venir',        val: upcomR.length,        sub:'rendez-vous',           col:'#6DBE9A' },
+    { lbl:'Messages',       val: state.contacts.length, sub:`${unread.length} non lu${unread.length!==1?'s':''}`, col: unread.length ? '#F4C57A' : '#888' },
+    { lbl:'Nouveaux',       val: newCli.length,        sub:'clients (30 jours)',    col:'#6DBE9A' },
+  ];
+
+  document.getElementById('kpiGrid').innerHTML = kpis.map(k => `
+    <div class="kpi-card">
+      <div class="kpi-card__eyebrow">${k.lbl}</div>
+      <div class="kpi-card__value" style="color:${k.col}">${k.val}</div>
+      <div class="kpi-card__label">${k.sub}</div>
+    </div>`).join('');
+
+  const h = now.getHours();
+  const g = h < 12 ? 'Bonne matinée' : h < 18 ? 'Bon après-midi' : 'Bonne soirée';
+  document.getElementById('dashSubtitle').textContent =
+    `${g} — ${upcomR.length} RDV à venir · ${unread.length} message${unread.length!==1?'s':''} non lu${unread.length!==1?'s':''}`;
+
+  renderChart(withDispo);
+  renderRecentRdv(upcomR.slice(0,5));
+}
+
+function renderChart(rdvs) {
+  const labels = [], counts = [];
+  for (let i = 3; i >= 0; i--) {
+    const d = new Date(); d.setDate(d.getDate() - i*7);
+    labels.push('S' + weekNum(d));
+    const wS = toYMD(new Date(d.getFullYear(), d.getMonth(), d.getDate() - ((d.getDay()+6)%7)));
+    const wE = toYMD(new Date(+new Date(wS) + 6*86400000));
+    counts.push(rdvs.filter(r => r.disponibilites.date_seance >= wS && r.disponibilites.date_seance <= wE).length);
+  }
+  if (state.chart) state.chart.destroy();
+  const ctx = document.getElementById('chartRdv').getContext('2d');
+  state.chart = new Chart(ctx, {
+    type: 'bar',
+    data: { labels, datasets: [{ label:'RDV', data:counts, backgroundColor:'rgba(45,156,219,0.18)', borderColor:'#2D9CDB', borderWidth:2, borderRadius:6 }] },
+    options: {
+      responsive:true, maintainAspectRatio:false,
+      plugins: { legend: { display:false } },
+      scales: {
+        y: { beginAtZero:true, ticks:{ stepSize:1, font:{ family:'Montserrat', size:11 } }, grid:{ color:'rgba(0,0,0,0.05)' } },
+        x: { ticks:{ font:{ family:'Montserrat', size:11 } }, grid:{ display:false } },
+      }
+    }
+  });
+}
+
+function renderRecentRdv(list) {
+  const el = document.getElementById('recentRdvList');
+  if (!list.length) { el.innerHTML = '<div class="empty-state"><p>Aucun RDV à venir</p></div>'; return; }
+  el.innerHTML = list.map(r => {
+    const d = r.disponibilites;
+    const t = SESSION_TYPES[d.type_seance] || { label: d.type_seance||'—', color:'#888' };
+    return `
+      <div class="rdv-card" style="border-radius:0;border-left:0;border-right:0;border-top:0;margin:0;" onclick="openRdvModal('${r.id}')">
+        <span class="dot" style="background:${t.color}"></span>
+        <div style="flex:1">
+          <div class="rdv-card__name">${r.prenom} ${r.nom}</div>
+          <div class="rdv-card__type">${fmtDate(d.date_seance)} · ${fmtTime(d.heure_debut)} · ${t.label}</div>
+        </div>
+        <svg viewBox="0 0 16 16" fill="none" width="13" stroke="currentColor" stroke-width="1.5" class="rdv-card__arrow"><path d="M6 4l4 4-4 4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>`;
+  }).join('');
+}
+
+/* ── MODAL RDV ──────────────────────────────────── */
+function openRdvModal(id) {
+  const r = state.reservations.find(x => String(x.id) === String(id));
+  if (!r) return;
+  const d = r.disponibilites;
+  const t = SESSION_TYPES[d?.type_seance] || { label: d?.type_seance||'—', color:'#888', duree:'—' };
+  document.getElementById('modalRdvTitle').textContent = `${r.prenom} ${r.nom}`;
+  document.getElementById('modalRdvBadge').innerHTML = `<span class="badge badge--blue"><span class="dot" style="background:${t.color};width:6px;height:6px"></span>${t.label}</span>`;
+  document.getElementById('modalRdvBody').innerHTML = `
+    <div class="modal__row">
+      <div class="modal__field"><div class="modal__label">Date</div><div class="modal__value">${fmtDate(d?.date_seance, {weekday:'long',day:'numeric',month:'long',year:'numeric'})}</div></div>
+      <div class="modal__field"><div class="modal__label">Heure</div><div class="modal__value">${fmtTime(d?.heure_debut)} – ${fmtTime(d?.heure_fin)}</div></div>
+    </div>
+    <div class="modal__row">
+      <div class="modal__field"><div class="modal__label">Type</div><div class="modal__value">${t.label}</div></div>
+      <div class="modal__field"><div class="modal__label">Durée</div><div class="modal__value">${d?.duree_min||t.duree} min</div></div>
+    </div>
+    <div style="height:1px;background:var(--gris-clair);margin:12px 0 14px"></div>
+    <div class="modal__row">
+      <div class="modal__field"><div class="modal__label">Email</div><div class="modal__value"><a href="mailto:${r.email}" style="color:var(--bleu)">${r.email}</a></div></div>
+    </div>
+    <div class="modal__row">
+      <div class="modal__field"><div class="modal__label">Téléphone</div><div class="modal__value">${r.telephone||'—'}</div></div>
+      <div class="modal__field"><div class="modal__label">Réservé le</div><div class="modal__value">${fmtDateTime(r.created_at)}</div></div>
+    </div>`;
+  document.getElementById('modalRdvActions').innerHTML = `
+    <a href="mailto:${r.email}?subject=Votre rendez-vous Alyssa Fitness" class="btn btn--primary" style="text-decoration:none">
+      <svg viewBox="0 0 16 16" fill="none" width="13" stroke="currentColor" stroke-width="1.5"><path d="M2 4l6 5 6-5M2 4h12v9H2z" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      Email
+    </a>
+    <button class="btn btn--ghost" onclick="closeModal('rdvModal')">Fermer</button>`;
+  openModal('rdvModal');
+}
+
+/* ── CALENDRIER ─────────────────────────────────── */
+function renderCalendar() {
+  const y = state.calYear, m = state.calMonth;
+  document.getElementById('calTitle').textContent = `${MOIS[m]} ${y}`;
+  const first = new Date(y, m, 1);
+  const last  = new Date(y, m+1, 0);
+  const startDow = (first.getDay() + 6) % 7;
+  const today = nowYMD();
+  const rdvByDate = {};
+  state.reservations.forEach(r => {
+    if (!r.disponibilites) return;
+    const ds = r.disponibilites.date_seance;
+    (rdvByDate[ds] = rdvByDate[ds] || []).push(r);
+  });
+  let html = '';
+  const prevLast = new Date(y, m, 0);
+  for (let i = startDow-1; i >= 0; i--) html += `<div class="cal-day cal-day--other"><div class="cal-day__num">${prevLast.getDate()-i}</div></div>`;
+  for (let d = 1; d <= last.getDate(); d++) {
+    const ds = `${y}-${String(m+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
+    const rdvs = rdvByDate[ds] || [];
+    const isToday = ds === today;
+    html += `<div class="cal-day${isToday?' cal-day--today':''}${rdvs.length?' has-event':''}" onclick="selectCalDay('${ds}')">
+      <div class="cal-day__num">${d}</div>`;
+    rdvs.slice(0,2).forEach(r => {
+      const ttype = r.disponibilites?.type_seance;
+      const cls = ttype==='bilan'?'cal-event--bilan':ttype==='coaching'?'cal-event--coaching':'';
+      html += `<div class="cal-event ${cls}" onclick="event.stopPropagation();openRdvModal('${r.id}')" title="${r.prenom} ${r.nom}">${fmtTime(r.disponibilites?.heure_debut)} ${r.prenom}</div>`;
+    });
+    if (rdvs.length > 2) html += `<div style="font-size:0.6rem;color:var(--gris-texte);padding:1px 5px">+${rdvs.length-2}</div>`;
+    html += `</div>`;
+  }
+  const rem = (7 - ((startDow + last.getDate()) % 7)) % 7;
+  for (let d = 1; d <= rem; d++) html += `<div class="cal-day cal-day--other"><div class="cal-day__num">${d}</div></div>`;
+  document.getElementById('calDays').innerHTML = html;
+}
+
+function calNav(dir) {
+  state.calMonth += dir;
+  if (state.calMonth > 11) { state.calMonth = 0; state.calYear++; }
+  if (state.calMonth < 0)  { state.calMonth = 11; state.calYear--; }
+  renderCalendar();
+  document.getElementById('calDayPanel').classList.remove('open');
+}
+
+function calGoToday() {
+  const now = new Date();
+  state.calYear = now.getFullYear(); state.calMonth = now.getMonth();
+  renderCalendar(); selectCalDay(nowYMD());
+}
+
+function selectCalDay(ds) {
+  const rdvs = state.reservations.filter(r => r.disponibilites?.date_seance === ds)
+    .sort((a,b) => (a.disponibilites?.heure_debut||'').localeCompare(b.disponibilites?.heure_debut||''));
+  document.getElementById('calDayTitle').textContent = fmtDate(ds, {weekday:'long',day:'numeric',month:'long',year:'numeric'});
+  document.getElementById('calDayRdvs').innerHTML = rdvs.length
+    ? rdvs.map(r => {
+        const d = r.disponibilites;
+        const t = SESSION_TYPES[d?.type_seance] || { label: d?.type_seance||'—', color:'#888' };
+        return `<div class="rdv-card" onclick="openRdvModal('${r.id}')">
+          <div class="rdv-card__time">${fmtTime(d?.heure_debut)}</div>
+          <div style="flex:1"><div class="rdv-card__name">${r.prenom} ${r.nom}</div><div class="rdv-card__type">${t.label} · ${d?.duree_min||''} min · ${r.email}</div></div>
+          <svg viewBox="0 0 16 16" fill="none" width="13" stroke="currentColor" stroke-width="1.5" class="rdv-card__arrow"><path d="M6 4l4 4-4 4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>`;
+      }).join('')
+    : '<div class="empty-state" style="padding:16px 0"><p>Aucun rendez-vous ce jour.</p></div>';
+  const panel = document.getElementById('calDayPanel');
+  panel.classList.add('open');
+  panel.scrollIntoView({ behavior:'smooth', block:'nearest' });
+}
+
+/* ── CLIENTS ────────────────────────────────────── */
+function buildClients() {
+  const map = {};
+  state.reservations.forEach(r => {
+    const e = r.email; if (!e) return;
+    if (!map[e]) map[e] = { prenom:r.prenom, nom:r.nom, email:e, telephone:r.telephone, rdvs:[], since:r.created_at };
+    map[e].rdvs.push(r);
+    if (new Date(r.created_at) < new Date(map[e].since)) map[e].since = r.created_at;
+  });
+  state.contacts.forEach(c => {
+    const e = c.email; if (!e) return;
+    if (!map[e]) map[e] = { prenom:c.prenom, nom:c.nom, email:e, telephone:c.telephone, rdvs:[], since:c.created_at };
+    (map[e].msgs = map[e].msgs || []).push(c);
+  });
+  state.allClients = Object.values(map).sort((a,b) => a.nom.localeCompare(b.nom));
+  return state.allClients;
+}
+
+function renderClients() {
+  const list = buildClients();
+  document.getElementById('clientsSubtitle').textContent = `${list.length} client${list.length!==1?'s':''} enregistré${list.length!==1?'s':''}`;
+  displayClients(list);
+}
+
+function displayClients(list) {
+  const el = document.getElementById('clientsGrid');
+  if (!list.length) { el.innerHTML = '<div class="empty-state"><p>Aucun client trouvé</p></div>'; return; }
+  el.innerHTML = list.map(c => {
+    const initials = (c.prenom[0]||'')+(c.nom[0]||'');
+    const next = c.rdvs.filter(r => r.disponibilites?.date_seance >= nowYMD()).sort((a,b)=>(a.disponibilites?.date_seance||'').localeCompare(b.disponibilites?.date_seance||''))[0];
+    return `<div class="client-card" onclick="openClientModal('${encodeURIComponent(c.email)}')">
+      <div class="client-card__top">
+        <div class="client-avatar">${initials.toUpperCase()}</div>
+        <div><div class="client-card__name">${c.prenom} ${c.nom}</div><div class="client-card__email">${c.email}</div></div>
+      </div>
+      <div class="client-card__stats">
+        <div><div class="stat-val">${c.rdvs.length}</div><div class="stat-lbl">Rendez-vous</div></div>
+        <div><div class="stat-val" style="font-size:0.78rem;color:var(--texte)">${next ? fmtDate(next.disponibilites?.date_seance) : '—'}</div><div class="stat-lbl">Prochain RDV</div></div>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function filterClients(q) {
+  const lower = q.toLowerCase();
+  displayClients(state.allClients.filter(c => (c.prenom+' '+c.nom+' '+c.email).toLowerCase().includes(lower)));
+}
+
+function openClientModal(enc) {
+  const email = decodeURIComponent(enc);
+  const c = state.allClients.find(x => x.email === email);
+  if (!c) return;
+  const initials = (c.prenom[0]||'')+(c.nom[0]||'');
+  document.getElementById('modalClientTitle').innerHTML =
+    `<span style="display:flex;align-items:center;gap:10px"><span class="client-avatar" style="width:34px;height:34px;font-size:0.82rem">${initials.toUpperCase()}</span>${c.prenom} ${c.nom}</span>`;
+  const future = c.rdvs.filter(r => r.disponibilites?.date_seance >= nowYMD()).sort((a,b)=>(a.disponibilites?.date_seance||'').localeCompare(b.disponibilites?.date_seance||''));
+  const past   = c.rdvs.filter(r => r.disponibilites?.date_seance < nowYMD()).sort((a,b)=>(b.disponibilites?.date_seance||'').localeCompare(a.disponibilites?.date_seance||''));
+  document.getElementById('modalClientBody').innerHTML = `
+    <div class="modal__row">
+      <div class="modal__field"><div class="modal__label">Email</div><div class="modal__value"><a href="mailto:${c.email}" style="color:var(--bleu)">${c.email}</a></div></div>
+      <div class="modal__field"><div class="modal__label">Téléphone</div><div class="modal__value">${c.telephone||'—'}</div></div>
+    </div>
+    <div style="height:1px;background:var(--gris-clair);margin:10px 0 14px"></div>
+    <div class="modal__label" style="margin-bottom:8px">À venir (${future.length})</div>
+    ${future.length ? future.map(r => { const d=r.disponibilites; const t=SESSION_TYPES[d?.type_seance]||{label:d?.type_seance||'—',color:'#888'}; return `<div style="padding:7px 10px;background:var(--fond);border-radius:8px;margin-bottom:6px;font-size:0.78rem"><span class="dot" style="background:${t.color}"></span><strong>${fmtDate(d?.date_seance)}</strong> à ${fmtTime(d?.heure_debut)} — ${t.label}</div>`; }).join('') : '<p style="color:var(--gris-texte);font-size:0.78rem;margin-bottom:8px">Aucun</p>'}
+    <div class="modal__label" style="margin:8px 0">Historique (${past.length})</div>
+    ${past.length ? past.slice(0,3).map(r => { const d=r.disponibilites; const t=SESSION_TYPES[d?.type_seance]||{label:d?.type_seance||'—'}; return `<div style="padding:7px 10px;border:1px solid var(--gris-clair);border-radius:8px;margin-bottom:6px;font-size:0.78rem;color:var(--gris-texte)">${fmtDate(d?.date_seance)} · ${fmtTime(d?.heure_debut)} · ${t.label}</div>`; }).join('') : '<p style="color:var(--gris-texte);font-size:0.78rem">Aucun</p>'}`;
+  document.getElementById('modalClientActions').innerHTML = `
+    <a href="mailto:${c.email}" class="btn btn--primary" style="text-decoration:none">
+      <svg viewBox="0 0 16 16" fill="none" width="13" stroke="currentColor" stroke-width="1.5"><path d="M2 4l6 5 6-5M2 4h12v9H2z" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      Contacter
+    </a>
+    <button class="btn btn--ghost" onclick="closeModal('clientModal')">Fermer</button>`;
+  openModal('clientModal');
+}
+
+/* ── MESSAGERIE ─────────────────────────────────── */
+function updateMsgBadge() {
+  const n = state.contacts.filter(c => !state.readIds.has(c.id)).length;
+  const badge = document.getElementById('navMsgBadge');
+  badge.textContent = n; badge.classList.toggle('visible', n > 0);
+}
+
+function renderMessagerie() {
+  const el = document.getElementById('msgListItems');
+  if (!state.contacts.length) { el.innerHTML = '<div class="loading-state" style="padding:20px"><p>Aucun message reçu</p></div>'; return; }
+  el.innerHTML = state.contacts.map(c => {
+    const read = state.readIds.has(c.id);
+    const preview = (c.message||'').substring(0,58) + ((c.message||'').length>58?'…':'');
+    return `<div class="msg-item${state.selectedContactId===c.id?' active':''}" onclick="selectContact('${c.id}')">
+      <div class="msg-item__top">
+        <span class="msg-item__name">${!read?'<span class="msg-unread-dot"></span>':''}${c.prenom} ${c.nom}</span>
+        <span class="msg-item__date">${fmtDate(c.created_at,{day:'2-digit',month:'short'})}</span>
+      </div>
+      <div class="msg-item__preview">${preview||c.objectif||'(pas de message)'}</div>
+    </div>`;
+  }).join('');
+}
+
+function selectContact(id) {
+  const c = state.contacts.find(x => String(x.id) === String(id));
+  if (!c) return;
+  state.selectedContactId = c.id;
+  state.readIds.add(c.id);
+  localStorage.setItem('af_admin_read', JSON.stringify([...state.readIds]));
+  updateMsgBadge();
+  document.getElementById('msgEmpty').style.display = 'none';
+  const conv = document.getElementById('msgConversation');
+  conv.style.display = 'flex';
+  document.getElementById('msgConvHead').innerHTML = `
+    <div><div class="msg-main__client">${c.prenom} ${c.nom}</div><div class="msg-main__email">${c.email}${c.telephone?' · '+c.telephone:''}</div></div>
+    <a href="mailto:${c.email}?subject=Re:%20${encodeURIComponent(c.objectif||'Votre message')}" class="btn btn--primary" style="text-decoration:none;font-size:0.75rem;padding:7px 14px">Répondre par email</a>`;
+  document.getElementById('msgConvBody').innerHTML = `
+    <div class="msg-bubble msg-bubble--client">
+      <div class="msg-bubble__text">
+        ${c.objectif?`<strong style="display:block;margin-bottom:6px;font-size:0.75rem;color:var(--bleu)">Objectif : ${c.objectif}</strong>`:''}
+        ${(c.message||'(pas de message)').replace(/\n/g,'<br>')}
+      </div>
+      <div class="msg-bubble__meta">${fmtDateTime(c.created_at)}</div>
+    </div>
+    <div style="text-align:center;padding:10px 0;font-size:0.72rem;color:var(--gris-texte)">
+      💬 Répondez directement par email — la messagerie bidirectionnelle nécessite une table Supabase dédiée.
+    </div>`;
+  renderMessagerie();
+}
+
+/* ── MÉDIAS ─────────────────────────────────────── */
+const PHOTOS = [
+  { f:'alyssa-stretch-studio.webp',   l:'Hero homepage',  u:'index.html — fond hero' },
+  { f:'alyssa-squat-rack.webp',       l:'Photo coach',    u:'index.html — photo droite' },
+  { f:'alyssa-rope-training.webp',    l:'Entraînement',   u:'methode.html' },
+  { f:'alyssa-dumbbell-press.webp',   l:'Haltères',       u:'a-propos.html' },
+  { f:'alyssa-treadmill.webp',        l:'Tapis course',   u:'coaching.html — sèche' },
+  { f:'alyssa-squat-gym.webp',        l:'Squat gym',      u:'coaching.html — coaching' },
+  { f:'alyssa-energy-cycle.webp',     l:'Énergie cycle',  u:'index.html' },
+];
+const VIDEOS = [
+  { f:'alyssa-video-hero.mp4',            l:'Vidéo hero',    u:'index.html — modal' },
+  { f:'alyssa-coaching-sur-mesure.mp4',   l:'Coaching loop', u:'coaching.html — loop' },
+];
+
+function renderMedias() {
+  document.getElementById('mediasPhotos').innerHTML = PHOTOS.map(p => `
+    <div class="media-item">
+      <img class="media-item__img" src="assets/images/alyssa/${p.f}" alt="${p.l}" loading="lazy">
+      <div class="media-item__info"><div class="media-item__name">${p.l}</div><div class="media-item__usage">${p.u}</div></div>
+      <div class="media-item__actions">
+        <button class="media-item__btn" onclick="copyPath('assets/images/alyssa/${p.f}')">📋 Copier</button>
+        <a href="assets/images/alyssa/${p.f}" target="_blank" rel="noopener" class="media-item__btn">↗ Ouvrir</a>
+      </div>
+    </div>`).join('');
+
+  document.getElementById('mediasVideos').innerHTML = VIDEOS.map(v => `
+    <div class="media-item">
+      <div class="video-thumb"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><polygon points="10,8 16,12 10,16" fill="currentColor"/></svg></div>
+      <div class="media-item__info"><div class="media-item__name">${v.l}</div><div class="media-item__usage">${v.u}</div></div>
+      <div class="media-item__actions">
+        <button class="media-item__btn" onclick="copyPath('assets/videos/${v.f}')">📋 Copier</button>
+        <a href="assets/videos/${v.f}" target="_blank" rel="noopener" class="media-item__btn">↗ Ouvrir</a>
+      </div>
+    </div>`).join('');
+
+  const zone = document.getElementById('uploadZone');
+  zone.onclick = () => document.getElementById('uploadInput').click();
+  zone.ondragover = e => { e.preventDefault(); zone.classList.add('drag-over'); };
+  zone.ondragleave = () => zone.classList.remove('drag-over');
+  zone.ondrop = e => { e.preventDefault(); zone.classList.remove('drag-over'); handleUpload(e.dataTransfer.files); };
+}
+
+function handleUpload(files) {
+  if (!files?.length) return;
+  const f = files[0];
+  if (f.size > 10*1024*1024) { showToast('Fichier trop lourd (max 10 Mo)', 'error'); return; }
+  showToast('Upload désactivé — configurez Supabase Storage (bucket «medias»)', 'error');
+}
+
+function copyPath(path) {
+  if (navigator.clipboard) navigator.clipboard.writeText(path).then(() => showToast('Chemin copié !'));
+}
+
+/* ── INIT ───────────────────────────────────────── */
+document.addEventListener('DOMContentLoaded', () => {
+  // Date header
+  const opts = { weekday:'long', year:'numeric', month:'long', day:'numeric' };
+  document.getElementById('adminDate').textContent =
+    new Date().toLocaleDateString('fr-FR', opts).replace(/^\w/, c => c.toUpperCase());
+
+  loadData().then(() => setupRealtime());
+});
+</script>
+</body>
+</html>
