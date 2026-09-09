@@ -609,7 +609,7 @@
       max-width: 480px; margin: -6px auto 0; line-height: 1.75;
     }
     .temo-carousel-outer {
-      overflow-x: clip;
+      overflow: hidden;
       margin: 0 calc(-1 * var(--gutter));
       padding: 16px 0 40px;
       cursor: grab;
@@ -619,15 +619,46 @@
       display: flex;
       gap: 20px;
       width: max-content;
+      will-change: transform;
       animation: temo-scroll 34s linear infinite;
     }
-    .temo-track.paused, .temo-track:hover { animation-play-state: paused; }
+    /* Pause uniquement via JS (class) — jamais via :hover sur mobile) */
+    .temo-track.paused { animation-play-state: paused; }
+    /* :hover uniquement pour vrais pointeurs souris */
+    @media (hover: hover) and (pointer: fine) {
+      .temo-track:hover { animation-play-state: paused; }
+    }
     @keyframes temo-scroll {
       from { transform: translateX(0); }
       to   { transform: translateX(-50%); }
     }
     .testimonial-card { width: 320px; flex-shrink: 0; }
-    @media (max-width: 768px) { .testimonial-card { width: 272px; } }
+
+    /* ─── MOBILE : scroll natif + snap ──────────────────────────── */
+    @media (max-width: 768px) {
+      .temo-carousel-outer {
+        overflow-x: auto;
+        overflow-y: hidden;
+        -webkit-overflow-scrolling: touch;
+        scroll-snap-type: x mandatory;
+        cursor: default;
+        padding: 16px 0 32px;
+      }
+      .temo-carousel-outer:active { cursor: default; }
+      .temo-track {
+        animation: none !important;
+        transform: none !important;
+        gap: 14px;
+        padding: 0 20px;
+        /* Masquer les doublons aria-hidden sur mobile */
+      }
+      .temo-track [aria-hidden="true"] { display: none; }
+      .testimonial-card {
+        width: min(82vw, 288px);
+        scroll-snap-align: start;
+        flex-shrink: 0;
+      }
+    }
 
     /* ─── POUR QUI ? ─────────────────────────────────────────── */
     .pourqui-intro {

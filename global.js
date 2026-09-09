@@ -67,29 +67,28 @@ document.addEventListener('DOMContentLoaded', () => {
     reveals.forEach(el => observer.observe(el));
   }
 
-  /* ─── CAROUSEL TÉMOIGNAGES — drag & touch ───────────────── */
+  /* ─── CAROUSEL TÉMOIGNAGES — drag (desktop) / scroll natif (mobile) ── */
   const temoTrack = document.getElementById('temoTrack');
   if (temoTrack) {
-    let isDown = false, startXPos = 0, scrollLeft = 0;
+    const isMobile = () => window.matchMedia('(max-width: 768px)').matches;
 
-    // Pause animation on drag/touch
-    const pauseAnim  = () => temoTrack.classList.add('paused');
+    // Pause/resume (desktop animation seulement)
+    const pauseAnim  = () => { if (!isMobile()) temoTrack.classList.add('paused'); };
     const resumeAnim = () => temoTrack.classList.remove('paused');
 
-    // Mouse drag
-    temoTrack.addEventListener('mousedown',  e => { isDown = true; startXPos = e.pageX - temoTrack.offsetLeft; scrollLeft = temoTrack.scrollLeft; pauseAnim(); });
-    temoTrack.addEventListener('mouseleave', () => { isDown = false; resumeAnim(); });
+    // Mouse drag — desktop uniquement
+    let isDown = false, startXPos = 0, scrollLeft = 0;
+    temoTrack.addEventListener('mousedown',  e => { if (isMobile()) return; isDown = true; startXPos = e.pageX - temoTrack.offsetLeft; scrollLeft = temoTrack.scrollLeft; pauseAnim(); });
+    temoTrack.addEventListener('mouseleave', () => { if (!isDown) return; isDown = false; resumeAnim(); });
     temoTrack.addEventListener('mouseup',    () => { isDown = false; resumeAnim(); });
     temoTrack.addEventListener('mousemove',  e => {
-      if (!isDown) return;
+      if (!isDown || isMobile()) return;
       e.preventDefault();
       temoTrack.scrollLeft = scrollLeft - (e.pageX - temoTrack.offsetLeft - startXPos);
     });
 
-    // Touch swipe
-    let touchStartX = 0;
-    temoTrack.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; pauseAnim(); }, { passive: true });
-    temoTrack.addEventListener('touchend',   () => resumeAnim(), { passive: true });
+    // Touch — mobile : le scroll natif gère tout, on ne touche pas à l'animation
+    // On ne pauses PAS sur mobile (animation: none en CSS déjà)
   }
 
   /* ─── NAV ACTIVE PAGE ───────────────────────────────────── */
