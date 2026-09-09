@@ -30,11 +30,23 @@
     .hero {
       position: relative;
       min-height: 100svh;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
+      display: flex;
       align-items: center;
       overflow: hidden;
       padding-top: var(--header-h);
+    }
+
+    /* Logo dominant dans le hero */
+    .hero__brand-logo {
+      margin-bottom: 40px;
+    }
+    .hero__brand-logo-img {
+      height: clamp(180px, 22vw, 300px);
+      width: auto;
+      max-width: 560px;
+      object-fit: contain;
+      display: block;
+      filter: drop-shadow(0 4px 20px rgba(0,0,0,0.12));
     }
 
     .hero__bg {
@@ -205,6 +217,9 @@
       position: relative;
       z-index: 5;
       padding: clamp(40px, 7vh, 80px) 0;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
     }
 
     .hero__tagline {
@@ -759,9 +774,6 @@
 
     /* ─── RESPONSIVE HOMEPAGE ───────────────────────────────── */
     @media (max-width: 1100px) {
-      .hero { grid-template-columns: 1fr; }
-      .hero__kpi-col { display: none; }
-      .hero__coach-photo { width: 55%; opacity: 0.5; }
 
       .programmes-layout,
       .methode-layout,
@@ -785,7 +797,7 @@
 
     @media (max-width: 768px) {
       .hero { padding-top: var(--header-h); min-height: 100svh; }
-      .hero__coach-photo { display: none; }
+      .hero__brand-logo-img { height: clamp(140px, 40vw, 200px); }
       .promesse-cards { grid-template-columns: 1fr; }
       .about-layout { grid-template-columns: 1fr; }
       .about-name-vertical { display: none; }
@@ -1028,7 +1040,6 @@
           <li><a href="methode.html" class="nav-link">Méthode</a></li>
           <li><a href="suivi.html" class="nav-link">Suivi</a></li>
           <li><a href="challenge.html" class="nav-link">Challenge</a></li>
-          <li><a href="contact.html" class="nav-link">Contact</a></li>
         </ul>
       </nav>
 
@@ -1056,7 +1067,6 @@
         <li><a href="methode.html" class="mobile-nav-link">Méthode</a></li>
         <li><a href="suivi.html" class="mobile-nav-link">Suivi</a></li>
         <li><a href="challenge.html" class="mobile-nav-link">Challenge</a></li>
-        <li><a href="contact.html" class="mobile-nav-link">Contact</a></li>
       </ul>
       <div class="mobile-menu__ctas">
         <a href="compte.html" class="btn btn--ghost mobile-cta">Mon compte</a>
@@ -1075,76 +1085,11 @@
       <div class="hero__overlay"></div>
     </div>
 
-    <!-- Photo coach -->
-    <div class="hero__coach-photo" aria-hidden="true">
-      <img src="assets/images/alyssa/alyssa-squat-rack.webp" alt="" loading="eager">
-    </div>
-
-    <!-- KPI cards flottantes -->
-    <aside class="hero__kpi-col" aria-label="Tableau de bord rapide">
-
-      <!-- KPI 1 : Ton suivi -->
-      <div class="hero-kpi">
-        <p class="hero-kpi__eyebrow">Ton suivi</p>
-        <div class="hero-kpi__main">
-          <div>
-            <div class="hero-kpi__value">7</div>
-            <div class="hero-kpi__unit">semaines<br/>ensemble</div>
-          </div>
-          <div class="hero-kpi__mini-chart" aria-hidden="true">
-            <div class="mini-bar" style="height:40%"></div>
-            <div class="mini-bar" style="height:60%"></div>
-            <div class="mini-bar" style="height:50%"></div>
-            <div class="mini-bar" style="height:80%"></div>
-            <div class="mini-bar mini-bar--active" style="height:90%"></div>
-          </div>
-        </div>
-      </div>
-
-      <!-- KPI 2 : Prochaine séance -->
-      <div class="hero-kpi">
-        <p class="hero-kpi__eyebrow">Prochaine séance</p>
-        <div class="hero-kpi__seance-title">Haut du corps</div>
-        <div class="hero-kpi__seance-date">Vendredi · 10h00</div>
-        <a href="reservation.html" class="btn btn--soft btn--xs" style="font-size:0.68rem; padding:6px 12px;">
-          Voir le programme
-          <svg viewBox="0 0 12 12" fill="none" width="10"><path d="M2 6h8M6 2l4 4-4 4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </a>
-      </div>
-
-      <!-- KPI 3 : Progression -->
-      <div class="hero-kpi">
-        <p class="hero-kpi__eyebrow">Ta progression</p>
-        <div class="hero-kpi__prog">
-          <div class="progress-ring" data-pct="72" style="width:52px; height:52px;">
-            <svg viewBox="0 0 60 60" width="52" height="52">
-              <circle class="progress-ring__track" cx="30" cy="30" r="24"/>
-              <circle class="progress-ring__fill" cx="30" cy="30" r="24"
-                style="stroke-dasharray:150.8; stroke-dashoffset:150.8;"/>
-            </svg>
-            <div class="progress-ring__text">
-              <span class="progress-ring__pct" style="font-size:0.78rem;">72%</span>
-            </div>
-          </div>
-          <div class="hero-kpi__prog-text">
-            <div class="hero-kpi__prog-label">Régularité<br/>cette semaine</div>
-          </div>
-        </div>
-        <div class="hero-kpi__bravo">
-          <svg viewBox="0 0 16 16" fill="none" width="12"><path d="M3 8l3 3 7-7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
-          Bravo, tu es au top !
-        </div>
-      </div>
-
-    </aside>
-
     <!-- Content -->
     <div class="hero__content container">
-      <p class="hero__tagline reveal">Coaching féminin personnalisé</p>
-      <h1 class="hero__title reveal">
-        Le coaching qui<br/>
-        s'adapte à <em>ta vie</em>
-      </h1>
+      <div class="hero__brand-logo reveal">
+        <img src="assets/logo-transparent.png" alt="Alyssa Fitness" class="hero__brand-logo-img">
+      </div>
       <div class="hero__actions reveal">
         <a href="coaching.html" class="btn btn--primary btn--lg">
           Commencer mon coaching
@@ -1331,246 +1276,12 @@
     </div>
   </section>
 
-  <!-- ═══════════════════════════════════════════
-       SPÉCIALITÉS
-  ═══════════════════════════════════════════ -->
-  <section class="section section--white" id="specialites" aria-label="Mes spécialités">
-    <div class="container">
-      <p class="section-eyebrow reveal">Expertise</p>
-      <h2 class="section-title reveal">Mes spécialités</h2>
-      <p class="specialites-subtitle reveal">Un accompagnement pensé pour le corps féminin, ses rythmes et ses transitions.</p>
-
-      <div class="specialites-grid">
-
-        <article class="specialite-card reveal">
-          <div class="specialite-card__photo" aria-hidden="true">
-            <img src="assets/images/alyssa/alyssa-energy-cycle.webp" alt="" loading="lazy">
-          </div>
-          <span class="specialite-card__emoji" aria-hidden="true">🔄</span>
-          <h3 class="specialite-card__title">Entraîne-toi selon ton cycle</h3>
-          <p class="specialite-card__text">Ton corps change chaque semaine. Tes entraînements aussi. Je programme tes séances en accord avec tes phases hormonales pour maximiser tes résultats et respecter ton énergie.</p>
-        </article>
-
-        <article class="specialite-card reveal reveal-delay-1">
-          <div class="specialite-card__photo" aria-hidden="true">
-            <img src="assets/images/alyssa/alyssa-rope-training.webp" alt="" loading="lazy">
-          </div>
-          <span class="specialite-card__emoji" aria-hidden="true">🤱</span>
-          <h3 class="specialite-card__title">Retour au sport après bébé</h3>
-          <p class="specialite-card__text">Je t'accompagne dans ta remise en forme progressive, en coordination avec les recommandations de ton kinésithérapeute. Objectif&nbsp;: retrouver ta force et ton énergie, sans brûler les étapes.</p>
-        </article>
-
-        <article class="specialite-card reveal reveal-delay-2">
-          <div class="specialite-card__photo" aria-hidden="true">
-            <img src="assets/images/alyssa/alyssa-squat-gym.webp" alt="" loading="lazy">
-          </div>
-          <span class="specialite-card__emoji" aria-hidden="true">💪</span>
-          <h3 class="specialite-card__title">Sculpte sans t'épuiser</h3>
-          <p class="specialite-card__text">Pas de régime extrême, pas d'overtraining. Une approche intelligente qui combine musculation, nutrition et récupération pour transformer ton corps durablement.</p>
-        </article>
-
-      </div>
-    </div>
-  </section>
 
 
-  <!-- ═══════════════════════════════════════════
-       À PROPOS
-  ═══════════════════════════════════════════ -->
-  <section class="section about-section" id="apropos" aria-label="À propos d'Alyssa">
-    <div class="container">
-      <div class="about-layout">
-
-        <div class="about-photo-wrap reveal reveal--left">
-          <div class="about-name-vertical" aria-hidden="true">Alyssa</div>
-          <div class="about-photo-circle" role="img" aria-label="Portrait d'Alyssa, coach fitness"></div>
-        </div>
-
-        <div class="about-text reveal reveal--right">
-          <p class="section-eyebrow">À propos</p>
-          <h2 class="section-title section-title--left" style="margin-bottom:24px;">
-            Moi, c'est <em>Alyssa.</em>
-          </h2>
-          <p class="about-body">Passionnée par le corps humain et la transformation physique, j'accompagne les femmes qui veulent se sentir bien dans leur corps et dans leur tête.</p>
-          <p class="about-body">Mon objectif&nbsp;: t'aider à reprendre confiance, à te dépasser et à construire une routine qui te ressemble, sans pression ni frustration.</p>
-          <p class="about-body">Chaque femme a un potentiel incroyable. Mon rôle, c'est de t'aider à le révéler.</p>
-
-          <div class="about-badge">
-            <svg viewBox="0 0 24 24" fill="none" width="18"><path d="M9 12l2 2 4-4M20.618 5.984A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622C17.176 19.29 21 14.591 21 9c0-1.052-.12-2.076-.382-3.016z" stroke="#2D9CDB" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            Coach certifiée CQP — Musculation & Personal Training
-          </div>
-
-          <div style="margin-top:28px;">
-            <a href="a-propos.html" class="btn btn--outline">En savoir plus sur moi →</a>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </section>
 
 
-  <!-- ═══════════════════════════════════════════
-       PROGRAMMES
-  ═══════════════════════════════════════════ -->
-  <section class="section section--white" id="coaching" aria-label="Programmes de coaching">
-    <div class="container">
-      <div class="programmes-layout">
-
-        <div class="programmes-aside reveal reveal--left">
-          <h2 class="section-title section-title--left">
-            Choisis<br/>l'accompagnement<br/>qui <em>te correspond.</em>
-          </h2>
-          <p class="programmes-aside__text">Chaque programme est pensé pour s'adapter à ton niveau, tes objectifs et ton mode de vie.</p>
-          <a href="coaching.html" class="btn btn--primary">
-            Me renseigner
-            <svg class="btn-arrow" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </a>
-        </div>
-
-        <div class="programmes-grid">
-
-          <article class="programme-card reveal">
-            <div class="programme-card__img" role="img" aria-label="Remise en forme"></div>
-            <div class="programme-card__body">
-              <h3 class="programme-card__title">Remise en forme</h3>
-              <p class="programme-card__text">Retrouve ton énergie, ta vitalité et une routine équilibrée.</p>
-              <a href="coaching.html#remise" class="btn btn--outline" style="margin-top:12px;">Découvrir →</a>
-            </div>
-          </article>
-
-          <article class="programme-card reveal reveal-delay-1">
-            <div class="programme-card__img programme-card__img--2" role="img" aria-label="Musculation"></div>
-            <div class="programme-card__body">
-              <h3 class="programme-card__title">Musculation</h3>
-              <p class="programme-card__text">Renforce ton corps, améliore ta posture et gagne en force.</p>
-              <a href="coaching.html#programme-galbe-musculation" class="btn btn--outline" style="margin-top:12px;">Découvrir →</a>
-            </div>
-          </article>
-
-          <article class="programme-card reveal reveal-delay-2">
-            <div class="programme-card__img programme-card__img--3" role="img" aria-label="Transformation physique"></div>
-            <div class="programme-card__body">
-              <h3 class="programme-card__title">Transformation physique</h3>
-              <p class="programme-card__text">Atteins tes objectifs et révèle la meilleure version de toi-même.</p>
-              <a href="coaching.html#programme-seche" class="btn btn--outline" style="margin-top:12px;">Découvrir →</a>
-            </div>
-          </article>
-
-          <article class="programme-card reveal reveal-delay-3">
-            <div class="programme-card__img programme-card__img--4" role="img" aria-label="Coaching personnalisé"></div>
-            <div class="programme-card__body">
-              <h3 class="programme-card__title">Coaching personnalisé</h3>
-              <p class="programme-card__text">Un accompagnement 100% sur-mesure, tes besoins, ton rythme.</p>
-              <a href="coaching.html#coaching-sur-mesure" class="btn btn--outline" style="margin-top:12px;">Découvrir →</a>
-            </div>
-          </article>
-
-        </div>
-      </div>
-    </div>
-  </section>
 
 
-  <!-- ═══════════════════════════════════════════
-       MÉTHODE
-  ═══════════════════════════════════════════ -->
-  <section class="section section--beige" id="methode" aria-label="La méthode Alyssa">
-    <div class="container">
-      <div class="methode-layout">
-
-        <div class="methode-aside reveal reveal--left">
-          <h2 class="section-title section-title--left" style="margin-bottom:16px;">
-            Une méthode <em>simple</em>, <em>humaine</em><br/>et <em>efficace.</em>
-          </h2>
-          <a href="methode.html" class="btn btn--outline" style="margin-top:20px;">Voir la méthode complète</a>
-        </div>
-
-        <div class="methode-steps-row">
-          <div class="methode-step-card reveal">
-            <div class="methode-step-card__num">01</div>
-            <div class="methode-step-card__icon">
-              <svg viewBox="0 0 40 40" fill="none"><rect x="8" y="6" width="24" height="28" rx="3" stroke="#2D9CDB" stroke-width="1.8"/><line x1="13" y1="13" x2="27" y2="13" stroke="#2D9CDB" stroke-width="1.5" stroke-linecap="round"/><line x1="13" y1="18" x2="27" y2="18" stroke="#2D9CDB" stroke-width="1.5" stroke-linecap="round"/><line x1="13" y1="23" x2="21" y2="23" stroke="#2D9CDB" stroke-width="1.5" stroke-linecap="round"/></svg>
-            </div>
-            <h3 class="methode-step-card__title">Bilan initial</h3>
-            <p class="methode-step-card__text">On échange sur tes objectifs, ton quotidien et ton niveau pour faire le point ensemble.</p>
-          </div>
-
-          <div class="methode-step-card reveal reveal-delay-1">
-            <div class="methode-step-card__num">02</div>
-            <div class="methode-step-card__icon">
-              <svg viewBox="0 0 40 40" fill="none"><circle cx="20" cy="20" r="12" stroke="#2D9CDB" stroke-width="1.8"/><path d="M15 20l3 3 7-7" stroke="#2D9CDB" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            </div>
-            <h3 class="methode-step-card__title">Plan personnalisé</h3>
-            <p class="methode-step-card__text">Je crée ton programme sur-mesure, adapté à ton corps et à ton rythme de vie.</p>
-          </div>
-
-          <div class="methode-step-card reveal reveal-delay-2">
-            <div class="methode-step-card__num">03</div>
-            <div class="methode-step-card__icon">
-              <svg viewBox="0 0 40 40" fill="none"><rect x="4" y="17" width="6" height="6" rx="1.5" stroke="#2D9CDB" stroke-width="1.8"/><rect x="30" y="17" width="6" height="6" rx="1.5" stroke="#2D9CDB" stroke-width="1.8"/><line x1="10" y1="20" x2="14" y2="20" stroke="#2D9CDB" stroke-width="1.8"/><line x1="26" y1="20" x2="30" y2="20" stroke="#2D9CDB" stroke-width="1.8"/><rect x="14" y="14" width="12" height="12" rx="2" stroke="#2D9CDB" stroke-width="1.8"/></svg>
-            </div>
-            <h3 class="methode-step-card__title">Séances guidées</h3>
-            <p class="methode-step-card__text">Des entraînements efficaces, encadrés et motivants, en présentiel ou à distance.</p>
-          </div>
-
-          <div class="methode-step-card reveal reveal-delay-3">
-            <div class="methode-step-card__num">04</div>
-            <div class="methode-step-card__icon">
-              <svg viewBox="0 0 40 40" fill="none"><polyline points="5,28 13,18 20,22 28,10 35,14" stroke="#2D9CDB" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M29 10h6v6" stroke="#2D9CDB" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            </div>
-            <h3 class="methode-step-card__title">Suivi & ajustements</h3>
-            <p class="methode-step-card__text">On suit tes progrès, on ajuste à tes besoins et on avance ensemble vers tes objectifs.</p>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-
-  <!-- ═══════════════════════════════════════════
-       CONFIANCE
-  ═══════════════════════════════════════════ -->
-  <section class="section section--white" id="confiance" aria-label="Nos garanties">
-    <div class="container">
-      <div class="confiance-layout">
-
-        <div class="confiance-aside reveal reveal--left">
-          <h2 class="section-title section-title--left" style="margin-bottom:0;">
-            Un accompagnement <em>sérieux</em>, <em>certifié</em><br/>et <em>bienveillant.</em>
-          </h2>
-        </div>
-
-        <div class="confiance-items-row">
-          <article class="confiance-item reveal">
-            <div class="confiance-item__icon">
-              <svg viewBox="0 0 48 48" fill="none" width="28" height="28"><path d="M9 12l2 2 4-4M20.618 5.984A11.955 11.955 0 0124 4.944a11.955 11.955 0 018.618 3.04A12.02 12.02 0 0135 17c0 5.591-3.824 10.29-9 11.622C20.824 27.29 17 22.591 17 17c0-1.052.12-2.076.382-3.016z" stroke="#2D9CDB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            </div>
-            <h3 class="confiance-item__title">Certifiée</h3>
-            <p class="confiance-item__text">Formée et certifiée pour t'offrir un coaching de qualité et en toute sécurité.</p>
-          </article>
-
-          <article class="confiance-item reveal reveal-delay-1">
-            <div class="confiance-item__icon">
-              <svg viewBox="0 0 48 48" fill="none" width="28" height="28"><path d="M24 10c-8.4 0-14 5.6-14 12 0 4.2 2.4 8 6.2 10.4L14 40l10-4 10 4-2.2-7.6C35.6 30 38 26.2 38 22c0-6.4-5.6-12-14-12z" stroke="#2D9CDB" stroke-width="1.8" stroke-linejoin="round"/><path d="M20 23l2.5 2.5L28 18" stroke="#2D9CDB" stroke-width="1.8" stroke-linecap="round"/></svg>
-            </div>
-            <h3 class="confiance-item__title">À l'écoute</h3>
-            <p class="confiance-item__text">Une écoute attentive, une relation de confiance et un soutien constant.</p>
-          </article>
-
-          <article class="confiance-item reveal reveal-delay-2">
-            <div class="confiance-item__icon">
-              <svg viewBox="0 0 48 48" fill="none" width="28" height="28"><polyline points="6,30 16,18 24,24 34,10 42,14" stroke="#2D9CDB" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M36 10h6v6" stroke="#2D9CDB" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            </div>
-            <h3 class="confiance-item__title">Progression durable</h3>
-            <p class="confiance-item__text">Des résultats concrets, sans extrêmes, pour un changement durable et sain.</p>
-          </article>
-        </div>
-
-      </div>
-    </div>
-  </section>
 
 
   <!-- ═══════════════════════════════════════════
