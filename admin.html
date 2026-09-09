@@ -1188,7 +1188,7 @@ function closeReplaceModal() {
 }
 
 function resetReplaceModal() {
-  document.getElementById('replaceStep1').style.display = '';
+  document.getElementById('replaceDropZone').style.display = '';
   document.getElementById('replaceConverting').style.display = 'none';
   document.getElementById('replaceStep2').style.display = 'none';
   document.getElementById('replaceFileInput').value = '';
@@ -1199,7 +1199,7 @@ function onReplaceFilePicked(file) {
   if (!file.type.startsWith('image/')) { showToast('Format non supporté — choisissez une image', 'error'); return; }
   if (file.size > 10 * 1024 * 1024) { showToast('Fichier trop lourd (max 10 Mo)', 'error'); return; }
 
-  document.getElementById('replaceStep1').style.display = 'none';
+  document.getElementById('replaceDropZone').style.display = 'none';
   document.getElementById('replaceConverting').style.display = 'block';
 
   const reader = new FileReader();
