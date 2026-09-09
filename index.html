@@ -634,28 +634,14 @@
     }
     .testimonial-card { width: 320px; flex-shrink: 0; }
 
-    /* ─── MOBILE : scroll natif + snap ──────────────────────────── */
+    /* ─── MOBILE : animation continue identique desktop ─────────── */
     @media (max-width: 768px) {
       .temo-carousel-outer {
-        overflow-x: auto;
-        overflow-y: hidden;
-        -webkit-overflow-scrolling: touch;
-        scroll-snap-type: x mandatory;
-        cursor: default;
+        overflow: hidden;
         padding: 16px 0 32px;
       }
-      .temo-carousel-outer:active { cursor: default; }
-      .temo-track {
-        animation: none !important;
-        transform: none !important;
-        gap: 14px;
-        padding: 0 20px;
-        /* Masquer les doublons aria-hidden sur mobile */
-      }
-      .temo-track [aria-hidden="true"] { display: none; }
       .testimonial-card {
-        width: min(82vw, 288px);
-        scroll-snap-align: start;
+        width: 270px;
         flex-shrink: 0;
       }
     }

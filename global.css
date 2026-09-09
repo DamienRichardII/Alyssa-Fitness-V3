@@ -1501,7 +1501,7 @@ input, textarea, select {
     will-change: transform;
   }
 
-  .testimonial-card { flex: 0 0 100%; width: 100%; }
+  .testimonials-track .testimonial-card { flex: 0 0 100%; width: 100%; }
   .testimonials-dots { display: flex; }
 
   .cta-inner { grid-template-columns: 1fr; }
