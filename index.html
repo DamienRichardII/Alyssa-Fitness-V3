@@ -66,7 +66,7 @@
     .hero__overlay {
       position: absolute;
       inset: 0;
-      background: transparent;
+      background: linear-gradient(to top, rgba(0,0,0,0.62) 0%, rgba(0,0,0,0.1) 45%, transparent 70%);
     }
 
     /* Coach photo en centre-droite */
@@ -206,14 +206,24 @@
       margin-top: 6px;
     }
 
-    /* Left content */
+    /* Left content — centré en bas */
     .hero__content {
       position: relative;
       z-index: 5;
-      padding: clamp(40px, 7vh, 80px) 0;
+      width: 100%;
+      min-height: calc(100svh - var(--header-h));
       display: flex;
       flex-direction: column;
-      align-items: flex-start;
+      align-items: center;
+      justify-content: flex-end;
+      padding-bottom: clamp(36px, 6vh, 64px);
+    }
+
+    .hero__actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      justify-content: center;
     }
 
     .hero__tagline {
@@ -299,6 +309,139 @@
     .hero__video-btn:hover .play-circle {
       background: rgba(45,156,219,0.1);
       border-color: var(--rose-saumon);
+    }
+
+    /* ─── DA DARK SECTIONS (Elevate style) ─────────────────── */
+    .section--dark-premium {
+      background: linear-gradient(135deg, #181824 0%, #24243a 60%, #1e1e30 100%);
+      color: #fff;
+    }
+
+    .section--dark-premium .section-title {
+      color: #fff;
+    }
+
+    .section--dark-premium .section-title em {
+      color: var(--rose-saumon);
+    }
+
+    .section--dark-premium .section-eyebrow {
+      color: var(--rose-saumon);
+    }
+
+    /* Promesse cards → glassmorphism dark */
+    .section--dark-premium .promesse-card {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.1);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+      backdrop-filter: blur(12px);
+    }
+
+    .section--dark-premium .promesse-card:hover {
+      background: rgba(255,255,255,0.1);
+      border-color: rgba(45,156,219,0.4);
+      box-shadow: 0 12px 40px rgba(0,0,0,0.4);
+    }
+
+    .section--dark-premium .promesse-card__icon {
+      background: rgba(45,156,219,0.18);
+    }
+
+    .section--dark-premium .promesse-card__title {
+      color: #fff;
+    }
+
+    .section--dark-premium .promesse-card__text {
+      color: rgba(255,255,255,0.65);
+    }
+
+    /* Pour qui cards → dark */
+    .section--dark-premium .pourqui-card__text {
+      color: rgba(255,255,255,0.85);
+    }
+
+    .section--dark-premium .pourqui-intro {
+      color: rgba(255,255,255,0.65);
+    }
+
+    .section--dark-premium .pourqui-card {
+      border-color: rgba(255,255,255,0.1);
+    }
+
+    /* Témoignages → dark cards */
+    .section--dark-premium .testimonial-card {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .section--dark-premium .testimonial-card__text {
+      color: rgba(255,255,255,0.8);
+    }
+
+    .section--dark-premium .testimonial-card__name {
+      color: #fff;
+    }
+
+    .section--dark-premium .temo-subtitle {
+      color: rgba(255,255,255,0.6);
+    }
+
+    .section--dark-premium .avatar {
+      background: rgba(45,156,219,0.25);
+      color: #fff;
+    }
+
+    /* Quiz → dark */
+    .section--dark-premium .quiz-card {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.1);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+    }
+
+    .section--dark-premium .quiz-subtitle {
+      color: rgba(255,255,255,0.65);
+    }
+
+    .section--dark-premium .quiz-question {
+      color: #fff;
+    }
+
+    .section--dark-premium .quiz-choice {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.15);
+      color: rgba(255,255,255,0.85);
+    }
+
+    .section--dark-premium .quiz-choice:hover,
+    .section--dark-premium .quiz-choice.selected {
+      background: rgba(45,156,219,0.2);
+      border-color: var(--rose-saumon);
+      color: #fff;
+    }
+
+    .section--dark-premium .quiz-progress {
+      background: rgba(255,255,255,0.1);
+    }
+
+    .section--dark-premium .quiz-progress__label {
+      color: rgba(255,255,255,0.5);
+    }
+
+    .section--dark-premium .quiz-back,
+    .section--dark-premium .quiz-restart {
+      color: rgba(255,255,255,0.5);
+    }
+
+    .section--dark-premium .quiz-result__label {
+      color: rgba(255,255,255,0.6);
+    }
+
+    .section--dark-premium .quiz-result__title {
+      color: #fff;
+    }
+
+    .section--dark-premium .quiz-result__text {
+      color: rgba(255,255,255,0.7);
     }
 
     /* ─── PROMESSE — horizontal cards ───────────────────────── */
@@ -1100,6 +1243,13 @@
 
     <!-- Content -->
     <div class="hero__content container">
+      <div class="hero__actions reveal">
+        <a href="reservation.html" class="btn btn--primary btn--lg">
+          Réserver
+          <svg class="btn-arrow" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+        <a href="methode.html" class="btn btn--lg" style="background:#fff; color:var(--rose-saumon); border:1.5px solid #fff;">Découvrir la méthode</a>
+      </div>
     </div>
   </section>
 
@@ -1107,7 +1257,7 @@
   <!-- ═══════════════════════════════════════════
        PROMESSE
   ═══════════════════════════════════════════ -->
-  <section class="section section--white" id="promesse" aria-label="Notre promesse">
+  <section class="section section--dark-premium" id="promesse" aria-label="Notre promesse">
     <div class="container">
       <h2 class="section-title reveal">
         Un coaching pensé pour <em>ton corps</em>,<br/>
@@ -1154,7 +1304,7 @@
   <!-- ═══════════════════════════════════════════
        POUR QUI ?
   ═══════════════════════════════════════════ -->
-  <section class="section section--beige" id="pour-qui" aria-label="Pour qui est ce coaching">
+  <section class="section section--dark-premium" id="pour-qui" aria-label="Pour qui est ce coaching">
     <div class="container">
       <p class="section-eyebrow reveal">Coaching féminin</p>
       <h2 class="section-title reveal">Ce coaching est fait pour toi si…</h2>
@@ -1200,7 +1350,7 @@
   <!-- ═══════════════════════════════════════════
        QUIZ — CHOISIR MON PROGRAMME
   ═══════════════════════════════════════════ -->
-  <section class="section section--white" id="quiz-programme" aria-label="Quiz d'orientation programme">
+  <section class="section section--dark-premium" id="quiz-programme" aria-label="Quiz d'orientation programme">
     <div class="container">
       <div class="quiz-wrapper">
 
@@ -1279,7 +1429,7 @@
   <!-- ═══════════════════════════════════════════
        TÉMOIGNAGES
   ═══════════════════════════════════════════ -->
-  <section class="section section--beige" id="temoignages" aria-label="Témoignages clientes">
+  <section class="section section--dark-premium" id="temoignages" aria-label="Témoignages clientes">
     <div class="container temo-header">
       <h2 class="section-title">
         Elles ont commencé à <em>leur rythme.</em>
