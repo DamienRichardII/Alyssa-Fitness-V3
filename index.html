@@ -1098,7 +1098,9 @@
   ═══════════════════════════════════════════ -->
   <section class="hero" id="accueil" aria-label="Section hero">
     <div class="hero__bg">
-      <img class="hero__img-placeholder" src="assets/images/alyssa/alyssa-stretch-studio.webp" alt="Alyssa coach fitness en séance de stretching" loading="eager" fetchpriority="high">
+      <video class="hero__img-placeholder" autoplay loop muted playsinline>
+        <source src="assets/videos/alyssa-hero-video.mp4" type="video/mp4">
+      </video>
       <div class="hero__overlay"></div>
     </div>
 
@@ -1115,16 +1117,6 @@
         <a href="methode.html" class="btn btn--ghost btn--lg">Découvrir la méthode</a>
       </div>
 
-      <!-- TODO: remplacer par la vidéo officielle d'Alyssa -->
-      <button class="hero__video-btn reveal" id="heroVideoBtn" aria-label="Voir la vidéo de présentation d'Alyssa">
-        <span class="play-circle">
-          <svg viewBox="0 0 24 24" fill="none"><polygon points="9,7 17,12 9,17" fill="currentColor"/></svg>
-        </span>
-        <span>
-          <span style="font-size:0.7rem; letter-spacing:0.1em; text-transform:uppercase; display:block; opacity:0.6; margin-bottom:2px;">Voir la vidéo</span>
-          <span>Découvrir mon approche</span>
-        </span>
-      </button>
     </div>
   </section>
 
@@ -1412,7 +1404,7 @@
     <div class="cta-watermark" aria-hidden="true">AF</div>
     <div class="container cta-inner">
       <div class="cta-visual reveal reveal--left">
-        <div class="cta-photo-placeholder" role="img" aria-label="Alyssa, coach fitness"></div>
+        <img src="assets/images/alyssa/alyssa-stretch-studio.webp" alt="Alyssa coach fitness" class="cta-photo-placeholder" style="width:100%;height:100%;object-fit:cover;display:block;border-radius:inherit;">
       </div>
       <div class="cta-content reveal reveal--right">
         <p class="section-eyebrow">Commence maintenant</p>
