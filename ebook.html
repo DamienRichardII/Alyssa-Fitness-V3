@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" href="assets/favicon/favicon.ico" />
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon/favicon-16x16.png" />
+  <link rel="apple-touch-icon" href="assets/favicon/apple-touch-icon.png" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="E-Book — Alyssa Fitness" />
+  <meta property="og:description" content="L'E-Book d\'Alyssa Fitness arrive bientôt : un plan personnalisé, préparé sur-mesure en 3 à 7 jours." />
+  <meta property="og:image" content="https://alyssa-fitness-v3.vercel.app/assets/og/alyssa-fitness-og.jpg" />
+  <meta property="og:url" content="https://alyssa-fitness-v3.vercel.app/ebook.html" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="E-Book — Alyssa Fitness" />
+  <meta name="twitter:description" content="L'E-Book d\'Alyssa Fitness arrive bientôt : un plan personnalisé, préparé sur-mesure en 3 à 7 jours." />
+  <meta name="twitter:image" content="https://alyssa-fitness-v3.vercel.app/assets/og/alyssa-fitness-og.jpg" />
+  <meta name="description" content="L'E-Book d\'Alyssa Fitness arrive bientôt : un plan personnalisé, préparé sur-mesure en 3 à 7 jours." />
+  <title>E-Book — Alyssa Fitness</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;800&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="global.css" />
+
+  <style>
+    .eb-hero { padding: calc(var(--header-h) + clamp(40px,7vw,90px)) 0 clamp(56px,8vw,110px); background: radial-gradient(1200px 500px at 80% 0%, rgba(45,156,219,.28), transparent 60%), linear-gradient(135deg,#181824 0%,#24243a 60%,#1e1e30 100%); color:#fff; }
+    .eb-hero__grid { display:grid; grid-template-columns: 1.1fr .9fr; gap: clamp(32px,6vw,80px); align-items:center; }
+    .eb-hero__title { font-size: clamp(3rem, 8vw, 6rem); margin: 22px 0 18px; }
+    .eb-hero__title em { font-style:normal; color: var(--rose-saumon); }
+    .eb-hero__text { max-width: 520px; font-size: 1.05rem; line-height:1.7; color: rgba(255,255,255,.78); margin-bottom: 32px; }
+    .eb-hero__actions { display:flex; flex-wrap:wrap; gap:14px; }
+    .eb-cover { position:relative; border-radius: 36px; overflow:hidden; aspect-ratio: 3/4; max-width: 460px; margin-left:auto; box-shadow: 0 30px 80px rgba(0,0,0,.45); }
+    .eb-cover img { width:100%; height:100%; object-fit:cover; object-position:center top; display:block; }
+    .eb-cover::after { content:''; position:absolute; inset:0; background: linear-gradient(to top, rgba(0,0,0,.72), rgba(0,0,0,.05) 55%); }
+    .eb-cover__text { position:absolute; z-index:1; left:26px; right:26px; bottom:26px; }
+    .eb-cover__text strong { display:block; font-family:var(--font-elv); font-weight:800; font-size:clamp(2rem,4vw,2.8rem); line-height:1; text-transform:uppercase; }
+    .eb-cover__text span { display:block; margin-top:8px; font-size:.85rem; color:rgba(255,255,255,.8); }
+
+    .eb-section { background: linear-gradient(135deg,#181824 0%,#24243a 60%,#1e1e30 100%); color:#fff; padding: clamp(56px,8vw,110px) 0; }
+    .eb-section--alt { background:#12121c; }
+    .eb-head { text-align:center; margin-bottom: clamp(36px,5vw,60px); }
+    .eb-head h2 { font-size: clamp(2.2rem,5.5vw,3.8rem); margin-bottom: 12px; }
+    .eb-head h2 em { font-style:normal; color: var(--rose-saumon); }
+
+    .eb-steps { display:grid; grid-template-columns: repeat(3,1fr); gap:20px; }
+    .eb-step { padding: 32px 28px 34px; min-height: 260px; display:flex; flex-direction:column; justify-content:flex-end; }
+    .eb-step__num { position:absolute; top:18px; right:26px; font-family:var(--font-elv); font-weight:800; font-size:5rem; line-height:1; color:rgba(255,255,255,.12); }
+    .eb-step__days { font-size:.72rem; font-weight:600; letter-spacing:.16em; text-transform:uppercase; color:var(--rose-clair); margin-bottom:10px; }
+    .eb-step h3 { font-size: 2rem; margin-bottom:10px; }
+    .eb-step p { font-size:.92rem; line-height:1.6; color:rgba(255,255,255,.78); }
+
+    .eb-gallery { display:grid; grid-template-columns: repeat(3,1fr); gap:20px; }
+
+    .eb-timeline { max-width: 760px; margin: 0 auto; display:grid; gap:14px; }
+    .eb-time { display:flex; align-items:center; gap:20px; padding:22px 26px; border-radius:24px; background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.1); }
+    .eb-time__d { flex:0 0 auto; min-width:84px; font-family:var(--font-elv); font-weight:800; font-size:1.7rem; text-transform:uppercase; color:var(--rose-saumon); }
+    .eb-time p { font-size:.95rem; line-height:1.6; color:rgba(255,255,255,.82); }
+
+    .eb-final { text-align:center; padding: clamp(40px,6vw,72px) clamp(24px,5vw,64px); }
+    .eb-final h2 { font-size: clamp(2.2rem,5.5vw,3.8rem); margin-bottom:14px; }
+    .eb-final p { max-width:520px; margin:0 auto 28px; color:rgba(255,255,255,.8); line-height:1.7; }
+
+    @media (max-width: 900px) {
+      .eb-hero__grid { grid-template-columns:1fr; }
+      .eb-cover { margin: 0 auto; max-width: 380px; }
+      .eb-steps, .eb-gallery { grid-template-columns:1fr; }
+      .eb-step { min-height: 0; padding-top: 80px; }
+      .eb-time { flex-direction:column; align-items:flex-start; gap:6px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ═══════════════════════════════════════════
+       HEADER
+  ═══════════════════════════════════════════ -->
+  <header class="header" id="header">
+    <div class="header__inner container">
+
+      <a href="index.html" class="header__logo" aria-label="Alyssa Fitness — Accueil">
+        <img src="assets/logo-transparent.png" class="logo-img" alt="Alyssa Fitness" />
+        <div class="logo-wordmark">
+          <span class="logo-wordmark__name">Alyssa Fitness</span>
+          <span class="logo-wordmark__sub">Coaching premium</span>
+        </div>
+      </a>
+
+      <nav class="header__nav" role="navigation" aria-label="Navigation principale">
+        <ul class="nav-list">
+          <li><a href="index.html" class="nav-link">Accueil</a></li>
+          <li><a href="coaching.html" class="nav-link">Coaching</a></li>
+          <li><a href="a-propos.html" class="nav-link">À propos</a></li>
+          <li><a href="methode.html" class="nav-link">Méthode</a></li>
+          <li><a href="suivi.html" class="nav-link">Suivi</a></li>
+          <li><a href="challenge.html" class="nav-link">Challenge</a></li>
+        </ul>
+      </nav>
+
+      <div class="header__ctas">
+        <a href="compte.html" class="btn--compte">
+          <svg viewBox="0 0 20 20" fill="none"><circle cx="10" cy="7" r="3.5" stroke="currentColor" stroke-width="1.5"/><path d="M3 17c0-3.866 3.134-7 7-7s7 3.134 7 7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+          Mon compte
+        </a>
+        <a href="reservation.html" class="btn btn--primary btn--sm btn--reserv-desktop">
+          Réserver
+          <svg class="btn-arrow" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+
+      <button class="burger" id="burger" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="mobile-menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+
+    <div class="mobile-menu" id="mobile-menu" role="dialog" aria-label="Menu mobile">
+      <ul class="mobile-nav-list">
+        <li><a href="index.html" class="mobile-nav-link">Accueil</a></li>
+        <li><a href="coaching.html" class="mobile-nav-link">Coaching</a></li>
+        <li><a href="a-propos.html" class="mobile-nav-link">À propos</a></li>
+        <li><a href="methode.html" class="mobile-nav-link">Méthode</a></li>
+        <li><a href="suivi.html" class="mobile-nav-link">Suivi</a></li>
+        <li><a href="challenge.html" class="mobile-nav-link">Challenge</a></li>
+      </ul>
+      <div class="mobile-menu__ctas">
+        <a href="compte.html" class="btn btn--ghost mobile-cta">Mon compte</a>
+        <a href="reservation.html" class="btn btn--primary mobile-cta">Réserver</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+  <section class="eb-hero" aria-label="E-Book">
+    <div class="container eb-hero__grid">
+      <div>
+        <span class="elv-badge">Disponible prochainement</span>
+        <h1 class="elv-title eb-hero__title">Ton plan <em>personnalisé</em>, en E-Book</h1>
+        <p class="eb-hero__text">Un guide complet pensé pour toi : entraînements, nutrition et rythme de vie. Chaque plan est préparé sur-mesure par Alyssa, entre <strong>3 et 7 jours de préparation</strong> après ta demande.</p>
+        <div class="eb-hero__actions">
+          <a href="contact.html" class="btn btn--primary btn--lg">Être prévenue de la sortie
+            <svg class="btn-arrow" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+          <a href="coaching.html" class="btn btn--ghost btn--lg" style="color:#fff;border-color:rgba(255,255,255,.5);">Découvrir le coaching</a>
+        </div>
+      </div>
+      <div class="eb-cover reveal">
+        <img src="assets/images/alyssa/alyssa-squat-gym.webp" alt="Alyssa à l'entraînement" />
+        <div class="eb-cover__text"><strong>L'E-Book</strong><span>Plan personnalisé · À la salle ou à la maison</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="eb-section" aria-label="Comment ça marche">
+    <div class="container">
+      <div class="eb-head">
+        <h2 class="elv-title reveal">Un plan fait <em>pour toi</em></h2>
+        <p class="elv-kicker reveal">Préparé à la main, jamais générique</p>
+      </div>
+      <div class="eb-steps">
+        <div class="elv-card eb-step reveal"><span class="eb-step__num">1</span><p class="eb-step__days">Jour 1</p><h3 class="elv-title">Ton profil</h3><p>Tu remplis un court questionnaire : objectifs, niveau, matériel, contraintes et quotidien.</p></div>
+        <div class="elv-card eb-step reveal reveal-delay-1"><span class="eb-step__num">2</span><p class="eb-step__days">Jours 2 à 6</p><h3 class="elv-title">La préparation</h3><p>Alyssa construit ton plan : séances, progression, conseils nutrition et suivi de ton cycle.</p></div>
+        <div class="elv-card eb-step reveal reveal-delay-2"><span class="eb-step__num">3</span><p class="eb-step__days">Jours 3 à 7</p><h3 class="elv-title">Ta livraison</h3><p>Tu reçois ton E-Book personnalisé, prêt à suivre dès le premier jour.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="eb-section eb-section--alt" aria-label="Ce que tu trouveras dans l'E-Book">
+    <div class="container">
+      <div class="eb-head">
+        <h2 class="elv-title reveal">Ce que tu <em>trouveras</em></h2>
+        <p class="elv-kicker reveal">Un guide pour tous les objectifs</p>
+      </div>
+      <div class="eb-gallery">
+        <div class="elv-photo-card reveal"><img src="assets/images/alyssa/alyssa-dumbbell-press.webp" alt="" loading="lazy" /><div class="elv-photo-card__label">Programme<small>À la salle ou à la maison</small></div></div>
+        <div class="elv-photo-card reveal reveal-delay-1"><img src="assets/images/alyssa/alyssa-energy-cycle.webp" alt="" loading="lazy" /><div class="elv-photo-card__label">Cycle &amp; énergie<small>Adapte l'effort à ton rythme</small></div></div>
+        <div class="elv-photo-card reveal reveal-delay-2"><img src="assets/images/alyssa/alyssa-stretch-studio.webp" alt="" loading="lazy" /><div class="elv-photo-card__label">Bien-être<small>Mobilité, récupération, sérénité</small></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="eb-section" aria-label="Délais de préparation">
+    <div class="container">
+      <div class="eb-head">
+        <h2 class="elv-title reveal">Entre <em>3 et 7 jours</em></h2>
+        <p class="elv-kicker reveal">Le temps de créer un plan qui te ressemble</p>
+      </div>
+      <div class="eb-timeline">
+        <div class="eb-time reveal"><span class="eb-time__d">3 jours</span><p>Pour un plan standard : objectifs clairs et besoins simples.</p></div>
+        <div class="eb-time reveal"><span class="eb-time__d">5 jours</span><p>Pour un plan complet : entraînement, nutrition et organisation de la semaine.</p></div>
+        <div class="eb-time reveal"><span class="eb-time__d">7 jours</span><p>Pour un plan très personnalisé : suivi hormonal, post-grossesse ou contraintes spécifiques.</p></div>
+      </div>
+      <div class="elv-card eb-final reveal" style="margin-top:clamp(40px,6vw,72px);">
+        <h2 class="elv-title">Sois la première prévenue</h2>
+        <p>L'E-Book est bientôt disponible. Écris-moi et je te préviens dès l'ouverture.</p>
+        <a href="contact.html" class="btn btn--primary btn--lg">Me prévenir</a>
+      </div>
+    </div>
+  </section>
+  </main>
+
+  <footer class="footer" role="contentinfo">
+    <div class="container footer__grid">
+
+      <div class="footer__brand">
+        <a href="index.html" class="footer__logo-link footer__logo-wordmark" aria-label="Alyssa Fitness">
+          <div style="display:flex; align-items:center; gap:10px;">
+            <img src="assets/logo-white.png" class="logo-img logo-img--footer" alt="Alyssa Fitness" />
+            <div class="logo-wordmark footer__logo-wordmark">
+              <span class="logo-wordmark__name" style="color:#fff;">Alyssa Fitness</span>
+              <span class="logo-wordmark__sub">Coaching premium</span>
+            </div>
+          </div>
+        </a>
+        <p class="footer__tagline">Coaching fitness personnalisé, musculation et personal training pour femmes.</p>
+        <div class="footer__social">
+          <a href="https://www.instagram.com/alyssa_hdd" target="_blank" rel="noopener noreferrer" class="footer__social-link" aria-label="Instagram">
+            <svg viewBox="0 0 24 24" fill="none" width="18"><rect x="2" y="2" width="20" height="20" rx="5" stroke="currentColor" stroke-width="1.5"/><circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.5"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg>
+          </a>
+                    <a href="https://www.tiktok.com/@alyssa_hdd" target="_blank" rel="noopener noreferrer" class="footer__social-link" aria-label="TikTok">
+            <!-- TikTok icon SVG -->
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.95a8.16 8.16 0 0 0 4.77 1.52V7.01a4.85 4.85 0 0 1-1-.32z"/></svg>
+          </a>
+<a href="mailto:alyssapro.coaching@gmail.com" class="footer__social-link" aria-label="Email">
+            <svg viewBox="0 0 24 24" fill="none" width="18"><rect x="2" y="4" width="20" height="16" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M2 8l10 7 10-7" stroke="currentColor" stroke-width="1.5"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <nav class="footer__nav-col" aria-label="Navigation footer">
+        <h4 class="footer__col-title">Liens rapides</h4>
+        <ul>
+          <li><a href="index.html" class="footer__link">Accueil</a></li>
+          <li><a href="coaching.html" class="footer__link">Coaching</a></li>
+          <li><a href="a-propos.html" class="footer__link">À propos</a></li>
+          <li><a href="methode.html" class="footer__link">Méthode</a></li>
+          <li><a href="contact.html" class="footer__link">Contact</a></li>
+        </ul>
+      </nav>
+
+      <nav class="footer__nav-col" aria-label="Espace client">
+        <h4 class="footer__col-title">Espace client</h4>
+        <ul>
+          <li><a href="compte.html" class="footer__link">Mon compte</a></li>
+          <li><a href="reservation.html" class="footer__link">Réserver une séance</a></li>
+          <li><a href="messagerie.html" class="footer__link">Messagerie</a></li>
+          <li><a href="suivi.html" class="footer__link">Mon suivi</a></li>
+          <li><a href="challenge.html" class="footer__link">Challenges</a></li>
+        </ul>
+      </nav>
+
+      <div class="footer__contact-col">
+        <h4 class="footer__col-title">Contact</h4>
+        <ul>
+          <li>
+            <svg viewBox="0 0 20 20" fill="none" width="14"><rect x="1" y="3" width="18" height="14" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M1 7l9 6 9-6" stroke="currentColor" stroke-width="1.5"/></svg>
+            <a href="mailto:alyssapro.coaching@gmail.com" class="footer__link">alyssapro.coaching@gmail.com</a>
+          </li>
+          <li>
+            <svg viewBox="0 0 20 20" fill="none" width="14"><path d="M4 2h3l1.5 4-2 1.5c1 2 3 4 5 5L13 10.5l4 1.5v3c0 1-1 2-2 2C7 17 3 10 3 4c0-1 1-2 2-2z" stroke="currentColor" stroke-width="1.5"/></svg>
+            <span>0783512058</span>
+          </li>
+          <li>
+            <svg viewBox="0 0 20 20" fill="none" width="14"><path d="M10 2C6.686 2 4 4.686 4 8c0 5.25 6 10 6 10s6-4.75 6-10c0-3.314-2.686-6-6-6zm0 8a2 2 0 110-4 2 2 0 010 4z" stroke="currentColor" stroke-width="1.5"/></svg>
+            <span>Paris, France</span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="footer__instagram-col">
+        <h4 class="footer__col-title">Suivez-moi</h4>
+        <div class="footer__insta-grid">
+          <a href="https://www.instagram.com/alyssa_hdd" target="_blank" rel="noopener" class="insta-thumb" aria-label="Alyssa sur Instagram — squat rack">
+            <img src="assets/images/alyssa/alyssa-squat-rack.webp" alt="Alyssa coach fitness — squat rack" loading="lazy">
+          </a>
+          <a href="https://www.instagram.com/alyssa_hdd" target="_blank" rel="noopener" class="insta-thumb" aria-label="Alyssa sur Instagram — corde à sauter">
+            <img src="assets/images/alyssa/alyssa-rope-training.webp" alt="Alyssa coach fitness — entraînement corde" loading="lazy">
+          </a>
+          <a href="https://www.instagram.com/alyssa_hdd" target="_blank" rel="noopener" class="insta-thumb" aria-label="Alyssa sur Instagram — haltères">
+            <img src="assets/images/alyssa/alyssa-dumbbell-press.webp" alt="Alyssa coach fitness — haltères" loading="lazy">
+          </a>
+          <a href="https://www.instagram.com/alyssa_hdd" target="_blank" rel="noopener" class="insta-thumb" aria-label="Alyssa sur Instagram — tapis de course">
+            <img src="assets/images/alyssa/alyssa-treadmill.webp" alt="Alyssa coach fitness — tapis de course" loading="lazy">
+          </a>
+          <a href="https://www.instagram.com/alyssa_hdd" target="_blank" rel="noopener" class="insta-thumb" aria-label="Alyssa sur Instagram — énergie et cycle">
+            <img src="assets/images/alyssa/alyssa-energy-cycle.webp" alt="Alyssa coach fitness — énergie et vitalité" loading="lazy">
+          </a>
+          <a href="https://www.instagram.com/alyssa_hdd" target="_blank" rel="noopener" class="insta-thumb" aria-label="Alyssa sur Instagram — squat en salle">
+            <img src="assets/images/alyssa/alyssa-squat-gym.webp" alt="Alyssa coach fitness — squat en salle" loading="lazy">
+          </a>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="footer__bottom">
+      <div class="container footer__bottom-inner">
+        <p class="footer__copyright">© 2026 Alyssa Fitness — Tous droits réservés.</p>
+        <div class="footer__legal">
+          <a href="#" class="footer__link">Mentions légales</a>
+          <span aria-hidden="true">·</span>
+          <a href="#" class="footer__link">Confidentialité</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="global.js"></script>
+</body>
+</html>
