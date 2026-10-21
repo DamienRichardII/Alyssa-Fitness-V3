@@ -433,32 +433,24 @@
     <!-- ═══ HERO INTERNE ═══ -->
     <section class="hero-internal pg-dark" style="--pg-img:url(assets/images/alyssa/alyssa-squat-rack.webp)">
       <div class="container" style="position:relative;z-index:1;">
-        <span class="eyebrow">Mes accompagnements</span>
         <h1>Trouve ton <em>accompagnement</em></h1>
         <p class="subtitle">Des programmes pensés pour t'aider à atteindre tes objectifs, quel que soit ton niveau. Chaque programme est personnalisé et adapté à ton mode de vie.</p>
-        <a href="reservation.html" class="btn btn--primary">Réserver</a>
       </div>
     </section>
 
     <!-- ═══ PROGRAMMES ═══ -->
     <section class="section section--white" id="programmes">
       <div class="container">
-
-        <!-- Programme 01 : Transformation complète — Coaching sur-mesure -->
-        <div class="prog-card" id="coaching-sur-mesure">
-          <div class="prog-card__img prog-card__img--video">
-            <div class="program-video-wrapper">
-              <video class="program-card-video" autoplay muted loop playsinline preload="metadata">
-                <source src="assets/videos/alyssa-coaching-sur-mesure.mp4" type="video/mp4">
-              </video>
-            </div>
-            <span class="prog-card__img-label">Suivi sur-mesure</span>
-          </div>
-          <div class="prog-card__body">
-            <span class="prog-card__badge">Programme 01 — Coaching sur-mesure</span>
-            <h2 class="prog-card__title">Transformation complète</h2>
-            <p class="prog-card__desc">Un accompagnement complet et un programme entièrement adapté à ton rythme de vie, tes contraintes, tes objectifs et tes progrès afin de t'accompagner à chaque étape de ta transformation.</p>
-            <ul class="prog-card__benefits">
+        <div class="cp-grid">
+        <article class="cp-card reveal" id="coaching-sur-mesure">
+          <div class="cp-card__media"><video autoplay muted loop playsinline preload="metadata"><source src="assets/videos/alyssa-coaching-sur-mesure.mp4" type="video/mp4"></video></div>
+          <div class="cp-card__body">
+            <h2 class="cp-card__title">Transformation complète</h2>
+            <p class="cp-card__desc">Un accompagnement complet et un programme entièrement adapté à ton rythme de vie, tes contraintes, tes objectifs et tes progrès afin de…</p>
+            <ul class="cp-card__meta"><li><svg viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="7.5" stroke="currentColor" stroke-width="1.5"/><path d="M6.5 10l2.5 2.5 4.5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Tous niveaux</li><li><svg viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="7.5" stroke="currentColor" stroke-width="1.5"/><path d="M10 6v4l2.5 2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>En ligne et/ou présentiel · Durée libre</li></ul>
+            <div class="cp-card__more" hidden>
+              <p>Un accompagnement complet et un programme entièrement adapté à ton rythme de vie, tes contraintes, tes objectifs et tes progrès afin de t'accompagner à chaque étape de ta transformation.</p>
+              <ul class="prog-card__benefits">
               <li>Bilan initial complet : morphologie, habitudes, objectifs et mode de vie</li>
               <li>Programme d'entraînement 100% personnalisé et évolutif adapté à ton cycle</li>
               <li>Accompagnement nutritionnel</li>
@@ -467,35 +459,20 @@
               <li>Appel ou visio hebdomadaire</li>
               <li>Conseils de récupération, mobilité et habitudes de vie</li>
             </ul>
-            <div class="prog-card__meta">
-              <div class="prog-card__meta-item">
-                <span class="prog-card__meta-label">Pour qui</span>
-                <span class="prog-card__meta-val">Femmes avec objectif précis, contraintes ou besoin d'un accompagnement complet</span>
-              </div>
-              <div class="prog-card__meta-item">
-                <span class="prog-card__meta-label">Niveau</span>
-                <span class="prog-card__meta-val">Tous niveaux</span>
-              </div>
-              <div class="prog-card__meta-item">
-                <span class="prog-card__meta-label">Format</span>
-                <span class="prog-card__meta-val">En ligne et/ou présentiel · Durée libre</span>
-              </div>
+              <a href="reservation.html" class="cp-card__link">Démarrer ce programme →</a>
             </div>
-            <a href="reservation.html" class="btn btn--primary btn--sm">Démarrer ce programme</a>
+            <button type="button" class="btn btn--primary btn--sm cp-card__toggle" aria-expanded="false">Découvrir <svg class="btn-arrow" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
           </div>
-        </div>
-
-        <!-- Programme 02 : Galbe & Musculation -->
-        <div class="prog-card prog-card--reverse" id="programme-galbe-musculation">
-          <div class="prog-card__img">
-            <img class="prog-card__img-inner" src="assets/images/alyssa/alyssa-dumbbell-press.webp" alt="Alyssa coach fitness — haltères galbe musculation" loading="lazy">
-            <span class="prog-card__img-label">Galbe & musculation</span>
-          </div>
-          <div class="prog-card__body">
-            <span class="prog-card__badge">Programme 02</span>
-            <h2 class="prog-card__title">Programme galbe & musculation</h2>
-            <p class="prog-card__desc">Construis un physique fort et développe ta masse musculaire intelligemment afin de sculpter une silhouette plus harmonieuse. Pensée pour favoriser le développement musculaire tout en limitant la prise de gras.</p>
-            <ul class="prog-card__benefits">
+        </article>
+        <article class="cp-card reveal" id="programme-galbe-musculation">
+          <div class="cp-card__media"><img src="assets/images/alyssa/alyssa-dumbbell-press.webp" alt="Programme galbe & musculation" loading="lazy" /></div>
+          <div class="cp-card__body">
+            <h2 class="cp-card__title">Programme galbe & musculation</h2>
+            <p class="cp-card__desc">Construis un physique fort et développe ta masse musculaire intelligemment afin de sculpter une silhouette plus harmonieuse. Pensée pour…</p>
+            <ul class="cp-card__meta"><li><svg viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="7.5" stroke="currentColor" stroke-width="1.5"/><path d="M6.5 10l2.5 2.5 4.5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Débutant ou intermédiaire</li><li><svg viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="7.5" stroke="currentColor" stroke-width="1.5"/><path d="M10 6v4l2.5 2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>Présentiel ou en ligne · 3–6 mois</li></ul>
+            <div class="cp-card__more" hidden>
+              <p>Construis un physique fort et développe ta masse musculaire intelligemment afin de sculpter une silhouette plus harmonieuse. Pensée pour favoriser le développement musculaire tout en limitant la prise de gras.</p>
+              <ul class="prog-card__benefits">
               <li>Programmes salle de sport structurés et progressifs</li>
               <li>Focus prise de masse féminine et galbe</li>
               <li>Adaptation possible selon le cycle menstruel</li>
@@ -503,35 +480,20 @@
               <li>Vidéos techniques pour maîtriser les mouvements</li>
               <li>Appel bilan mensuel individuel</li>
             </ul>
-            <div class="prog-card__meta">
-              <div class="prog-card__meta-item">
-                <span class="prog-card__meta-label">Pour qui</span>
-                <span class="prog-card__meta-val">Femmes souhaitant développer leur masse musculaire et galber leur silhouette</span>
-              </div>
-              <div class="prog-card__meta-item">
-                <span class="prog-card__meta-label">Niveau</span>
-                <span class="prog-card__meta-val">Débutant ou intermédiaire</span>
-              </div>
-              <div class="prog-card__meta-item">
-                <span class="prog-card__meta-label">Format</span>
-                <span class="prog-card__meta-val">Présentiel ou en ligne · 3–6 mois</span>
-              </div>
+              <a href="reservation.html" class="cp-card__link">Démarrer ce programme →</a>
             </div>
-            <a href="reservation.html" class="btn btn--primary btn--sm">Démarrer ce programme</a>
+            <button type="button" class="btn btn--primary btn--sm cp-card__toggle" aria-expanded="false">Découvrir <svg class="btn-arrow" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
           </div>
-        </div>
-
-        <!-- Programme 03 : Sèche -->
-        <div class="prog-card" id="programme-seche">
-          <div class="prog-card__img">
-            <img class="prog-card__img-inner" src="assets/images/alyssa/alyssa-treadmill.webp" alt="Alyssa coach fitness — cardio tapis de course sèche" loading="lazy">
-            <span class="prog-card__img-label">Transformation totale</span>
-          </div>
-          <div class="prog-card__body">
-            <span class="prog-card__badge">Programme 03</span>
-            <h2 class="prog-card__title">Programme sèche</h2>
-            <p class="prog-card__desc">Perds du gras durablement, tonifie ta silhouette et révèle un physique plus harmonieux grâce à une méthode alliant musculation, nutrition et récupération.</p>
-            <ul class="prog-card__benefits">
+        </article>
+        <article class="cp-card reveal" id="programme-seche">
+          <div class="cp-card__media"><img src="assets/images/alyssa/alyssa-treadmill.webp" alt="Programme sèche" loading="lazy" /></div>
+          <div class="cp-card__body">
+            <h2 class="cp-card__title">Programme sèche</h2>
+            <p class="cp-card__desc">Perds du gras durablement, tonifie ta silhouette et révèle un physique plus harmonieux grâce à une méthode alliant musculation, nutrition…</p>
+            <ul class="cp-card__meta"><li><svg viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="7.5" stroke="currentColor" stroke-width="1.5"/><path d="M6.5 10l2.5 2.5 4.5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Tous niveaux</li><li><svg viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="7.5" stroke="currentColor" stroke-width="1.5"/><path d="M10 6v4l2.5 2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>En ligne · 3–6 mois</li></ul>
+            <div class="cp-card__more" hidden>
+              <p>Perds du gras durablement, tonifie ta silhouette et révèle un physique plus harmonieux grâce à une méthode alliant musculation, nutrition et récupération.</p>
+              <ul class="prog-card__benefits">
               <li>Programme d'entraînement progressif : 2 à 5 séances par semaine</li>
               <li>Plan nutritionnel complet</li>
               <li>Guide cardio : Zone 2 et HIIT selon objectifs</li>
@@ -539,69 +501,39 @@
               <li>Vidéos techniques des exercices</li>
               <li>Outils de suivi de progression</li>
             </ul>
-            <div class="prog-card__meta">
-              <div class="prog-card__meta-item">
-                <span class="prog-card__meta-label">Pour qui</span>
-                <span class="prog-card__meta-val">Prête à sécher, pas à te priver</span>
-              </div>
-              <div class="prog-card__meta-item">
-                <span class="prog-card__meta-label">Niveau</span>
-                <span class="prog-card__meta-val">Tous niveaux</span>
-              </div>
-              <div class="prog-card__meta-item">
-                <span class="prog-card__meta-label">Format</span>
-                <span class="prog-card__meta-val">En ligne · 3–6 mois</span>
-              </div>
+              <a href="reservation.html" class="cp-card__link">Démarrer ce programme →</a>
             </div>
-            <a href="reservation.html" class="btn btn--primary btn--sm">Démarrer ce programme</a>
+            <button type="button" class="btn btn--primary btn--sm cp-card__toggle" aria-expanded="false">Découvrir <svg class="btn-arrow" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
           </div>
-        </div>
-
-        <!-- Programme 04 : Remise en forme -->
-        <div class="prog-card prog-card--reverse" id="remise">
-          <div class="prog-card__img">
-            <img class="prog-card__img-inner" src="assets/images/alyssa/alyssa-squat-gym.webp" alt="Alyssa coach fitness — remise en forme squat" loading="lazy">
-            <span class="prog-card__img-label">Remise en forme</span>
-          </div>
-          <div class="prog-card__body">
-            <span class="prog-card__badge">Programme 04</span>
-            <h2 class="prog-card__title">Remise en forme & Bien-être</h2>
-            <p class="prog-card__desc">Un programme doux mais efficace pour te remettre en mouvement en douceur. On travaille la mobilité, le renforcement global et ton rapport au sport, sans jamais te brusquer. L'objectif : retrouver de l'énergie, du tonus et de la confiance en toi.</p>
-            <ul class="prog-card__benefits">
+        </article>
+        <article class="cp-card reveal" id="remise">
+          <div class="cp-card__media"><img src="assets/images/alyssa/alyssa-squat-gym.webp" alt="Remise en forme & Bien-être" loading="lazy" /></div>
+          <div class="cp-card__body">
+            <h2 class="cp-card__title">Remise en forme & Bien-être</h2>
+            <p class="cp-card__desc">Un programme doux mais efficace pour te remettre en mouvement en douceur. On travaille la mobilité, le renforcement global et ton rapport…</p>
+            <ul class="cp-card__meta"><li><svg viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="7.5" stroke="currentColor" stroke-width="1.5"/><path d="M6.5 10l2.5 2.5 4.5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Débutant</li><li><svg viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="7.5" stroke="currentColor" stroke-width="1.5"/><path d="M10 6v4l2.5 2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>En ligne · 3 mois</li></ul>
+            <div class="cp-card__more" hidden>
+              <p>Un programme doux mais efficace pour te remettre en mouvement en douceur. On travaille la mobilité, le renforcement global et ton rapport au sport, sans jamais te brusquer. L'objectif : retrouver de l'énergie, du tonus et de la confiance en toi.</p>
+              <ul class="prog-card__benefits">
               <li>Séances adaptées à ton rythme et ta condition physique</li>
               <li>Exercices de mobilité et de renforcement progressifs</li>
               <li>Conseils nutritionnels simples et durables</li>
               <li>Suivi hebdomadaire personnalisé</li>
               <li>Accès à la communauté privée</li>
             </ul>
-            <div class="prog-card__meta">
-              <div class="prog-card__meta-item">
-                <span class="prog-card__meta-label">Pour qui</span>
-                <span class="prog-card__meta-val">Débutantes & reprises</span>
-              </div>
-              <div class="prog-card__meta-item">
-                <span class="prog-card__meta-label">Niveau</span>
-                <span class="prog-card__meta-val">Débutant</span>
-              </div>
-              <div class="prog-card__meta-item">
-                <span class="prog-card__meta-label">Format</span>
-                <span class="prog-card__meta-val">En ligne · 3 mois</span>
-              </div>
+              <a href="reservation.html" class="cp-card__link">Démarrer ce programme →</a>
             </div>
-            <a href="reservation.html" class="btn btn--primary btn--sm">Démarrer ce programme</a>
+            <button type="button" class="btn btn--primary btn--sm cp-card__toggle" aria-expanded="false">Découvrir <svg class="btn-arrow" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
           </div>
+        </article>
         </div>
-
       </div>
     </section>
 
     <!-- ═══ FAQ ═══ -->
-    <section class="section section--beige">
+    <section class="section section--white" style="padding-top:24px;">
       <div class="container">
-        <div style="text-align:center; margin-bottom:56px;">
-          <span style="display:inline-block; font-family:var(--font-body); font-size:11px; font-weight:600; letter-spacing:0.2em; text-transform:uppercase; color:var(--rose-saumon); margin-bottom:14px;">FAQ</span>
-          <h2 style="font-family:var(--font-heading); font-size:clamp(1.8rem,3.5vw,2.8rem); font-weight:400; color:var(--noir-doux);">Questions fréquentes</h2>
-        </div>
+        <h2 class="section-title" style="margin-bottom:24px;">Questions fréquentes</h2>
         <div class="faq-list">
 
           <div class="faq-item">
@@ -644,113 +576,61 @@
             <div class="faq-answer">Absolument. Les objectifs évoluent, la vie aussi. Si ton programme ne te convient plus ou si tu souhaites évoluer vers quelque chose de différent, on en discute ensemble et on ajuste. La flexibilité fait partie de mon approche — un bon programme, c'est avant tout un programme que tu peux suivre sur la durée.</div>
           </div>
 
+          <div class="faq-item">
+            <button class="faq-btn" aria-expanded="false">
+              <span class="faq-btn__q">Comment se déroule le suivi ?</span>
+              <span class="faq-btn__icon" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none"><path d="M8 3v10M3 8h10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></span>
+            </button>
+            <div class="faq-answer">Tu as accès à une messagerie régulière, à des bilans réguliers et à des ajustements de ton programme selon tes retours. Tu n'es jamais seule dans ton parcours.</div>
+          </div>
         </div>
       </div>
     </section>
 
     <!-- ═══ CTA FINAL ═══ -->
-    <section class="section--cta">
-      <span class="eyebrow">Prête à commencer ?</span>
-      <h2>Prête à commencer ton coaching ?</h2>
-      <p>Un seul appel suffit pour tout changer. Gratuit, sans engagement, et peut-être le meilleur investissement que tu feras pour toi.</p>
-      <a href="reservation.html" class="btn btn--primary">Réserver mon appel gratuit</a>
+    <section class="home-cta" aria-label="Une question ?">
+      <div class="container home-cta__inner">
+        <div>
+          <h2>Tu as une question ?<br/>On en discute ensemble.</h2>
+          <p>Réserve un appel pour faire le point sur tes objectifs et trouver l'accompagnement qui te correspond.</p>
+        </div>
+        <a href="reservation.html" class="btn btn--primary btn--lg">Réserver</a>
+      </div>
     </section>
 
   </main>
 
   <!-- ═══ FOOTER ═══ -->
-  <footer class="footer" role="contentinfo">
-    <div class="container footer__grid">
-      <div class="footer__brand">
-        <a href="index.html" class="footer__logo-link footer__logo-wordmark" aria-label="Alyssa Fitness">
-          <div style="display:flex; align-items:center; gap:10px;">
-            <img src="assets/logo-white.png" class="logo-img logo-img--footer" alt="Alyssa Fitness" />
-            <div class="logo-wordmark footer__logo-wordmark">
-              <span class="logo-wordmark__name" style="color:#fff;">Alyssa Fitness</span>
-              <span class="logo-wordmark__sub">Coaching premium</span>
-            </div>
-          </div>
+  <footer class="elv-footer" role="contentinfo">
+    <div class="container elv-footer__grid">
+      <div class="elv-footer__brand">
+        <a href="index.html" class="elv-footer__logo" aria-label="Alyssa Fitness">
+          <img src="assets/logo-white.png" class="logo-img logo-img--footer" alt="Alyssa Fitness" />
+          <span><strong>Alyssa Fitness</strong><em>Coaching premium</em></span>
         </a>
-        <p class="footer__tagline">Coaching fitness personnalisé, musculation et personal training pour femmes.</p>
-        <div class="footer__social">
-          <a href="https://www.instagram.com/alyssa_hdd" target="_blank" rel="noopener noreferrer" class="footer__social-link" aria-label="Instagram">
-            <svg viewBox="0 0 24 24" fill="none" width="18"><rect x="2" y="2" width="20" height="20" rx="5" stroke="currentColor" stroke-width="1.5"/><circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.5"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg>
-          </a>
-                    <a href="https://www.tiktok.com/@alyssa_hdd" target="_blank" rel="noopener noreferrer" class="footer__social-link" aria-label="TikTok">
-            <!-- TikTok icon SVG -->
-            <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.95a8.16 8.16 0 0 0 4.77 1.52V7.01a4.85 4.85 0 0 1-1-.32z"/></svg>
-          </a>
-<a href="mailto:alyssapro.coaching@gmail.com" class="footer__social-link" aria-label="Email">
-            <svg viewBox="0 0 24 24" fill="none" width="18"><rect x="2" y="4" width="20" height="16" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M2 8l10 7 10-7" stroke="currentColor" stroke-width="1.5"/></svg>
-          </a>
-        </div>
       </div>
-      <nav class="footer__nav-col" aria-label="Navigation footer">
-        <h4 class="footer__col-title">Liens rapides</h4>
+      <nav class="elv-footer__col" aria-label="Navigation">
+        <h4>Navigation</h4>
         <ul>
-          <li><a href="index.html" class="footer__link">Accueil</a></li>
-          <li><a href="coaching.html" class="footer__link">Coaching</a></li>
-          <li><a href="a-propos.html" class="footer__link">À propos</a></li>
-          <li><a href="methode.html" class="footer__link">Méthode</a></li>
-          <li><a href="contact.html" class="footer__link">Contact</a></li>
+          <li><a href="index.html">Accueil</a></li><li><a href="coaching.html">Coaching</a></li><li><a href="a-propos.html">À propos</a></li><li><a href="methode.html">Méthode</a></li><li><a href="suivi.html">Suivi</a></li><li><a href="challenge.html">Challenge</a></li><li><a href="ebook.html">E-Book</a></li>
         </ul>
       </nav>
-      <nav class="footer__nav-col" aria-label="Espace client">
-        <h4 class="footer__col-title">Espace client</h4>
-        <ul>
-          <li><a href="compte.html" class="footer__link">Mon compte</a></li>
-          <li><a href="reservation.html" class="footer__link">Réserver une séance</a></li>
-          <li><a href="messagerie.html" class="footer__link">Messagerie</a></li>
-          <li><a href="suivi.html" class="footer__link">Mon suivi</a></li>
-          <li><a href="challenge.html" class="footer__link">Challenges</a></li><li><a href="ebook.html" class="footer__link">E-Book</a></li>
-        </ul>
+      <nav class="elv-footer__col" aria-label="Légal">
+        <h4>Légal</h4>
+        <ul><li><a href="#">Mentions légales</a></li><li><a href="#">Politique de confidentialité</a></li><li><a href="#">CGU</a></li><li><a href="#">Cookies</a></li></ul>
       </nav>
-      <div class="footer__contact-col">
-        <h4 class="footer__col-title">Contact</h4>
+      <div class="elv-footer__col">
+        <h4>Suivre</h4>
         <ul>
-          <li>
-            <svg viewBox="0 0 20 20" fill="none" width="14"><rect x="1" y="3" width="18" height="14" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M1 7l9 6 9-6" stroke="currentColor" stroke-width="1.5"/></svg>
-            <a href="mailto:alyssapro.coaching@gmail.com" class="footer__link">alyssapro.coaching@gmail.com</a>
-          </li>
-          <li>
-            <svg viewBox="0 0 20 20" fill="none" width="14"><path d="M10 2C6.686 2 4 4.686 4 8c0 5.25 6 10 6 10s6-4.75 6-10c0-3.314-2.686-6-6-6zm0 8a2 2 0 110-4 2 2 0 010 4z" stroke="currentColor" stroke-width="1.5"/></svg>
-            <span>Paris, France</span>
-          </li>
+          <li><a href="https://www.instagram.com/alyssa_hdd" target="_blank" rel="noopener noreferrer">Instagram</a></li>
+          <li><a href="https://www.tiktok.com/@alyssa_hdd" target="_blank" rel="noopener noreferrer">TikTok</a></li>
+          <li><a href="mailto:alyssapro.coaching@gmail.com">Email</a></li>
         </ul>
-      </div>
-      <div class="footer__instagram-col">
-        <h4 class="footer__col-title">Suivez-moi</h4>
-        <div class="footer__insta-grid">
-          <a href="https://www.instagram.com/alyssa_hdd" target="_blank" rel="noopener noreferrer" class="insta-thumb" aria-label="Alyssa sur Instagram — squat rack">
-            <img src="assets/images/alyssa/alyssa-squat-rack.webp" alt="Alyssa coach fitness — squat rack" loading="lazy">
-          </a>
-          <a href="https://www.instagram.com/alyssa_hdd" target="_blank" rel="noopener noreferrer" class="insta-thumb" aria-label="Alyssa sur Instagram — corde à sauter">
-            <img src="assets/images/alyssa/alyssa-rope-training.webp" alt="Alyssa coach fitness — entraînement corde" loading="lazy">
-          </a>
-          <a href="https://www.instagram.com/alyssa_hdd" target="_blank" rel="noopener noreferrer" class="insta-thumb" aria-label="Alyssa sur Instagram — haltères">
-            <img src="assets/images/alyssa/alyssa-dumbbell-press.webp" alt="Alyssa coach fitness — haltères" loading="lazy">
-          </a>
-          <a href="https://www.instagram.com/alyssa_hdd" target="_blank" rel="noopener noreferrer" class="insta-thumb" aria-label="Alyssa sur Instagram — tapis de course">
-            <img src="assets/images/alyssa/alyssa-treadmill.webp" alt="Alyssa coach fitness — tapis de course" loading="lazy">
-          </a>
-          <a href="https://www.instagram.com/alyssa_hdd" target="_blank" rel="noopener noreferrer" class="insta-thumb" aria-label="Alyssa sur Instagram — énergie et cycle">
-            <img src="assets/images/alyssa/alyssa-energy-cycle.webp" alt="Alyssa coach fitness — énergie et vitalité" loading="lazy">
-          </a>
-          <a href="https://www.instagram.com/alyssa_hdd" target="_blank" rel="noopener noreferrer" class="insta-thumb" aria-label="Alyssa sur Instagram — squat en salle">
-            <img src="assets/images/alyssa/alyssa-squat-gym.webp" alt="Alyssa coach fitness — squat en salle" loading="lazy">
-          </a>
-        </div>
       </div>
     </div>
-    <div class="footer__bottom">
-      <div class="container footer__bottom-inner">
-        <p class="footer__copyright">© 2026 Alyssa Fitness — Tous droits réservés.</p>
-        <div class="footer__legal">
-          <a href="#" class="footer__link">Mentions légales</a>
-          <span aria-hidden="true">·</span>
-          <a href="#" class="footer__link">Confidentialité</a>
-        </div>
-      </div>
+    <div class="container elv-footer__bottom">
+      <span>© 2026 Alyssa Fitness. Tous droits réservés.</span>
+      <span>Une progression plus forte, chaque jour.</span>
     </div>
   </footer>
 
@@ -777,6 +657,16 @@
   })();
   </script>
 
+  <script>
+    document.querySelectorAll('.cp-card__toggle').forEach(function(b){
+      b.addEventListener('click',function(){
+        var more=b.parentNode.querySelector('.cp-card__more'), open=more.hasAttribute('hidden');
+        if(open) more.removeAttribute('hidden'); else more.setAttribute('hidden','');
+        b.setAttribute('aria-expanded',String(open));
+        b.firstChild.textContent=open?'Réduire ':'Découvrir ';
+      });
+    });
+  </script>
   <script src="global.js"></script>
 </body>
 </html>

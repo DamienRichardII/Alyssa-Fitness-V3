@@ -27,7 +27,7 @@
 
     .msg-layout {
       display: grid;
-      grid-template-columns: 300px 1fr;
+      grid-template-columns: 290px 1fr 270px;
       height: 640px;
       margin: 28px auto 56px;
       max-width: var(--max-width);
@@ -332,6 +332,7 @@
     @media (max-width: 768px) {
       body { overflow: auto; }
       .msg-layout { grid-template-columns: 1fr; height: auto; }
+      .msg-aside { display: none; }
       .msg-sidebar { height: 200px; overflow: hidden; }
       .msg-main { height: calc(100vh - var(--header-h) - 200px); }
       .msg-body { padding: 16px; }
@@ -581,7 +582,26 @@
       </div>
 
     </main>
+
+    <!-- COLONNE DROITE -->
+    <aside class="msg-aside">
+      <h3>Prochaine séance</h3>
+      <img src="assets/images/alyssa/alyssa-dumbbell-press.webp" alt="" class="msg-aside__img" />
+      <p class="msg-aside__t">Haut du corps</p>
+      <ul class="msg-aside__meta"><li>Aujourd'hui · 18h00</li><li>45 min</li><li>En ligne</li></ul>
+      <a href="reservation.html" class="btn btn--ghost btn--sm" style="width:100%;justify-content:center;">Voir le programme →</a>
+      <h3 style="margin-top:22px;">Documents utiles</h3>
+      <ul class="msg-docs">
+        <li><svg viewBox="0 0 24 24" fill="none" width="20" height="20" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6"/></svg><div><strong>Programme actuel</strong><small>PDF · 12 pages</small></div></li>
+        <li><svg viewBox="0 0 24 24" fill="none" width="20" height="20" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6"/></svg><div><strong>Fiche exercices</strong><small>PDF · 6 pages</small></div></li>
+        <li><svg viewBox="0 0 24 24" fill="none" width="20" height="20" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6"/></svg><div><strong>Conseils récupération</strong><small>PDF · 4 pages</small></div></li>
+      </ul>
+    </aside>
   </div>
+
+  <section class="home-cta ap-follow-band" style="--pg-img:url(assets/images/alyssa/alyssa-squat-rack.webp)">
+    <div class="container"><h2>Une coach à tes côtés,<br/><em>à chaque étape.</em></h2></div>
+  </section>
 
   <style>
     @keyframes typing { from { opacity:.3; transform:scale(.8); } to { opacity:1; transform:scale(1); } }

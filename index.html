@@ -1200,48 +1200,7 @@
     </div>
   </section>
 
-  <!-- ═══════════════════════════════════════════
-       POUR QUI ?
-  ═══════════════════════════════════════════ -->
-  <section class="section section--home-light" id="pour-qui" aria-label="Pour qui est ce coaching">
-    <div class="container">
-      <p class="section-eyebrow reveal">Coaching féminin</p>
-      <h2 class="section-title reveal">Ce coaching est fait pour toi si…</h2>
-      <p class="pourqui-intro reveal">Un accompagnement pensé pour les femmes qui veulent avancer à leur rythme, sans pression et sans programmes génériques.</p>
 
-      <div class="pourqui-grid">
-
-        <div class="pourqui-card reveal">
-          <div class="pourqui-card__dot">
-            <svg viewBox="0 0 24 24" fill="none"><path d="M5 12l4 4L19 7" stroke="#2D9CDB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </div>
-          <p class="pourqui-card__text">Tu veux reprendre le sport sans te blesser ni te perdre</p>
-        </div>
-
-        <div class="pourqui-card reveal reveal-delay-1">
-          <div class="pourqui-card__dot">
-            <svg viewBox="0 0 24 24" fill="none"><path d="M5 12l4 4L19 7" stroke="#2D9CDB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </div>
-          <p class="pourqui-card__text">Tu ressens les effets de ton cycle sur ton énergie et tes performances</p>
-        </div>
-
-        <div class="pourqui-card reveal reveal-delay-2">
-          <div class="pourqui-card__dot">
-            <svg viewBox="0 0 24 24" fill="none"><path d="M5 12l4 4L19 7" stroke="#2D9CDB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </div>
-          <p class="pourqui-card__text">Tu reviens de grossesse et tu veux y aller à ton rythme</p>
-        </div>
-
-        <div class="pourqui-card reveal reveal-delay-3">
-          <div class="pourqui-card__dot">
-            <svg viewBox="0 0 24 24" fill="none"><path d="M5 12l4 4L19 7" stroke="#2D9CDB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </div>
-          <p class="pourqui-card__text">Tu en as marre des programmes génériques qui ne te ressemblent pas</p>
-        </div>
-
-      </div>
-    </div>
-  </section>
 
 
 
@@ -1249,7 +1208,20 @@
   <!-- ═══════════════════════════════════════════
        QUIZ — CHOISIR MON PROGRAMME
   ═══════════════════════════════════════════ -->
-  <section class="section section--home-light" id="quiz-programme" aria-label="Quiz d'orientation programme">
+  <section class="section section--home-pale" id="profil" aria-label="Quel est ton profil ?" style="padding-bottom:0;">
+    <div class="container">
+      <div class="banner reveal">
+        <div class="banner__img"><img src="assets/images/alyssa/alyssa-treadmill.webp" alt="" loading="lazy" style="object-position:center 30%"/></div>
+        <div class="banner__body">
+          <h2>Quel est ton profil ?</h2>
+          <p>Réponds à quelques questions pour découvrir l'accompagnement le plus adapté à tes objectifs.</p>
+          <button type="button" class="btn btn--primary" id="quizOpen" aria-expanded="false" aria-controls="quiz-programme">Faire le quiz</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--home-light" id="quiz-programme" aria-label="Quiz d'orientation programme" hidden>
     <div class="container">
       <div class="quiz-wrapper">
 
@@ -1325,16 +1297,15 @@
 
 
 
-  <section class="section section--home-pale" id="ebook" aria-label="E-Book à venir" style="padding-top:0;">
-    <div class="container stack-gap">
-      <div class="banner banner--rev reveal">
+  <section class="section section--home-pale" id="ebook" aria-label="E-Book à venir" style="padding-top:24px;padding-bottom:0;">
+    <div class="container">
+      <div class="banner reveal">
+        <div class="banner__img banner__img--cover"><div class="book-cover"><img src="assets/logo-transparent.png" alt="" /><strong>Mon plan<br/><em>personnalisé</em></strong></div></div>
         <div class="banner__body">
-          <span class="elv-badge">Disponible prochainement</span>
-          <h2>E-Book : ton plan personnalisé</h2>
-          <p>Des conseils pratiques, des programmes et des outils pour t'accompagner. Préparation entre 3 et 7 jours.</p>
+          <h2>E-Book<br/>bientôt disponible</h2>
+          <p>Des conseils pratiques, des recettes et des outils pour t'accompagner. Plan personnalisé en 3 à 7 jours.</p>
           <a href="ebook.html" class="btn btn--primary">Être informée</a>
         </div>
-        <div class="banner__img"><img src="assets/images/alyssa/alyssa-stretch-studio.webp" alt="E-Book Alyssa Fitness" loading="lazy"/></div>
       </div>
     </div>
   </section>
@@ -1346,7 +1317,7 @@
   <section class="section section--home-light" id="temoignages" aria-label="Témoignages clientes">
     <div class="container temo-header">
       <h2 class="section-title">
-        Elles ont commencé à <em>leur rythme.</em>
+        Elles en <em>parlent</em>
       </h2>
       <p class="temo-subtitle">Des femmes de tous profils, qui ont choisi de se donner une chance.</p>
     </div>
@@ -1447,27 +1418,13 @@
   <!-- ═══════════════════════════════════════════
        CTA FINAL
   ═══════════════════════════════════════════ -->
-  <section class="section--cta" id="contact" aria-label="Prise de contact">
-    <div class="cta-watermark" aria-hidden="true">AF</div>
-    <div class="container cta-inner">
-      <div class="cta-visual reveal reveal--left">
-        <img src="assets/images/alyssa/alyssa-stretch-studio.webp" alt="Alyssa coach fitness" class="cta-photo-placeholder" style="width:100%;height:100%;object-fit:cover;display:block;border-radius:inherit;">
+  <section class="home-cta" id="contact" aria-label="Prête à te lancer ?">
+    <div class="container home-cta__inner">
+      <div>
+        <h2>Prête à te lancer ?</h2>
+        <p>Réserve ton appel ou ta séance découverte et on fait le point ensemble.</p>
       </div>
-      <div class="cta-content reveal reveal--right">
-        <p class="section-eyebrow">Commence maintenant</p>
-        <h2 class="cta-title">Prête à reprendre le contrôle de <em>ton corps&nbsp;?</em></h2>
-        <p class="cta-text">On commence par un appel de 20 minutes pour faire le point ensemble — tes objectifs, ton rythme, ton quotidien. Gratuit, sans engagement.</p>
-        <div class="cta-actions">
-          <a href="reservation.html" class="btn btn--primary btn--lg">
-            Réserver mon appel gratuit
-            <svg class="btn-arrow" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </a>
-          <a href="https://www.instagram.com/alyssa_hdd" target="_blank" rel="noopener noreferrer" class="btn btn--ghost btn--lg">
-            M'écrire sur Instagram
-            <svg viewBox="0 0 24 24" fill="none" width="18"><rect x="2" y="2" width="20" height="20" rx="5" stroke="currentColor" stroke-width="1.5"/><circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.5"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg>
-          </a>
-        </div>
-      </div>
+      <a href="reservation.html" class="btn btn--primary btn--lg">Réserver <svg class="btn-arrow" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
     </div>
   </section>
 
@@ -1475,109 +1432,36 @@
   <!-- ═══════════════════════════════════════════
        FOOTER
   ═══════════════════════════════════════════ -->
-  <footer class="footer" role="contentinfo">
-    <div class="container footer__grid">
-
-      <div class="footer__brand">
-        <a href="index.html" class="footer__logo-link footer__logo-wordmark" aria-label="Alyssa Fitness">
-          <div style="display:flex; align-items:center; gap:10px;">
-            <img src="assets/logo-white.png" class="logo-img logo-img--footer" alt="Alyssa Fitness" />
-            <div class="logo-wordmark footer__logo-wordmark">
-              <span class="logo-wordmark__name" style="color:#fff;">Alyssa Fitness</span>
-              <span class="logo-wordmark__sub">Coaching premium</span>
-            </div>
-          </div>
+  <footer class="elv-footer" role="contentinfo">
+    <div class="container elv-footer__grid">
+      <div class="elv-footer__brand">
+        <a href="index.html" class="elv-footer__logo" aria-label="Alyssa Fitness">
+          <img src="assets/logo-white.png" class="logo-img logo-img--footer" alt="Alyssa Fitness" />
+          <span><strong>Alyssa Fitness</strong><em>Coaching premium</em></span>
         </a>
-        <p class="footer__tagline">Coaching fitness personnalisé, musculation et personal training pour femmes.</p>
-        <div class="footer__social">
-          <a href="https://www.instagram.com/alyssa_hdd" target="_blank" rel="noopener noreferrer" class="footer__social-link" aria-label="Instagram">
-            <svg viewBox="0 0 24 24" fill="none" width="18"><rect x="2" y="2" width="20" height="20" rx="5" stroke="currentColor" stroke-width="1.5"/><circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.5"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg>
-          </a>
-                    <a href="https://www.tiktok.com/@alyssa_hdd" target="_blank" rel="noopener noreferrer" class="footer__social-link" aria-label="TikTok">
-            <!-- TikTok icon SVG -->
-            <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.95a8.16 8.16 0 0 0 4.77 1.52V7.01a4.85 4.85 0 0 1-1-.32z"/></svg>
-          </a>
-<a href="mailto:alyssapro.coaching@gmail.com" class="footer__social-link" aria-label="Email">
-            <svg viewBox="0 0 24 24" fill="none" width="18"><rect x="2" y="4" width="20" height="16" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M2 8l10 7 10-7" stroke="currentColor" stroke-width="1.5"/></svg>
-          </a>
-        </div>
       </div>
-
-      <nav class="footer__nav-col" aria-label="Navigation footer">
-        <h4 class="footer__col-title">Liens rapides</h4>
+      <nav class="elv-footer__col" aria-label="Navigation">
+        <h4>Navigation</h4>
         <ul>
-          <li><a href="index.html" class="footer__link">Accueil</a></li>
-          <li><a href="coaching.html" class="footer__link">Coaching</a></li>
-          <li><a href="a-propos.html" class="footer__link">À propos</a></li>
-          <li><a href="methode.html" class="footer__link">Méthode</a></li>
-          <li><a href="contact.html" class="footer__link">Contact</a></li>
+          <li><a href="index.html">Accueil</a></li><li><a href="coaching.html">Coaching</a></li><li><a href="a-propos.html">À propos</a></li><li><a href="methode.html">Méthode</a></li><li><a href="suivi.html">Suivi</a></li><li><a href="challenge.html">Challenge</a></li><li><a href="ebook.html">E-Book</a></li>
         </ul>
       </nav>
-
-      <nav class="footer__nav-col" aria-label="Espace client">
-        <h4 class="footer__col-title">Espace client</h4>
-        <ul>
-          <li><a href="compte.html" class="footer__link">Mon compte</a></li>
-          <li><a href="reservation.html" class="footer__link">Réserver une séance</a></li>
-          <li><a href="messagerie.html" class="footer__link">Messagerie</a></li>
-          <li><a href="suivi.html" class="footer__link">Mon suivi</a></li>
-          <li><a href="challenge.html" class="footer__link">Challenges</a></li><li><a href="ebook.html" class="footer__link">E-Book</a></li>
-        </ul>
+      <nav class="elv-footer__col" aria-label="Légal">
+        <h4>Légal</h4>
+        <ul><li><a href="#">Mentions légales</a></li><li><a href="#">Politique de confidentialité</a></li><li><a href="#">CGU</a></li><li><a href="#">Cookies</a></li></ul>
       </nav>
-
-      <div class="footer__contact-col">
-        <h4 class="footer__col-title">Contact</h4>
+      <div class="elv-footer__col">
+        <h4>Suivre</h4>
         <ul>
-          <li>
-            <svg viewBox="0 0 20 20" fill="none" width="14"><rect x="1" y="3" width="18" height="14" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M1 7l9 6 9-6" stroke="currentColor" stroke-width="1.5"/></svg>
-            <a href="mailto:alyssapro.coaching@gmail.com" class="footer__link">alyssapro.coaching@gmail.com</a>
-          </li>
-          <li>
-            <svg viewBox="0 0 20 20" fill="none" width="14"><path d="M4 2h3l1.5 4-2 1.5c1 2 3 4 5 5L13 10.5l4 1.5v3c0 1-1 2-2 2C7 17 3 10 3 4c0-1 1-2 2-2z" stroke="currentColor" stroke-width="1.5"/></svg>
-            <span>0783512058</span>
-          </li>
-          <li>
-            <svg viewBox="0 0 20 20" fill="none" width="14"><path d="M10 2C6.686 2 4 4.686 4 8c0 5.25 6 10 6 10s6-4.75 6-10c0-3.314-2.686-6-6-6zm0 8a2 2 0 110-4 2 2 0 010 4z" stroke="currentColor" stroke-width="1.5"/></svg>
-            <span>Paris, France</span>
-          </li>
+          <li><a href="https://www.instagram.com/alyssa_hdd" target="_blank" rel="noopener noreferrer">Instagram</a></li>
+          <li><a href="https://www.tiktok.com/@alyssa_hdd" target="_blank" rel="noopener noreferrer">TikTok</a></li>
+          <li><a href="mailto:alyssapro.coaching@gmail.com">Email</a></li>
         </ul>
       </div>
-
-      <div class="footer__instagram-col">
-        <h4 class="footer__col-title">Suivez-moi</h4>
-        <div class="footer__insta-grid">
-          <a href="https://www.instagram.com/alyssa_hdd" target="_blank" rel="noopener" class="insta-thumb" aria-label="Alyssa sur Instagram — squat rack">
-            <img src="assets/images/alyssa/alyssa-squat-rack.webp" alt="Alyssa coach fitness — squat rack" loading="lazy">
-          </a>
-          <a href="https://www.instagram.com/alyssa_hdd" target="_blank" rel="noopener" class="insta-thumb" aria-label="Alyssa sur Instagram — corde à sauter">
-            <img src="assets/images/alyssa/alyssa-rope-training.webp" alt="Alyssa coach fitness — entraînement corde" loading="lazy">
-          </a>
-          <a href="https://www.instagram.com/alyssa_hdd" target="_blank" rel="noopener" class="insta-thumb" aria-label="Alyssa sur Instagram — haltères">
-            <img src="assets/images/alyssa/alyssa-dumbbell-press.webp" alt="Alyssa coach fitness — haltères" loading="lazy">
-          </a>
-          <a href="https://www.instagram.com/alyssa_hdd" target="_blank" rel="noopener" class="insta-thumb" aria-label="Alyssa sur Instagram — tapis de course">
-            <img src="assets/images/alyssa/alyssa-treadmill.webp" alt="Alyssa coach fitness — tapis de course" loading="lazy">
-          </a>
-          <a href="https://www.instagram.com/alyssa_hdd" target="_blank" rel="noopener" class="insta-thumb" aria-label="Alyssa sur Instagram — énergie et cycle">
-            <img src="assets/images/alyssa/alyssa-energy-cycle.webp" alt="Alyssa coach fitness — énergie et vitalité" loading="lazy">
-          </a>
-          <a href="https://www.instagram.com/alyssa_hdd" target="_blank" rel="noopener" class="insta-thumb" aria-label="Alyssa sur Instagram — squat en salle">
-            <img src="assets/images/alyssa/alyssa-squat-gym.webp" alt="Alyssa coach fitness — squat en salle" loading="lazy">
-          </a>
-        </div>
-      </div>
-
     </div>
-
-    <div class="footer__bottom">
-      <div class="container footer__bottom-inner">
-        <p class="footer__copyright">© 2026 Alyssa Fitness — Tous droits réservés.</p>
-        <div class="footer__legal">
-          <a href="#" class="footer__link">Mentions légales</a>
-          <span aria-hidden="true">·</span>
-          <a href="#" class="footer__link">Confidentialité</a>
-        </div>
-      </div>
+    <div class="container elv-footer__bottom">
+      <span>© 2026 Alyssa Fitness. Tous droits réservés.</span>
+      <span>Une progression plus forte, chaque jour.</span>
     </div>
   </footer>
 
@@ -1685,6 +1569,18 @@
         answers = [];
         document.querySelectorAll('.quiz-choice').forEach(function(b) { b.classList.remove('selected'); });
         showStep(1);
+      });
+    })();
+  </script>
+  <script>
+    (function(){
+      var btn=document.getElementById('quizOpen'), q=document.getElementById('quiz-programme');
+      if(!btn||!q) return;
+      btn.addEventListener('click',function(){
+        var open=q.hasAttribute('hidden');
+        if(open){ q.removeAttribute('hidden'); q.scrollIntoView({behavior:'smooth',block:'start'}); }
+        else q.setAttribute('hidden','');
+        btn.setAttribute('aria-expanded',String(open));
       });
     })();
   </script>
