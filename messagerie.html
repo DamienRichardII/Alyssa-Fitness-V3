@@ -23,13 +23,17 @@
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="global.css" />
   <style>
-    body { overflow: hidden; }
+    body { overflow: auto; }
 
     .msg-layout {
       display: grid;
       grid-template-columns: 300px 1fr;
-      height: calc(100vh - var(--header-h));
-      margin-top: var(--header-h);
+      height: 640px;
+      margin: 28px auto 56px;
+      max-width: var(--max-width);
+      border-radius: var(--elv-radius);
+      overflow: hidden;
+      box-shadow: var(--ombre-card);
     }
 
     /* ─── SIDEBAR ──────────────────────────────────────── */
@@ -333,6 +337,8 @@
       .msg-body { padding: 16px; }
     }
   </style>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="elevate.css" />
 </head>
 <body>
 
@@ -372,8 +378,16 @@
     </div>
   </header>
 
+  <section class="hero-inner" style="--pg-img:url(assets/images/alyssa/alyssa-dumbbell-press.webp)" aria-label="En-tête messagerie">
+    <div class="container">
+      <p class="section-eyebrow">Messagerie</p>
+      <h1 class="hero-inner__title">Échange avec <em>Alyssa</em></h1>
+      <p class="hero-inner__subtitle">Une question, un doute ou besoin d'un conseil ? Discute directement avec ta coach.</p>
+    </div>
+  </section>
+
   <!-- MESSAGERIE -->
-  <div class="msg-layout">
+  <div class="msg-layout container">
 
     <!-- SIDEBAR -->
     <aside class="msg-sidebar">

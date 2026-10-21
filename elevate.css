@@ -1,0 +1,138 @@
+/* ═══════════════════════════════════════════════════════════════
+   DA ELEVATE — couche de surcharge (chargée en dernier sur chaque page)
+   Couleurs du site conservées (bleu #2D9CDB, noir #111, fonds clairs)
+   ═══════════════════════════════════════════════════════════════ */
+:root {
+  --font-titre: 'Barlow Condensed', 'Oswald', Impact, sans-serif;
+  --font-elv:   'Barlow Condensed', 'Oswald', Impact, sans-serif;
+  --elv-pale:   #EAF4FC;
+  --elv-pale-2: #F6FAFE;
+  --elv-dark:   #0e1219;
+  --elv-radius: 28px;
+  --radius-md:  20px;
+  --radius-lg:  28px;
+}
+
+/* ── Titres : condensé, majuscules, sans italique ───────────── */
+h1, h2, h3,
+.section-title, .cta-title {
+  font-family: var(--font-elv);
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.005em;
+  line-height: 1.02;
+}
+h1 em, h2 em, h3 em, .section-title em, .cta-title em { font-style: normal; color: var(--rose-saumon); }
+h4 { font-family: var(--font-elv); font-weight: 700; text-transform: uppercase; letter-spacing: .02em; }
+.section-title { text-align: left; font-size: clamp(2.2rem, 5vw, 3.4rem); }
+.section-title--center { text-align: center; }
+.section-eyebrow, .eyebrow {
+  font-size: .72rem; letter-spacing: .2em; font-weight: 600; text-transform: uppercase;
+  color: var(--rose-saumon);
+}
+
+/* ── Hero de page (hero-internal / hero-inner / suivi / challenge / résa) ── */
+.hero-internal, .hero-inner, .suivi-hero, .chall-hero, .resa-hero {
+  position: relative; overflow: hidden;
+  display: flex; align-items: center;
+  min-height: clamp(320px, 34vw, 440px);
+  padding: calc(var(--header-h, 76px) + 40px) 0 56px;
+  background: linear-gradient(120deg, #E6F2FB 0%, #F6FAFE 55%, #DCEBF7 100%);
+  color: var(--noir-doux);
+  text-align: left;
+}
+.hero-internal::before, .hero-inner::before, .suivi-hero::before, .chall-hero::before, .resa-hero::before { display: none; }
+.hero-internal::after, .hero-inner::after, .suivi-hero::after, .chall-hero::after, .resa-hero::after {
+  content: ''; position: absolute; top: 0; right: 0; bottom: 0; width: 50%;
+  background: var(--pg-img, none) center 20% / cover no-repeat;
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, #000 45%);
+          mask-image: linear-gradient(to right, transparent 0%, #000 45%);
+  pointer-events: none;
+}
+.hero-internal > .container, .hero-inner > .container, .suivi-hero__inner, .chall-hero__inner, .resa-hero > .container {
+  position: relative; z-index: 1; width: 100%; text-align: left;
+}
+.hero-internal .container > *, .hero-inner .container > *,
+.suivi-hero__inner > *, .chall-hero__inner > *, .resa-hero .container > * { max-width: min(560px, 55%); }
+.hero-internal h1, .hero-inner__title, .suivi-hero__title, .chall-hero__title, .resa-hero__title {
+  font-family: var(--font-elv); font-weight: 800; text-transform: uppercase;
+  font-size: clamp(2.8rem, 6.5vw, 5rem); line-height: .98; color: var(--noir-doux);
+  margin: 10px 0 16px;
+}
+.hero-internal h1 em, .hero-inner__title em, .suivi-hero__title em, .chall-hero__title em, .resa-hero__title em { color: var(--rose-saumon); }
+.hero-internal .subtitle, .hero-inner__subtitle, .suivi-hero__sub, .chall-hero__sub, .resa-hero__sub {
+  color: #555; font-size: 1rem; line-height: 1.65; margin: 0 0 22px;
+}
+.hero-internal .eyebrow, .hero-inner .section-eyebrow, .suivi-hero__eyebrow, .chall-hero__eyebrow, .resa-hero__eyebrow {
+  color: var(--rose-saumon); margin-bottom: 4px; display: block;
+}
+
+/* variante sombre (coaching, méthode) */
+.pg-dark { background: var(--elv-dark) !important; }
+.pg-dark::after { width: 58%; opacity: .9; }
+.pg-dark h1, .pg-dark .hero-inner__title { color: #fff !important; }
+.pg-dark .subtitle, .pg-dark .hero-inner__subtitle { color: rgba(255,255,255,.82) !important; }
+
+/* ── Cartes ─────────────────────────────────────────────────── */
+.card, .dash-card, .kpi-widget, .chart-card, .stat-card, .challenge-card, .prog-card, .programme-card,
+.valeur-card, .value-card, .faq-item, .contact-card, .form-card {
+  border-radius: var(--elv-radius);
+}
+.btn { border-radius: 999px; }
+
+/* ── Menu : lien E-Book un peu plus serré ───────────────────── */
+.nav-list { gap: clamp(14px, 1.6vw, 28px); }
+
+/* ── Mobile ─────────────────────────────────────────────────── */
+@media (max-width: 800px) {
+  .hero-internal, .hero-inner, .suivi-hero, .chall-hero, .resa-hero { min-height: 0; padding-bottom: 40px; }
+  .hero-internal::after, .hero-inner::after, .suivi-hero::after, .chall-hero::after, .resa-hero::after {
+    width: 100%; opacity: .18;
+    -webkit-mask-image: none; mask-image: none;
+  }
+  .pg-dark::after { opacity: .35; }
+  .hero-internal .container > *, .hero-inner .container > *,
+  .suivi-hero__inner > *, .chall-hero__inner > *, .resa-hero .container > * { max-width: 100%; }
+}
+
+/* ── Hero : blocs enfants (KPIs, niveau, stepper) ───────────── */
+.suivi-hero__kpis, .chall-hero__inner > div, .resa-hero .stepper { max-width: 100% !important; }
+.chall-hero__inner > div { justify-content: flex-start !important; }
+.suivi-hero__kpis { margin-top: 28px; }
+.hero-kpi-card { background: linear-gradient(135deg, #2D9CDB 0%, #4FB5E8 100%) !important; border: 0 !important; color: #fff !important; border-radius: 22px !important; }
+.hero-kpi-card * { color: #fff !important; }
+.level-card, .streak-row { border-radius: 24px; }
+.resa-hero .stepper { margin-top: 28px; justify-content: flex-start; }
+
+/* Italiques résiduels des titres de page */
+h1 em, h2 em, h3 em, [class*="__title"] em, [class*="-title"] em { font-style: normal !important; }
+.chall-hero__sub, .resa-hero__sub { margin-left: 0 !important; margin-right: 0 !important; }
+
+/* ::after photo — réaffirmé (certaines pages définissent leur propre ::after décoratif) */
+html body .hero-internal::after, html body .hero-inner::after, html body .suivi-hero::after,
+html body .chall-hero::after, html body .resa-hero::after {
+  top: 0; right: 0; bottom: 0; left: auto; height: auto; border-radius: 0;
+  width: 50%;
+  background: var(--pg-img, none) center 20% / cover no-repeat;
+}
+html body .pg-dark::after { width: 58%; }
+
+/* ── Compte : bannière de bienvenue ─────────────────────────── */
+.welcome-bar {
+  position: relative; overflow: hidden;
+  background: linear-gradient(120deg, #E6F2FB 0%, #F6FAFE 55%, #DCEBF7 100%) !important;
+  min-height: 220px;
+}
+.welcome-bar::before {
+  content: ''; position: absolute; inset: 0 0 0 auto; width: 46%; top: 0; right: 0; left: auto; height: auto;
+  border-radius: 0; background: url('assets/images/alyssa/alyssa-dumbbell-press.webp') center 20% / cover no-repeat;
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 45%); mask-image: linear-gradient(to right, transparent, #000 45%);
+}
+.welcome-bar__name { color: var(--noir-doux) !important; font-weight: 800 !important; text-transform: uppercase; font-size: clamp(2.2rem, 4.5vw, 3.4rem) !important; }
+.welcome-bar__name em { color: var(--rose-saumon) !important; }
+.welcome-bar__sub { color: #555 !important; }
+.welcome-bar__actions .btn--ghost-white { color: var(--noir-doux); border-color: rgba(0,0,0,.2); background: #fff; }
+.msg-layout.container { padding: 0; }
+
+/* Témoignages / quiz sur fond clair */
+.testimonial-card, .quiz-card { border-radius: var(--elv-radius); }

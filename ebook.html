@@ -25,51 +25,48 @@
   <link rel="stylesheet" href="global.css" />
 
   <style>
-    .eb-hero { padding: calc(var(--header-h) + clamp(40px,7vw,90px)) 0 clamp(56px,8vw,110px); background: radial-gradient(1200px 500px at 80% 0%, rgba(45,156,219,.28), transparent 60%), linear-gradient(135deg,#181824 0%,#24243a 60%,#1e1e30 100%); color:#fff; }
-    .eb-hero__grid { display:grid; grid-template-columns: 1.1fr .9fr; gap: clamp(32px,6vw,80px); align-items:center; }
-    .eb-hero__title { font-size: clamp(3rem, 8vw, 6rem); margin: 22px 0 18px; }
-    .eb-hero__title em { font-style:normal; color: var(--rose-saumon); }
-    .eb-hero__text { max-width: 520px; font-size: 1.05rem; line-height:1.7; color: rgba(255,255,255,.78); margin-bottom: 32px; }
+    .eb-hero { position:relative; overflow:hidden; padding: calc(var(--header-h) + 48px) 0 64px; background: linear-gradient(120deg,#E6F2FB 0%,#F6FAFE 55%,#DCEBF7 100%); }
+    .eb-hero__grid { display:grid; grid-template-columns: 1.1fr .9fr; gap: clamp(28px,5vw,72px); align-items:center; }
+    .eb-hero__title { font-size: clamp(3rem, 7.5vw, 5.6rem); line-height:.95; margin: 10px 0 18px; color: var(--noir-doux); }
+    .eb-hero__title em { color: var(--rose-saumon); }
+    .eb-hero__text { max-width: 480px; font-size:1rem; line-height:1.7; color:#555; margin-bottom:24px; }
+    .eb-pill { display:inline-flex; align-items:center; gap:10px; padding:12px 20px; border-radius:14px; background:#fff; border:1px solid var(--gris-clair); font-weight:600; font-size:.88rem; margin-bottom:18px; }
+    .eb-pill small { font-weight:500; color:var(--gris-texte); }
     .eb-hero__actions { display:flex; flex-wrap:wrap; gap:14px; }
-    .eb-cover { position:relative; border-radius: 36px; overflow:hidden; aspect-ratio: 3/4; max-width: 460px; margin-left:auto; box-shadow: 0 30px 80px rgba(0,0,0,.45); }
+    .eb-cover { position:relative; border-radius:28px; overflow:hidden; aspect-ratio:3/4; max-width:420px; margin-left:auto; box-shadow:0 30px 70px rgba(17,40,70,.25); transform: rotate(2deg); }
     .eb-cover img { width:100%; height:100%; object-fit:cover; object-position:center top; display:block; }
-    .eb-cover::after { content:''; position:absolute; inset:0; background: linear-gradient(to top, rgba(0,0,0,.72), rgba(0,0,0,.05) 55%); }
-    .eb-cover__text { position:absolute; z-index:1; left:26px; right:26px; bottom:26px; }
-    .eb-cover__text strong { display:block; font-family:var(--font-elv); font-weight:800; font-size:clamp(2rem,4vw,2.8rem); line-height:1; text-transform:uppercase; }
-    .eb-cover__text span { display:block; margin-top:8px; font-size:.85rem; color:rgba(255,255,255,.8); }
+    .eb-cover::after { content:''; position:absolute; inset:0; background: linear-gradient(to top, rgba(0,0,0,.7), transparent 55%); }
+    .eb-cover__text { position:absolute; z-index:1; left:24px; right:24px; bottom:24px; color:#fff; }
+    .eb-cover__text strong { display:block; font-family:var(--font-elv); font-weight:800; font-size:2.6rem; line-height:.95; text-transform:uppercase; }
+    .eb-cover__text strong em { color: var(--rose-clair); }
+    .eb-cover__text span { display:block; margin-top:8px; font-size:.78rem; letter-spacing:.14em; text-transform:uppercase; opacity:.85; }
 
-    .eb-section { background: linear-gradient(135deg,#181824 0%,#24243a 60%,#1e1e30 100%); color:#fff; padding: clamp(56px,8vw,110px) 0; }
-    .eb-section--alt { background:#12121c; }
-    .eb-head { text-align:center; margin-bottom: clamp(36px,5vw,60px); }
-    .eb-head h2 { font-size: clamp(2.2rem,5.5vw,3.8rem); margin-bottom: 12px; }
-    .eb-head h2 em { font-style:normal; color: var(--rose-saumon); }
-
+    .eb-section { padding: clamp(48px,7vw,88px) 0; background: var(--blanc-casse); }
+    .eb-section h2 { font-size: clamp(2rem,4.5vw,3rem); margin-bottom: 8px; }
+    .eb-section__sub { color:#666; margin-bottom: 32px; }
     .eb-steps { display:grid; grid-template-columns: repeat(3,1fr); gap:20px; }
-    .eb-step { padding: 32px 28px 34px; min-height: 260px; display:flex; flex-direction:column; justify-content:flex-end; }
-    .eb-step__num { position:absolute; top:18px; right:26px; font-family:var(--font-elv); font-weight:800; font-size:5rem; line-height:1; color:rgba(255,255,255,.12); }
-    .eb-step__days { font-size:.72rem; font-weight:600; letter-spacing:.16em; text-transform:uppercase; color:var(--rose-clair); margin-bottom:10px; }
-    .eb-step h3 { font-size: 2rem; margin-bottom:10px; }
-    .eb-step p { font-size:.92rem; line-height:1.6; color:rgba(255,255,255,.78); }
-
+    .eb-step { background:#fff; border:1px solid var(--gris-clair); border-radius:24px; padding:28px 24px; text-align:center; box-shadow:var(--ombre-card); }
+    .eb-step__n { width:36px; height:36px; border-radius:50%; background:var(--rose-saumon); color:#fff; font-weight:700; display:inline-flex; align-items:center; justify-content:center; margin-bottom:12px; }
+    .eb-step h3 { font-size:1.6rem; margin-bottom:8px; }
+    .eb-step p { color:#666; font-size:.9rem; line-height:1.6; }
     .eb-gallery { display:grid; grid-template-columns: repeat(3,1fr); gap:20px; }
-
-    .eb-timeline { max-width: 760px; margin: 0 auto; display:grid; gap:14px; }
-    .eb-time { display:flex; align-items:center; gap:20px; padding:22px 26px; border-radius:24px; background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.1); }
-    .eb-time__d { flex:0 0 auto; min-width:84px; font-family:var(--font-elv); font-weight:800; font-size:1.7rem; text-transform:uppercase; color:var(--rose-saumon); }
-    .eb-time p { font-size:.95rem; line-height:1.6; color:rgba(255,255,255,.82); }
-
-    .eb-final { text-align:center; padding: clamp(40px,6vw,72px) clamp(24px,5vw,64px); }
-    .eb-final h2 { font-size: clamp(2.2rem,5.5vw,3.8rem); margin-bottom:14px; }
-    .eb-final p { max-width:520px; margin:0 auto 28px; color:rgba(255,255,255,.8); line-height:1.7; }
-
+    .eb-feat__img { border-radius:20px; overflow:hidden; aspect-ratio: 4/3; margin-bottom:14px; }
+    .eb-feat__img img { width:100%; height:100%; object-fit:cover; object-position:center 25%; display:block; }
+    .eb-feat h3 { font-size:1.35rem; color:var(--rose-saumon); margin-bottom:6px; }
+    .eb-feat p { color:#666; font-size:.9rem; line-height:1.6; }
+    .eb-notify { position:relative; overflow:hidden; border-radius:28px; background: linear-gradient(120deg,#E6F2FB,#cfe6f6); padding: clamp(28px,5vw,52px); display:grid; grid-template-columns: 1fr 1fr; gap:28px; align-items:center; }
+    .eb-notify h2 { font-size: clamp(2rem,4vw,2.8rem); }
+    .eb-notify p { color:#555; line-height:1.6; }
+    .eb-notify form { display:grid; gap:12px; }
+    .eb-notify input { padding:15px 18px; border-radius:14px; border:1px solid #cfdceb; background:#fff; font:inherit; }
     @media (max-width: 900px) {
-      .eb-hero__grid { grid-template-columns:1fr; }
-      .eb-cover { margin: 0 auto; max-width: 380px; }
+      .eb-hero__grid, .eb-notify { grid-template-columns:1fr; }
+      .eb-cover { margin:0 auto; transform:none; max-width:360px; }
       .eb-steps, .eb-gallery { grid-template-columns:1fr; }
-      .eb-step { min-height: 0; padding-top: 80px; }
-      .eb-time { flex-direction:column; align-items:flex-start; gap:6px; }
     }
   </style>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="elevate.css" />
 </head>
 <body>
 
@@ -134,66 +131,59 @@
   <section class="eb-hero" aria-label="E-Book">
     <div class="container eb-hero__grid">
       <div>
-        <span class="elv-badge">Disponible prochainement</span>
-        <h1 class="elv-title eb-hero__title">Ton plan <em>personnalisé</em>, en E-Book</h1>
-        <p class="eb-hero__text">Un guide complet pensé pour toi : entraînements, nutrition et rythme de vie. Chaque plan est préparé sur-mesure par Alyssa, entre <strong>3 et 7 jours de préparation</strong> après ta demande.</p>
+        <p class="section-eyebrow">E-Book</p>
+        <h1 class="eb-hero__title">Ton plan.<br/><em>Ton rythme.</em></h1>
+        <p class="eb-hero__text">Un guide complet pour t'accompagner pas à pas vers une version plus forte, plus sereine et plus alignée de toi-même. Chaque plan est personnalisé, avec <strong>3 à 7 jours de préparation</strong>.</p>
+        <div class="eb-pill">Disponible prochainement <small>· Plan personnalisé</small></div>
         <div class="eb-hero__actions">
-          <a href="contact.html" class="btn btn--primary btn--lg">Être prévenue de la sortie
+          <a href="#prevenue" class="btn btn--primary btn--lg">Être prévenue
             <svg class="btn-arrow" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </a>
-          <a href="coaching.html" class="btn btn--ghost btn--lg" style="color:#fff;border-color:rgba(255,255,255,.5);">Découvrir le coaching</a>
+          <a href="coaching.html" class="btn btn--ghost btn--lg">Découvrir le coaching</a>
         </div>
       </div>
       <div class="eb-cover reveal">
         <img src="assets/images/alyssa/alyssa-squat-gym.webp" alt="Alyssa à l'entraînement" />
-        <div class="eb-cover__text"><strong>L'E-Book</strong><span>Plan personnalisé · À la salle ou à la maison</span></div>
+        <div class="eb-cover__text"><strong>Mon plan <em>personnalisé</em></strong><span>Entraînement · Organisation · Récupération · Mindset</span></div>
       </div>
     </div>
   </section>
 
   <section class="eb-section" aria-label="Comment ça marche">
     <div class="container">
-      <div class="eb-head">
-        <h2 class="elv-title reveal">Un plan fait <em>pour toi</em></h2>
-        <p class="elv-kicker reveal">Préparé à la main, jamais générique</p>
-      </div>
+      <h2>Un E-Book pensé pour toi</h2>
+      <p class="eb-section__sub">Entre 3 et 7 jours de préparation, selon ta situation.</p>
       <div class="eb-steps">
-        <div class="elv-card eb-step reveal"><span class="eb-step__num">1</span><p class="eb-step__days">Jour 1</p><h3 class="elv-title">Ton profil</h3><p>Tu remplis un court questionnaire : objectifs, niveau, matériel, contraintes et quotidien.</p></div>
-        <div class="elv-card eb-step reveal reveal-delay-1"><span class="eb-step__num">2</span><p class="eb-step__days">Jours 2 à 6</p><h3 class="elv-title">La préparation</h3><p>Alyssa construit ton plan : séances, progression, conseils nutrition et suivi de ton cycle.</p></div>
-        <div class="elv-card eb-step reveal reveal-delay-2"><span class="eb-step__num">3</span><p class="eb-step__days">Jours 3 à 7</p><h3 class="elv-title">Ta livraison</h3><p>Tu reçois ton E-Book personnalisé, prêt à suivre dès le premier jour.</p></div>
+        <div class="eb-step reveal"><span class="eb-step__n">1</span><h3>Ton profil</h3><p>Tu réponds à un court questionnaire sur tes besoins, ton mode de vie et tes objectifs.</p></div>
+        <div class="eb-step reveal reveal-delay-1"><span class="eb-step__n">2</span><h3>La préparation</h3><p>Je construis ton plan personnalisé avec soin, en 3 à 7 jours, en fonction de tes réponses.</p></div>
+        <div class="eb-step reveal reveal-delay-2"><span class="eb-step__n">3</span><h3>Ton plan livré</h3><p>Tu reçois un guide complet et actionnable, prêt à t'aider à passer à l'action.</p></div>
       </div>
     </div>
   </section>
 
-  <section class="eb-section eb-section--alt" aria-label="Ce que tu trouveras dans l'E-Book">
+  <section class="eb-section" style="background:#fff;" aria-label="Contenu de l'E-Book">
     <div class="container">
-      <div class="eb-head">
-        <h2 class="elv-title reveal">Ce que tu <em>trouveras</em></h2>
-        <p class="elv-kicker reveal">Un guide pour tous les objectifs</p>
-      </div>
+      <h2>Un contenu complet et concret</h2>
+      <p class="eb-section__sub">Un plan structuré pour t'entraîner, mieux t'organiser et progresser durablement.</p>
       <div class="eb-gallery">
-        <div class="elv-photo-card reveal"><img src="assets/images/alyssa/alyssa-dumbbell-press.webp" alt="" loading="lazy" /><div class="elv-photo-card__label">Programme<small>À la salle ou à la maison</small></div></div>
-        <div class="elv-photo-card reveal reveal-delay-1"><img src="assets/images/alyssa/alyssa-energy-cycle.webp" alt="" loading="lazy" /><div class="elv-photo-card__label">Cycle &amp; énergie<small>Adapte l'effort à ton rythme</small></div></div>
-        <div class="elv-photo-card reveal reveal-delay-2"><img src="assets/images/alyssa/alyssa-stretch-studio.webp" alt="" loading="lazy" /><div class="elv-photo-card__label">Bien-être<small>Mobilité, récupération, sérénité</small></div></div>
+        <div class="eb-feat reveal"><div class="eb-feat__img"><img src="assets/images/alyssa/alyssa-dumbbell-press.webp" alt="" loading="lazy" /></div><h3>Entraînement</h3><p>Des séances efficaces, adaptées à ton niveau, avec des explications claires.</p></div>
+        <div class="eb-feat reveal reveal-delay-1"><div class="eb-feat__img"><img src="assets/images/alyssa/alyssa-energy-cycle.webp" alt="" loading="lazy" /></div><h3>Organisation</h3><p>Des conseils pratiques pour mieux gérer ton énergie, ton cycle et ton quotidien.</p></div>
+        <div class="eb-feat reveal reveal-delay-2"><div class="eb-feat__img"><img src="assets/images/alyssa/alyssa-stretch-studio.webp" alt="" loading="lazy" /></div><h3>Récupération</h3><p>Des clés pour mieux récupérer, gérer ton énergie et tenir sur le long terme.</p></div>
       </div>
     </div>
   </section>
 
-  <section class="eb-section" aria-label="Délais de préparation">
+  <section class="eb-section" id="prevenue" aria-label="Être prévenue">
     <div class="container">
-      <div class="eb-head">
-        <h2 class="elv-title reveal">Entre <em>3 et 7 jours</em></h2>
-        <p class="elv-kicker reveal">Le temps de créer un plan qui te ressemble</p>
-      </div>
-      <div class="eb-timeline">
-        <div class="eb-time reveal"><span class="eb-time__d">3 jours</span><p>Pour un plan standard : objectifs clairs et besoins simples.</p></div>
-        <div class="eb-time reveal"><span class="eb-time__d">5 jours</span><p>Pour un plan complet : entraînement, nutrition et organisation de la semaine.</p></div>
-        <div class="eb-time reveal"><span class="eb-time__d">7 jours</span><p>Pour un plan très personnalisé : suivi hormonal, post-grossesse ou contraintes spécifiques.</p></div>
-      </div>
-      <div class="elv-card eb-final reveal" style="margin-top:clamp(40px,6vw,72px);">
-        <h2 class="elv-title">Sois la première prévenue</h2>
-        <p>L'E-Book est bientôt disponible. Écris-moi et je te préviens dès l'ouverture.</p>
-        <a href="contact.html" class="btn btn--primary btn--lg">Me prévenir</a>
+      <div class="eb-notify reveal">
+        <div>
+          <h2>Sois la première informée</h2>
+          <p>Inscris-toi à la liste d'attente pour être prévenue dès la sortie de l'E-Book et recevoir toutes les informations en avant-première.</p>
+        </div>
+        <form id="ebookNotify" action="mailto:alyssapro.coaching@gmail.com" method="post" enctype="text/plain">
+          <input type="email" name="email" placeholder="Ton adresse e-mail" required aria-label="Adresse e-mail" />
+          <button type="submit" class="btn btn--primary btn--lg" style="justify-content:center;">Être prévenue</button>
+        </form>
       </div>
     </div>
   </section>
